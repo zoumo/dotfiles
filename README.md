@@ -14,7 +14,28 @@ If you're interested in the philosophy behind why projects like these are
 awesome, you might want to [read Holman post on the
 subject](http://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/).
 
-## install
+## First things first
+
+Install [XCode command line tools](https://developer.apple.com/devcenter/mac/index.action). You will always need it anyway.
+
+## Install Homebrew
+
+[Homebrew](http://mxcl.github.com/homebrew/) is some kind of ports for Mac. As a developer, you should install it:
+
+```sh
+ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+```
+
+## Install zsh
+
+[ZSH](http://www.zsh.org/) is a pretty powerful shell for *nix systems. As a developer, it just changed my life. I don't even know how I lived before using it. No, really, install it NOW:
+
+```sh
+brew install zsh
+chsh -s /bin/zsh
+```
+
+## Install dotfiles
 
 Run this:
 
@@ -35,7 +56,7 @@ defaults, and so on. Tweak this script, and occasionally run `dot` from
 time to time to keep your environment fresh and up-to-date. You can find
 this script in `bin/`.
 
-## topical
+## Topical
 
 Everything's built around topic areas. If you're adding a new area to your
 forked dotfiles — say, "Java" — you can simply add a `java` directory and put
@@ -43,14 +64,14 @@ files in there. Anything with an extension of `.zsh` will get automatically
 included into your shell. Anything with an extension of `.symlink` will get
 symlinked without extension into `$HOME` when you run `script/bootstrap`.
 
-## what's inside
+## What's inside
 
 A lot of stuff. Seriously, a lot of stuff. Check them out in the file browser
 above and see what components may mesh up with you.
 [Fork it](https://github.com/amowu/dotfiles/fork), remove what you don't
 use, and build on what you do use.
 
-## components
+## Components
 
 There's a few special files in the hierarchy.
 
@@ -67,7 +88,7 @@ There's a few special files in the hierarchy.
   but still keep those autoloaded files in your home directory. These get
   symlinked in when you run `script/bootstrap`.
 
-## bugs
+## Bugs
 
 Holman want this to work for everyone; that means when you clone it down it should
 work for you even though you may not have `rbenv` installed, for example. That
@@ -78,7 +99,7 @@ If you're brand-new to the project and run into any blockers, please
 [open an issue](https://github.com/holman/dotfiles/issues) on this repository
 and I'd love to get it fixed for you!
 
-## thanks
+## Thanks
 
 I forked [Zach Holman](http://github.com/holman)' excellent
 [dotfiles](http://github.com/holman/dotfiles).
