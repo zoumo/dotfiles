@@ -49,7 +49,7 @@ plugins=(git)
 
 # User configuration
 
-export PATH="./bin:/usr/local/bin:/usr/local/sbin:/Users/amowu/.dotfiles/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -78,3 +78,41 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# dotfiles
+# shortcut to this dotfiles path is $DOTFILES
+export DOTFILES=$HOME/.dotfiles
+
+# use .localrc for SUPER SECRET CRAP that you don't
+# want in your public, versioned repo.
+# if [[ -a ~/.localrc ]]
+# then
+#   source ~/.localrc
+# fi
+
+if [ -d "$DOTFILES" ];
+then
+  # all of our zsh files
+  typeset -U config_files
+  config_files=($DOTFILES/**/*.zsh)
+
+  # load the path files
+  for file in ${(M)config_files:#*/path.zsh}
+  do
+    source $file
+  done
+
+  # load everything but the path and completion files
+  for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
+  do
+    source $file
+  done
+
+  # load every completion after autocomplete loads
+  for file in ${(M)config_files:#*/completion.zsh}
+  do
+    source $file
+  done
+
+  unset config_files
+fi

@@ -7,6 +7,7 @@
 
 # Binaries
 binaries=(
+  grc
   mackup
   tree
 )
@@ -20,6 +21,7 @@ apps=(
   qlcolorcode
   qlmarkdown
   qlstephen
+  sourcetree
   sublime-text3
 )
 
