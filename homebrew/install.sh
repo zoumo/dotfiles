@@ -1,15 +1,17 @@
-#!/bin/sh
+# !/bin/sh
 #
 # Homebrew
 #
 # This installs some of the common dependencies needed (or at least desired)
 # using Homebrew.
+
+# Binaries
 binaries=(
-  git
   mackup
   tree
 )
 
+# Apps
 apps=(
   alfred
   dropbox
@@ -21,20 +23,19 @@ apps=(
   sublime-text3
 )
 
+# Fonts
 fonts=(
   font-roboto
-  # font-noto-sans-t-chinese
-  # font-noto-sans
-  # font-noto-serif
 )
 
 # Check for Homebrew
 if test ! $(which brew)
 then
-  echo "  Installing Homebrew for you."
+  echo "Installing Homebrew for you..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" > /tmp/homebrew-install.log
 fi
 
+echo "Update Homebrew..."
 # Update homebrew recipes
 brew update
 
@@ -49,15 +50,15 @@ brew tap caskroom/fonts
 brew tap caskroom/versions
 brew install caskroom/cask/brew-cask
 
-echo "installing binaries..."
+echo "Installing binaries..."
 brew install ${binaries[@]}
 
-echo "installing fonts..."
-# brew cask install ${fonts[@]}
+echo "Installing fonts..."
+brew cask install ${fonts[@]}
 
 # Install apps to /Applications
 # Default is: /Users/$user/Applications
-echo "installing apps..."
+echo "Installing apps..."
 brew cask install --appdir="/Applications" ${apps[@]}
 
 # clean things up

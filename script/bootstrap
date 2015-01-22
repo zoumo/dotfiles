@@ -10,7 +10,7 @@ set -e
 echo ''
 
 info () {
-  printf "  [ \033[00;34m..\033[0m ] $1"
+  printf "  [ \033[00;34m..\033[0m ] $1\n"
 }
 
 user () {
@@ -120,12 +120,12 @@ install_dotfiles
 if [ "$(uname -s)" == "Darwin" ]
 then
   info "installing dependencies"
-#   if source bin/dot > /tmp/dotfiles-dot 2>&1
-#   then
-#     success "dependencies installed"
-#   else
-#     fail "error installing dependencies"
-#   fi
+  if source bin/dot > /tmp/dotfiles-dot 2>&1
+  then
+    success "dependencies installed"
+  else
+    fail "error installing dependencies"
+  fi
 fi
 
 echo ''
