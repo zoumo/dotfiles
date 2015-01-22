@@ -1,0 +1,36 @@
+[hub]
+        protocol = https
+[user]
+        name = Amo Wu
+        email = amo260@gmail.com
+[credential]
+        helper = osxkeychain
+[alias]
+        co = checkout
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+        log = auto
+        ui = true
+[core]
+        excludesfile = ~/.gitignore
+        editor = vim
+[mergetool]
+        keepBackup = false
+[difftool]
+        prompt = false
+[help]
+        autocorrect = 1
+[push]
+        # See `git help config` (search for push.default)
+        # for more information on different options of the below setting.
+        #
+        # Setting to git 2.0 default to surpress warning message
+        default = simple
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
