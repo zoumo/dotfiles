@@ -18,6 +18,7 @@ apps=(
   dropbox
   google-chrome
   iterm2
+  mou
   qlcolorcode
   qlmarkdown
   qlstephen
