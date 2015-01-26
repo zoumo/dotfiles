@@ -126,6 +126,14 @@ link_file () {
   fi
 }
 
+install_homebrew () {
+  if test ! $(which brew)
+  then
+    echo "Installing Homebrew for you..."
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+}
+
 install_ohmyzsh () {
   if [ ! -d ~/.oh-my-zsh ]
   then
@@ -146,6 +154,7 @@ install_dotfiles () {
   done
 }
 
+install_homebrew
 install_ohmyzsh
 install_dotfiles
 
@@ -153,7 +162,7 @@ install_dotfiles
 if [ "$(uname -s)" == "Darwin" ]
 then
   info "installing dependencies"
-  if source bin/dot > /tmp/dotfiles-dot 2>&1
+  if source bin/dot
   then
     success "dependencies installed"
   else
