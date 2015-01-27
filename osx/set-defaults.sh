@@ -181,6 +181,11 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeF
 defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3
 defaults write NSGlobalDomain com.apple.mouse.scaling -int 3 
 
+# Trackpad: enable swipe down tree/four finger to app expose
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 0
+defaults write com.apple.dock showAppExposeGestureEnabled -int 1
+
 # Disable “natural” (Lion-style) scrolling
 # defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
