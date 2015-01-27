@@ -53,6 +53,6 @@ ssh
 # Use the names listed below.
 #
 # For example, to not sync SSH and Adium, add:
-# [applications_to_ignore]
+[applications_to_ignore]
 # ssh
 # adium
