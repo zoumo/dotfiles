@@ -13,7 +13,7 @@
 ---
 
 - [Quick Start](#quick-start)
-	- [清除並安裝OS X](#reinstall-osx)
+	- [清除並安裝OS X](#清除並安裝OS X)
 	- [安裝Xcode](#install-xcode)
 	- [安裝dotfiles](#install-dotfiles)
 	- [恢復備份](#restore)
