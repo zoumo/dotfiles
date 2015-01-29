@@ -1,4 +1,4 @@
-# Amo Wu's dotfiles
+# Amo Wu does dotfiles
 
 如果不清楚什麼是 dotfiles 的話，可以參閱[善用 dotfiles 個人化自己的工作環境](http://cloudchen.logdown.com/posts/49264746647/dotfiles):
 
