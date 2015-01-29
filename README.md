@@ -12,7 +12,7 @@
 
 ---
 
-- [Quick Start](quick-start)
+- [Quick Start](#quick-start)
 	- [清除並安裝OS X](#reinstall-osx)
 	- [安裝Xcode](#install-xcode)
 	- [安裝dotfiles](#install-dotfiles)
@@ -22,13 +22,13 @@
 	- [OSX](#osx)
 	- [Mackup](#mackup)
 
-# Quick Start  <a id="quick-start"></a>
+# Quick Start
 
-## 清除並安裝OS X <a id="reinstall-osx"></a>
+## 清除並安裝OS X
 
 如果你打算從乾淨的Mac環境開始，請參閱[OS X：如何清除並安裝](http://support.apple.com/zh-tw/HT5943)。
 
-## 安裝Xcode <a id="install-xcode"></a>
+## 安裝Xcode
 
 1. 更新App Store
 2. 安裝[Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
@@ -38,7 +38,7 @@
 xcode-select --install
 ```
 
-## 安裝dotfiles <a id="install-dotfiles"></a>
+## 安裝dotfiles
 
 [下載](https://github.com/amowu/dotfiles/archive/master.zip)或使用git clone一份到`$HOME`目錄底下的`.dotfiles`資料夾裡面:
 
@@ -68,7 +68,7 @@ script/bootstrap
 
 完成之後，手動安裝一些App Store上才有的軟體(Dash, Moom, ...)
 
-## 恢復備份 <a id="restore"></a>
+## 恢復備份
 
 ```sh
 mackup restore
@@ -76,9 +76,9 @@ mackup restore
 
 ---
 
-# How To Use <a id="how-to-use"></a>
+# How To Use
 
-## dotfiles <a id="dotfiles"></a>
+## dotfiles
 
 執行`~/.dotfiles/script/bootstrap`的時候，腳本會將目錄底下所有的`*.symlink`檔案透過`ln`命令建立連結至`$HOME`目錄底下:
 
@@ -112,7 +112,7 @@ mackup restore
 - 移除**zsh/prompt.zsh**、**zsh/window.zsh.zsh**等檔案，改用Oh My Zsh的[themes]。(https://github.com/robbyrussell/oh-my-zsh/wiki/Themes)代替。
 - dotfiles只專注在**topic/*.symlink**、**topic/path.zsh**的配置。
 
-## OS X <a id="osx"></a>
+## OS X
 
 `bin/dot`是一支簡單的腳本，會在`script/bootstrap`配置完dotfiles之後執行，安裝自定的OS X程式並設定系統參數配置。
 
@@ -240,7 +240,7 @@ dot
 
 就會再次更新packages還有defaults setting。
 
-## Mackup <a id="mackup"></a>
+## Mackup
 
 當初始環境都安裝好之後，剩下的就是恢復備份。除了`.zsrc`、`.vimrc`這類dotfile比較適合放在版本控制之外，其他像是Sublime的plugin、iTerm2的setting、Oh My Zsh的plugin、等等很多還有一般應用程式的配置檔需要備份，甚至是SSH的key，這些我認為都不適合丟進dotfiles放上GitHub。所以這裡介紹[Mackup](https://github.com/lra/mackup)這個簡單的工具作為解決方案，使用方式很簡單，`brew install mackup`安裝完之後只要執行:
 
