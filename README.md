@@ -13,10 +13,10 @@
 ---
 
 - [Quick Start](#quick-start)
-	- [清除並安裝OS X](#清除並安裝OS X)
+	- [清除並安裝OS X](#erase-and-reinstall-OS-X)
 	- [安裝Xcode](#install-xcode)
 	- [安裝dotfiles](#install-dotfiles)
-	- [恢復備份](#restore)
+	- [恢復備份](#restore-backup)
 - [How To Use](#how-to-use)
 	- [dotfiles](#dotfiles)
 	- [OSX](#osx)
@@ -24,11 +24,11 @@
 
 # Quick Start
 
-## 清除並安裝OS X
+## Erase and reinstall OS X
 
 如果你打算從乾淨的Mac環境開始，請參閱[OS X：如何清除並安裝](http://support.apple.com/zh-tw/HT5943)。
 
-## 安裝Xcode
+## Install Xcode
 
 1. 更新App Store
 2. 安裝[Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
@@ -38,7 +38,7 @@
 xcode-select --install
 ```
 
-## 安裝dotfiles
+## Install dotfiles
 
 [下載](https://github.com/amowu/dotfiles/archive/master.zip)或使用git clone一份到`$HOME`目錄底下的`.dotfiles`資料夾裡面:
 
@@ -68,7 +68,7 @@ script/bootstrap
 
 完成之後，手動安裝一些App Store上才有的軟體(Dash, Moom, ...)
 
-## 恢復備份
+## Restore backup
 
 ```sh
 mackup restore
