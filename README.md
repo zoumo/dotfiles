@@ -13,13 +13,13 @@
 ---
 
 - [Quick Start](#quick-start)
-	- [清除並安裝OS X](#erase-and-reinstall-OS-X)
+	- [清除並安裝OS X](#erase-and-reinstall-os-x)
 	- [安裝Xcode](#install-xcode)
 	- [安裝dotfiles](#install-dotfiles)
 	- [恢復備份](#restore-backup)
 - [How To Use](#how-to-use)
 	- [dotfiles](#dotfiles)
-	- [OSX](#osx)
+	- [OS X](#os-x)
 	- [Mackup](#mackup)
 
 # Quick Start
