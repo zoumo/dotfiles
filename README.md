@@ -20,6 +20,7 @@
 - [How To Use](#how-to-use)
 	- [dotfiles](#dotfiles)
 	- [OS X](#os-x)
+	- [App Store](#app-store)
 	- [Mackup](#mackup)
 
 # Quick Start
@@ -158,17 +159,17 @@ apps=(
 
 以下是目前安裝的 packages:
 
-| Binary ||
+| Binary | 說明 |
 | --- | --- |
 | [grc](http://kassiopeia.juls.savba.sk/~garabik/software/grc/README.txt) | log 上色 |
 | [mackup](https://github.com/lra/mackup) | 同步應用程式的配置 |
 | [tree](http://mama.indstate.edu/users/ice/tree/) | 樹狀目錄顯示 |
 
-| Font ||
+| Font | 說明 |
 | --- | --- |
 | [font-roboto](http://www.google.com/fonts/specimen/Roboto) | Roboto |
 
-| App | |
+| App | 說明 |
 | --- | --- |
 | [alfred](http://www.alfredapp.com/) | 三大神器之一 |
 | [dropbox](http://www.dropbox.com/) | 雲端硬碟 |
@@ -187,7 +188,7 @@ apps=(
 
 以下是目前設定的配置:
 
-| setting ||
+| setting | script |
 | ------ | --- |
 | 加快視窗 resize 的速度(Cocoa applications) | defaults write NSGlobalDomain NSWindowResizeTime -float 0.001 |
 | 預設展開儲存視窗 | defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true |
@@ -244,6 +245,17 @@ dot
 
 就會再次更新 packages 還有 defaults setting。
 
+## App Store
+
+剩下無法透過 Homebrew 安裝，或是需要透過 App Store 購買的應用程式，只能手動一個一個安裝回來了...
+
+以下是目前安裝的應用程式:
+
+| App | 說明 |
+| --- | --- |
+| [Dash](http://kapeli.com/dash) | 程式文件查詢 |
+| [moom](http://manytricks.com/moom/) | 視窗布局 |
+
 ## Mackup
 
 當初始環境都安裝好之後，剩下的就是恢復備份。除了 `.zsrc`、`.vimrc` 這類 dotfile 比較適合放在版本控制之外，其他像是 Sublime 的 plugin、iTerm2 的 setting、Oh My Zsh 的 plugin、等等很多還有一般應用程式的配置檔需要備份，甚至是 SSH 的 key，這些我認為都不適合丟進 dotfiles 放上 GitHub。所以這裡介紹 [Mackup](https://github.com/lra/mackup) 這個簡單的工具作為解決方案，使用方式很簡單，`brew install mackup` 安裝完之後只要執行:
@@ -280,7 +292,7 @@ ssh
 
 以下是目前備份的應用程式:
 
-| app | |
+| app | 說明 |
 | --- | --- |
 | [iterm2](http://iterm2.com/) | 加強版終端機 |
 | [moom](http://manytricks.com/moom/) | 視窗布局 |
