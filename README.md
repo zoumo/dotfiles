@@ -197,7 +197,8 @@ apps=(
 | 開啟觸控板輕觸點擊功能 | defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true |
 || defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1 |
 || defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1 |
-| 開啟觸控板兩指輕觸彈出右鍵選單功能 | defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true |
+| 開啟觸控板/滑鼠右鍵選單功能 | defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true |
+|| defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode "TwoButton" |
 | 開啟觸控板三指拖曳功能 | defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerDragGesture -bool true |
 || defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true |
 | 開啟觸控板四指向下滑出現 app expose 功能 | defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0 |

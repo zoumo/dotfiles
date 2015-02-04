@@ -170,8 +170,12 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 # defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 # defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
-# Trackpad: tap with two fingers to emulate right click
+# Trackpad/Mouse: enable right click
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode "TwoButton"
+
+# Mouse: enable swipe between pages
+# defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseHorizontalSwipe -int 1
 
 # Trackpad: enable three finger drag
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerDragGesture -bool true
