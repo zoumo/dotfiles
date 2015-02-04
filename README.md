@@ -256,7 +256,6 @@ dot
 
 | App | 說明 |
 | --- | --- |
-| [Dash](http://kapeli.com/dash) | 程式文件查詢 |
 | [Moom](http://manytricks.com/moom/) | 視窗布局 |
 | [Day One](http://dayoneapp.com/) | 日記 |
 
