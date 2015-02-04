@@ -172,6 +172,7 @@ apps=(
 | App | 說明 |
 | --- | --- |
 | [alfred](http://www.alfredapp.com/) | 三大神器之一 |
+| [dash](http://kapeli.com/dash) | 程式文件查詢 |
 | [dropbox](http://www.dropbox.com/) | 雲端硬碟 |
 | [flux](https://justgetflux.com/) | 螢幕色彩亮度調整 |
 | [google-chrome](www.google.com/chrome) | Google 瀏覽器 |
@@ -297,6 +298,7 @@ ssh
 
 | app | 說明 |
 | --- | --- |
+| [dash](http://kapeli.com/dash) | 程式文件查詢 |
 | [flux](https://justgetflux.com/) | 螢幕色彩亮度調整 |
 | [iterm2](http://iterm2.com/) | 加強版終端機 |
 | [moom](http://manytricks.com/moom/) | 視窗布局 |

@@ -15,6 +15,7 @@ binaries=(
 # Apps
 apps=(
   alfred
+  dash
   dropbox
   flux
   google-chrome
