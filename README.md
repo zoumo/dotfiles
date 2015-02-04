@@ -173,6 +173,7 @@ apps=(
 | --- | --- |
 | [alfred](http://www.alfredapp.com/) | 三大神器之一 |
 | [dropbox](http://www.dropbox.com/) | 雲端硬碟 |
+| [flux](https://justgetflux.com/) | 螢幕色彩亮度調整 |
 | [google-chrome](www.google.com/chrome) | Google 瀏覽器 |
 | [iterm2](http://iterm2.com/) | 加強版終端機 |
 | [mou](http://25.io/mou/) | Markdown 編輯器 |
@@ -296,6 +297,7 @@ ssh
 
 | app | 說明 |
 | --- | --- |
+| [flux](https://justgetflux.com/) | 螢幕色彩亮度調整 |
 | [iterm2](http://iterm2.com/) | 加強版終端機 |
 | [moom](http://manytricks.com/moom/) | 視窗布局 |
 | [oh-my-zsh](http://ohmyz.sh/) | 加強版 ZSH |

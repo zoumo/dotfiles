@@ -16,6 +16,7 @@ binaries=(
 apps=(
   alfred
   dropbox
+  flux
   google-chrome
   iterm2
   mou
