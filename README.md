@@ -192,6 +192,7 @@ apps=(
 
 | setting | script |
 | ------ | --- |
+| 待機時間延長至 3 小時 | sudo pmset -a standbydelay 10800 |
 | 加快視窗 resize 的速度(Cocoa applications) | defaults write NSGlobalDomain NSWindowResizeTime -float 0.001 |
 | 預設展開儲存視窗 | defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true |
 || defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true |
@@ -211,8 +212,9 @@ apps=(
 | 開啟所有視窗組件支援鍵盤控制 | defaults write NSGlobalDomain AppleKeyboardUIMode -int 3 |
 | 關閉鍵盤按住的輸入限制 | defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false |
 | 加快鍵盤輸入 | defaults write NSGlobalDomain KeyRepeat -int 0 |
-| 預設 Finder 起始位置為桌面 | defaults write com.apple.finder NewWindowTarget -string "PfDe" |
-|| defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/" |
+| 移除視窗截圖的影子 | defaults write com.apple.screencapture disable-shadow -bool true |
+| 預設 Finder 起始位置為下載資料夾 | defaults write com.apple.finder NewWindowTarget -string "PfLo" |
+|| defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Downloads/" |
 | 顯示副檔名 | defaults write NSGlobalDomain AppleShowAllExtensions -bool true |
 | 顯示 Finder 狀態列 | defaults write com.apple.finder ShowStatusBar -bool true |
 | 顯示 Finder 路徑列 | defaults write com.apple.finder ShowPathbar -bool true |

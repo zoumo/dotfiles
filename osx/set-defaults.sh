@@ -27,8 +27,8 @@ echo "Set OS X defaults..."
 # sudo scutil --set LocalHostName "0x6D746873"
 # sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
 
-# Set standby delay to 24 hours (default is 1 hour)
-# sudo pmset -a standbydelay 86400
+# Set standby delay to 3 hours (default is 1 hour)
+sudo pmset -a standbydelay 10800
 
 # Disable the sound effects on boot
 # sudo nvram SystemAudioVolume=" "
@@ -244,7 +244,7 @@ defaults write NSGlobalDomain KeyRepeat -int 0
 # defaults write com.apple.screencapture type -string "png"
 
 # Disable shadow in screenshots
-# defaults write com.apple.screencapture disable-shadow -bool true
+defaults write com.apple.screencapture disable-shadow -bool true
 
 # Enable subpixel font rendering on non-Apple LCDs
 # defaults write NSGlobalDomain AppleFontSmoothing -int 2
