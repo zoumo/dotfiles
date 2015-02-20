@@ -27,8 +27,8 @@ echo "Set OS X defaults..."
 # sudo scutil --set LocalHostName "0x6D746873"
 # sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
 
-# Set standby delay to 3 hours (default is 1 hour)
-sudo pmset -a standbydelay 10800
+# Set standby delay to 1 hours 10 min
+sudo pmset -a standbydelay 4200
 
 # Disable the sound effects on boot
 # sudo nvram SystemAudioVolume=" "
