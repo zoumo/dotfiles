@@ -181,6 +181,7 @@ apps=(
 | [qlcolorcode](https://code.google.com/p/qlcolorcode/) | 讓 Quick Look 支援 syntax highlighting |
 | [qlmarkdown](https://github.com/toland/qlmarkdown) | 讓 Quick Look 支援 Markdown |
 | [qlstephen](http://whomwah.github.io/qlstephen/) | 讓 Quick Look 支援無副檔名的純文字檔 |
+| [qq](http://im.qq.com/macqq/) | 聊天 |
 | [sourcetree](http://www.sourcetreeapp.com/) | Git GUI |
 | [sublime-text3](http://www.sublimetext.com/3) | 程式碼編輯器 |
 

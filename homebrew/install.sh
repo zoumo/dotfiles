@@ -24,6 +24,7 @@ apps=(
   qlcolorcode
   qlmarkdown
   qlstephen
+  qq
   sourcetree
   sublime-text3
 )
