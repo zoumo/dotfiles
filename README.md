@@ -192,7 +192,7 @@ apps=(
 
 | setting | script |
 | ------ | --- |
-| 待機時間延長至 3 小時 | sudo pmset -a standbydelay 10800 |
+| 待機時間延長至 24 小時 | sudo pmset -a standbydelay 86400 |
 | 加快視窗 resize 的速度(Cocoa applications) | defaults write NSGlobalDomain NSWindowResizeTime -float 0.001 |
 | 預設展開儲存視窗 | defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true |
 || defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true |
