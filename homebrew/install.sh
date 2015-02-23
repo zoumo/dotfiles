@@ -32,6 +32,7 @@ apps=(
 # Fonts
 fonts=(
   font-roboto
+  font-source-code-pro
 )
 
 echo "Update Homebrew..."

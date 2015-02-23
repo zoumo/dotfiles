@@ -168,6 +168,7 @@ apps=(
 | Font | 說明 |
 | --- | --- |
 | [font-roboto](http://www.google.com/fonts/specimen/Roboto) | Roboto |
+| [font-source-code-pro](http://www.google.com/fonts/specimen/Source+Code+Pro) | Source Code Pro |
 
 | App | 說明 |
 | --- | --- |
