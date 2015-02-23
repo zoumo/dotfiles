@@ -262,6 +262,12 @@ dot
 | [Moom](http://manytricks.com/moom/) | 視窗布局 |
 | [Day One](http://dayoneapp.com/) | 日記 |
 
+其他安裝方式的應用程式:
+
+| App | 說明 |
+| --- | --- |
+| [小麥注音輸入法](https://mcbopomofo.openvanilla.org/) | 輸入法 |
+
 ## Mackup
 
 當初始環境都安裝好之後，剩下的就是恢復備份。除了 `.zsrc`、`.vimrc` 這類 dotfile 比較適合放在版本控制之外，其他像是 Sublime 的 plugin、iTerm2 的 setting、Oh My Zsh 的 plugin、等等很多還有一般應用程式的配置檔需要備份，甚至是 SSH 的 key，這些我認為都不適合丟進 dotfiles 放上 GitHub。所以這裡介紹 [Mackup](https://github.com/lra/mackup) 這個簡單的工具作為解決方案，使用方式很簡單，`brew install mackup` 安裝完之後只要執行:
