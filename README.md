@@ -268,6 +268,7 @@ dot
 | App | 說明 |
 | --- | --- |
 | [小麥注音輸入法](https://mcbopomofo.openvanilla.org/) | 輸入法 |
+| [Affinity Photo](https://affinity.serif.com/photo/) beta | 修圖軟體 |
 
 ## Mackup
 
