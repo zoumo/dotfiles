@@ -9,6 +9,7 @@
 binaries=(
   grc
   mackup
+  nvm
   tree
 )
 

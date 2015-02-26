@@ -163,6 +163,7 @@ apps=(
 | --- | --- |
 | [grc](http://kassiopeia.juls.savba.sk/~garabik/software/grc/README.txt) | log 上色 |
 | [mackup](https://github.com/lra/mackup) | 同步應用程式的配置 |
+| [nvm](https://github.com/creationix/nvm) | Node Version Manager |
 | [tree](http://mama.indstate.edu/users/ice/tree/) | 樹狀目錄顯示 |
 
 | Font | 說明 |
