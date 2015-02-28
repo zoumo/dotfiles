@@ -28,6 +28,7 @@ apps=(
   qq
   sourcetree
   sublime-text3
+  vlc
 )
 
 # Fonts

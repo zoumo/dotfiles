@@ -186,6 +186,7 @@ apps=(
 | [qq](http://im.qq.com/macqq/) | 聊天 |
 | [sourcetree](http://www.sourcetreeapp.com/) | Git GUI |
 | [sublime-text3](http://www.sublimetext.com/3) | 程式碼編輯器 |
+| [VLC](www.videolan.org/vlc) | 媒體播放器 |
 
 ### OS X defaults setting
 
