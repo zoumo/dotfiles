@@ -163,6 +163,7 @@ apps=(
 | --- | --- |
 | [git-flow](https://github.com/nvie/gitflow) | Git branch manage model |
 | [grc](http://kassiopeia.juls.savba.sk/~garabik/software/grc/README.txt) | log 上色 |
+| [legit](http://www.git-legit.org/) | optimized for Git command-line |
 | [mackup](https://github.com/lra/mackup) | 同步應用程式的配置 |
 | [nvm](https://github.com/creationix/nvm) | Node Version Manager |
 | [tree](http://mama.indstate.edu/users/ice/tree/) | 樹狀目錄顯示 |

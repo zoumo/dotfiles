@@ -9,6 +9,7 @@
 binaries=(
   git-flow
   grc
+  legit
   mackup
   nvm
   tree
