@@ -7,6 +7,7 @@
 
 # Binaries
 binaries=(
+  git-flow
   grc
   mackup
   nvm
