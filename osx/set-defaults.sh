@@ -29,6 +29,7 @@ echo "Set OS X defaults..."
 
 # Set standby delay to 24 hours (default is 1 hour)
 sudo pmset -a standbydelay 86400
+sudo pmset -a autopoweroffdelay 86400
 
 # Disable the sound effects on boot
 # sudo nvram SystemAudioVolume=" "
@@ -183,7 +184,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeF
 
 # Trackpad/Mouse: tracking speed fast
 defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3
-defaults write NSGlobalDomain com.apple.mouse.scaling -int 3 
+defaults write NSGlobalDomain com.apple.mouse.scaling -int 3
 
 # Trackpad: enable swipe down tree/four finger to app expose
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0
@@ -323,7 +324,7 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # Show item info to the right of the icons on the desktop
 # /usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" ~/Library/Preferences/com.apple.finder.plist
-# 
+#
 # Enable snap-to-grid for icons on the desktop and in other icon views
 # /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 # /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
