@@ -7,6 +7,14 @@
         helper = osxkeychain
 [alias]
         co = checkout
+        switch = !legit switch \"$@\"
+        branches = !legit branches
+        sprout = !legit sprout \"$@\"
+        unpublish = !legit unpublish \"$@\"
+        harvest = !legit harvest \"$@\"
+        sync = !legit sync \"$@\"
+        publish = !legit publish \"$@\"
+        graft = !legit graft \"$@\"
 [color]
         diff = auto
         status = auto
