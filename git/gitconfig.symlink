@@ -1,38 +1,38 @@
 [hub]
-        protocol = https
+  protocol = https
 [user]
-        name = Amo Wu
-        email = amo260@gmail.com
+  name = Amo Wu
+  email = amo260@gmail.com
 [credential]
-        helper = osxkeychain
+  helper = osxkeychain
 [alias]
-        co = checkout
-        switch = !legit switch \"$@\"
-        branches = !legit branches
-        sprout = !legit sprout \"$@\"
-        unpublish = !legit unpublish \"$@\"
-        harvest = !legit harvest \"$@\"
-        sync = !legit sync \"$@\"
-        publish = !legit publish \"$@\"
-        graft = !legit graft \"$@\"
+  co = checkout
+  switch = !legit switch \"$@\"
+  branches = !legit branches
+  sprout = !legit sprout \"$@\"
+  unpublish = !legit unpublish \"$@\"
+  harvest = !legit harvest \"$@\"
+  sync = !legit sync \"$@\"
+  publish = !legit publish \"$@\"
+  graft = !legit graft \"$@\"
 [color]
-        diff = auto
-        status = auto
-        branch = auto
-        log = auto
-        ui = true
+  diff = auto
+  status = auto
+  branch = auto
+  log = auto
+  ui = true
 [core]
-        excludesfile = ~/.gitignore
-        editor = vim
+  excludesfile = ~/.gitignore
+  editor = vim
 [mergetool]
-        keepBackup = false
+  keepBackup = false
 [difftool]
-        prompt = false
+  prompt = false
 [help]
-        autocorrect = 1
+  autocorrect = 1
 [push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to surpress warning message
-        default = simple
+  # See `git help config` (search for push.default)
+  # for more information on different options of the below setting.
+  #
+  # Setting to git 2.0 default to surpress warning message
+  default = simple
