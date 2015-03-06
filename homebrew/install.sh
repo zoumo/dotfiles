@@ -7,6 +7,8 @@
 
 # Binaries
 binaries=(
+  boot2docker
+  docker
   git-flow
   grc
   legit

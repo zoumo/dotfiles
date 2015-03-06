@@ -161,6 +161,8 @@ apps=(
 
 | Binary | 說明 |
 | --- | --- |
+| [boot2docker](https://github.com/nvie/gitflow) |  Linux virtual machine provider |
+| [docker](https://github.com/nvie/gitflow) | An open platform for distributed applications for developers and sysadmins. |
 | [git-flow](https://github.com/nvie/gitflow) | Git branch manage model |
 | [grc](http://kassiopeia.juls.savba.sk/~garabik/software/grc/README.txt) | log 上色 |
 | [legit](http://www.git-legit.org/) | optimized for Git command-line |
