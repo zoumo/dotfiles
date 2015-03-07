@@ -201,12 +201,17 @@ apps=(
 
 | setting | script |
 | ------ | --- |
-| 電池進入睡眠時間延長至 24 小時 | sudo pmset -a standbydelay 86400 |
-| 電源進入睡眠時間延長至 24 小時 | sudo pmset -a autopoweroffdelay 86400 |
+| 關閉電池進入深入睡眠模式 | sudo pmset -a standby 0 |
+| 關閉電源進入深入睡眠模式 | sudo pmset -a autopoweroff 0 |
 | 加快視窗 resize 的速度(Cocoa applications) | defaults write NSGlobalDomain NSWindowResizeTime -float 0.001 |
 | 預設展開儲存視窗 | defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true |
 || defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true |
 | 關閉“你確定要開啟這個應用程式?”詢問視窗 | defaults write com.apple.LaunchServices LSQuarantine -bool false |
+| 關閉 Time Machine | sudo tmutil disablelocal |
+| 加速進入睡眠模式 | sudo pmset -a hibernatemode 0 |
+| 移除睡眠模式產生的映像檔 | sudo rm /Private/var/vm/sleepimage |
+|| sudo touch /Private/var/vm/sleepimage |
+|| sudo chflags uchg /Private/var/vm/sleepimage |
 | 開啟觸控板輕觸點擊功能 | defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true |
 || defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1 |
 || defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1 |

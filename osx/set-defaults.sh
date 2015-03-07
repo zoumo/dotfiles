@@ -27,9 +27,13 @@ echo "Set OS X defaults..."
 # sudo scutil --set LocalHostName "0x6D746873"
 # sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
 
-# Set standby delay to 24 hours (default is 1 hour)
-sudo pmset -a standbydelay 86400
-sudo pmset -a autopoweroffdelay 86400
+# Set battery and power standby delay to 24 hours (default is 1 hour)
+# sudo pmset -a standbydelay 86400
+# sudo pmset -a autopoweroffdelay 86400
+
+# Disable battery and power sleep mode
+sudo pmset -a standby 0
+sudo pmset -a autopoweroff 0
 
 # Disable the sound effects on boot
 # sudo nvram SystemAudioVolume=" "
@@ -141,17 +145,17 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 ###############################################################################
 
 # Disable local Time Machine snapshots
-# sudo tmutil disablelocal
+sudo tmutil disablelocal
 
 # Disable hibernation (speeds up entering sleep mode)
-# sudo pmset -a hibernatemode 0
+sudo pmset -a hibernatemode 0
 
 # Remove the sleep image file to save disk space
-# sudo rm /Private/var/vm/sleepimage
+sudo rm /Private/var/vm/sleepimage
 # Create a zero-byte file instead…
-# sudo touch /Private/var/vm/sleepimage
+sudo touch /Private/var/vm/sleepimage
 # …and make sure it can’t be rewritten
-# sudo chflags uchg /Private/var/vm/sleepimage
+sudo chflags uchg /Private/var/vm/sleepimage
 
 # Disable the sudden motion sensor as it’s not useful for SSDs
 # sudo pmset -a sms 0
