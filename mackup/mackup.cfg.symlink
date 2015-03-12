@@ -39,6 +39,7 @@ directory = Mackup
 #
 # For example, to sync Irssi, Ventrilo and XEmacs, add:
 [applications_to_sync]
+aws
 dash
 flux
 iterm2

@@ -322,6 +322,7 @@ ssh
 
 | app | 說明 |
 | --- | --- |
+| [aws](https://aws.amazon.com/tw/cli/) | AWS Command Line Interface |
 | [dash](http://kapeli.com/dash) | 程式文件查詢 |
 | [flux](https://justgetflux.com/) | 螢幕色彩亮度調整 |
 | [iterm2](http://iterm2.com/) | 加強版終端機 |
