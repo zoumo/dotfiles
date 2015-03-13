@@ -23,6 +23,7 @@ apps=(
   alfred
   dash
   dropbox
+  evernote
   flux
   google-chrome
   iterm2
