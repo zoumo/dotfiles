@@ -185,6 +185,7 @@ apps=(
 | [flux](https://justgetflux.com/) | 螢幕色彩亮度調整 |
 | [google-chrome](www.google.com/chrome) | Google 瀏覽器 |
 | [iterm2](http://iterm2.com/) | 加強版終端機 |
+| [Kaleidoscope](http://www.kaleidoscopeapp.com/) | File comparison for Mac |
 | [mou](http://25.io/mou/) | Markdown 編輯器 |
 | [qlcolorcode](https://code.google.com/p/qlcolorcode/) | 讓 Quick Look 支援 syntax highlighting |
 | [qlmarkdown](https://github.com/toland/qlmarkdown) | 讓 Quick Look 支援 Markdown |
