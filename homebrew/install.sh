@@ -14,6 +14,7 @@ binaries=(
   legit
   mackup
   nvm
+  ssh-copy-id
   trash
   tree
 )
