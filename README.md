@@ -279,6 +279,7 @@ dot
 | --- | --- |
 | [Moom](http://manytricks.com/moom/) | 視窗布局 |
 | [Day One](http://dayoneapp.com/) | 日記 |
+| [LINE](http://line.me/) | 聊天 |
 | Microsoft Remote Desktop | 遠端桌面 |
 
 其他安裝方式的應用程式:
