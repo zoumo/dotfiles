@@ -228,7 +228,7 @@ apps=(
 || defaults write com.apple.dock showAppExposeGestureEnabled -int 1 |
 | 加快觸控板/滑鼠的速度 | defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3 |
 || defaults write NSGlobalDomain com.apple.mouse.scaling -int 3  |
-| 開啟所有視窗組件支援鍵盤控制 | defaults write NSGlobalDomain AppleKeyboardUIMode -int 3 |
+| 開啟部分視窗組件支援鍵盤控制 | defaults write NSGlobalDomain AppleKeyboardUIMode -int 1 |
 | 關閉鍵盤按住的輸入限制 | defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false |
 | 加快鍵盤輸入 | defaults write NSGlobalDomain KeyRepeat -int 0 |
 | 移除視窗截圖的影子 | defaults write com.apple.screencapture disable-shadow -bool true |
