@@ -188,6 +188,7 @@ apps=(
 | [iterm2](http://iterm2.com/) | 加強版終端機 |
 | [Kaleidoscope](http://www.kaleidoscopeapp.com/) | File comparison for Mac |
 | [mou](http://25.io/mou/) | Markdown 編輯器 |
+| [robomongo](http://robomongo.org/) | Shell-centric cross-platform MongoDB management tool |
 | [qlcolorcode](https://code.google.com/p/qlcolorcode/) | 讓 Quick Look 支援 syntax highlighting |
 | [qlmarkdown](https://github.com/toland/qlmarkdown) | 讓 Quick Look 支援 Markdown |
 | [qlstephen](http://whomwah.github.io/qlstephen/) | 讓 Quick Look 支援無副檔名的純文字檔 |
