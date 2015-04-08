@@ -13,15 +13,16 @@
 ---
 
 - [Quick Start](#quick-start)
-	- [清除並安裝 OS X](#erase-and-reinstall-os-x)
-	- [安裝 Xcode](#install-xcode)
-	- [安裝 dotfiles](#install-dotfiles)
-	- [恢復備份](#restore-backup)
+  - [清除並安裝 OS X](#erase-and-reinstall-os-x)
+  - [安裝 Xcode](#install-xcode)
+  - [安裝 dotfiles](#install-dotfiles)
+  - [恢復備份](#restore-backup)
 - [How To Use](#how-to-use)
-	- [dotfiles](#dotfiles)
-	- [OS X](#os-x)
-	- [App Store](#app-store)
-	- [Mackup](#mackup)
+  - [dotfiles](#dotfiles)
+  - [OS X](#os-x)
+  - [Mackup](#mackup)
+- [Issue](#issue)
+  - [App Store](#app-store)
 
 # Quick Start
 
@@ -270,26 +271,6 @@ dot
 
 就會再次更新 packages 還有 defaults setting。
 
-## App Store
-
-剩下無法透過 Homebrew 安裝，或是需要透過 App Store 購買的應用程式，只能手動一個一個安裝回來了...
-
-以下是目前安裝的應用程式:
-
-| App | 說明 |
-| --- | --- |
-| [Moom](http://manytricks.com/moom/) | 視窗布局 |
-| [Day One](http://dayoneapp.com/) | 日記 |
-| [LINE](http://line.me/) | 聊天 |
-| Microsoft Remote Desktop | 遠端桌面 |
-
-其他安裝方式的應用程式:
-
-| App | 說明 |
-| --- | --- |
-| [小麥注音輸入法](https://mcbopomofo.openvanilla.org/) | 輸入法 |
-| [Affinity Photo](https://affinity.serif.com/photo/) beta | 修圖軟體 |
-
 ## Mackup
 
 當初始環境都安裝好之後，剩下的就是恢復備份。除了 `.zsrc`、`.vimrc` 這類 dotfile 比較適合放在版本控制之外，其他像是 Sublime 的 plugin、iTerm2 的 setting、Oh My Zsh 的 plugin、等等很多還有一般應用程式的配置檔需要備份，甚至是 SSH 的 key，這些我認為都不適合丟進 dotfiles 放上 GitHub。所以這裡介紹 [Mackup](https://github.com/lra/mackup) 這個簡單的工具作為解決方案，使用方式很簡單，`brew install mackup` 安裝完之後只要執行:
@@ -339,6 +320,28 @@ ssh
 | ssh | SSH Key |
 
 更多詳細的配置與支援的軟體請參閱 [mackup 的文件](https://github.com/lra/mackup/tree/master/doc)。
+
+# Issue
+
+## App Store
+
+剩下無法透過 Homebrew 安裝，或是需要透過 App Store 購買的應用程式，只能手動一個一個安裝回來了...
+
+以下是目前安裝的應用程式:
+
+| App | 說明 |
+| --- | --- |
+| [Moom](http://manytricks.com/moom/) | 視窗布局 |
+| [Day One](http://dayoneapp.com/) | 日記 |
+| [LINE](http://line.me/) | 聊天 |
+| Microsoft Remote Desktop | 遠端桌面 |
+
+其他安裝方式的應用程式:
+
+| App | 說明 |
+| --- | --- |
+| [小麥注音輸入法](https://mcbopomofo.openvanilla.org/) | 輸入法 |
+| [Affinity Photo](https://affinity.serif.com/photo/) beta | 修圖軟體 |
 
 ---
 
