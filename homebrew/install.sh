@@ -34,7 +34,6 @@ apps=(
   qlmarkdown
   qlstephen
   qq
-  robomongo
   sourcetree
   sublime-text3
   virtualbox
