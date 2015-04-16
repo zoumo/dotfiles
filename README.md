@@ -215,9 +215,6 @@ apps=(
 | 關閉“你確定要開啟這個應用程式?”詢問視窗 | defaults write com.apple.LaunchServices LSQuarantine -bool false |
 | 關閉 Time Machine | sudo tmutil disablelocal |
 | 加速進入睡眠模式 | sudo pmset -a hibernatemode 0 |
-| 移除睡眠模式產生的映像檔 | sudo rm /Private/var/vm/sleepimage |
-|| sudo touch /Private/var/vm/sleepimage |
-|| sudo chflags uchg /Private/var/vm/sleepimage |
 | 開啟觸控板輕觸點擊功能 | defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true |
 || defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1 |
 || defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1 |
