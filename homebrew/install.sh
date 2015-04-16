@@ -29,6 +29,7 @@ apps=(
   google-chrome
   iterm2
   kaleidoscope
+  keka
   mou
   qlcolorcode
   qlmarkdown
