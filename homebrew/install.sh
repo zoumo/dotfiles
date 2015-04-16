@@ -70,7 +70,7 @@ brew cask install ${fonts[@]}
 # Install apps to /Applications
 # Default is: /Users/$user/Applications
 echo "Installing apps..."
-brew cask install --appdir="/Applications" ${apps[@]}
+sudo brew cask install --appdir="/Applications" ${apps[@]}
 
 # clean things up
 brew cleanup
