@@ -205,7 +205,7 @@ defaults write com.apple.dock showAppExposeGestureEnabled -int 1
 # 0 disable
 # 1 text boxes and lists only
 # 3 all controls (e.g. enable Tab in modal dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 1
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
 # defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
