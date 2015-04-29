@@ -194,6 +194,7 @@ apps=(
 | [qlmarkdown](https://github.com/toland/qlmarkdown) | 讓 Quick Look 支援 Markdown |
 | [qlstephen](http://whomwah.github.io/qlstephen/) | 讓 Quick Look 支援無副檔名的純文字檔 |
 | [qq](http://im.qq.com/macqq/) | 聊天 |
+| [Recordit](http://recordit.co/) | Record screencasts fast with GIF |
 | [sourcetree](http://www.sourcetreeapp.com/) | Git GUI |
 | [sublime-text3](http://www.sublimetext.com/3) | 程式碼編輯器 |
 | [virtualbox](https://www.virtualbox.org/) | 虛擬機 |

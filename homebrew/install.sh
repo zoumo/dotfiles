@@ -35,6 +35,7 @@ apps=(
   qlmarkdown
   qlstephen
   qq
+  recordit
   sourcetree
   sublime-text3
   virtualbox
