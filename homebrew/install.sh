@@ -31,6 +31,7 @@ apps=(
   kaleidoscope
   keka
   mou
+  obs
   qlcolorcode
   qlmarkdown
   qlstephen
