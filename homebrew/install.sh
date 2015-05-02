@@ -11,6 +11,7 @@ binaries=(
   docker
   git-flow
   grc
+  hub
   legit
   mackup
   nvm

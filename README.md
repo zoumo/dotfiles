@@ -166,6 +166,7 @@ apps=(
 | [docker](https://github.com/nvie/gitflow) | An open platform for distributed applications for developers and sysadmins. |
 | [git-flow](https://github.com/nvie/gitflow) | Git branch manage model |
 | [grc](http://kassiopeia.juls.savba.sk/~garabik/software/grc/README.txt) | log 上色 |
+| [hub](https://github.com/github/hub) | hub is a command-line wrapper for git that makes you better at GitHub |
 | [legit](http://www.git-legit.org/) | optimized for Git command-line |
 | [mackup](https://github.com/lra/mackup) | 同步應用程式的配置 |
 | [nvm](https://github.com/creationix/nvm) | Node Version Manager |
