@@ -1,16 +1,16 @@
 # Amo Wu does dotfiles
 
-如果不清楚什麼是 dotfiles 的話，可以參閱[善用 dotfiles 個人化自己的工作環境](http://cloudchen.logdown.com/posts/49264746647/dotfiles):
+如果不清楚什麼是 dotfiles 的話，可以參閱「[善用 dotfiles 個人化自己的工作環境](http://cloudchen.logdown.com/posts/49264746647/dotfiles)」：
 
 > dotfiles，顧名思義，就是檔案名稱以 . (dot) 為 prefix 的檔案通稱，若是您的作業系統是 Mac OS X 或是 Linux 這類 *nix-based 的作業系統，一般來說在視窗環境中是看不到這些檔案的，因為對系統來說，他們是所謂的隱藏檔，這些檔案有一些共通點，那就是他們通常用來儲存一些個人化的設定或是自定的拓展功能，以符合使用者本身的使用需求與習慣，有了這些設定好的檔案之後，使用者可以讓整個系統用起來更為順手，並且大幅提昇他們自身的工作效率！因此對某些使用者來說，這些 dotfiles 設定檔對他們來說，反而可能是他們機器上最重要的檔案呢！
 
-![心智圖](http://2.bp.blogspot.com/-fFPbZGT8PcQ/VNxKxQHte6I/AAAAAAAAgKQ/NPVbkNiAoVs/s1600/f4ec16b6f72031d99b0b0d40af57126ec06967d68b78ed45b4afa4ab7ff4038f%2B(2).png)
+![iMac-MacBook-flat](https://lh5.googleusercontent.com/X7SdRCINXZyrJDiJO_eIvFCPYBJK38oFgYrcMSOJe9PbJNL6vxnQczcp4u-QewoQhptJotOu=w1896-h861)
 
-這份 dotfiles 是 fork 自[Holman's dotfiles](https://github.com/holman/dotfiles)，並根據個人的需求修改過，如果有興趣，閱讀完這份文件之後，歡迎 fork 一份回去配置成適合自己的 dotfiles。
+這份 dotfiles 是 fork 自 [Holman's dotfiles](https://github.com/holman/dotfiles)，並根據個人的需求修改過，如果有興趣，閱讀完這份文件之後，歡迎 fork 一份回去配置成適合自己的 dotfiles。
 
-更多的 dotfiles 請參考[GitHub does dotfiles](https://dotfiles.github.io/)。
+更多的 dotfiles 請參考 [GitHub does dotfiles](https://dotfiles.github.io/)。
 
----
+## Menu
 
 - [Quick Start](#quick-start)
   - [清除並安裝 OS X](#erase-and-reinstall-os-x)
@@ -24,11 +24,13 @@
 - [Issue](#issue)
   - [App Store](#app-store)
 
+![Mind-Mapping](http://2.bp.blogspot.com/-fFPbZGT8PcQ/VNxKxQHte6I/AAAAAAAAgKQ/NPVbkNiAoVs/s1600/f4ec16b6f72031d99b0b0d40af57126ec06967d68b78ed45b4afa4ab7ff4038f%2B(2).png)
+
 # Quick Start
 
 ## Erase and reinstall OS X
 
-如果你打算從乾淨的 Mac 環境開始，請參閱 [OS X：如何清除並安裝](http://support.apple.com/zh-tw/HT5943)。
+如果你打算從乾淨的 Mac 環境開始，請參閱「[OS X：如何清除並安裝](http://support.apple.com/zh-tw/HT5943)」。
 
 ## Install Xcode
 
@@ -36,28 +38,28 @@
 2. 安裝 [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)。
 3. 開啟 Terminal，安裝 Xcode Command Line Tools:
 
-```sh
-xcode-select --install
+```bash
+$ xcode-select --install
 ```
 
 ## Install dotfiles
 
 [下載](https://github.com/amowu/dotfiles/archive/master.zip)或使用 git clone 一份到 `$HOME` 目錄底下的 `.dotfiles` 資料夾裡面:
 
-```sh
-git clone https://github.com/amowu/dotfiles.git ~/.dotfiles
+```bash
+$ git clone https://github.com/amowu/dotfiles.git ~/.dotfiles
 ```
 
 進入 `.dotfiles` 資料夾:
 
-```sh
-cd ~/.dotfiles
+```bash
+$ cd ~/.dotfiles
 ```
 
 安裝 dotfiles:
 
-```sh
-script/bootstrap
+```bash
+$ ./script/bootstrap
 ```
 
 `bootstrap.sh` 這個程式會自動完成以下工作:
@@ -74,13 +76,11 @@ script/bootstrap
 
 使用 [Mackup](https://github.com/lra/mackup) 進行備份回復:
 
-```sh
-mackup restore
+```bash
+$ mackup restore
 ```
 
-什麼是 Mackup? 底下會介紹。
-
----
+> 什麼是 Mackup? 底下會介紹。
 
 # How To Use
 
@@ -122,16 +122,16 @@ mackup restore
 
 `bin/dot` 是一支簡單的腳本，會在 `script/bootstrap` 配置完 dotfiles 之後執行，安裝自定的 OS X 程式並設定系統參數配置。
 
-執行 `dot` 之後，它會跑以下兩支腳本檔:
+執行 `$ dot` 之後，它會跑以下兩支腳本檔:
 
 1. `$HOME/.dotfiles/homebrew/install.sh` - Homebrew packages
 2. `$HOME/.dotfiles/osx/set-defaults.sh` - OS X defaults setting
 
 ### Homebrew packages
 
-執行 `homebrew/install.sh` 的時候，腳本會使用 [Homebrew](http://brew.sh/) 和 [Homebrew Cask](http://caskroom.io/) 來安裝 **binary**、**font** 還有 **app**，可以根據個人需求修改這個檔案，增加或減少自己需要的 packages:
+執行 `$ ./homebrew/install.sh` 的時候，腳本會使用 [Homebrew](http://brew.sh/) 和 [Homebrew Cask](http://caskroom.io/) 來安裝 **binary**、**font** 還有 **app**，可以根據個人需求修改這個檔案，增加或減少自己需要的 packages:
 
-```sh
+```bash
 binaries=(
   git
   tree
@@ -139,18 +139,18 @@ binaries=(
 )
 ```
 
-字型都是以 **font-XXX** 的形式命名，可以用 `brew cask search /font-XXX/` 搜尋是否存在。
+字型都是以 **font-XXX** 的形式命名，可以用 `$ brew cask search /font-XXX/` 搜尋是否存在。
 
-```sh
+```bash
 fonts=(
   font-roboto
   ...
 )
 ```
 
-應用程式可以用 `brew cask search XXX` 或是 [Cask Search](http://caskroom.io/search) 網站搜尋是否存在。
+應用程式可以用 `$ brew cask search XXX` 或是 [Cask Search](http://caskroom.io/search) 網站搜尋是否存在。
 
-```sh
+```bash
 apps=(
   dropbox
   google-chrome
@@ -158,9 +158,11 @@ apps=(
 )
 ```
 
-以下是目前安裝的 packages:
+以下是我目前安裝的 packages：
 
-| Binary | 說明 |
+#### Binaries
+
+| name | 說明 |
 | --- | --- |
 | [boot2docker](https://github.com/nvie/gitflow) |  Linux virtual machine provider |
 | [docker](https://github.com/nvie/gitflow) | An open platform for distributed applications for developers and sysadmins. |
@@ -174,12 +176,16 @@ apps=(
 | [trash](http://mama.indstate.edu/users/ice/tree/) | 樹狀目錄顯示 |
 | [tree](http://hasseg.org/trash/) | 刪除至垃圾桶 |
 
-| Font | 說明 |
+#### Fonts
+
+| name | 說明 |
 | --- | --- |
 | [font-roboto](http://www.google.com/fonts/specimen/Roboto) | Roboto |
 | [font-source-code-pro](http://www.google.com/fonts/specimen/Source+Code+Pro) | Source Code Pro |
 
-| App | 說明 |
+#### Apps
+
+| name | 說明 |
 | --- | --- |
 | [alfred](http://www.alfredapp.com/) | 三大神器之一 |
 | [dash](http://kapeli.com/dash) | 程式文件查詢 |
@@ -204,92 +210,92 @@ apps=(
 
 ### OS X defaults setting
 
-執行 `osx/set-defaults.sh` 之後，程式會將 Mac OS X 的一些系統設置改變，可以根據個人需求修改這個檔案，或是參考 [Mathias’s dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.osx) 整理好的配置。
+執行 `$ ./osx/set-defaults.sh` 之後，程式會將 Mac OS X 的一些系統設置改變，可以根據個人需求修改這個檔案，或是參考 [Mathias’s dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.osx) 整理好的配置。
 
-以下是目前設定的配置:
+以下是目前設定的配置：
 
 | setting | script |
 | ------ | --- |
-| 關閉電池進入深入睡眠模式 | sudo pmset -a standby 0 |
-| 關閉電源進入深入睡眠模式 | sudo pmset -a autopoweroff 0 |
-| 加快視窗 resize 的速度(Cocoa applications) | defaults write NSGlobalDomain NSWindowResizeTime -float 0.001 |
-| 預設展開儲存視窗 | defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true |
-|| defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true |
-| 關閉“你確定要開啟這個應用程式?”詢問視窗 | defaults write com.apple.LaunchServices LSQuarantine -bool false |
-| 關閉 Time Machine | sudo tmutil disablelocal |
-| 加速進入睡眠模式 | sudo pmset -a hibernatemode 0 |
-| 開啟觸控板輕觸點擊功能 | defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true |
-|| defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1 |
-|| defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1 |
-| 開啟觸控板/滑鼠右鍵選單功能 | defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true |
-|| defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode "TwoButton" |
-| 開啟觸控板三指拖曳功能 | defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerDragGesture -bool true |
-|| defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true |
-| 開啟觸控板四指向下滑出現 app expose 功能 | defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0 |
-|| defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 0 |
-|| defaults write com.apple.dock showAppExposeGestureEnabled -int 1 |
-| 加快觸控板/滑鼠的速度 | defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3 |
-|| defaults write NSGlobalDomain com.apple.mouse.scaling -int 3  |
-| 開啟全部視窗組件支援鍵盤控制 | defaults write NSGlobalDomain AppleKeyboardUIMode -int 3 |
-| 關閉鍵盤按住的輸入限制 | defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false |
-| 加快鍵盤輸入 | defaults write NSGlobalDomain KeyRepeat -int 0 |
-| 移除視窗截圖的影子 | defaults write com.apple.screencapture disable-shadow -bool true |
-| 預設 Finder 起始位置為下載資料夾 | defaults write com.apple.finder NewWindowTarget -string "PfLo" |
-|| defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Downloads/" |
-| 顯示副檔名 | defaults write NSGlobalDomain AppleShowAllExtensions -bool true |
-| 顯示 Finder 狀態列 | defaults write com.apple.finder ShowStatusBar -bool true |
-| 顯示 Finder 路徑列 | defaults write com.apple.finder ShowPathbar -bool true |
-| 允許框選 Finde Quick Look 的文字 | defaults write com.apple.finder QLEnableTextSelection -bool true |
-| Finder 標題列顯示完整路徑 | defaults write com.apple.finder _FXShowPosixPathInTitle -bool true |
-| 預設搜尋列的結果為當前目錄下 | defaults write com.apple.finder FXDefaultSearchScope -string "SCcf" |
-| 關閉改變副檔名的警告提示 | defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false |
-| 開啟資料夾的 spring loading 功能 | defaults write NSGlobalDomain com.apple.springing.enabled -bool true |
-| 開啟 Dock 的 spring loading 功能 | defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true |
-| 移除 spring loading 的延遲 | defaults write NSGlobalDomain com.apple.springing.delay -float 0 |
-| 避免在 network volumes 底下建立 .DS_Store 檔案 | defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true |
-| 使用 column view 作為 Finder 預設顯示選項 | defaults write com.apple.finder FXPreferredViewStyle -string "clmv" |
-| 關閉清空垃圾桶的警告提示 | defaults write com.apple.finder WarnOnEmptyTrash -bool false |
-| 使用黑色的選單列和 Dock | defaults write NSGlobalDomain AppleInterfaceStyle Dark |
-| 使用縮放的效果作為視窗放大縮小效果 | defaults write com.apple.dock mineffect -string "scale" |
-| 應用程式縮小至自己的圖示 | defaults write com.apple.dock minimize-to-application -bool true |
-| 顯示 Dock 應用程式開啟中的小亮燈提示 | defaults write com.apple.dock show-process-indicators -bool true |
-| 關閉 Dock 開啟應用程式的彈跳動畫 | defaults write com.apple.dock launchanim -bool false |
-| 加快 Mission Control 的動畫速度 | defaults write com.apple.dock expose-animation-duration -float 0.1 |
-| 關閉 Mission Control 的應用程式群組化顯示 | defaults write com.apple.dock expose-group-by-app -bool false |
-| 關閉 Dashboard | defaults write com.apple.dashboard mcx-disabled -bool true |
-| 將 Dashboard 從多重桌面之中移除 | defaults write com.apple.dock dashboard-in-overlay -bool true | 
-| 自動隱藏 Dock | defaults write com.apple.dock autohide -bool true |
-| 移除隱藏 Dock 的延遲 | defaults write com.apple.dock autohide-delay -float 0 |
-| 移除 Dock 的顯示/隱藏動畫 | defaults write com.apple.dock autohide-time-modifier -float 0 |
-| 將隱藏的應用程式 Dock 圖示半透明顯示 | defaults write com.apple.dock showhidden -bool true |
+| 關閉電池進入深入睡眠模式 | `sudo pmset -a standby 0` |
+| 關閉電源進入深入睡眠模式 | `sudo pmset -a autopoweroff 0` |
+| 加快視窗 resize 的速度(Cocoa applications) | `defaults write NSGlobalDomain NSWindowResizeTime -float 0.001` |
+| 預設展開儲存視窗 | `defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true` |
+|| `defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true` |
+| 關閉“你確定要開啟這個應用程式?”詢問視窗 | `defaults write com.apple.LaunchServices LSQuarantine -bool false` |
+| 關閉 Time Machine | `sudo tmutil disablelocal` |
+| 加速進入睡眠模式 | `sudo pmset -a hibernatemode 0` |
+| 開啟觸控板輕觸點擊功能 | `defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true` |
+|| `defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1` |
+|| `defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1` |
+| 開啟觸控板/滑鼠右鍵選單功能 | `defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true` |
+|| `defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode "TwoButton"` |
+| 開啟觸控板三指拖曳功能 | `defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerDragGesture -bool true` |
+|| `defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true` |
+| 開啟觸控板四指向下滑出現 app expose 功能 | `defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0` |
+|| `defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 0` |
+|| `defaults write com.apple.dock showAppExposeGestureEnabled -int 1` |
+| 加快觸控板/滑鼠的速度 | `defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3` |
+|| `defaults write NSGlobalDomain com.apple.mouse.scaling -int 3`  |
+| 開啟全部視窗組件支援鍵盤控制 | `defaults write NSGlobalDomain AppleKeyboardUIMode -int 3` |
+| 關閉鍵盤按住的輸入限制 | `defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false` |
+| 加快鍵盤輸入 | `defaults write NSGlobalDomain KeyRepeat -int 0` |
+| 移除視窗截圖的影子 | `defaults write com.apple.screencapture disable-shadow -bool true` |
+| 預設 Finder 起始位置為下載資料夾 | `defaults write com.apple.finder NewWindowTarget -string "PfLo"` |
+|| `defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Downloads/"` |
+| 顯示副檔名 | `defaults write NSGlobalDomain AppleShowAllExtensions -bool true` |
+| 顯示 Finder 狀態列 | `defaults write com.apple.finder ShowStatusBar -bool true` |
+| 顯示 Finder 路徑列 | `defaults write com.apple.finder ShowPathbar -bool true` |
+| 允許框選 Finde Quick Look 的文字 | `defaults write com.apple.finder QLEnableTextSelection -bool true` |
+| Finder 標題列顯示完整路徑 | `defaults write com.apple.finder _FXShowPosixPathInTitle -bool true` |
+| 預設搜尋列的結果為當前目錄下 | `defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"` |
+| 關閉改變副檔名的警告提示 | `defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false` |
+| 開啟資料夾的 spring loading 功能 | `defaults write NSGlobalDomain com.apple.springing.enabled -bool true` |
+| 開啟 Dock 的 spring loading 功能 | `defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true` |
+| 移除 spring loading 的延遲 | `defaults write NSGlobalDomain com.apple.springing.delay -float 0` |
+| 避免在 network volumes 底下建立 .DS_Store 檔案 | `defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true` |
+| 使用 column view 作為 Finder 預設顯示選項 | `defaults write com.apple.finder FXPreferredViewStyle -string "clmv"` |
+| 關閉清空垃圾桶的警告提示 | `defaults write com.apple.finder WarnOnEmptyTrash -bool false` |
+| 使用黑色的選單列和 Dock | `defaults write NSGlobalDomain AppleInterfaceStyle Dark` |
+| 使用縮放的效果作為視窗放大縮小效果 | `defaults write com.apple.dock mineffect -string "scale"` |
+| 應用程式縮小至自己的圖示 | `defaults write com.apple.dock minimize-to-application -bool true` |
+| 顯示 Dock 應用程式開啟中的小亮燈提示 | `defaults write com.apple.dock show-process-indicators -bool true` |
+| 關閉 Dock 開啟應用程式的彈跳動畫 | `defaults write com.apple.dock launchanim -bool false` |
+| 加快 Mission Control 的動畫速度 | `defaults write com.apple.dock expose-animation-duration -float 0.1` |
+| 關閉 Mission Control 的應用程式群組化顯示 | `defaults write com.apple.dock expose-group-by-app -bool false` |
+| 關閉 Dashboard | `defaults write com.apple.dashboard mcx-disabled -bool true` |
+| 將 Dashboard 從多重桌面之中移除 | `defaults write com.apple.dock dashboard-in-overlay -bool true` | 
+| 自動隱藏 Dock | `defaults write com.apple.dock autohide -bool true` |
+| 移除隱藏 Dock 的延遲 | `defaults write com.apple.dock autohide-delay -float 0` |
+| 移除 Dock 的顯示/隱藏動畫 | `defaults write com.apple.dock autohide-time-modifier -float 0` |
+| 將隱藏的應用程式 Dock 圖示半透明顯示 | `defaults write com.apple.dock showhidden -bool true` |
 
 以上，若修改過 `homebrew/install.sh` 或 `osx/set-defaults.sh` 之後，直接執行指令:
 
-```sh
-dot
+```bash
+$ dot
 ```
 
 就會再次更新 packages 還有 defaults setting。
 
 ## Mackup
 
-當初始環境都安裝好之後，剩下的就是恢復備份。除了 `.zsrc`、`.vimrc` 這類 dotfile 比較適合放在版本控制之外，其他像是 Sublime 的 plugin、iTerm2 的 setting、Oh My Zsh 的 plugin、等等很多還有一般應用程式的配置檔需要備份，甚至是 SSH 的 key，這些我認為都不適合丟進 dotfiles 放上 GitHub。所以這裡介紹 [Mackup](https://github.com/lra/mackup) 這個簡單的工具作為解決方案，使用方式很簡單，`brew install mackup` 安裝完之後只要執行:
+當初始環境都安裝好之後，剩下的就是恢復備份。除了 `.zsrc`、`.vimrc` 這類 dotfile 比較適合放在版本控制之外，其他像是 Sublime 的 plugin、iTerm2 的 setting、Oh My Zsh 的 plugin、等等很多還有一般應用程式的配置檔需要備份，甚至是 SSH 的 key，這些我認為都不適合丟進 dotfiles 放上 GitHub。所以這裡介紹 [Mackup](https://github.com/lra/mackup) 這個簡單的工具作為解決方案，使用方式很簡單，`brew install mackup` 安裝完之後只要執行：
 
-```
-mackup backup
+```bash
+$ mackup backup
 ```
 
 就可以將檔案備份到 Dropbox 或 Google Drive。當需要恢復的時候則是執行:
 
-```
-mackup restore
+```bash
+$ mackup restore
 ```
 
 就會將雲端硬碟上的備份以 `ln` 連結的方式在新電腦上同步。
 
 配置方式也很容易，建立一份 `~/.mackup.cfg`，或是直接使用 `.dofiles/mackup/mackup.cfg.symlink` 來修改:
 
-```sh
+```bash
 [storage]
 engine = dropbox # 同步的雲端硬碟，有 dropbox 與 google_drive 可以選擇
 directory = Mackup # 同步的資料夾，這裡會將所有備份同步至 ~/Dropbox/Mackup 底下
@@ -305,7 +311,7 @@ ssh
 # 指定不想同步的應用程式
 ```
 
-以下是目前備份的應用程式:
+以下是目前我備份的應用程式：
 
 | app | 說明 |
 | --- | --- |
@@ -321,39 +327,33 @@ ssh
 
 更多詳細的配置與支援的軟體請參閱 [mackup 的文件](https://github.com/lra/mackup/tree/master/doc)。
 
-# Issue
-
-## App Store
+## Issue
 
 剩下無法透過 Homebrew 安裝，或是需要透過 App Store 購買的應用程式，只能手動一個一個安裝回來了...
 
-以下是目前安裝的應用程式:
+以下是目前我安裝的應用程式：
 
-| App | 說明 |
+### App Store
+
+| name | 說明 |
 | --- | --- |
 | [Moom](http://manytricks.com/moom/) | 視窗布局 |
 | [Day One](http://dayoneapp.com/) | 日記 |
 | [LINE](http://line.me/) | 聊天 |
 | Microsoft Remote Desktop | 遠端桌面 |
 
-其他安裝方式的應用程式:
+### Other
 
-| App | 說明 |
+| name | 說明 |
 | --- | --- |
 | [Affinity Photo](https://affinity.serif.com/photo/) beta | 修圖軟體 |
 | [Yahoo!奇摩輸入法](https://github.com/yahoo/keykey) beta | 输入法 |
 
----
-
-## 參考文章
+## Reference
 
 - [Hacker's Guide to Setting up Your Mac](http://lapwinglabs.com/blog/hacker-guide-to-setting-up-your-mac)
 - [First steps with Mac OS X as a Developer](http://carlosbecker.com/posts/first-steps-with-mac-os-x-as-a-developer/)
 - [Mac 开发配置手册](https://www.gitbook.com/book/aaaaaashu/mac-dev-setup/details)
-
-## Bugs
-
-If you're brand-new to the project and run into any blockers, please [open an issue](https://github.com/holman/dotfiles/issues) on this repository and I'd love to get it fixed for you!
 
 ## Thanks
 
