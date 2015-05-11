@@ -31,7 +31,6 @@ apps=(
   iterm2
   kaleidoscope
   keka
-  mou
   obs
   qlcolorcode
   qlmarkdown

@@ -190,7 +190,6 @@ apps=(
 | [iterm2](http://iterm2.com/) | 加強版終端機 |
 | [Kaleidoscope](http://www.kaleidoscopeapp.com/) | File comparison for Mac |
 | [Keka](http://www.kekaosx.com/) | 免費的Mac OS X 檔案壓縮程式 |
-| [mou](http://25.io/mou/) | Markdown 編輯器 |
 | [OBS](https://obsproject.com/) | Free, open source software for live streaming and recording |
 | [qlcolorcode](https://code.google.com/p/qlcolorcode/) | 讓 Quick Look 支援 syntax highlighting |
 | [qlmarkdown](https://github.com/toland/qlmarkdown) | 讓 Quick Look 支援 Markdown |
