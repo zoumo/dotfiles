@@ -4,7 +4,7 @@
 
 > dotfiles，顧名思義，就是檔案名稱以 . (dot) 為 prefix 的檔案通稱，若是您的作業系統是 Mac OS X 或是 Linux 這類 *nix-based 的作業系統，一般來說在視窗環境中是看不到這些檔案的，因為對系統來說，他們是所謂的隱藏檔，這些檔案有一些共通點，那就是他們通常用來儲存一些個人化的設定或是自定的拓展功能，以符合使用者本身的使用需求與習慣，有了這些設定好的檔案之後，使用者可以讓整個系統用起來更為順手，並且大幅提昇他們自身的工作效率！因此對某些使用者來說，這些 dotfiles 設定檔對他們來說，反而可能是他們機器上最重要的檔案呢！
 
-![iMac-MacBook-flat](https://lh5.googleusercontent.com/X7SdRCINXZyrJDiJO_eIvFCPYBJK38oFgYrcMSOJe9PbJNL6vxnQczcp4u-QewoQhptJotOu=w1896-h861)
+![iMac-MacBook-flat](https://lh4.googleusercontent.com/QJPDpp2INOuBq4K05EZCPp_XTgrMphQyWrN-WllsvjSVIR7_ge_hIZBy9HW4Lqo5klVodyjmQuiyW6E=w1896-h861)
 
 這份 dotfiles 是 fork 自 [Holman's dotfiles](https://github.com/holman/dotfiles)，並根據個人的需求修改過，如果有興趣，閱讀完這份文件之後，歡迎 fork 一份回去配置成適合自己的 dotfiles。
 
