@@ -347,6 +347,7 @@ ssh
 | name | 說明 |
 | --- | --- |
 | [Affinity Photo](https://affinity.serif.com/photo/) beta | 修圖軟體 |
+| [PomoDone](http://pomodoneapp.com/) | 番茄時鐘 |
 | [Yahoo!奇摩輸入法](https://github.com/yahoo/keykey) beta | 输入法 |
 
 ## Reference
