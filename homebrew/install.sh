@@ -26,6 +26,7 @@ apps=(
   dash
   dropbox
   evernote
+  firefox
   flux
   google-chrome
   iterm2

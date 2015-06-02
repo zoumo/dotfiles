@@ -191,6 +191,7 @@ apps=(
 | [dash](http://kapeli.com/dash) | 程式文件查詢 |
 | [dropbox](http://www.dropbox.com/) | 雲端硬碟 |
 | [evernote](https://evernote.com/) | 筆記 |
+| [Firefox](https://moztw.org/) | Mozilla Firefox (known simply as Firefox) is a free and open-source[17] web browser |
 | [flux](https://justgetflux.com/) | 螢幕色彩亮度調整 |
 | [google-chrome](www.google.com/chrome) | Google 瀏覽器 |
 | [iterm2](http://iterm2.com/) | 加強版終端機 |
