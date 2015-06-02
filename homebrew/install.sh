@@ -38,6 +38,7 @@ apps=(
   qlstephen
   qq
   recordit
+  slack
   sourcetree
   sublime-text3
   virtualbox
