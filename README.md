@@ -207,6 +207,7 @@ apps=(
 | [Slack](https://slack.com/) | Slack brings all your communication together in one place. It's real-time messaging, archiving and search for modern teams. |
 | [sourcetree](http://www.sourcetreeapp.com/) | Git GUI |
 | [sublime-text3](http://www.sublimetext.com/3) | 程式碼編輯器 |
+| [todoist](https://todoist.com/) | 待辦事項列表及任務管理器 |
 | [virtualbox](https://www.virtualbox.org/) | 虛擬機 |
 | [VLC](www.videolan.org/vlc) | 媒體播放器 |
 

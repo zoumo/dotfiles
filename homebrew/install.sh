@@ -42,6 +42,7 @@ apps=(
   slack
   sourcetree
   sublime-text3
+  todoist
   virtualbox
   vlc
 )
