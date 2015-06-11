@@ -67,6 +67,7 @@ brew install bash
 brew tap caskroom/fonts
 brew tap caskroom/versions
 brew install caskroom/cask/brew-cask
+brew upgrade brew-cask
 
 echo "Installing binaries..."
 brew install ${binaries[@]}
