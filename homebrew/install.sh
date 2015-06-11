@@ -41,6 +41,7 @@ apps=(
   recordit
   slack
   sourcetree
+  steam
   sublime-text3
   todoist
   virtualbox

@@ -206,6 +206,7 @@ apps=(
 | [Recordit](http://recordit.co/) | Record screencasts fast with GIF |
 | [Slack](https://slack.com/) | Slack brings all your communication together in one place. It's real-time messaging, archiving and search for modern teams. |
 | [sourcetree](http://www.sourcetreeapp.com/) | Git GUI |
+| [steam](http://store.steampowered.com/) | Digital game store for Windows, Mac and Linux platforms with forums, update client and store code redemtion. |
 | [sublime-text3](http://www.sublimetext.com/3) | 程式碼編輯器 |
 | [todoist](https://todoist.com/) | 待辦事項列表及任務管理器 |
 | [virtualbox](https://www.virtualbox.org/) | 虛擬機 |
