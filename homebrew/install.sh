@@ -32,6 +32,7 @@ apps=(
   iterm2
   kaleidoscope
   keka
+  kitematic
   macdown
   obs
   qlcolorcode
