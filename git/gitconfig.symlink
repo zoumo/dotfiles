@@ -37,8 +37,8 @@
   # Setting to git 2.0 default to surpress warning message
   default = simple
 [difftool "sourcetree"]
-  cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
-  path = 
+  cmd = bcomp $LOCAL $REMOTE
+  path =
 [mergetool "sourcetree"]
-  cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  cmd = bcomp $LOCAL $REMOTE $BASE $MERGED
   trustExitCode = true

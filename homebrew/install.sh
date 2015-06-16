@@ -23,6 +23,7 @@ binaries=(
 # Apps
 apps=(
   alfred
+  beyond-compare
   dash
   dropbox
   evernote

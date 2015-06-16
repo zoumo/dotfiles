@@ -188,6 +188,7 @@ apps=(
 | name | 說明 |
 | --- | --- |
 | [alfred](http://www.alfredapp.com/) | 三大神器之一 |
+| [beyond-compare](http://www.scootersoftware.com/) | Beyond Compare 是一套優秀的檔案內容及目錄的比對工具 |
 | [dash](http://kapeli.com/dash) | 程式文件查詢 |
 | [dropbox](http://www.dropbox.com/) | 雲端硬碟 |
 | [evernote](https://evernote.com/) | 筆記 |
