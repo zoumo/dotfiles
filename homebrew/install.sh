@@ -30,7 +30,6 @@ apps=(
   flux
   google-chrome
   iterm2
-  kaleidoscope
   keka
   kitematic
   macdown

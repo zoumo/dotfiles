@@ -195,7 +195,6 @@ apps=(
 | [flux](https://justgetflux.com/) | 螢幕色彩亮度調整 |
 | [google-chrome](www.google.com/chrome) | Google 瀏覽器 |
 | [iterm2](http://iterm2.com/) | 加強版終端機 |
-| [Kaleidoscope](http://www.kaleidoscopeapp.com/) | File comparison for Mac |
 | [Keka](http://www.kekaosx.com/) | 免費的Mac OS X 檔案壓縮程式 |
 | [kitematic](https://kitematic.com/) | The easiest way to use Docker on Mac. |
 | [MacDown](http://macdown.uranusjr.com/) | Open source Markdown editor for OS X |
