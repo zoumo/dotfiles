@@ -32,7 +32,7 @@ echo "Set OS X defaults..."
 # sudo pmset -a autopoweroffdelay 86400
 
 # Disable battery and power sleep mode
-sudo pmset -a standby 0
+# sudo pmset -a standby 0
 sudo pmset -a autopoweroff 0
 
 # Disable the sound effects on boot
@@ -145,7 +145,7 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 ###############################################################################
 
 # Disable local Time Machine snapshots
-sudo tmutil disablelocal
+# sudo tmutil disablelocal
 
 # Disable hibernation (speeds up entering sleep mode)
 sudo pmset -a hibernatemode 0
@@ -187,8 +187,8 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerDragGes
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
 
 # Trackpad/Mouse: tracking speed fast
-defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3
-defaults write NSGlobalDomain com.apple.mouse.scaling -int 3
+# defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3
+# defaults write NSGlobalDomain com.apple.mouse.scaling -int 3
 
 # Trackpad: enable swipe down tree/four finger to app expose
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0
@@ -296,7 +296,7 @@ defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
 # Display full POSIX path as Finder window title
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+# defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 # When performing a search, search the current folder by default
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
@@ -351,7 +351,7 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
 # Disable the warning before emptying the Trash
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
+# defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # Empty Trash securely by default
 # defaults write com.apple.finder EmptyTrashSecurely -bool true
@@ -381,7 +381,7 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 ###############################################################################
 
 # Use dark menu bar and Dock
-defaults write NSGlobalDomain AppleInterfaceStyle Dark
+# defaults write NSGlobalDomain AppleInterfaceStyle Dark
 
 # Enable highlight hover effect for the grid view of a stack (Dock)
 # defaults write com.apple.dock mouse-over-hilite-stack -bool true
@@ -390,7 +390,7 @@ defaults write NSGlobalDomain AppleInterfaceStyle Dark
 # defaults write com.apple.dock tilesize -int 36
 
 # Change minimize/maximize window effect
-defaults write com.apple.dock mineffect -string "scale"
+# defaults write com.apple.dock mineffect -string "suck"
 
 # Minimize windows into their application’s icon
 defaults write com.apple.dock minimize-to-application -bool true
@@ -407,14 +407,14 @@ defaults write com.apple.dock show-process-indicators -bool true
 # defaults write com.apple.dock persistent-apps -array
 
 # Don’t animate opening applications from the Dock
-defaults write com.apple.dock launchanim -bool false
+# defaults write com.apple.dock launchanim -bool false
 
 # Speed up Mission Control animations
-defaults write com.apple.dock expose-animation-duration -float 0.1
+# defaults write com.apple.dock expose-animation-duration -float 0.3
 
 # Don’t group windows by application in Mission Control
 # (i.e. use the old Exposé behavior instead)
-defaults write com.apple.dock expose-group-by-app -bool false
+# defaults write com.apple.dock expose-group-by-app -bool false
 
 # Disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
@@ -428,7 +428,7 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 # Remove the auto-hiding Dock delay
 defaults write com.apple.dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
-defaults write com.apple.dock autohide-time-modifier -float 0
+defaults write com.apple.dock autohide-time-modifier -float 1
 
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true

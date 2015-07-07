@@ -7,46 +7,56 @@
 
 # Binaries
 binaries=(
-  boot2docker
-  docker
+  python
+  ctags
+  wget
+  dos2unix
   git-flow
-  grc
-  hub
-  legit
   mackup
-  nvm
-  ssh-copy-id
-  trash
+  z
   tree
+  tmux
+  # boot2docker
+  # docker
+  # grc
+  # hub
+  # legit
+  # nvm
+  # ssh-copy-id
+  # trash
+
 )
 
 # Apps
 apps=(
-  alfred
-  beyond-compare
-  dash
-  dropbox
-  evernote
-  firefox
-  flux
   google-chrome
   iterm2
-  keka
-  kitematic
-  macdown
-  obs
   qlcolorcode
   qlmarkdown
   qlstephen
   qq
-  recordit
-  slack
   sourcetree
-  steam
-  sublime-text3
-  todoist
-  virtualbox
-  vlc
+  scroll-reverser
+  goagentx
+  slate
+  macdown
+  beyond-compare
+  the-unarchiver
+  # mou
+  # alfred
+  # dash
+  # evernote
+  # flux
+  # keka
+  # kitematic
+  # obs
+  # recordit
+  # slack
+  # steam
+  # sublime-text3
+  # todoist
+  # virtualbox
+  # vlc
 )
 
 # Fonts

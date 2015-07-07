@@ -1,12 +1,13 @@
 [hub]
   protocol = https
 [user]
-  name = Amo Wu
-  email = amo260@gmail.com
+  name = JimZhang
+  email = jim.zoumo@gmail.com
 [credential]
   helper = osxkeychain
 [alias]
   co = checkout
+  ci = commit
   switch = !legit switch \"$@\"
   branches = !legit branches
   sprout = !legit sprout \"$@\"
@@ -42,3 +43,7 @@
 [mergetool "sourcetree"]
   cmd = bcomp $LOCAL $REMOTE $BASE $MERGED
   trustExitCode = true
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
