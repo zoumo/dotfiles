@@ -62,8 +62,10 @@ $ ./script/bootstrap
 3. 检查并链接 dotfiles(`.zshrc`, `.vimrc`, `.gitconfig`,` .gitignore`, ...)。
 4. 更新并安装 brew packages(binaries, fonts, apps)。
 5. 设置 Mac OS X 的 defaults settings。
+6. 安装python packages(powerline-status, pyenv, ...)
+7. 对vim, ls, terminal进行美化, 主要是安装了solarized配色和powerline状态栏
 
-完成之后, 手动安装一些其他软件(Sublime3, Alfred)
+完成之后, 手动安装一些其他软件(Sublime3, Alfred, 以及一些较大的软件java, mysql, mongodb, nginx, jmeter)
 
 ## Restore backup
 
@@ -79,7 +81,7 @@ $ mackup restore
 
 ## dotfiles
 
-执行 `~/.dotfiles/script/bootstrap` 的時候，腳本會將目錄底下所有的 `*.symlink` 檔案透過 `ln` 命令建立連結至 `$HOME` 目錄底下:
+执行 `~/.dotfiles/script/bootstrap` 的时候，脚本会将目录底下所有的 `*.symlink` 文件通过 `ln` 命令建立链接至 `$HOME` 目录底下:
 
 | topic  | *.symlink          | .dotfiles     |
 | ------ | ------------------ | ------------- |
@@ -91,25 +93,26 @@ $ mackup restore
 
 ### Topical
 
-每一個環境的配置是以資料夾的形式被獨立區分。例如，如果想要新增 "Java" 的配置到 dotfiles，你可以簡單的新增一個命名為 `java` 的資料夾，然後將檔案建至目錄底下。
-任何副檔名是 `.zsh` 的檔案將在 shell 執行時被自動載入至環境中。
-任何副檔名是 `.symlink`的檔案將在你執行 `script/bootstrap` 安裝時被連結至 `$HOME` 目錄底下。.
+每一个环境的配置是以文件夹的形式独立区分, 例如, 如果想要增加"Python"的配置到ditfiles, 则简单的新增一个名字为 `python` 的文件夹
+任何后缀名是 `.zsh` 的文件将在 shell 执行时自动被载入环境中。
+任何后缀名是 `.symlink` 的文件将在你执行 `script/bootstrap`的时候自动链接到 `$HOME` 目录下
 
 ### Components
 
-一些目錄中比較特別的檔案:
+目录中比较特殊的文件
 
-- **bin/**: 任何在 `bin/` 目錄底下的檔案可以在 shell 執行時直接使用。
-- **topic/*.zsh**: 任何 `.zsh` 結尾的檔案都會在 shell 執行時被載入至環境。
-- **topic/path.zsh**: 任何命名為 `path.zsh` 的檔案會在 shell 執行時優先被載入至 `$PATH`。
-- **topic/*.symlink**: 任何 `*.symlink` 結尾的檔案都會在 `$HOME` 目錄底下建立連結。這可以讓你在配置環境的時候也保持版本控制的優點。新增 symlink 的時候需要執行 `script/bootstrap` 安裝。
+- **bin/**: 任何在 `bin/` 目录下的文件可以在shell执行的时候使用。
+- **topic/*.zsh**: 任何 `.zsh` 结尾的文件都会在 shell 执行的时候被载入环境。
+- **topic/path.zsh**: 任何 `path.zsh` 结尾的文件会在 shell 执行时优先载入。
+- **topic/*.symlink**: 任何 `*.symlink` 結尾的文件都会在 `$HOME` 目录下建立链接。
 
-不同於 [Holman's dotfiles](https://github.com/holman/dotfiles)，我修改了一些部分:
+不同于 [Holman's dotfiles](https://github.com/holman/dotfiles)，我修改了一些部分:
 
 - Shell 的部分改用 [Oh My Zsh](http://ohmyz.sh/)取代原作者自己配置的 zsh。
-- 移除 **topic/aliases.zsh**、**topic/completion.zsh** 等檔案，改用 Oh My Zsh 的 [plugins]。(https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins) 代替。
-- 移除 **zsh/prompt.zsh**、**zsh/window.zsh.zsh** 等檔案，改用 Oh My Zsh 的 [themes]。(https://github.com/robbyrussell/oh-my-zsh/wiki/Themes) 代替。
+- 移除 **topic/aliases.zsh**、**topic/completion.zsh** 等文件，改用 Oh My Zsh 的 [plugins]。(https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins) 代替。
+- 移除 **zsh/prompt.zsh**、**zsh/window.zsh** 等文件，改用 Oh My Zsh 的 [themes]。(https://github.com/robbyrussell/oh-my-zsh/wiki/Themes) 代替。
 - dotfiles 只專注在 **topic/*.symlink**、**topic/path.zsh** 的配置。
+
 
 ## OS X
 
@@ -119,6 +122,8 @@ $ mackup restore
 
 1. `$HOME/.dotfiles/homebrew/install.sh` - Homebrew packages
 2. `$HOME/.dotfiles/osx/set-defaults.sh` - OS X defaults setting
+3. `$HOME/.dotfiles/python/install.sh`   - Set up python env
+4. `$HOME/.dotfiles/beautify/install.sh` - beautify vim, terminal, ls
 
 ### Homebrew packages
 
@@ -151,7 +156,7 @@ apps=(
 )
 ```
 
-以下是我目前安裝的 packages：
+以下是我目前自动安裝的 packages：
 
 #### Binaries
 
@@ -168,10 +173,7 @@ apps=(
 | [z](https://github.com/rupa/z.git) | autojump |
 | tmux | tmux |
 | htop | 加强版top |
-| mysql | 数据库 |
-| mongodb | 数据库 |
-| nginx | 反向代理 |
-| node | nodejs |
+
 
 #### Fonts
 
@@ -184,10 +186,9 @@ apps=(
 
 | name | info |
 | --- | --- |
-| java | java |
 | [google-chrome](www.google.com/chrome) | Google 浏览器 |
 | [qq](http://im.qq.com/macqq/) | 聊天 |
-| [MacDown](http://macdown.uranusjr.com/) | Open source Markdown editor for OS X |
+| [macdown](http://macdown.uranusjr.com/) | Open source Markdown editor for OS X |
 | [iterm2](http://iterm2.com/) | 加强版终端 |
 | [scroll-reverser](http://pilotmoon.com/scrollreverser/) | 支持鼠标和触控板滚轮分别设置 |
 | [goagentx](https://goagentx.com/releasenotes.html) | 支持各种协议的翻墙GUI |
@@ -199,8 +200,29 @@ apps=(
 | The Unarchiver | 优秀免费的解压软件 |
 | sequel-pro | mysql客户端 |
 | clipmenu | 粘贴板功能扩展 |
+| sourcetree | git客户端 |
 | movist | 播放器 |
+| lingon-x | 启动项管理 |
 | appzapper | app卸载器 |
+| xtrafinder | finder加强 |
+
+
+下面这些安装包比较大最好手动安装
+
+#### Binaries
+
+| name | info |
+| --- | --- |
+| mysql | 数据库 |
+| mongodb | 数据库 |
+| nginx | 反向代理 |
+| node | nodejs |
+
+#### Apps
+
+| name | info |
+| --- | --- |
+| java | java |
 
 ### OS X defaults setting
 
