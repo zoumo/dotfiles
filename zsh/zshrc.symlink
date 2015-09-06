@@ -49,7 +49,7 @@ plugins=(git git-flow brew)
 #plugins=(autojump)
 # User configuration
 
-source $ZSH/oh-my-zsh.sh
+
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -76,6 +76,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+info () {
+  printf "  [ \033[00;34m..\033[0m ] $1\n"
+}
+
+load() {
+  info "loading $1"
+  source $1
+}
 
 # dotfiles
 # shortcut to this dotfiles path is $DOTFILES
@@ -91,14 +99,22 @@ then
   # 获取到所有目录下path.zsh的文件, 优先载入
   for file in ${(M)config_files:#*/path.zsh}
   do
-    source $file
+    load $file
   done
+if
+
+load $ZSH/oh-my-zsh.sh
+
+if [ -d "$DOTFILES" ];
+  # all of our zsh files
+  typeset -U config_files
+  config_files=($DOTFILES/**/*.zsh)
 
   # load everything but the path and completion files
   # 然后载入除掉所有目录下path.zsh的文件
   for file in ${config_files:#*/path.zsh}
   do
-    source $file
+    load $file
   done
 
   # load every completion after autocomplete loads
@@ -109,3 +125,4 @@ then
 
   unset config_files
 fi
+
