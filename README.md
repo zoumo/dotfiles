@@ -161,12 +161,17 @@ apps=(
 | wget | wget工具 |
 | python | OS X自带的python没有pip |
 | ctags | 方便代码阅读 |
+| [grc](http://kassiopeia.juls.savba.sk/~garabik/software/grc/README.txt)| log上色 |
 | [git-flow](https://github.com/nvie/gitflow) | Git branch manage model |
 | [tree](http://mama.indstate.edu/users/ice/tree/) | 树状目录结构显示 |
 | [mackup](https://github.com/lra/mackup) | 同步应用程序配置 |
 | [z](https://github.com/rupa/z.git) | autojump |
+| tmux | tmux |
 | htop | 加强版top |
-
+| mysql | 数据库 |
+| mongodb | 数据库 |
+| nginx | 反向代理 |
+| node | nodejs |
 
 #### Fonts
 
@@ -179,6 +184,7 @@ apps=(
 
 | name | info |
 | --- | --- |
+| java | java |
 | [google-chrome](www.google.com/chrome) | Google 浏览器 |
 | [qq](http://im.qq.com/macqq/) | 聊天 |
 | [MacDown](http://macdown.uranusjr.com/) | Open source Markdown editor for OS X |
@@ -191,6 +197,10 @@ apps=(
 | [qlstephen](http://whomwah.github.io/qlstephen/) | 让 Quick Look 支持无后拓展名的纯文本 |
 | [beyond-compare](http://www.scootersoftware.com/) | Beyond Compare 是一个优秀的文件/目录对比工具 |
 | The Unarchiver | 优秀免费的解压软件 |
+| sequel-pro | mysql客户端 |
+| clipmenu | 粘贴板功能扩展 |
+| movist | 播放器 |
+| appzapper | app卸载器 |
 
 ### OS X defaults setting
 
@@ -269,10 +279,10 @@ $ brew install mackup
 
 ```bash
 [storage]
-engine = dropbox # 同步的雲端硬碟，有 dropbox 與 google_drive 可以選擇
-directory = Mackup # 同步的資料夾，這裡會將所有備份同步至 ~/Dropbox/Mackup 底下
+engine = dropbox # 同步的云盘, 目前只有弓dropbox和google_drive可以选择
+directory = Mackup # 同步的文件夹，这里会将所有的同步备份至 ~/Dropbox/Mackup 底下
 
-# 指定要同步的應用程式
+# 指定要同步的应用程序
 [applications_to_sync]
 iterm2
 oh-my-zsh
@@ -280,7 +290,7 @@ sublime-text-3
 ssh
 
 [applications_to_ignore]
-# 指定不想同步的應用程式
+# 指定不想同步的应用程序
 ```
 
 还可以在 `~/.mackup`文件夹中添加自定义程序同步配置(注意, 如果自定义的配置与默认支持的程序同名, 会覆盖默认配置)
@@ -309,29 +319,12 @@ $ mackup backup
 $ mackup restore
 ```
 
-配置方式也很容易，建立一份 `~/.mackup.cfg`，或是直接使用 `.dofiles/mackup/mackup.cfg.symlink` 來修改:
-
-```bash
-[storage]
-engine = dropbox # 同步的雲端硬碟，有 dropbox 與 google_drive 可以選擇
-directory = Mackup # 同步的資料夾，這裡會將所有備份同步至 ~/Dropbox/Mackup 底下
-
-# 指定要同步的應用程式
-[applications_to_sync]
-iterm2
-oh-my-zsh
-sublime-text-3
-ssh
-
-[applications_to_ignore]
-# 指定不想同步的應用程式
-```
-
 以下是目前我备份的应用程序：
 
 
 | app | backup-conf |
 | --- | --- |
+| git | ~/.gitconfig和.config/git/ignore |
 | mackup | ~/.mackup.cfg和~/.mackup |
 | dash | 默认配置 |
 | iterm2 | 默认配置 |

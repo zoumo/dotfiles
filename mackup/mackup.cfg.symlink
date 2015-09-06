@@ -4,8 +4,8 @@
 # If none is specified, Mackup will try to use the default: "dropbox".
 # With the "dropbox" storage engine, Mackup will automatically figure out your
 # Dropbox folder.
-[storage]
-engine = dropbox
+# [storage]
+# engine = dropbox
 
 # If you choose the "google_drive" storage engine instead, Mackup will figure
 # out where your Google Drive is and store your configuration files in it.
@@ -18,11 +18,12 @@ engine = dropbox
 # The "path" can be absolute (from the / of your drive) or relative to your
 # home directory.
 # The "path" setting is mandatory when using the "file_system" engine.
-# [storage]
-# engine = file_system
+[storage]
+engine = file_system
 # path = some/folder/in/your/home
 # # or
-# path = /some/folder/in/your/root
+path = 百度云同步盘/osx
+
 
 # You can customize the directory name in which Mackup stores your file. By
 # default, if not specified, Mackup creates a "Mackup" directory in the storage
@@ -39,15 +40,18 @@ directory = Mackup
 #
 # For example, to sync Irssi, Ventrilo and XEmacs, add:
 [applications_to_sync]
-aws
+git
+mackup
 dash
-flux
 iterm2
-moom
 oh-my-zsh
-sourcetree
+scroll-reverser
+slate
 sublime-text-3
-ssh
+pycharm40
+goagentx
+vim
+xtrafinder
 
 # List of applications you want to ignore
 # One application name per line
@@ -59,5 +63,4 @@ ssh
 #
 # For example, to not sync SSH and Adium, add:
 [applications_to_ignore]
-# ssh
-# adium
+z
