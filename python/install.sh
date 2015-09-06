@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 plugins=(
     virtualenv
     powerline-status

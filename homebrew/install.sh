@@ -41,16 +41,16 @@ apps=(
   macdown  # markdown编辑器
   iterm2 # 加强版终端
   scroll-reverser  # 可以分别鼠标和触控板滚动方向
-  goagentx  # FQ
+  # goagentx  # FQ
   slate  # 开源免费的桌面窗口控制调整工具
-  qlcolorcode
-  qlmarkdown
-  qlstephen
+  # qlcolorcode
+  # qlmarkdown
+  # qlstephen
   beyond-compare  # 优秀的文件比较软件
   the-unarchiver  # 免费的解压软件
-  sequel-pro  # mysql客户端
-  clipmenu  # 粘贴版扩展 0.4.3
-  sourcetree  # git 管理
+  # sequel-pro  # mysql客户端
+  # clipmenu  # 粘贴版扩展 0.4.3
+  # sourcetree  # git 管理
   movist  # 播放器
   lingon-x # 启动项管理
   appzapper  # app卸载器
@@ -80,7 +80,7 @@ fonts=(
 
 echo "Update Homebrew..."
 # Update homebrew recipes
-brew update
+# brew update
 
 # Install GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
