@@ -79,7 +79,7 @@ $ mackup restore
 
 ## dotfiles
 
-執行 `~/.dotfiles/script/bootstrap` 的時候，腳本會將目錄底下所有的 `*.symlink` 檔案透過 `ln` 命令建立連結至 `$HOME` 目錄底下:
+执行 `~/.dotfiles/script/bootstrap` 的時候，腳本會將目錄底下所有的 `*.symlink` 檔案透過 `ln` 命令建立連結至 `$HOME` 目錄底下:
 
 | topic  | *.symlink          | .dotfiles     |
 | ------ | ------------------ | ------------- |
@@ -165,6 +165,7 @@ apps=(
 | [tree](http://mama.indstate.edu/users/ice/tree/) | 树状目录结构显示 |
 | [mackup](https://github.com/lra/mackup) | 同步应用程序配置 |
 | [z](https://github.com/rupa/z.git) | autojump |
+| htop | 加强版top |
 
 
 #### Fonts
@@ -326,7 +327,7 @@ ssh
 # 指定不想同步的應用程式
 ```
 
-以下是目前我備份的應用程式：
+以下是目前我备份的应用程序：
 
 
 | app | backup-conf |
