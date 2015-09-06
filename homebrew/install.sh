@@ -16,6 +16,7 @@ binaries=(
   z
   tree
   tmux
+  htop
   # boot2docker
   # docker
   # grc
@@ -42,6 +43,7 @@ apps=(
   macdown
   beyond-compare
   the-unarchiver
+  lingon-x # 启动项管理
   # mou
   # alfred
   # dash
