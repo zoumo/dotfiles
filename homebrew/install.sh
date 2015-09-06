@@ -17,6 +17,11 @@ binaries=(
   tree
   tmux
   htop
+  grc
+  # mysql
+  # nginx
+  # node
+  # mongodb
   # boot2docker
   # docker
   # grc
@@ -30,20 +35,26 @@ binaries=(
 
 # Apps
 apps=(
+  java
+  sequel-pro  # mysql客户端
+  clipmenu  # 粘贴版扩展 0.4.3
   google-chrome
-  iterm2
+  iterm2 # 加强版终端
   qlcolorcode
   qlmarkdown
   qlstephen
+  sourcetree  # git 管理
+  scroll-reverser  # 可以分别鼠标和触控板滚动方向
+  goagentx  # FQ
+  slate  # 开源免费的桌面窗口控制调整工具
+  macdown  # markdown编辑器
+  beyond-compare  # 优秀的文件比较软件
+  the-unarchiver  # 免费的解压软件
+  movist  # 播放器
   qq
-  sourcetree
-  scroll-reverser
-  goagentx
-  slate
-  macdown
-  beyond-compare
-  the-unarchiver
   lingon-x # 启动项管理
+  appzapper  # app卸载器
+  xtrafinder  # 加强finder
   # mou
   # alfred
   # dash
