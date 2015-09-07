@@ -179,7 +179,6 @@ apps=(
 
 | name | info |
 | --- | --- |
-| [font-roboto](http://www.google.com/fonts/specimen/Roboto) | Roboto |
 | [font-source-code-pro](http://www.google.com/fonts/specimen/Source+Code+Pro) | Source Code Pro |
 
 #### Apps
@@ -191,23 +190,16 @@ apps=(
 | [macdown](http://macdown.uranusjr.com/) | Open source Markdown editor for OS X |
 | [iterm2](http://iterm2.com/) | 加强版终端 |
 | [scroll-reverser](http://pilotmoon.com/scrollreverser/) | 支持鼠标和触控板滚轮分别设置 |
-| [goagentx](https://goagentx.com/releasenotes.html) | 支持各种协议的翻墙GUI |
 | [slate](https://github.com/jigish/slate) | Mac窗口调节程序,类似于Divvy and SizeUp |
-| [qlcolorcode](https://code.google.com/p/qlcolorcode/) | 让 Quick Look 支持 syntax highlighting |
-| [qlmarkdown](https://github.com/toland/qlmarkdown) | 让 Quick Look 支持 Markdown |
-| [qlstephen](http://whomwah.github.io/qlstephen/) | 让 Quick Look 支持无后拓展名的纯文本 |
 | [beyond-compare](http://www.scootersoftware.com/) | Beyond Compare 是一个优秀的文件/目录对比工具 |
-| The Unarchiver | 优秀免费的解压软件 |
-| sequel-pro | mysql客户端 |
-| clipmenu | 粘贴板功能扩展 |
-| sourcetree | git客户端 |
+| the-unarchiver | 优秀免费的解压软件 |
 | movist | 播放器 |
 | lingon-x | 启动项管理 |
 | appzapper | app卸载器 |
 | xtrafinder | finder加强 |
 
 
-下面这些安装包比较大最好手动安装
+下面这些不太适合自动安装, 有些比较大, 有些可以不装
 
 #### Binaries
 
@@ -223,6 +215,7 @@ apps=(
 | name | info |
 | --- | --- |
 | java | java |
+| robomango | mongodb客户端 |
 
 ### OS X defaults setting
 
@@ -277,13 +270,112 @@ apps=(
 | 自动显示和隐藏dock | `defaults write com.apple.dock autohide -bool true` |
 | 将隐藏的应用程序 Dock 图标用半透明显示 | `defaults write com.apple.dock showhidden -bool true` |
 
-以上，若修改過 `homebrew/install.sh` 或 `osx/set-defaults.sh` 之後，直接執行指令:
+
+## Beautify
+
+
+美化至少要对三个工具进行配色Terminal, vim, ls
+我使用solarized来进行终端美化, 它提供了一套比较完整的解决方案, 但是作者没有给ls配色, 所以使用另外一个作者 
+[seebi](https://github.com/seebi/) 的 [dircolors-solarized](https://github.com/seebi/dircolors-solarized.git)
+另外我还在terminal中加入powerline状态栏来增强效果
+
+下面展示的是完整的美化过程, 在dotfiles中除了更改字体需要手动修改, 大部分的工作都自动完成了
+
 
 ```bash
-$ dot
+$ git clone https://github.com/altercation/solarized.git ~/plugins
+$ git clone https://github.com/seebi/dircolors-solarized.git ~/plugins
 ```
 
-就會再次更新 packages 還有 defaults setting。
+### Terminal/Iterm2
+
+在 `~/plugins/solarized/iterm2-colors-solarized/` 双击 `Solarized Dark.itermcolors` 导入iterm2的配色
+ 
+在 `~/plugins/solarized/osx-terminal.app-colors-solarized/xterm-256color/` 双击 `Solarized Dark ansi.terminal` 导入Terminal.app的配色
+
+### vim
+
+```bash
+$ mkdir -p ~/.vim/colors
+$ cd ~/plugins/solarized/vim-colors-solarized/colors/
+$ cp solarized.vim ~/.vim/colors
+```
+
+修改 `.vimrc` 
+
+```bash
+$ vi ~/.vimrc
+syntax on
+set background=dark
+colorscheme solarized
+```
+
+### ls
+
+Max OS X是基于FreeBSD的, 所以ls是BSD那一套, 不是GNU的ls, 所以即使Terminal/iTerm2配置了颜色, 但是ls也不会受到影响, 所以通过安装GNU的coreutils, 来解决
+
+```bash
+eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-dark`
+```
+
+
+### powerline
+
+powerline修改了terminal/vim下面的statusline
+
+先安装__字体__不然会有乱码
+
+```bash
+$ git clone https://github.com/powerline/fonts
+$ cd ~/plugins/fonts && ./install.sh
+```
+
+用`pip`安装, 然后获取到安装目录, 然后打开 vim ~/.zshrc, 在最后添加(注意前面的点)
+
+```bash
+$ pip install powerline-status
+$ vim ~/.zshrc
+
+if test $(which pip)
+then
+    export POWERLINE_ROOT="$(python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")/powerline"
+    . ${POWERLINE_ROOT}/bindings/zsh/powerline.zsh
+
+fi
+```	
+之后使用`source ~/.zshrc`使之生效, 修改终端(iTerm2)的字体为`14pt Meslo LG S DZ Regular for Powerline`
+
+如下图
+
+![image](http://7xjgzy.com1.z0.glb.clouddn.com/powerline_1.png)
+
+然后修改配置powerline for vim
+
+`vim ~/.vimrc` 添加下面的配置, 路径和字体改成自己的
+
+```bash
+set rtp+=${POWERLINE_ROOT}/bindings/vim
+set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline:h14
+set laststatus=2
+set encoding=utf-8
+set t_Co=256
+set number
+set fillchars+=stl:\ ,stlnc:\
+set term=xterm-256color
+set termencoding=utf-8
+set background=dark
+syntax on
+colorscheme solarized
+set tabstop=4
+set shiftwidth=4
+set expandtab
+filetype plugin on
+filetype indent on
+```
+    
+效果图如下, 会有一个状态栏出来
+
+![image](http://7xjgzy.com1.z0.glb.clouddn.com/powerline_2.png)
 
 ## Mackup
 
@@ -364,14 +456,28 @@ $ mackup restore
 ## Issue
 
 有一些程序我使用的破解版本, 需要手动安装
-
+以及有一些brew cask安装不上的app
 
 | name | 说明 |
 | --- | --- |
 | Sublime Text 3 | 我最喜欢的Editor |
 | Alfred | workflow神器 |
 | Dash | API查询神器 |
+| Airmail2 | 漂亮的邮件客户端 |
+| MindNode Pro | 简单漂亮的思维导图 |
+| sequel-pro | mysql客户端 |
+| clipmenu | 粘贴板增强 |
+| sourcetree | git客户端 |
 
+还有一些压根装不上的
+
+| name | 说明 |
+| --- | --- |
+| [qlcolorcode](https://code.google.com/p/qlcolorcode/) | 让 Quick Look 支持 syntax highlighting |
+| [qlmarkdown](https://github.com/toland/qlmarkdown) | 让 Quick Look 支持 Markdown |
+| [qlstephen](http://whomwah.github.io/qlstephen/) | 让 Quick Look 支持无后拓展名的纯文本 |
+| [font-roboto](http://www.google.com/fonts/specimen/Roboto) | Roboto字体 |
+| [goagentx](https://goagentx.com/releasenotes.html) | 支持各种协议的翻墙GUI, 被和谐了 |
 
 
 ## Reference
