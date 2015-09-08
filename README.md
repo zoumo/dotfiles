@@ -173,6 +173,7 @@ apps=(
 | [z](https://github.com/rupa/z.git) | autojump |
 | tmux | tmux |
 | htop | 加强版top |
+| [trash](http://hasseg.org/blog/post/406/trash-files-from-the-os-x-command-line/) | 模拟Finder的移到废纸篓功能, 在alias中对rm进行替换, 进行安全删除 |
 
 
 #### Fonts
@@ -452,6 +453,19 @@ $ mackup restore
 
 
 更多详细的配置说明和支持软件请查看 [mackup 的文件](https://github.com/lra/mackup/tree/master/doc)。
+
+## alias
+
+由于个人习惯需要对一些命令进行alias, 如下
+
+```bash
+alias dos2mac="dos2unix -c mac"
+alias gbk2utf8="iconv -f GBK -t UTF-8"
+alias utf82gbk="iconv -f UTF-8 -t GBK"
+alias tailf="tail -f"
+alias ve="pyenv local"
+alias rm="trash" # 这个需要brew install trash
+```
 
 ## Issue
 

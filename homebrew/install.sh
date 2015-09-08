@@ -18,6 +18,7 @@ binaries=(
   z
   tmux
   htop
+  trash
   # mysql
   # nginx
   # node
