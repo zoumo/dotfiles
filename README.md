@@ -5,7 +5,7 @@
 
 ![iMac-MacBook-flat](http://i.imgur.com/GBpjrHB.png)
 
-这份 dotfiles 是 fork 自 [Amowu's dotfiles](https://github.com/amowu/dotfiles) 基于[Holman's dotfiles](https://github.com/holman/dotfiles)，并更加个人的需求进行了修改, 如果有兴趣欢迎fork一份回去配置适合自己的dotfiles。
+这份 [dotfiles](https://github.com/zoumo/dotfiles) 是 fork 自 [Amowu's dotfiles](https://github.com/amowu/dotfiles) 基于[Holman's dotfiles](https://github.com/holman/dotfiles)，并更加个人的需求进行了修改, 如果有兴趣欢迎fork一份回去配置适合自己的dotfiles。
 
 更多的 dotfiles 请参考 [GitHub does dotfiles](https://dotfiles.github.io/)。
 
@@ -222,7 +222,7 @@ apps=(
 
 执行 `$ ./osx/set-defaults.sh` 之后，程序会更改Mac OS X的一些系统设置, 根据个人喜欢和需求修改这个文件，或是参考 [Mathias’s dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.osx) 整理好的配置。
 
-以下是目前設定的配置：
+以下是目前设定的配置：
 
 
 | setting | script |
@@ -502,7 +502,12 @@ alias rm="trash" # 这个需要brew install trash
 - [如何優雅地在 Mac 上使用 dotfiles?](http://segmentfault.com/a/1190000002713879)
 - [osx-for-hackers.sh](https://gist.github.com/brandonb927/3195465)
 - [Mackup](https://github.com/lra/mackup/tree/master/doc)
+- [我的mac-dev-setup](https://github.com/zoumo/mac-dev-setup)
 
 ## Thanks
 
 I forked [Amowu](https://github.com/amowu/)'s [dotfiles](https://github.com/amowu/dotfiles.git) base on [Zach Holman](http://github.com/holman)'s excellent [dotfiles](http://github.com/holman/dotfiles).
+
+## GitHub
+
+这是我的[dotfiles](https://github.com/zoumo/dotfiles)欢迎fork
