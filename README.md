@@ -482,6 +482,7 @@ alias rm="trash" # 这个需要brew install trash
 | sequel-pro | mysql客户端 |
 | clipmenu | 粘贴板增强 |
 | sourcetree | git客户端 |
+| lantern | 开源P2P翻墙 |
 
 还有一些压根装不上的
 
