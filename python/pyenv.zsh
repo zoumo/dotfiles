@@ -8,3 +8,7 @@ export PATH="${PYENV_ROOT}/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 export PYTHONPATH="${HOME}/code/mrwind/MrWind-Dispatcher:${HOME}/code/mrwind/schedule:${HOME}/code/mrwind"
+export PYTHONDONTWRITEBYTECODE=x
+
+# thefuck
+eval $(thefuck --alias)

@@ -9,6 +9,7 @@ plugins=(
     pytz
     requests
     unittest2
+    thefuck
 )
 
 pip install --upgrade pip
