@@ -5,5 +5,12 @@ function crt
     host="$(ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d " " -f 2 )";
     PWD="$(pwd)"
 
-    echo ${user}@${host}:${PWD}
+    if [[ $# == 1 ]]; then
+        suffix="/$1"
+        #statements
+    else
+        suffix=""
+    fi
+
+    echo ${user}@${host}:${PWD}${suffix}
 }
