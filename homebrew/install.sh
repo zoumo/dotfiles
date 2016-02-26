@@ -19,6 +19,7 @@ binaries=(
   tmux
   htop
   trash
+  cheat
   # mysql
   # nginx
   # node
@@ -54,7 +55,6 @@ apps=(
   # sourcetree  # git 管理
   # movist  # 播放器
   lingon-x # 启动项管理
-  appzapper  # app卸载器
   xtrafinder  # 加强finder
   # mou
   # alfred
@@ -92,8 +92,9 @@ brew install bash
 # Install Homebrew Cask
 # brew tap caskroom/fonts
 # brew tap caskroom/versions
-brew install caskroom/cask/brew-cask
-brew upgrade brew-cask
+# no nead more
+# brew install caskroom/cask/brew-cask
+# brew upgrade brew-cask
 
 echo "Installing binaries..."
 brew install ${binaries[@]}
@@ -104,7 +105,7 @@ brew install ${binaries[@]}
 # Install apps to /Applications
 # Default is: /Users/$user/Applications
 echo "Installing apps..."
-sudo brew cask install --appdir="/Applications" ${apps[@]}
+brew cask install --appdir="/Applications" ${apps[@]}
 
 # clean things up
 brew cleanup
