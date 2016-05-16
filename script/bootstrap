@@ -178,7 +178,7 @@ install_ohmyzsh
 install_dotfiles
 
 info "installing dependencies"
-if source bin/dot
+if source script/dot
 then
     success "dependencies installed"
 else
