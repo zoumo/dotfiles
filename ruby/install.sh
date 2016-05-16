@@ -1,3 +1,3 @@
 #!/bin/sh
 
-gem sourse -a http://ruby.taobao.org
+gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
