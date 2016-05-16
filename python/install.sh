@@ -12,9 +12,11 @@ plugins=(
     thefuck
 )
 
-pip install --upgrade pip
+sudo pip install --upgrade pip
 
 # pyenv
-curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+if [ ! -d ${HOME}/.pyenv ]; then
+    curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+fi
 
 pip install ${plugins[@]}
