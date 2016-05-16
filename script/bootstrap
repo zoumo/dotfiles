@@ -122,7 +122,7 @@ link_file () {
 }
 
 install_homebrew () {
-    if [[ -z $(which brew) ]]; then
+    if [[ -z "$(which brew)" ]]; then
         echo "Installing Homebrew for you..."
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
