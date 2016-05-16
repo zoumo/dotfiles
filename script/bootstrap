@@ -135,6 +135,8 @@ install_centos () {
     sudo yum install epel-release
     sudo yum install dconf
     sudo yum install git
+    sudo yum install zsh
+    chsh -s /bin/zsh
     sudo yum install python-pip
     sudo pip install --upgrade pip
 

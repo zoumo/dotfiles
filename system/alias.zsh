@@ -7,6 +7,4 @@ alias ve="pyenv local"
 alias la="ls -lAh"
 if [[ "$OS" == "osx" ]]; then
     alias rm="trash"
-else
-    alias rm="trash-rm"
 fi
