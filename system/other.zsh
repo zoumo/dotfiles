@@ -4,4 +4,6 @@ then
   source `brew --prefix`/etc/grc.bashrc
 fi
 
-. `brew --prefix`/etc/profile.d/z.sh
+if (( $+commands[brew] )); then
+    . `brew --prefix`/etc/profile.d/z.sh
+fi
