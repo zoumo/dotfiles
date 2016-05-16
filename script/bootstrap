@@ -57,14 +57,14 @@ link_file () {
     local overwrite= backup= skip=
     local action=
 
-    if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
+    if [[ -f "$dst" -o -d "$dst" -o -L "$dst" ]]
     then
 
-        if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
+        if [[ "$overwrite_all" == "false" ]] && [[ "$backup_all" == "false" ]] && [[ "$skip_all" == "false" ]]
         then
             local currentSrc="$(readlink $dst)"
 
-            if [ "$currentSrc" == "$src" ]
+            if [[ "$currentSrc" == "$src" ]]
             then
                 skip=true;
             else
@@ -96,25 +96,25 @@ link_file () {
         backup=${backup:-$backup_all}
         skip=${skip:-$skip_all}
 
-        if [ "$overwrite" == "true" ]
+        if [[ "$overwrite" == "true" ]]
         then
             rm -rf "$dst"
             success "removed $dst"
         fi
 
-        if [ "$backup" == "true" ]
+        if [[ "$backup" == "true" ]]
         then
             mv "$dst" "${dst}.backup"
             success "moved $dst to ${dst}.backup"
         fi
 
-        if [ "$skip" == "true" ]
+        if [[ "$skip" == "true" ]]
         then
             success "skipped $src"
         fi
     fi
 
-    if [ "$skip" != "true" ]  # "false" or empty
+    if [[ "$skip" != "true" ]]  # "false" or empty
     then
         ln -s "$1" "$2"
         success "linked $1 to $2"
@@ -122,7 +122,7 @@ link_file () {
 }
 
 install_homebrew () {
-    if [ -z $(which brew) ]; then
+    if [[ -z $(which brew) ]]; then
         echo "Installing Homebrew for you..."
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
@@ -141,7 +141,7 @@ install_centos () {
 }
 
 install_ohmyzsh () {
-    if [ ! -d ~/.oh-my-zsh ]
+    if [[ ! -d ~/.oh-my-zsh ]]
     then
         info 'installing oh-my-zsh'
         sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -159,18 +159,18 @@ install_dotfiles () {
     done
 }
 
-if [ "$(uname -s)" == "Darwin" ]; then
+if [[ "$(uname -s)" == "Darwin" ]]; then
     export OS="osx"
-elif [ "$(uname -s)" == "Linux" -a -n $(which yum) ]; then
+elif [[ "$(uname -s)" == "Linux" -a -n $(which yum) ]]; then
     export OS="centos"
 fi
 
 
 
-if [ $OS == "osx" ]
+if [[ $OS == "osx" ]]
 then
     install_homebrew
-elif [ $OS == "centos" ]; then
+elif [[ $OS == "centos" ]]; then
     install_centos
 fi
 
