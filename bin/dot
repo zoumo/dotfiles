@@ -5,11 +5,16 @@
 # `dot` handles installation, updates, things like that. Run it periodically
 # to make sure you're on the latest and greatest.
 
-# Install homebrew packages
-sh $HOME/.dotfiles/homebrew/install.sh
+if [ $OS == "osx" ]; then
+    # Install homebrew packages
+    sh $HOME/.dotfiles/homebrew/install.sh
 
-# Set OS X defaults
-sh $HOME/.dotfiles/osx/set-defaults.sh
+    # Set OS X defaults
+    sh $HOME/.dotfiles/osx/set-defaults.sh
+
+    # Set up vim
+    sh $HOME/.dotfiles/vim/install.sh
+fi
 
 # Set up python env
 sh $HOME/.dotfiles/python/install.sh
@@ -19,6 +24,3 @@ sh $HOME/.dotfiles/ruby/install.sh
 
 # beautify vim ls terminal
 sh $HOME/.dotfiles/beautify/install.sh
-
-# Set up vim
-sh $HOME/.dotfiles/vim/install.sh
