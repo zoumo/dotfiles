@@ -1,6 +1,6 @@
-if [ "$(uname -s)" == "Darwin" ]; then
+if [[ "$(uname -s)" == "Darwin" ]]; then
     export OS="osx"
-elif [ "$(uname -s)" == "Linux" -a -n $(which yum) ]; then
+elif [[ "$(uname -s)" == "Linux" -a -n $(which yum) ]]; then
     export OS="centos"
 fi
 export GOPATH="$HOME/.golang"
