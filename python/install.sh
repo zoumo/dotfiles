@@ -19,4 +19,4 @@ if [ ! -d ${HOME}/.pyenv ]; then
     curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 fi
 
-pip install ${plugins[@]}
+sudo pip install ${plugins[@]}
