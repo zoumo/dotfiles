@@ -12,7 +12,13 @@ cd ${plugins}
 if [[ $OS == "osx" ]]; then
     brew install ctags
     brew install the_silver_searcher
+elif [[ $OS == 'centos' ]]; then
+    sudo yum install python-devel.x86_64
+    sudo yum groupinstall 'Development Tools'
+    sudo yum install the_silver_searcher
+    sudo yum install cmake
 fi
+
 
 # 可以选择安装
 # brew tap neovim/neovim
