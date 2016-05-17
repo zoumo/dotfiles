@@ -83,24 +83,25 @@ echo "Update Homebrew..."
 # Update homebrew recipes
 # brew update
 
+echo "Installing coreutils, findutils, bash, macvim..."
 # Install GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew install findutils
 # Install Bash 4
 brew install bash
-# Install Homebrew Cask
-# brew tap caskroom/fonts
-# brew tap caskroom/versions
-# no nead more
-# brew install caskroom/cask/brew-cask
-# brew upgrade brew-cask
+# mac中的vim版本太低, 换成macvim
+brew install macvim --override-system-vim
+brew linkapps macvim
 
 echo "Installing binaries..."
 brew install ${binaries[@]}
 
 # echo "Installing fonts..."
 # brew cask install ${fonts[@]}
+
+# Important December 2015 update: Homebrew-Cask will now be kept up to date together with Homebrew (see #15381 for details).
+# If you haven’t yet, run brew uninstall --force brew-cask; brew update to switch to the new system.
 
 # Install apps to /Applications
 # Default is: /Users/$user/Applications
