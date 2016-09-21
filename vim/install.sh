@@ -13,10 +13,10 @@ if [[ $OS == "osx" ]]; then
     brew install ctags
     brew install the_silver_searcher
 elif [[ $OS == 'centos' ]]; then
-    sudo yum install python-devel.x86_64
-    sudo yum groupinstall 'Development Tools'
-    sudo yum install the_silver_searcher
-    sudo yum install cmake
+    sudo yum install -y python-devel.x86_64
+    sudo yum groupinstall -y 'Development Tools'
+    sudo yum install -y the_silver_searcher
+    sudo yum install -y cmake
 fi
 
 
