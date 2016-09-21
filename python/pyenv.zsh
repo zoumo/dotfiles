@@ -7,7 +7,7 @@ export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-export PYTHONPATH="${HOME}/code/mrwind/NewMrWind"
+export PYTHONPATH="${HOME}/code/feng/NewMrWind"
 export PYTHONDONTWRITEBYTECODE=x
 
 # thefuck

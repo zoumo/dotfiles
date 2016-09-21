@@ -132,12 +132,10 @@ install_centos () {
     # EPEL(http://fedoraproject.org/wiki/EPEL) 是由 Fedora 社区打造，
     # 为 RHEL 及衍生发行版如 CentOS、Scientific Linux 等提供高质量软件包的项目。
     # 官方的源更新滞后, 有些拓展源没有
-    sudo yum install epel-release
-    sudo yum install dconf
-    sudo yum install git
-    sudo yum install zsh
+    sudo yum install -y epel-release
+    sudo yum install -y dconf, git, openssl-devel, zsh, gcc
     chsh -s /bin/zsh
-    sudo yum install python-pip
+    sudo yum install -y python-pip
     sudo pip install --upgrade pip
 
 }

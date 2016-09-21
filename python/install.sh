@@ -20,7 +20,7 @@ if [[ ! -d ${HOME}/.pyenv ]]; then
 fi
 
 if [[ $OS == "centos" ]]; then
-    sudo yum install python-devel.x86_64
+    sudo yum install -y python-devel.x86_64
 fi
 
 sudo pip install ${plugins[@]}
