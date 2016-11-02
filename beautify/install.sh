@@ -14,6 +14,12 @@ if [[ ! -d ${plugins}/fonts ]]; then
 	sh ./fonts/install.sh
 fi
 
+# install powerline
+if test $(which pip)
+then
+sudo pip install powerline-status
+fi
+
 # install solarized and dircolors
 if [[ ! -d ${plugins}/solarized ]]; then
 	git clone https://github.com/altercation/solarized.git
@@ -33,6 +39,7 @@ if [[ ! -d ${plugins}/solarized ]]; then
     fi
 fi
 
+# install dircolors-solarized
 if [[ ! -d ${plugins}/dircolors-solarized ]]; then
 	git clone https://github.com/seebi/dircolors-solarized.git
 fi
