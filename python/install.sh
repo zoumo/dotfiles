@@ -2,7 +2,6 @@
 
 plugins=(
     virtualenv
-    powerline-status
     autopep8
     flake8
     docopt

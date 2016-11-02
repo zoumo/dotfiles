@@ -86,13 +86,12 @@ $ mackup restore
 
 执行 `~/.dotfiles/script/bootstrap` 的时候，脚本会将目录底下所有的 `*.symlink` 文件通过 `ln` 命令建立链接至 `$HOME` 目录底下:
 
-| topic  | *.symlink          | .dotfiles     |
-| ------ | ------------------ | ------------- |
-| git    | gitconfig.symlink  | ~/.gitconfig  |
-| git    | gitignore.symlink  | ~/.gitignore  |
-| mackup | mackup.cfg.symlink | ~/.mackup.cfg |
-| vim    | vimrc.symlink      | ~/.vimrc      |
-| zsh    | zshrc.symlink      | ~/.zshrc      |
+| topic | *.symlink      | .dotfiles |
+| ----- | -------------- | --------- |
+| zsh   | zshenv.symlink | ~/.zshenv |
+| zsh   | zshrc.symlink  | ~/.zshrc  |
+
+>   我的git的dotfiles交给mackup来备份, vim的dotfiles交给[k-vim](https://github.com/wklken/k-vim)管理
 
 ### Topical
 
@@ -108,7 +107,7 @@ $ mackup restore
 
 - **bin/**: 任何在 `bin/` 目录下的文件可以在shell执行的时候使用。
 - **topic/*.zsh**: 任何 `.zsh` 结尾的文件都会在 shell 执行的时候被载入环境。
-- **topic/path.zsh**: 任何 `path.zsh` 结尾的文件会在 shell 执行时优先载入。
+- **topic/path.zsh**: 任何 `path.zsh` 文件会在 shell 执行时优先载入。
 - **topic/*.symlink**: 任何 `*.symlink` 結尾的文件都会在 `$HOME` 目录下建立链接。
 
 不同于 [Holman's dotfiles](https://github.com/holman/dotfiles)，我修改了一些部分:
@@ -188,7 +187,6 @@ apps=(
 | [scroll-reverser](http://pilotmoon.com/scrollreverser/) | 支持鼠标和触控板滚轮分别设置                       |
 | [slate](https://github.com/jigish/slate) | Mac窗口调节程序,类似于Divvy and SizeUp        |
 | the-unarchiver                           | 优秀免费的解压软件                            |
-| movist                                   | 播放器                                  |
 | lingon-x                                 | 启动项管理                                |
 | xtrafinder                               | finder加强                             |
 
@@ -282,11 +280,14 @@ $ git clone https://github.com/seebi/dircolors-solarized.git ~/plugins
 
 ### Terminal/Iterm2
 
-在 `~/plugins/solarized/iterm2-colors-solarized/` 双击 `Solarized Dark.itermcolors` 导入iterm2的配色
+```bash
+# 导入iterm2的配色
+$ open "~/plugins/solarized/iterm2-colors-solarized/Solarized Dark.itermcolors"
+# 导入Terminal.app的配色
+$ open "~/plugins/solarized/osx-terminal.app-colors-solarized/xterm-256color/Solarized Dark xterm-256color.terminal"
+```
 
-在 `~/plugins/solarized/osx-terminal.app-colors-solarized/xterm-256color/` 双击 `Solarized Dark ansi.terminal` 导入Terminal.app的配色
-
-### vim
+### vim(k-vim已经做了这块工作)
 
 ``` bash
 $ mkdir -p ~/.vim/colors
@@ -314,6 +315,8 @@ eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-dark`
 
 
 ### powerline
+
+**powerline-statusline**
 
 powerline修改了terminal/vim下面的statusline
 
@@ -344,7 +347,7 @@ fi
 
 ![image](http://7xjgzy.com1.z0.glb.clouddn.com/powerline_1.png)
 
-然后修改配置powerline for vim
+**powerline for vim(k-vim使用了airline)**
 
 `vim ~/.vimrc` 添加下面的配置, 路径和字体改成自己的
 
@@ -388,7 +391,7 @@ $ brew install mackup
 
 ``` bash
 [storage]
-engine = dropbox # 同步的云盘, 目前只有弓dropbox和google_drive可以选择
+engine = dropbox # 同步的云盘, 目前只有dropbox和google_drive可以选择
 directory = Mackup # 同步的文件夹，这里会将所有的同步备份至 ~/Dropbox/Mackup 底下
 
 # 指定要同步的应用程序
@@ -430,21 +433,13 @@ $ mackup restore
 
 以下是目前我备份的应用程序：
 
-
-
 | app             | backup-conf                     |
 | --------------- | ------------------------------- |
 | git             | ~/.gitconfig和.config/git/ignore |
 | mackup          | ~/.mackup.cfg和~/.mackup         |
-| dash            | 默认配置                            |
-| iterm2          | 默认配置                            |
-| oh-my-zsh       | ~/.oh-my-zsh                    |
 | scroll-reverser | 默认配置                            |
 | slate           | ~/.slate                        |
 | sublime-text-3  | plugins和config                  |
-| pycharm40       | config                          |
-| goagentx        | config                          |
-| vim             | ~/.vimrc和~/.vim                 |
 
 更多详细的配置说明和支持软件请查看 [mackup 的文件](https://github.com/lra/mackup/tree/master/doc)。
 
@@ -480,6 +475,14 @@ alias rm="trash" # 这个需要brew install trash
 | [SourceTree](https://www.sourcetreeapp.com/) | git客户端                         |
 | [lantern](https://github.com/getlantern/lantern) | 开源P2P翻墙                        |
 | [Charles](http://www.charlesproxy.com/)  | 抓包工具                           |
+| movist                                   | 播放器                            |
+
+## TODO
+
+-   支持多个操作系统, 首先支持CentOS
+-   更加模块化
+
+
 
 ## Reference
 
