@@ -20,9 +20,9 @@
   - [安装 dotfiles](#install-dotfiles)
   - [恢复备份](#restore-backup)
 - [How To Use](#how-to-use)
-  - [dotfiles](#dotfiles)
-  - [OS X](#os-x)
-  - [Mackup](#mackup)
+- [dotfiles](#dotfiles)
+- [OS X](#os-x)
+- [Mackup](#mackup)
 - [Issue](#issue)
 
 <!-- more -->
@@ -47,7 +47,7 @@ $ xcode-select --install
 使用 git clone 一份到 `$HOME` 目录底下的 `.dotfiles` 文件夹里面:
 
 ``` bash
-$ git clone git@github.com:zoumo/dotfiles.git ~/.dotfiles
+$ git clone https://github.com/zoumo/dotfiles.git ~/.dotfiles
 ```
 
 进入 `.dotfiles` 文件夹, 然后安装dotfiles:
@@ -184,13 +184,9 @@ apps=(
 
 | name                                     | info                                 |
 | ---------------------------------------- | ------------------------------------ |
-| [google-chrome](www.google.com/chrome)   | Google 浏览器                           |
-| [qq](http://im.qq.com/macqq/)            | 聊天                                   |
 | [macdown](http://macdown.uranusjr.com/)  | Open source Markdown editor for OS X |
-| [iterm2](http://iterm2.com/)             | 加强版终端                                |
 | [scroll-reverser](http://pilotmoon.com/scrollreverser/) | 支持鼠标和触控板滚轮分别设置                       |
 | [slate](https://github.com/jigish/slate) | Mac窗口调节程序,类似于Divvy and SizeUp        |
-| [beyond-compare](http://www.scootersoftware.com/) | Beyond Compare 是一个优秀的文件/目录对比工具       |
 | the-unarchiver                           | 优秀免费的解压软件                            |
 | movist                                   | 播放器                                  |
 | lingon-x                                 | 启动项管理                                |
@@ -467,22 +463,23 @@ alias rm="trash" # 这个需要brew install trash
 
 ## Issue
 
-有一些程序我使用的破解版本, 需要手动安装
+其他的一些软件按需安装
 
-以及有一些brew cask安装不上的app
-
-| name                                     | 说明          |
-| ---------------------------------------- | ----------- |
-| [Sublime Text 3](http://www.sublimetext.com/3) | 我最喜欢的Editor |
-| Alfred                                   | workflow神器  |
-| Dash                                     | API查询神器     |
-| Airmail2                                 | 漂亮的邮件客户端    |
-| MindNode Pro                             | 简单漂亮的思维导图   |
-| sequel-pro                               | mysql客户端    |
-| [clipmenu](http://www.clipmenu.com/)     | 粘贴板增强       |
-| [SourceTree](https://www.sourcetreeapp.com/) | git客户端      |
-| [lantern](https://github.com/getlantern/lantern) | 开源P2P翻墙     |
-| [Charles](http://www.charlesproxy.com/)  | 抓包工具        |
+| name                                     | 说明                             |
+| ---------------------------------------- | ------------------------------ |
+| [google-chrome](www.google.com/chrome)   | Google 浏览器                     |
+| [iterm2](http://iterm2.com/)             | 加强版终端                          |
+| [beyond-compare](http://www.scootersoftware.com/) | Beyond Compare 是一个优秀的文件/目录对比工具 |
+| [Sublime Text 3](http://www.sublimetext.com/3) | 我最喜欢的Editor                    |
+| Alfred                                   | workflow神器                     |
+| Dash                                     | API查询神器                        |
+| Airmail2                                 | 漂亮的邮件客户端                       |
+| MindNode Pro                             | 简单漂亮的思维导图                      |
+| sequel-pro                               | mysql客户端                       |
+| [clipmenu](http://www.clipmenu.com/)     | 粘贴板增强                          |
+| [SourceTree](https://www.sourcetreeapp.com/) | git客户端                         |
+| [lantern](https://github.com/getlantern/lantern) | 开源P2P翻墙                        |
+| [Charles](http://www.charlesproxy.com/)  | 抓包工具                           |
 
 ## Reference
 
