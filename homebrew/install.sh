@@ -9,7 +9,6 @@
 binaries=(
   dos2unix
   wget
-  python
   ctags
   grc
   git-flow

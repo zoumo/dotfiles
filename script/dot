@@ -11,16 +11,19 @@ if [[ $OS == "osx" ]]; then
 
     # Set OS X defaults
     sh $HOME/.dotfiles/osx/set-defaults.sh
-
-    # Set up vim
-    sh $HOME/.dotfiles/vim/install.sh
 fi
+
+# Set up vim
+sh $HOME/.dotfiles/vim/install.sh
 
 # Set up python env
 sh $HOME/.dotfiles/python/install.sh
 
 # Set up ruby
 sh $HOME/.dotfiles/ruby/install.sh
+
+# Set up go
+sh $HOME/.dotfiles/go/install.sh
 
 # beautify vim ls terminal
 sh $HOME/.dotfiles/beautify/install.sh
