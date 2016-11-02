@@ -1,5 +1,16 @@
 #!/bin/sh
 
+# install python and pip
+if [[ $OS == "osx" ]]; then
+    brew install python
+elif [[  $OS == "centos" ]]; then
+    # pip
+    sudo yum install -y python-pip
+    # python development packages
+    sudo yum install -y python-devel.x86_64
+fi
+
+# install plugins
 plugins=(
     virtualenv
     autopep8
@@ -11,15 +22,12 @@ plugins=(
     thefuck
 )
 
+# update pip
 sudo pip install --upgrade pip
 
-# pyenv
+sudo pip install ${plugins[@]}
+
+# install pyenv
 if [[ ! -d ${HOME}/.pyenv ]]; then
     curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 fi
-
-if [[ $OS == "centos" ]]; then
-    sudo yum install -y python-devel.x86_64
-fi
-
-sudo pip install ${plugins[@]}

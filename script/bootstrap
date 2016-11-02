@@ -134,10 +134,7 @@ install_centos () {
     # 官方的源更新滞后, 有些拓展源没有
     sudo yum install -y epel-release
     sudo yum install -y dconf, git, openssl-devel, zsh, gcc
-    chsh -s /bin/zsh
-    sudo yum install -y python-pip
-    sudo pip install --upgrade pip
-
+    # chsh -s /bin/zsh
 }
 
 install_ohmyzsh () {
@@ -164,7 +161,6 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 elif [[ "$(uname -s)" == "Linux" ]] && [[ -n "$(which yum)" ]]; then
     export OS="centos"
 fi
-
 
 
 if [[ $OS == "osx" ]]
