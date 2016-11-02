@@ -31,11 +31,11 @@
 
 ## Erase and reinstall OS X
 
-如果你打算从干净的 Mac 环境开始，请参考「[OS X：如何清除并安裝](http://support.apple.com/zh-tw/HT5943)」。
+如果你打算从干净的 Mac 环境开始，请参考「[OS X：如何清除并安装](http://support.apple.com/zh-tw/HT5943)」。
 
 ## Install Xcode
 
-1. 安装Xcode
+1. 安装或更新Xcode, 保证Xcode最新, 否则可能会导致失败
 2. 安装Xcode Command Line Tools
 
 ``` bash
