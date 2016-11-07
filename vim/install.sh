@@ -17,6 +17,7 @@ elif [[ $OS == 'centos' ]]; then
     sudo yum groupinstall -y 'Development Tools'
     sudo yum install -y the_silver_searcher
     sudo yum install -y cmake
+    sudo yum install -y vim
 fi
 
 
@@ -25,6 +26,8 @@ fi
 # brew install --HEAD neovim
 # pip install neovim
 
-git clone https://github.com/wklken/k-vim.git
+if [[ ! -d ${plugins}/k-vim ]]; then
+    git clone https://github.com/wklken/k-vim.git
+fi
 cd k-vim/
 sh -x install.sh

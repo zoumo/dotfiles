@@ -3,6 +3,8 @@ command_exists() {
     command -v "$@" > /dev/null 2>&1
 }
 
+export -f command_exists
+
 if command_exists lsb_release ; then
     os="$(lsb_release -si)"
 fi
