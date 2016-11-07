@@ -16,7 +16,7 @@ fi
 
 # install powerline
 if command_exists pip; then
-    pip install powerline-status
+    sudo pip install powerline-status
 fi
 
 # install solarized and dircolors
