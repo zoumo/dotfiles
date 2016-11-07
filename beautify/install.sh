@@ -15,7 +15,7 @@ if [[ ! -d ${plugins}/fonts ]]; then
 fi
 
 # install powerline
-if (( $+commands[pip] )); then
+if command_exists pip; then
     pip install powerline-status
 fi
 
@@ -30,7 +30,7 @@ if [[ ! -d ${plugins}/solarized ]]; then
         if [[ ! -d ${plugins}/gnome-terminal-colors-solarized ]]; then
             git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
         fi
-        if (( $+commands[dconf] )); then
+        if command_exists; then
             sudo yum install dconf
         fi
         # need dconf

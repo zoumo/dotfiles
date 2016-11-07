@@ -1,9 +1,9 @@
 # GRC colorizes nifty unix tools all over the place
-if (( $+commands[grc] )) && (( $+commands[brew] ))
+if command_exists grc && command_exists brew
 then
   source `brew --prefix`/etc/grc.bashrc
 fi
 
-if (( $+commands[brew] )); then
+if command_exists brew; then
     . `brew --prefix`/etc/profile.d/z.sh
 fi
