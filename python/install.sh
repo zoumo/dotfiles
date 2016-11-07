@@ -1,7 +1,9 @@
 #!/bin/sh
 
 # install python and pip
-if [[ $OS == "osx" ]]; then
+if command_exists python && command_exists pip; then
+    :
+elif [[ $OS == "osx" ]]; then
     brew install python
 elif [[  $OS == "centos" ]]; then
     # pip
