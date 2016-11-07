@@ -5,7 +5,7 @@ if [[ $OS == "osx" ]]; then
     brew install python
 elif [[  $OS == "centos" ]]; then
     # pip
-    sudo yum install -y python-pip
+    sudo yum install -y python-pip || ( curl -fsSL https://bootstrap.pypa.io/get-pip.py | sudo python )
     # python development packages
     sudo yum install -y python-devel.x86_64
 fi
