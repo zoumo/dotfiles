@@ -53,7 +53,7 @@ apps=(
   # clipmenu  # 粘贴版扩展 0.4.3
   # sourcetree  # git 管理
   # movist  # 播放器
-  lingon-x # 启动项管理
+  # lingon-x # 启动项管理
   xtrafinder  # 加强finder
   # mou
   # alfred

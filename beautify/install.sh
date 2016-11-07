@@ -3,7 +3,7 @@
 plugins=${HOME}/plugins
 
 if [[ ! -d ${plugins} ]]; then
-    mkdir ${plugins}
+    mkdir -p ${plugins}
 fi
 
 cd ${plugins}
@@ -15,9 +15,8 @@ if [[ ! -d ${plugins}/fonts ]]; then
 fi
 
 # install powerline
-if test $(which pip)
-then
-sudo pip install powerline-status
+if (( $+commands[pip] )); then
+    pip install powerline-status
 fi
 
 # install solarized and dircolors
@@ -31,7 +30,7 @@ if [[ ! -d ${plugins}/solarized ]]; then
         if [[ ! -d ${plugins}/gnome-terminal-colors-solarized ]]; then
             git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
         fi
-        if [[ -z $(which dconf) ]]; then
+        if (( $+commands[dconf] )); then
             sudo yum install dconf
         fi
         # need dconf
@@ -42,6 +41,7 @@ fi
 # install dircolors-solarized
 if [[ ! -d ${plugins}/dircolors-solarized ]]; then
 	git clone https://github.com/seebi/dircolors-solarized.git
+    cp ${plugins}/dircolors-solarized/dircolors.ansi-dark $HOME/.dircolors
 fi
 
 
