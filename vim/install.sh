@@ -30,4 +30,4 @@ if [[ ! -d ${plugins}/k-vim ]]; then
     git clone https://github.com/wklken/k-vim.git
 fi
 cd k-vim/
-sh -x install.sh
+sh install.sh
