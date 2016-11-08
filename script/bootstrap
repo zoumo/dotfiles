@@ -199,3 +199,5 @@ if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
         info "Please manually change your default shell to zsh!"
     fi
 fi
+
+env zsh
