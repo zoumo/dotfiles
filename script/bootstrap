@@ -144,7 +144,8 @@ install_ohmyzsh () {
     if [[ ! -d ~/.oh-my-zsh ]]
     then
         info 'installing oh-my-zsh'
-        sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+        # sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+        git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
     fi
 }
 
@@ -181,5 +182,20 @@ else
     fail "error installing dependencies"
 fi
 
-echo ''
-echo '  All installed!'
+
+info "==============="
+info "All installed!"
+info "==============="
+
+TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
+if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
+    # If this platform provides a "chsh" command (not Cygwin), do it, man!
+    if hash chsh >/dev/null 2>&1; then
+        info "Time to change your default shell to zsh!"
+        chsh -s $(grep /zsh$ /etc/shells | tail -1)
+    # Else, suggest the user do so manually.
+    else
+        info "I can't change your shell automatically because this system does not have chsh."
+        info "Please manually change your default shell to zsh!"
+    fi
+fi
