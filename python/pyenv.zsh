@@ -11,4 +11,4 @@ export PYTHONPATH="${HOME}/code/feng/NewMrWind"
 export PYTHONDONTWRITEBYTECODE=x
 
 # thefuck
-eval $(thefuck --alias)
+# eval $(thefuck --alias)

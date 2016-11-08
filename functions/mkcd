@@ -1,3 +1,4 @@
+#!/bin/sh
 # -*- shell-script -*-
 # mkcd: a script which declares a function, mkcd.
 

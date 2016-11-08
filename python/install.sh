@@ -1,5 +1,9 @@
 #!/bin/sh
 
+function command_exists() {
+    command -v "$@" > /dev/null 2>&1
+}
+
 # install python and pip
 if command_exists python && command_exists pip; then
     :
@@ -21,7 +25,7 @@ plugins=(
     pytz
     requests
     unittest2
-    thefuck
+    # thefuck
 )
 
 # update pip
