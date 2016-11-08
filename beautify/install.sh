@@ -14,6 +14,10 @@ if [[ ! -d ${plugins}/fonts ]]; then
 	sh ./fonts/install.sh
 fi
 
+function command_exists() {
+    command -v "$@" > /dev/null 2>&1
+}
+
 # install powerline
 if command_exists pip; then
     sudo pip install powerline-status
