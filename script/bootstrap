@@ -133,7 +133,9 @@ install_centos () {
     # 为 RHEL 及衍生发行版如 CentOS、Scientific Linux 等提供高质量软件包的项目。
     # 官方的源更新滞后, 有些拓展源没有
     sudo yum -y update
+    sudo yum remove -y epel-release
     sudo yum install -y epel-release
+    sudo yum install -y yum-axelget
     sudo yum install -y dconf git openssl-devel zsh gcc
     # chsh -s /bin/zsh
 }
