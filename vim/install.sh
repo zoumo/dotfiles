@@ -1,6 +1,6 @@
 # !/bin/sh
 
-plugins=${HOME}/plugins
+plugins=${HOME}/.dotfiles/plugins
 
 if [[ ! -d ${plugins} ]]; then
     mkdir ${plugins}
