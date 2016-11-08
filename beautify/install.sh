@@ -1,6 +1,6 @@
 # !/bin/sh
 
-plugins=${HOME}/plugins
+plugins=${HOME}/.dotfiles/plugins
 
 if [[ ! -d ${plugins} ]]; then
     mkdir -p ${plugins}
@@ -8,13 +8,15 @@ fi
 
 cd ${plugins}
 
-# install powerline fonts
-if [[ ! -d ${plugins}/fonts ]]; then
-	git clone https://github.com/powerline/fonts
-	sh ./fonts/install.sh
-fi
+install_fonts() {
+    # install powerline fonts
+    if [[ ! -d ${plugins}/fonts ]]; then
+        git clone https://github.com/powerline/fonts
+        sh ./fonts/install.sh
+    fi
+}
 
-function command_exists() {
+command_exists() {
     command -v "$@" > /dev/null 2>&1
 }
 
@@ -23,18 +25,20 @@ if command_exists pip; then
     sudo pip install powerline-status
 fi
 
-# install solarized and dircolors
+# install solarized for terminal
 if [[ ! -d ${plugins}/solarized ]]; then
 	git clone https://github.com/altercation/solarized.git
 
     if [[ $OS == "osx" ]]; then
+        install_fonts
         open "${plugins}/solarized/iterm2-colors-solarized/Solarized Dark.itermcolors"
         open "${plugins}/solarized/osx-terminal.app-colors-solarized/xterm-256color/Solarized Dark xterm-256color.terminal"
     elif [[ $OS == "centos" ]] && command_exists gnome-shell; then
+        install_fonts
         if [[ ! -d ${plugins}/gnome-terminal-colors-solarized ]]; then
             git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
         fi
-        if command_exists dconf; then
+        if ! command_exists dconf; then
             sudo yum install dconf
         fi
         # need dconf
