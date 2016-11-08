@@ -12,6 +12,13 @@
 
 更多的 dotfiles 请参考 [GitHub does dotfiles](https://dotfiles.github.io/)。
 
+## Compatibility
+
+-   macOS
+
+
+-   CentOS7
+
 ## Menu
 
 - [Quick Start](#quick-start)
@@ -333,10 +340,13 @@ $ cd ~/plugins/fonts && ./install.sh
 $ pip install powerline-status
 $ vim ~/.zshrc
 
+function command_exists() {
+    command -v "$@" > /dev/null 2>&1
+}
+
 if command_exists pip; then
     export POWERLINE_ROOT="$(python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")/powerline"
-    . ${POWERLINE_ROOT}/bindings/zsh/powerline.zsh
-
+    source ${POWERLINE_ROOT}/bindings/zsh/powerline.zsh
 fi
 ```
 
