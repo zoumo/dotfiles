@@ -1,0 +1,18 @@
+#!/bin/bash
+
+function switch
+{
+    if [[ $# != 2 ]]; then
+        echo "Usage: switch A B"
+    else
+        file1=$1
+        file2=$2
+
+        cp $file1 $file2.tmp
+        cp $file2 $file1
+        mv $file2.tmp $file2
+    fi
+
+
+
+}
