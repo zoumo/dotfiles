@@ -1,9 +1,11 @@
-#!/bin/sh
+# !/bin/bash
 #
 # dot
 #
 # `dot` handles installation, updates, things like that. Run it periodically
 # to make sure you're on the latest and greatest.
+
+set -e
 
 if [[ $OS == "osx" ]]; then
     # Install homebrew packages

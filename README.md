@@ -74,6 +74,7 @@ $ ./script/bootstrap
 5. 设置 Mac OS X 的 defaults settings。
 6. 安装python packages(powerline-status, pyenv, ...)
 7. 对vim, ls, terminal进行美化, 主要是安装了solarized配色和powerline状态栏
+8. 切换shell到zsh
 
 完成之后, 手动安装一些其他软件(Sublime3, Alfred, 以及一些较大的软件java, mysql, mongodb, nginx, jmeter)
 

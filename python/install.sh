@@ -1,4 +1,4 @@
-#!/bin/sh
+# !/bin/bash
 
 function command_exists() {
     command -v "$@" > /dev/null 2>&1
