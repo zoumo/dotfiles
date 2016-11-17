@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 
 plugins=${HOME}/.dotfiles/plugins
 

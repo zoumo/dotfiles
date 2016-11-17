@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # command name: trash-rm
 # http://www.webupd8.org/2010/02/make-rm-move-files-to-trash-instead-of.html
 shopt -s extglob
