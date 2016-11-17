@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # thanks docker/hack/install.sh
 
 function command_exists() {
