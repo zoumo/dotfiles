@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# !/bin/bash
 #
 # bootstrap installs things.
 
@@ -160,8 +160,9 @@ install_dotfiles () {
     done
 }
 
-# export OS
+# export OS, command_exists
 source system/os.sh
+
 case "$OS" in
     osx)
         install_homebrew
@@ -190,9 +191,9 @@ success "==============="
 TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
 if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
     # If this platform provides a "chsh" command (not Cygwin), do it, man!
-    if hash chsh >/dev/null 2>&1; then
+    if command_exists chsh; then
         success "Time to change your default shell to zsh!"
-        chsh -s $(grep /zsh$ /etc/shells | tail -1)
+        chsh -s $(grep "/zsh$" /etc/shells | tail -1)
     # Else, suggest the user do so manually.
     else
         info "I can't change your shell automatically because this system does not have chsh."

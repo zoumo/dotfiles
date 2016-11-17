@@ -1,4 +1,4 @@
-# !/bin/sh
+# !/bin/bash
 
 if [[ $OS == "osx" ]]; then
     brew install go
