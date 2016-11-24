@@ -27,7 +27,7 @@ fi
 # pip install neovim
 
 if [[ ! -d ${plugins}/k-vim ]]; then
-    git clone https://github.com/wklken/k-vim.git
+    git clone https://github.com/zoumo/k-vim.git
 fi
 cd k-vim/
 sh install.sh
