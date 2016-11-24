@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 plugins=${HOME}/.dotfiles/plugins
 
 if [[ ! -d ${plugins} ]]; then

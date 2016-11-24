@@ -5,6 +5,8 @@
 # This installs some of the common dependencies needed (or at least desired)
 # using Homebrew.
 
+set -e
+
 # Binaries
 binaries=(
   dos2unix
