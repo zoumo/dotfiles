@@ -1,6 +1,8 @@
 #!/bin/bash
 # thanks docker/hack/install.sh
 
+set -e
+
 function command_exists() {
     command -v "$@" > /dev/null 2>&1
 }
