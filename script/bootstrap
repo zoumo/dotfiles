@@ -161,7 +161,7 @@ install_dotfiles () {
 }
 
 # export OS, command_exists
-source system/os.sh
+source system/path.zsh
 
 case "$OS" in
     osx)
