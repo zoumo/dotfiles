@@ -9,6 +9,10 @@ function docker-clean() {
     docker rm $(docker ps -a -q)
 }
 
+function docker-clean-image() {
+    docker images  -f "dangling=true" -q | xargs docker rmi
+}
+
 #the implementation refs from https://github.com/jpetazzo/nsenter/blob/master/docker-enter
 function docker-enter() {
     #if [ -e $(dirname "$0")/nsenter ]; then
