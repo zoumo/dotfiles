@@ -58,3 +58,4 @@ if [[ $OS == "osx" ]]; then
     export PATH="/usr/local/opt/coreutils/libexec/gnubin:${GOPATH}/bin/:${HOME}/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
     export GO15VENDOREXPERIMENT=1
+fi
