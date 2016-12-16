@@ -54,5 +54,7 @@ export -f command_exists >/dev/null 2>&1
 
 export OS=$os
 export GOPATH="$HOME/.golang"
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:${GOPATH}/bin/:${HOME}/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+if [[ $OS == "osx" ]]; then
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:${GOPATH}/bin/:${HOME}/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    export GO15VENDOREXPERIMENT=1
