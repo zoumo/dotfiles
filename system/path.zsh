@@ -2,10 +2,6 @@ function command_exists() {
     command -v "$@" > /dev/null 2>&1
 }
 
-if command_exists lsb_release ; then
-    os="$(lsb_release -si)"
-fi
-
 # set default
 : ${os:=""}
 
