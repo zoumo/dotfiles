@@ -9,27 +9,20 @@ function command_exists() {
     command -v "$@" > /dev/null 2>&1
 }
 
+if [[ $OS == "osx" ]]; then
+    brew install readline xzs
+elif [[  $OS == "centos" ]]; then
+    yum install -y gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
+fi
+
 # install pyenv
 if [[ ! -d ${HOME}/.pyenv ]]; then
+    
     curl -fsSL https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
     source $ROOT_PATH/pyenv.zsh
     pyenv install $VERSION
     pyenv global $VERSION
 fi
-
-# install python and pip
-
-# if [[ $OS == "osx" ]]; then
-#     brew install python
-# elif [[  $OS == "centos" ]]; then
-#     # # pip
-#     # sudo yum install -y python-pip || ( curl -fsSL https://bootstrap.pypa.io/get-pip.py | sudo python )
-#     # # python development packages
-#     # sudo yum install -y python-devel.x86_64
-
-#     pyenv install 2.7.12
-
-# fi
 
 # install plugins
 plugins=(
