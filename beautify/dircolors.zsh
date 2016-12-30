@@ -1,2 +1,4 @@
 # beautify ls
-eval `dircolors $HOME/.dircolors`
+if [[ -d $HOME/.dircolors ]]; then
+    eval `dircolors $HOME/.dircolors`
+fi
