@@ -27,6 +27,17 @@ if command_exists pip; then
     sudo pip install powerline-status
 fi
 
+# install one dark for iterm
+if [[ ! -d ${plugins}/one-dark-iterm]]; then
+    git clone https://github.com/anunez/one-dark-iterm.git
+    
+    if [[ $OS == "osx" ]]; then
+        install_fonts
+        open "${plugins}/one-dark-iterm/one-dark.itermcolors"
+
+    fi
+fi
+
 # install solarized for terminal
 if [[ ! -d ${plugins}/solarized ]]; then
 	git clone https://github.com/altercation/solarized.git
@@ -53,5 +64,7 @@ if [[ ! -d ${plugins}/dircolors-solarized ]]; then
 	git clone https://github.com/seebi/dircolors-solarized.git
     cp ${plugins}/dircolors-solarized/dircolors.ansi-dark $HOME/.dircolors
 fi
+
+
 
 exit 0
