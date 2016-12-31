@@ -10,7 +10,7 @@ function command_exists() {
 }
 
 if [[ $OS == "osx" ]]; then
-    brew install readline xzs
+    brew install readline xz
 elif [[  $OS == "centos" ]]; then
     yum install -y gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
 fi
@@ -20,7 +20,7 @@ if [[ ! -d ${HOME}/.pyenv ]]; then
     
     curl -fsSL https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
     source $ROOT_PATH/pyenv.zsh
-    pyenv install $VERSION
+    env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install $VERSION
     pyenv global $VERSION
 fi
 
