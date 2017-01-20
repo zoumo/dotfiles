@@ -2,6 +2,9 @@
 
 set -e
 
+ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
+source $ROOT_PATH/lib/lib.sh
+
 plugins=${HOME}/.dotfiles/plugins
 
 if [[ ! -d ${plugins} ]]; then
@@ -12,8 +15,7 @@ cd ${plugins}
 
 # 安装依赖
 if [[ $OS == "osx" ]]; then
-    brew install ctags
-    brew install the_silver_searcher
+    brew_install ctags the_silver_searcher
 elif [[ $OS == 'centos' ]]; then
     sudo yum install -y python-devel.x86_64
     sudo yum groupinstall -y 'Development Tools'
@@ -30,6 +32,6 @@ fi
 
 if [[ ! -d ${plugins}/k-vim ]]; then
     git clone https://github.com/zoumo/k-vim.git
+    cd k-vim/
+    sh install.sh
 fi
-cd k-vim/
-sh install.sh

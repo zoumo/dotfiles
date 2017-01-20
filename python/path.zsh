@@ -8,6 +8,3 @@ export PATH="${PYENV_ROOT}/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 export PYTHONDONTWRITEBYTECODE=x
-
-# thefuck
-# eval $(thefuck --alias)
