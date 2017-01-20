@@ -7,25 +7,44 @@
 
 set -e
 
+ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
+source $ROOT_PATH/lib/lib.sh
+
 if [[ $OS == "osx" ]]; then
     # Install homebrew packages
+    info "homebrew installing"
     sh $HOME/.dotfiles/homebrew/install.sh
+    success "homebrew install"
+    
 
     # Set OS X defaults
+    info "osx set-defaults"
     sh $HOME/.dotfiles/osx/set-defaults.sh
+    success "osx set-defaults"
+    
 fi
 
 # Set up python env
+info "python installing"
 sh $HOME/.dotfiles/python/install.sh
+success "python install"
 
 # Set up ruby
+info "ruby installing"
 sh $HOME/.dotfiles/ruby/install.sh
+success "ruby install"
 
 # Set up go
+info "go installing"
 sh $HOME/.dotfiles/go/install.sh
+success "go install"
 
 # Set up vim
+info "vim installing"
 sh $HOME/.dotfiles/vim/install.sh
+success "vim install"
 
 # beautify vim ls terminal
+info "beautify installing"
 sh $HOME/.dotfiles/beautify/install.sh
+success "beautify install"

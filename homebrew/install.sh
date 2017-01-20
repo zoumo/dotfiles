@@ -7,6 +7,9 @@
 
 set -e
 
+ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
+source $ROOT_PATH/lib/lib.sh
+
 # Binaries
 binaries=(
   dos2unix
@@ -86,17 +89,17 @@ echo "Update Homebrew..."
 
 echo "Installing coreutils, findutils, bash, macvim..."
 # Install GNU core utilities (those that come with OS X are outdated)
-brew install coreutils
+brew_install coreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
-brew install findutils
+brew_install findutils
 # Install Bash 4
-brew install bash
+brew_install bash
 # mac中的vim版本太低, 换成macvim
-brew install macvim --override-system-vim
+brew_install_one macvim --override-system-vim
 brew linkapps macvim
 
 echo "Installing binaries..."
-brew install ${binaries[@]}
+brew_install ${binaries[@]}
 
 # echo "Installing fonts..."
 # brew cask install ${fonts[@]}
