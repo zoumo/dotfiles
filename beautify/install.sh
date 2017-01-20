@@ -29,7 +29,7 @@ fi
 # install one dark for iterm
 if [[ ! -d ${plugins}/one-dark-iterm ]]; then
 	git clone https://github.com/anunez/one-dark-iterm.git
-
+    
 	if [[ $OS == "osx" ]]; then
 		install_fonts
 		open "${plugins}/one-dark-iterm/one-dark.itermcolors"
