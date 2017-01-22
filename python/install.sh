@@ -5,7 +5,7 @@ set -e
 ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
 source $ROOT_PATH/lib/lib.sh
 
-VERSION="2.7.11"
+VERSION="2.7.13"
 
 if [[ $OS == "osx" ]]; then
 	brew_install readline xz
@@ -16,8 +16,12 @@ fi
 # install pyenv
 if [[ ! -d ${HOME}/.pyenv ]]; then
 	curl -fsSL "https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer" | bash
+
 	source $ROOT_PATH/python/path.zsh
-    # source $ROOT_PATH/python/pyenv.zsh
+
+	# make cache
+	mkdir -p $(pyenv root)/cache
+
 	env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install $VERSION
 	pyenv global $VERSION
 fi
@@ -34,6 +38,8 @@ plugins=(
     arrow
 	# thefuck
 )
+
+pyenv update
 
 # update pip
 pip_install_one --upgrade pip

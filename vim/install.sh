@@ -13,9 +13,17 @@ fi
 
 cd ${plugins}
 
+
 # 安装依赖
 if [[ $OS == "osx" ]]; then
     brew_install ctags the_silver_searcher
+    # mac中的vim版本太低, 换成macvim
+    pyenv local system
+    brew_install python
+    brew_install_one macvim --override-system-vim
+    brew linkapps macvim
+    pyenv local --unset
+    
 elif [[ $OS == 'centos' ]]; then
     sudo yum install -y python-devel.x86_64
     sudo yum groupinstall -y 'Development Tools'
