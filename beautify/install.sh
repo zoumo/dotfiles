@@ -13,18 +13,18 @@ fi
 
 cd ${plugins}
 
-install_fonts() {
-	# install powerline fonts
-	if [[ ! -d ${plugins}/fonts ]]; then
-		git clone https://github.com/powerline/fonts
-		sh ./fonts/install.sh
-	fi
-}
+# install_fonts() {
+# 	# install powerline fonts
+# 	if [[ ! -d ${plugins}/fonts ]]; then
+# 		git clone https://github.com/powerline/fonts
+# 		sh ./fonts/install.sh
+# 	fi
+# }
 
 # install powerline
-if command_exists pip; then
-	pip_install powerline-status
-fi
+# if command_exists pip; then
+# 	pip_install powerline-status
+# fi
 
 # install one dark for iterm
 if [[ ! -d ${plugins}/one-dark-iterm ]]; then
@@ -42,11 +42,9 @@ if [[ ! -d ${plugins}/solarized ]]; then
 	git clone https://github.com/altercation/solarized.git
 
 	if [[ $OS == "osx" ]]; then
-		install_fonts
-		open "${plugins}/solarized/iterm2-colors-solarized/Solarized Dark.itermcolors"
+		# open "${plugins}/solarized/iterm2-colors-solarized/Solarized Dark.itermcolors"
 		open "${plugins}/solarized/osx-terminal.app-colors-solarized/xterm-256color/Solarized Dark xterm-256color.terminal"
 	elif [[ $OS == "centos" ]] && command_exists gnome-shell; then
-		install_fonts
 		if [[ ! -d ${plugins}/gnome-terminal-colors-solarized ]]; then
 			git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
 		fi
