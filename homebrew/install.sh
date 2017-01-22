@@ -94,9 +94,7 @@ brew_install coreutils
 brew_install findutils
 # Install Bash 4
 brew_install bash
-# mac中的vim版本太低, 换成macvim
-brew_install_one macvim --override-system-vim
-brew linkapps macvim
+
 
 echo "Installing binaries..."
 brew_install ${binaries[@]}
