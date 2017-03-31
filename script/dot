@@ -10,7 +10,7 @@ set -e
 ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
 source $ROOT_PATH/lib/lib.sh
 
-if [[ $OS == "osx" ]]; then
+if [[ $OS == "macos" ]]; then
     # Install homebrew packages
     info "homebrew installing"
     sh $HOME/.dotfiles/homebrew/install.sh
@@ -18,9 +18,9 @@ if [[ $OS == "osx" ]]; then
     
 
     # Set OS X defaults
-    info "osx set-defaults"
-    sh $HOME/.dotfiles/osx/set-defaults.sh
-    success "osx set-defaults"
+    info "macos set-defaults"
+    sh $HOME/.dotfiles/macos/set-defaults.sh
+    success "macos set-defaults"
     
 fi
 

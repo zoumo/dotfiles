@@ -132,7 +132,7 @@ $ mackup restore
 执行 `$ dot` 之后，它会执行下面几个脚本:
 
 1. `$HOME/.dotfiles/homebrew/install.sh` - Homebrew packages
-2. `$HOME/.dotfiles/osx/set-defaults.sh` - OS X defaults setting
+2. `$HOME/.dotfiles/macos/set-defaults.sh` - OS X defaults setting
 3. `$HOME/.dotfiles/python/install.sh`   - Set up python env
 4. `$HOME/.dotfiles/beautify/install.sh` - beautify vim, terminal, ls
 
@@ -218,7 +218,7 @@ apps=(
 
 ### OS X defaults setting
 
-执行 `$ ./osx/set-defaults.sh` 之后，程序会更改Mac OS X的一些系统设置, 根据个人喜欢和需求修改这个文件，或是参考 [Mathias’s dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.osx) 整理好的配置。
+执行 `$ ./macos/set-defaults.sh` 之后，程序会更改Mac OS X的一些系统设置, 根据个人喜欢和需求修改这个文件，或是参考 [Mathias’s dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.osx) 整理好的配置。
 
 以下是目前设定的配置：
 
