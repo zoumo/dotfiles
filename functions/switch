@@ -12,7 +12,4 @@ function switch
         cp $file2 $file1
         mv $file2.tmp $file2
     fi
-
-
-
 }
