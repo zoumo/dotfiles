@@ -7,7 +7,7 @@ source $ROOT_PATH/lib/lib.sh
 
 VERSION="2.7.13"
 
-if [[ $OS == "osx" ]]; then
+if [[ $OS == "macos" ]]; then
 	brew_install readline xz
 elif [[ $OS == "centos" ]]; then
 	yum install -y gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel

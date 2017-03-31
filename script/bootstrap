@@ -144,7 +144,7 @@ install_dotfiles() {
 source system/path.zsh
 
 case "$OS" in
-	osx)
+	macos)
 		install_homebrew
 		;;
 	centos)

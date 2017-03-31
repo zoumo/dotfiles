@@ -34,7 +34,7 @@ if [ -z "$os" ] && [ -r /etc/os-release ]; then
     os="$(. /etc/os-release && echo "$ID")"
 fi
 if [ -z "$os" ] && [[ "$(uname -s)" == "Darwin" ]]; then
-    os="osx"
+    os="macos"
 fi
 
 os="$(echo "$os" | cut -d " " -f1 | tr '[:upper:]' '[:lower:]')"
@@ -52,8 +52,8 @@ export OS=$os
 export GOPATH="$HOME/.golang"
 export GO15VENDOREXPERIMENT=1
 export PATH="${GOPATH}/bin/:${HOME}/bin:$PATH"
-if [[ $OS == "osx" ]]; then
+if [[ $OS == "macos" ]]; then
     export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-    
+    export JAVA_HOME=$(/usr/libexec/java_home)
 fi

@@ -15,7 +15,7 @@ cd ${plugins}
 
 
 # 安装依赖
-if [[ $OS == "osx" ]]; then
+if [[ $OS == "macos" ]]; then
     brew_install ctags the_silver_searcher
     # mac中的vim版本太低, 换成macvim
     pyenv local system

@@ -5,6 +5,6 @@ alias utf82gbk="iconv -f UTF-8 -t GBK"
 alias tailf="tail -f"
 alias ve="pyenv local"
 alias la="ls -lAh"
-if [[ "$OS" == "osx" ]]; then
+if [[ "$OS" == "macos" ]]; then
     alias rm="trash"
 fi
