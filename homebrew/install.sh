@@ -19,11 +19,15 @@ binaries=(
   git-flow
   tree
   mackup
-  z
+  # z
   tmux
   htop
   trash
   cheat
+  hh      # https://github.com/dvorka/hstr
+  fzf
+  fasd
+  zplug
   # mysql
   # nginx
   # node
@@ -94,7 +98,8 @@ brew_install coreutils
 brew_install findutils
 # Install Bash 4
 brew_install bash
-
+# To install useful keybindings and fuzzy completion
+echo "y\n" | /usr/local/opt/fzf/install
 
 echo "Installing binaries..."
 brew_install ${binaries[@]}
