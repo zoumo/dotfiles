@@ -31,3 +31,8 @@ fd() {
 	DIR=$(find * -maxdepth 0 -type d -print 2>/dev/null | fzf-tmux) \
 		&& cd "$DIR"
 }
+
+# fh - repeat history
+fh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
