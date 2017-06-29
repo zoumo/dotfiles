@@ -53,6 +53,7 @@ export GOPATH="$HOME/.golang"
 export GO15VENDOREXPERIMENT=1
 export PATH="${GOPATH}/bin/:${HOME}/bin:$PATH"
 if [[ $OS == "macos" ]]; then
+    export GOROOT="/usr/local/opt/go/libexec"
     export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
     export JAVA_HOME=$(/usr/libexec/java_home)
