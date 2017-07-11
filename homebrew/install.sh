@@ -96,6 +96,8 @@ echo "Installing coreutils, findutils, bash, macvim..."
 brew_install coreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew_install findutils
+# Install GNU `sed`
+brew install --with-default-names gnu-sed
 # Install Bash 4
 brew_install bash
 # To install useful keybindings and fuzzy completion
