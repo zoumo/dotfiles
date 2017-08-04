@@ -20,7 +20,7 @@ if [[ $OS == "macos" ]]; then
     # mac中的vim版本太低, 换成macvim
     pyenv local system
     brew_install python
-    brew_install_one macvim --override-system-vim
+    brew_install_one macvim --with-override-system-vim
     brew linkapps macvim
     pyenv local --unset
     
