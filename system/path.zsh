@@ -49,12 +49,13 @@ fi
 export -f command_exists >/dev/null 2>&1
 
 export OS=$os
+export EDITOR='vim'
 export GOPATH="$HOME/.golang"
 export GO15VENDOREXPERIMENT=1
 export PATH="${GOPATH}/bin/:${HOME}/bin:$PATH"
 if [[ $OS == "macos" ]]; then
     export GOROOT="/usr/local/opt/go/libexec"
-    export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
+    export PATH="/usr/local/opt/curl/bin:$PATH:/usr/local/opt/coreutils/libexec/gnubin/:/usr/local/opt/node/bin/"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
     export JAVA_HOME=$(/usr/libexec/java_home)
 fi
