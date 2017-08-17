@@ -4,10 +4,10 @@ fpath=($DOTFILES/functions $fpath)
 autoload -U $DOTFILES/functions/*(:t)
 
 # GRC colorizes nifty unix tools all over the place
-if command_exists grc && command_exists brew; then
-	source $(brew --prefix)/etc/grc.bashrc
-	unalias docker # make docker completion work
-fi
+# if command_exists grc && command_exists brew; then
+# 	source $(brew --prefix)/etc/grc.bashrc
+# 	unalias docker # make docker completion work
+# fi
 
 # config for hh
 # add this configuration to ~/.zshrc
