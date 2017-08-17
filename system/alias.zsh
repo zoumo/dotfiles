@@ -8,3 +8,4 @@ alias la="ls -lAh"
 if [[ "$OS" == "macos" ]]; then
     alias rm="trash"
 fi
+alias mux="tmuxinator"

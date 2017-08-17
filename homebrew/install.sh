@@ -20,7 +20,6 @@ binaries=(
   tree
   mackup
   # z
-  tmux
   htop
   trash
   cheat
