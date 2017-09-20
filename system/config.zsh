@@ -11,8 +11,8 @@ autoload -U $DOTFILES/functions/*(:t)
 
 # config for hh
 # add this configuration to ~/.zshrc
-if command_exists hh; then
-	export HISTFILE=~/.zsh_history # ensure history file visibility
-	export HH_CONFIG=hicolor       # get more colors
-	bindkey -s "\C-r" "\eqhh\n"    # bind hh to Ctrl-r (for Vi mode check doc)
-fi
+# if command_exists hh; then
+# 	export HISTFILE=~/.zsh_history # ensure history file visibility
+# 	export HH_CONFIG=hicolor       # get more colors
+# 	bindkey -s "\C-r" "\eqhh\n"    # bind hh to Ctrl-r (for Vi mode check doc)
+# fi
