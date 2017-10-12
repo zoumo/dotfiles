@@ -43,7 +43,7 @@ plugins=(
 	requests
 	unittest2
     arrow
-	# thefuck
+	thefuck
 )
 
 pyenv update
