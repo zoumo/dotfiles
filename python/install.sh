@@ -17,7 +17,11 @@ fi
 if [[ ! -d ${HOME}/.pyenv ]]; then
 	curl -fsSL "https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer" | bash
 
-	source $ROOT_PATH/python/path.zsh
+	# temporary export
+	export PYENV_ROOT="${HOME}/.pyenv"
+	export PATH="${PYENV_ROOT}/bin:$PATH"
+	eval "$(pyenv init -)"
+	eval "$(pyenv virtualenv-init -)"
 
 	# make cache
 	mkdir -p $(pyenv root)/cache
