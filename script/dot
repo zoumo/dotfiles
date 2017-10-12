@@ -13,18 +13,27 @@ source $ROOT_PATH/lib/lib.sh
 cd $ROOT_PATH
 
 info "preparing the operating system"
-sh $HOME/.dotfiles/os/install.sh
+sh $HOME/.dotfiles/os/prepare.sh
 success "The operating system is ready"
 
-# Set up python env
-info "python installing"
-sh $HOME/.dotfiles/python/install.sh
-success "python install"
-
 installers=$(find_installer | tr " " "\n")
+
+lang=("python ruby go")
+
+# insatll language support
 for installer in $installers
 do
-    if [[ $installer == "os" || $installer == "python" ]]; then
+    if [[ ${lang[@]} =~ $installer ]]; then
+        info "$installer installing"
+        sh $HOME/.dotfiles/$installer/install.sh
+        success "$installer installed"
+    fi
+done
+
+# install others
+for installer in $installers
+do
+    if [[ ${lang[@]} =~ $installer ]]; then
         # skip os and python
         continue
     fi
