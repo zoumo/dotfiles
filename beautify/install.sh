@@ -5,6 +5,7 @@ set -e
 ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
 source $ROOT_PATH/lib/lib.sh
 
+cd $plugins
 
 # install_fonts() {
 # 	# install powerline fonts
