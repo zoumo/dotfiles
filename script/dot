@@ -10,41 +10,23 @@ set -e
 ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
 source $ROOT_PATH/lib/lib.sh
 
-if [[ $OS == "macos" ]]; then
-    # Install homebrew packages
-    info "homebrew installing"
-    sh $HOME/.dotfiles/homebrew/install.sh
-    success "homebrew install"
-    
+cd $ROOT_PATH
 
-    # Set OS X defaults
-    info "macos set-defaults"
-    sh $HOME/.dotfiles/macos/set-defaults.sh
-    success "macos set-defaults"
-    
-fi
+info "preparing the operating system"
+sh $HOME/.dotfiles/os/install.sh
+success "The operating system is ready"
 
 # Set up python env
 info "python installing"
 sh $HOME/.dotfiles/python/install.sh
 success "python install"
 
-# Set up ruby
-info "ruby installing"
-sh $HOME/.dotfiles/ruby/install.sh
-success "ruby install"
 
-# Set up go
-info "go installing"
-sh $HOME/.dotfiles/go/install.sh
-success "go install"
+for installer in $(find_installer | egrep -v "os|python")
+do
+    info "$installer installing"
+    sh $HOME/.dotfiles/$installer/install.sh
+    success "$installer installed"
+done
 
-# Set up vim
-info "vim installing"
-sh $HOME/.dotfiles/vim/install.sh
-success "vim install"
-
-# beautify vim ls terminal
-info "beautify installing"
-sh $HOME/.dotfiles/beautify/install.sh
-success "beautify install"
+cd -

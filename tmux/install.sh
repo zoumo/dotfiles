@@ -5,12 +5,6 @@ set -e
 ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
 source $ROOT_PATH/lib/lib.sh
 
-plugins=${HOME}/.dotfiles/plugins
-
-if [[ ! -d ${plugins} ]]; then
-    mkdir ${plugins}
-fi
-
 cd ${plugins}
 
 if [[ $OS == "macos" ]]; then

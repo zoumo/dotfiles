@@ -5,13 +5,6 @@ set -e
 ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
 source $ROOT_PATH/lib/lib.sh
 
-plugins=${HOME}/.dotfiles/plugins
-
-if [[ ! -d ${plugins} ]]; then
-	mkdir -p ${plugins}
-fi
-
-cd ${plugins}
 
 # install_fonts() {
 # 	# install powerline fonts
