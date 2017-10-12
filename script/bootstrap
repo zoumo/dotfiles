@@ -140,8 +140,6 @@ install_dotfiles() {
 	done
 }
 
-# export OS, command_exists
-source system/path.zsh
 
 case "$OS" in
 	macos)
