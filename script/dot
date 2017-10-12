@@ -21,9 +21,13 @@ info "python installing"
 sh $HOME/.dotfiles/python/install.sh
 success "python install"
 
-
-for installer in $(find_installer | egrep -v "os|python")
+installers=($(find_installer))
+for installer in $installers
 do
+    if [[ $installer == "os" || $installer == "python" ]]; then
+        # skip os and python
+        continue
+    fi
     info "$installer installing"
     sh $HOME/.dotfiles/$installer/install.sh
     success "$installer installed"
