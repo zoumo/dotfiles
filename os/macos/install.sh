@@ -7,7 +7,7 @@
 
 set -e
 
-ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
+ROOT_PATH="$(dirname $(dirname $(dirname ${BASH_SOURCE})))"
 source $ROOT_PATH/lib/lib.sh
 
 # Binaries
@@ -23,10 +23,9 @@ binaries=(
   htop
   trash
   cheat
-  hh      # https://github.com/dvorka/hstr
+  # hh      # https://github.com/dvorka/hstr
   fzf
   fasd
-  zplug
   # mysql
   # nginx
   # node
@@ -96,7 +95,7 @@ brew_install coreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew_install findutils
 # Install GNU `sed`
-brew install --with-default-names gnu-sed
+brew_install_one --with-default-names gnu-sed
 # Install Bash 4
 brew_install bash
 # To install useful keybindings and fuzzy completion
