@@ -21,7 +21,7 @@ info "python installing"
 sh $HOME/.dotfiles/python/install.sh
 success "python install"
 
-installers=($(find_installer))
+installers=$(find_installer | tr " " "\n")
 for installer in $installers
 do
     if [[ $installer == "os" || $installer == "python" ]]; then
