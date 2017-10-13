@@ -3,6 +3,7 @@
 ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
 source $ROOT_PATH/lib/lib.sh
 
-if ! command_exists zplug; then
-    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+ZPLUG_HOME=$HOME/.zplug
+if [[ ! -d $ZPLUG_HOME ]]; then
+    git clone https://github.com/zplug/zplug $ZPLUG_HOME
 fi

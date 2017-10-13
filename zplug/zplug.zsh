@@ -7,9 +7,9 @@ if command_exists zplug; then
     # zplug "changyuheng/fz", defer:1
     # zplug "rupa/z", use:z.sh
     # zplug "changyuheng/zsh-interactive-cd", use:zsh-interactive-cd.plugin.zsh, from:github
+    # zplug "pindexis/marker", hook-build:"python install.py"
     zplug "junegunn/fzf", hook-build:"./install --all --no-update-rc"
     zplug "clvv/fasd", hook-build:"make install"
-    zplug "pindexis/marker", hook-build:"python install.py"
     zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
 
 
@@ -20,7 +20,7 @@ if command_exists zplug; then
 	zplug load
 
     # source marker
-    [[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
+    # [[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
 
     # zsh-autosuggestions
     # set highlight foreground colour to 
