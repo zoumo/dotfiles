@@ -26,5 +26,6 @@ fi
 
 if [[ ! $(rbenv versions | grep $VERSION) ]]; then
 	rbenv install $VERSION -v
-	rbenv global $VERSION
 fi
+
+rbenv global $VERSION
