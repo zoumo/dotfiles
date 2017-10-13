@@ -32,11 +32,12 @@ if [[ ! $(pyenv versions | grep $VERSION) ]]; then
 	if [[ $OS == "macos" ]]; then
 		env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install $VERSION
 	elif [[ $OS == "centos" ]]; then
-		pyenv install $VERSION -v
+		env PYTHON_CONFIGURE_OPTS="--enable-shared CC=clang" pyenv install $VERSION -v
 	fi
-	# set global version
-	pyenv global $VERSION	
 fi
+
+# set global version
+pyenv global $VERSION	
 
 # install plugins
 plugins=(
