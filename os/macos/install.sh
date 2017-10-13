@@ -12,6 +12,10 @@ source $ROOT_PATH/lib/lib.sh
 
 # Binaries
 binaries=(
+  libxml2
+  libxslt
+  libiconv
+  gpg
   dos2unix
   wget
   ctags
