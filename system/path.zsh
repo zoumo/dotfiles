@@ -85,4 +85,8 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 # ====================================================================
 # rvm
 # ====================================================================
-export PATH="$PATH:$HOME/.rvm/bin"
+if [[ $OS == "macos" ]]; then
+    export PATH="$PATH:$HOME/.rvm/bin"
+elif [[ $OS == "centos" ]]; then
+    source /etc/profile.d/rvm.sh
+fi
