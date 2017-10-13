@@ -25,9 +25,7 @@ if [[ ! -d ${plugins}/one-dark-iterm ]]; then
 	git clone https://github.com/anunez/one-dark-iterm.git
     
 	if [[ $OS == "macos" ]]; then
-		install_fonts
 		open "${plugins}/one-dark-iterm/one-dark.itermcolors"
-
 	fi
 fi
 
@@ -36,14 +34,10 @@ if [[ ! -d ${plugins}/solarized ]]; then
 	git clone https://github.com/altercation/solarized.git
 
 	if [[ $OS == "macos" ]]; then
-		# open "${plugins}/solarized/iterm2-colors-solarized/Solarized Dark.itermcolors"
 		open "${plugins}/solarized/osx-terminal.app-colors-solarized/xterm-256color/Solarized Dark xterm-256color.terminal"
 	elif [[ $OS == "centos" ]] && command_exists gnome-shell; then
 		if [[ ! -d ${plugins}/gnome-terminal-colors-solarized ]]; then
 			git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
-		fi
-		if ! command_exists dconf; then
-			sudo yum install dconf
 		fi
 		# need dconf
 		sh ./gnome-terminal-colors-solarized/install.sh

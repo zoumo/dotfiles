@@ -11,6 +11,7 @@ if ! command_exists rbenv; then
 	if [[ $OS == "macos" ]]; then
 		brew_install rbenv
 	else
+
 		git clone https://github.com/rbenv/rbenv.git $HOME/.rbenv
 		cd $HOME/.rbenv && src/configure && make -C src
 		export PATH="$HOME/.rbenv/bin:$PATH"
@@ -19,10 +20,7 @@ if ! command_exists rbenv; then
 		mkdir -p "$(rbenv root)"/plugins
 		git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 	fi
-	
 	eval "$(rbenv init -)"
-
-	rbenv install $VERSION
 
 fi
 
