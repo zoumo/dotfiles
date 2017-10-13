@@ -11,6 +11,7 @@ binaries=(
     zlib-devel
     gdbm-devel
     ncurses-devel
+    deltarpm
 )
 
 yum install -y ${binaries[@]}
