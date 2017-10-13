@@ -25,12 +25,17 @@ if [[ ! -d $HOME/.pyenv ]]; then
 
 	# make cache
 	mkdir -p $(pyenv root)/cache
+
+fi
+
+if [[ ! $(pyenv versions | grep $VERSION) ]]; then
 	if [[ $OS == "macos" ]]; then
 		env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install $VERSION
 	elif [[ $OS == "centos" ]]; then
 		pyenv install $VERSION
 	fi
-	pyenv global $VERSION
+	# set global version
+	pyenv global $VERSION	
 fi
 
 # install plugins
