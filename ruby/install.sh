@@ -5,18 +5,28 @@ set -e
 ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
 source $ROOT_PATH/lib/lib.sh
 
-VERSION="2.4.1"
+VERSION="2.4.2"
 
-if ! command_exists rvm; then
-	gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-	curl -sSL https://get.rvm.io | bash -s stable
-
+if ! command_exists rbenv; then
 	if [[ $OS == "macos" ]]; then
-		source $HOME/.rvm/scripts/rvm
-	elif [[ $OS == "centos" ]]; then	
-		source /etc/profile.d/rvm.sh
+		brew_install rbenv
+	else
+		git clone https://github.com/rbenv/rbenv.git $HOME/.rbenv
+		cd $HOME/.rbenv && src/configure && make -C src
+		export PATH="$HOME/.rbenv/bin:$PATH"
+
+		# install ruby-build
+		mkdir -p "$(rbenv root)"/plugins
+		git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 	fi
-	rvm install $VERSION 
+	
+	eval "$(rbenv init -)"
+
+	rbenv install $VERSION
+
 fi
 
-rvm use $VERSION --default
+if [[ ! $(rbenv versions | grep $VERSION) ]]; then
+	rbenv install $VERSION -v
+	rbenv global $VERSION
+fi
