@@ -23,25 +23,17 @@ binaries=(
   git-flow
   tree
   mackup
-  # z
   htop
   trash
   cheat
-  # hh      # https://github.com/dvorka/hstr
-  fzf
-  fasd
   # mysql
   # nginx
   # node
   # mongodb
-  # boot2docker
-  # docker
   # grc
   # hub
   # legit
-  # nvm
   # ssh-copy-id
-  # trash
 
 )
 
@@ -66,18 +58,13 @@ apps=(
   # movist  # 播放器
   # lingon-x # 启动项管理
   xtrafinder  # 加强finder
-  # mou
-  # alfred
   # dash
-  # evernote
   # flux
   # keka
   # kitematic
   # obs
   # recordit
   # slack
-  # steam
-  # sublime-text3
   # todoist
   # virtualbox
   # vlc
@@ -91,7 +78,7 @@ apps=(
 
 echo "Update Homebrew..."
 # Update homebrew recipes
-# brew update
+brew update
 
 echo "Installing coreutils, findutils, bash, macvim..."
 # Install GNU core utilities (those that come with OS X are outdated)
@@ -102,8 +89,6 @@ brew_install findutils
 brew_install_one --with-default-names gnu-sed
 # Install Bash 4
 brew_install bash
-# To install useful keybindings and fuzzy completion
-echo "y\n" | /usr/local/opt/fzf/install
 
 echo "Installing binaries..."
 brew_install ${binaries[@]}

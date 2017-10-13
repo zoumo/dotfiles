@@ -7,6 +7,8 @@ if command_exists zplug; then
     # zplug "changyuheng/fz", defer:1
     # zplug "rupa/z", use:z.sh
     # zplug "changyuheng/zsh-interactive-cd", use:zsh-interactive-cd.plugin.zsh, from:github
+    zplug "junegunn/fzf", hook-build:"./install --all --no-update-rc"
+    zplug "clvv/fasd", hook-build:"make install"
     zplug "pindexis/marker", hook-build:"python install.py"
     zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
 
