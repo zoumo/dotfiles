@@ -118,7 +118,7 @@ install_centos() {
 	sudo yum remove -y epel-release
 	sudo yum install -y epel-release
 	sudo yum install -y yum-axelget
-	sudo yum install -y dconf git openssl-devel zsh gcc
+	sudo yum install -y git openssl-devel zsh gcc
 	# chsh -s /bin/zsh
 }
 
