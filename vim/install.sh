@@ -24,7 +24,8 @@ elif [[ $OS == 'centos' ]]; then
     sudo yum groupinstall -y 'Development Tools'
     sudo yum install -y the_silver_searcher
     sudo yum install -y cmake
-    sudo yum -y install vim-enhanced
+    sudo yum remove -y vim-*
+    sudo yum install -y vim-enhanced
 fi
 
 
