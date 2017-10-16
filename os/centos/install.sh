@@ -11,6 +11,7 @@ binaries=(
     readline-devel
     zlib-devel
     gdbm-devel
+    libevent-devel
     ncurses-devel
     deltarpm
 )
