@@ -5,19 +5,14 @@ set -e
 ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
 source $ROOT_PATH/lib/lib.sh
 
-if [[ $OS == "macos" ]]; then
-    # Install homebrew packages
-    info "homebrew installing"
-    sh $HOME/.dotfiles/os/macos/install.sh
-    success "homebrew install"
+# prepare os
+info "$OS installing"
+sh $HOME/.dotfiles/os/$OS/install.sh
+success "$OS install"
 
+if [[ $OS == "macos" ]]; then
     # Set OS X defaults
     info "macos set-defaults"
     sh $HOME/.dotfiles/os/macos/set-defaults.sh
     success "macos set-defaults"
-    
-elif [[ $OS == "centos" ]]; then
-    # prepare centos
-    info "centos prepareing"
-    info "centos prepared"
 fi
