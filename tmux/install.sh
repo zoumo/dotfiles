@@ -9,7 +9,7 @@ cd ${plugins}
 
 VERSION=2.6
 
-if ! command_exists tmux then
+if ! command_exists tmux; then
     if [[ $OS == "macos" ]]; then
         brew_install tmux
     else
@@ -22,7 +22,6 @@ if ! command_exists tmux then
         make &&  make install
         cd ${plugins}
     fi
-
 fi
 
 if [[ ! -d ${plugins}/tmux ]]; then
