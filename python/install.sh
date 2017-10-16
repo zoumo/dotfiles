@@ -14,7 +14,7 @@ elif [[ $OS == "centos" ]]; then
 fi
 
 # install pyenv
-if [[ ! -d $HOME/.pyenv ]]; then
+if ! command_exists pyenv ; then
 	curl -fsSL "https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer" | bash
 
 	# temporary export
