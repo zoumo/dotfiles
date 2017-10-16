@@ -38,12 +38,14 @@ if [[ ! -d ${plugins}/k-vim ]]; then
     git clone https://github.com/zoumo/k-vim.git
     cd k-vim/
     if [[ ! -d bundle/YouCompleteMe ]]; then
+        export CC=/usr/bin/clang
+        export CXX=/usr/bin/clang++
         mkdir -p bundle
         cd bundle 
         tar -zxf ${plugins}/YouCompleteMe.tar.gz
         cd YouCompleteMe
         ./install.py --clang-completer
-        cd .${plugins}/k-vim
+        cd ${plugins}/k-vim
     fi
     sh install.sh
 fi
