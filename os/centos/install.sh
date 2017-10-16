@@ -3,6 +3,7 @@
 binaries=(
     dconf
     gcc-6
+    clang
     bzip2
     openssl-devel
     libyaml-devel
