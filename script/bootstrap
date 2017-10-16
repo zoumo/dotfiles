@@ -103,24 +103,6 @@ link_file() {
 	fi
 }
 
-install_homebrew() {
-	if ! command_exists brew; then
-		echo "Installing Homebrew for you..."
-		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	fi
-}
-
-install_centos() {
-	# EPEL(http://fedoraproject.org/wiki/EPEL) 是由 Fedora 社区打造，
-	# 为 RHEL 及衍生发行版如 CentOS、Scientific Linux 等提供高质量软件包的项目。
-	# 官方的源更新滞后, 有些拓展源没有
-	sudo yum -y update
-	sudo yum remove -y epel-release
-	sudo yum install -y epel-release
-	sudo yum install -y yum-axelget
-	sudo yum install -y git openssl-devel zsh gcc
-	# chsh -s /bin/zsh
-}
 
 install_ohmyzsh() {
 	if [[ ! -d ~/.oh-my-zsh ]]; then
@@ -139,16 +121,6 @@ install_dotfiles() {
 		link_file "$src" "$dst"
 	done
 }
-
-
-case "$OS" in
-	macos)
-		install_homebrew
-		;;
-	centos)
-		install_centos
-		;;
-esac
 
 install_ohmyzsh
 install_dotfiles

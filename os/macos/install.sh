@@ -68,6 +68,12 @@ apps=(
 #   font-source-code-pro
 # )
 
+if ! command_exists brew; then
+  echo "Installing Homebrew for you..."
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+
 echo "Update Homebrew..."
 # Update homebrew recipes
 brew update

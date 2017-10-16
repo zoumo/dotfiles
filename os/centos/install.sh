@@ -1,8 +1,10 @@
 #!/bin/bash
 
 binaries=(
+    yum-axelget
+    git
     dconf
-    gcc-6
+    gcc
     clang
     bzip2
     openssl-devel
@@ -17,8 +19,16 @@ binaries=(
     python-devel
     the_silver_searcher
     cmake
+    zsh
 )
 
-yum groupinstall -y 'Development Tools'
+# EPEL(http://fedoraproject.org/wiki/EPEL) 是由 Fedora 社区打造，
+# 为 RHEL 及衍生发行版如 CentOS、Scientific Linux 等提供高质量软件包的项目。
+# 官方的源更新滞后, 有些拓展源没有
+sudo yum -y update
+sudo yum remove -y epel-release
+sudo yum install -y epel-release
 
-yum install -y ${binaries[@]}
+sudo yum groupinstall -y 'Development Tools'
+
+sudo yum install -y ${binaries[@]}
