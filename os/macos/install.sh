@@ -39,21 +39,13 @@ binaries=(
 
 # Apps
 apps=(
-  # java
-  # google-chrome
-  # qq
-  # macdown  # markdown编辑器
-  # iterm2 # 加强版终端
   scroll-reverser  # 可以分别鼠标和触控板滚动方向
-  # goagentx  # FQ
   slate  # 开源免费的桌面窗口控制调整工具
   # qlcolorcode
   # qlmarkdown
   # qlstephen
-  # beyond-compare  # 优秀的文件比较软件
   the-unarchiver  # 免费的解压软件
   # sequel-pro  # mysql客户端
-  # clipmenu  # 粘贴版扩展 0.4.3
   # sourcetree  # git 管理
   # movist  # 播放器
   # lingon-x # 启动项管理

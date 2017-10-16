@@ -14,6 +14,11 @@ binaries=(
     libevent-devel
     ncurses-devel
     deltarpm
+    python-devel
+    the_silver_searcher
+    cmake
 )
+
+yum groupinstall -y 'Development Tools'
 
 yum install -y ${binaries[@]}

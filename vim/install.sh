@@ -20,12 +20,8 @@ if [[ $OS == "macos" ]]; then
     
 elif [[ $OS == 'centos' ]]; then
     wget -P /etc/yum.repos.d/  https://copr.fedorainfracloud.org/coprs/mcepl/vim8/repo/epel-7/mcepl-vim8-epel-7.repo
-    sudo yum install -y python-devel.x86_64
-    sudo yum groupinstall -y 'Development Tools'
-    sudo yum install -y the_silver_searcher
-    sudo yum install -y cmake
-    sudo yum remove -y vim-*
-    sudo yum install -y vim-enhanced
+    yum remove -y vim-*
+    yum install -y vim-enhanced
 fi
 
 
