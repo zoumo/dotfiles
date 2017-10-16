@@ -30,7 +30,7 @@ if [[ ! -d ${plugins}/tmux ]]; then
     ln -sf ${plugins}/tmux/.tmux.conf ${HOME}/.tmux.conf
 fi
 
-if ! command_exists tmuxinator; then
+if [[ ! $(command_exists tmuxinator) && $(command_exists gem) ]]; then
     gem install tmuxinator
 fi
 
