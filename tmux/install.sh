@@ -7,8 +7,22 @@ source $ROOT_PATH/lib/lib.sh
 
 cd ${plugins}
 
-if [[ $OS == "macos" ]]; then
-    brew_install tmux
+VERSION=2.6
+
+if ! command_exists tmux then
+    if [[ $OS == "macos" ]]; then
+        brew_install tmux
+    else
+        temp_dir=$(mktemp -d)
+        cd $temp_dir
+        wget https://github.com/tmux/tmux/releases/download/$VERSION/tmux-$VERSION.tar.gz
+        tar xvzf tmux-$VERSION.tar.gz
+        cd tmux-$VERSION
+        LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local
+        make &&  make install
+        cd ${plugins}
+    fi
+
 fi
 
 if [[ ! -d ${plugins}/tmux ]]; then
