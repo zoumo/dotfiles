@@ -17,6 +17,8 @@ if command_exists zplug; then
 		zplug install
 	fi
 
+    zplug load
+
     # source marker
     # [[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
 
