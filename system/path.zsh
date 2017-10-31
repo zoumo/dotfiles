@@ -98,4 +98,3 @@ if [[ $OS == "centos" ]]; then
 fi
 
 eval "$(rbenv init -)"
-
