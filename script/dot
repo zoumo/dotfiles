@@ -5,41 +5,44 @@
 # `dot` handles installation, updates, things like that. Run it periodically
 # to make sure you're on the latest and greatest.
 
-set -e
+# Exit on error. Append "|| true" if you expect an error.
+set -o errexit
+# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
+set -o nounset
+# Catch the error in pipeline.
+set -o pipefail
 
 ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
-source $ROOT_PATH/lib/lib.sh
+source ${ROOT_PATH}/lib/init.sh
 
-cd $ROOT_PATH
+cd ${DOT_ROOT}
 
-info "preparing the operating system"
-sh $HOME/.dotfiles/os/prepare.sh
-success "The operating system is ready"
+log::status "preparing the operating system"
+./os/prepare.sh
+log::status "The operating system is ready"
 
-installers=$(find_installer | tr " " "\n")
+installers=($(util::find_installer | tr " " "\n"))
 
 lang=("python ruby go")
 
 # insatll language support
-for installer in $installers
-do
-    if [[ ${lang[@]} =~ $installer ]]; then
-        info "$installer installing"
-        sh $HOME/.dotfiles/$installer/install.sh
-        success "$installer installed"
-    fi
+for installer in ${installers[@]}; do
+	if [[ ${lang[@]} =~ ${installer} ]]; then
+		log::status "${installer} installing"
+		bash $HOME/.dotfiles/${installer}/install.sh
+		log::status "${installer} installation is complete"
+	fi
 done
 
 # install others
-for installer in $installers
-do
-    if [[ ${lang[@]} =~ $installer ]]; then
-        # skip os and python
-        continue
-    fi
-    info "$installer installing"
-    sh $HOME/.dotfiles/$installer/install.sh
-    success "$installer installed"
+for installer in ${installers[@]}; do
+	if [[ ${lang[@]} =~ ${installer} ]]; then
+		# skip os and python
+		continue
+	fi
+	log::status "${installer} installing"
+	bash $HOME/.dotfiles/${installer}/install.sh
+	log::status "${installer} installation is complete"
 done
 
 cd -

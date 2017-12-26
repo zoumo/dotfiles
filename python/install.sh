@@ -1,20 +1,25 @@
 #!/bin/bash
 
-set -e
+# Exit on error. Append "|| true" if you expect an error.
+set -o errexit
+# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
+set -o nounset
+# Catch the error in pipeline.
+set -o pipefail
 
-ROOT_PATH="$(dirname $(dirname $BASH_SOURCE))"
-source $ROOT_PATH/lib/lib.sh
+ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
+source ${ROOT_PATH}/lib/init.sh
 
 VERSION="2.7.13"
 
-if [[ $OS == "macos" ]]; then
-	brew_install readline xz
-elif [[ $OS == "centos" ]]; then
+if [[ ${OS} == "macos" ]]; then
+	util::brew_install readline xz
+elif [[ ${OS} == "centos" ]]; then
 	yum install -y gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
 fi
 
 # install pyenv
-if ! command_exists pyenv ; then
+if ! util::command_exists pyenv; then
 	curl -fsSL "https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer" | bash
 
 	# temporary export
@@ -29,15 +34,15 @@ if ! command_exists pyenv ; then
 fi
 
 if [[ ! $(pyenv versions | grep $VERSION) ]]; then
-	if [[ $OS == "macos" ]]; then
+	if [[ ${OS} == "macos" ]]; then
 		env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install $VERSION
-	elif [[ $OS == "centos" ]]; then
+	elif [[ ${OS} == "centos" ]]; then
 		env PYTHON_CONFIGURE_OPTS="--enable-shared CC=clang" pyenv install $VERSION -v
 	fi
 fi
 
 # set global version
-pyenv global $VERSION	
+pyenv global $VERSION
 
 # install plugins
 plugins=(
@@ -48,13 +53,13 @@ plugins=(
 	pytz
 	requests
 	unittest2
-    arrow
+	arrow
 	thefuck
 )
 
 pyenv update
 
 # update pip
-pip_install_one --upgrade pip
+util::pip_install_one --upgrade pip
 
-pip_install ${plugins[@]}
+util::pip_install ${plugins[@]}
