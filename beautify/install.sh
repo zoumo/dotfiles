@@ -1,30 +1,22 @@
 #!/bin/bash
 
-set -e
+# Exit on error. Append "|| true" if you expect an error.
+set -o errexit
+# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
+set -o nounset
+# Catch the error in pipeline.
+set -o pipefail
 
 ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
-source $ROOT_PATH/lib/lib.sh
+source ${ROOT_PATH}/lib/init.sh
 
-cd $plugins
-
-# install_fonts() {
-# 	# install powerline fonts
-# 	if [[ ! -d ${plugins}/fonts ]]; then
-# 		git clone https://github.com/powerline/fonts
-# 		sh ./fonts/install.sh
-# 	fi
-# }
-
-# install powerline
-# if command_exists pip; then
-# 	pip_install powerline-status
-# fi
+cd ${plugins}
 
 # install one dark for iterm
 if [[ ! -d ${plugins}/one-dark-iterm ]]; then
 	git clone https://github.com/anunez/one-dark-iterm.git
-    
-	if [[ $OS == "macos" ]]; then
+
+	if [[ ${OS} == "macos" ]]; then
 		open "${plugins}/one-dark-iterm/one-dark.itermcolors"
 	fi
 fi
@@ -33,9 +25,9 @@ fi
 if [[ ! -d ${plugins}/solarized ]]; then
 	git clone https://github.com/altercation/solarized.git
 
-	if [[ $OS == "macos" ]]; then
+	if [[ ${OS} == "macos" ]]; then
 		open "${plugins}/solarized/osx-terminal.app-colors-solarized/xterm-256color/Solarized Dark xterm-256color.terminal"
-	elif [[ $OS == "centos" ]] && command_exists gnome-shell; then
+	elif [[ ${OS} == "centos" ]] && util::command_exists gnome-shell; then
 		if [[ ! -d ${plugins}/gnome-terminal-colors-solarized ]]; then
 			git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
 		fi

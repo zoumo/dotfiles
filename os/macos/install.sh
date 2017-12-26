@@ -5,61 +5,66 @@
 # This installs some of the common dependencies needed (or at least desired)
 # using Homebrew.
 
-set -e
+# Exit on error. Append "|| true" if you expect an error.
+set -o errexit
+# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
+set -o nounset
+# Catch the error in pipeline.
+set -o pipefail
 
-ROOT_PATH="$(dirname $(dirname $(dirname ${BASH_SOURCE})))"
-source $ROOT_PATH/lib/lib.sh
+ROOT_PATH="$(dirname ${BASH_SOURCE})"/../..
+source ${ROOT_PATH}/lib/init.sh
 
 # Binaries
 binaries=(
-  libxml2
-  libxslt
-  libiconv
-  gpg
-  dos2unix
-  wget
-  ctags
-  grc
-  git-flow
-  tree
-  mackup
-  htop
-  trash
-  cheat
-  # mysql
-  # nginx
-  # node
-  # mongodb
-  # grc
-  # hub
-  # legit
-  # ssh-copy-id
+	libxml2
+	libxslt
+	libiconv
+	gnupg
+	dos2unix
+	wget
+	ctags
+	grc
+	git-flow
+	tree
+	mackup
+	htop
+	trash
+	cheat
+	# mysql
+	# nginx
+	# node
+	# mongodb
+	# grc
+	# hub
+	# legit
+	# ssh-copy-id
 
 )
 
 # Apps
 apps=(
-  scroll-reverser  # 可以分别鼠标和触控板滚动方向
-  slate  # 开源免费的桌面窗口控制调整工具
-  # qlcolorcode
-  # qlmarkdown
-  # qlstephen
-  the-unarchiver  # 免费的解压软件
-  # sequel-pro  # mysql客户端
-  # sourcetree  # git 管理
-  # movist  # 播放器
-  # lingon-x # 启动项管理
-  xtrafinder  # 加强finder
-  # dash
-  # flux
-  # keka
-  # kitematic
-  # obs
-  # recordit
-  # slack
-  # todoist
-  # virtualbox
-  # vlc
+	scroll-reverser # 可以分别鼠标和触控板滚动方向
+	slate # 开源免费的桌面窗口控制调整工具
+	# qlcolorcode
+	# qlmarkdown
+	# qlstephen
+	the-unarchiver # 免费的解压软件
+	# sequel-pro  # mysql客户端
+	# sourcetree  # git 管理
+	# movist  # 播放器
+	# lingon-x # 启动项管理
+	xtrafinder # 加强finder
+	# dash
+	# flux
+	# keka
+	# kitematic
+	# obs
+	# recordit
+	# slack
+	# todoist
+	# virtualbox
+	# vlc
 )
 
 # Fonts
@@ -68,11 +73,10 @@ apps=(
 #   font-source-code-pro
 # )
 
-if ! command_exists brew; then
-  echo "Installing Homebrew for you..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if ! util::command_exists brew; then
+	echo "Installing Homebrew for you..."
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
-
 
 echo "Update Homebrew..."
 # Update homebrew recipes
@@ -80,16 +84,16 @@ brew update
 
 echo "Installing coreutils, findutils, bash, macvim..."
 # Install GNU core utilities (those that come with OS X are outdated)
-brew_install coreutils
+util::brew_install coreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
-brew_install findutils
+util::brew_install findutils
 # Install GNU `sed`
-brew_install_one --with-default-names gnu-sed
+util::brew_install_one --with-default-names gnu-sed
 # Install Bash 4
-brew_install bash
+util::brew_install bash
 
 echo "Installing binaries..."
-brew_install ${binaries[@]}
+util::brew_install ${binaries[@]}
 
 # echo "Installing fonts..."
 # brew cask install ${fonts[@]}
