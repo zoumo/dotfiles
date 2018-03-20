@@ -80,6 +80,16 @@ info() {
   printf "  [ \033[00;34m..\033[0m ] $1\n"
 }
 
+datetime() {
+  time=$(date +%s.%N)
+  if [[ ${time: -1} == "N" ]];then
+    echo ${time/%N/000000000}
+    return
+  fi
+
+  echo ${time} 
+}
+
 duration() {
     start=$1  
     end=$2  
@@ -88,18 +98,16 @@ duration() {
     start_ns=$(echo $start | cut -d '.' -f 2)  
     end_s=$(echo $end | cut -d '.' -f 1)  
     end_ns=$(echo $end | cut -d '.' -f 2)  
-  
     time=$(( ( 10#$end_s - 10#$start_s ) * 1000 + ( 10#$end_ns / 1000000 - 10#$start_ns / 1000000 ) ))  
   
     echo "$time ms"  
 }
 
 load() {
-  start=$(date +%s.%N)
+  start=$(datetime)
   source $1
-  end=$(date +%s.%N)
+  end=$(datetime)
   info "load $1 [used $(duration ${start} ${end})]"
-  
 }
 
 # dotfiles
