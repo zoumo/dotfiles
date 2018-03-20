@@ -54,7 +54,7 @@ export GO15VENDOREXPERIMENT=1
 export PATH="${GOPATH}/bin/:${HOME}/bin:${PATH}"
 if [[ ${OS} == "macos" ]]; then
 	export GOROOT="/usr/local/opt/go/libexec"
-	export PATH="/usr/local/opt/curl/bin:${PATH}:/usr/local/opt/coreutils/libexec/gnubin/:/usr/local/opt/node/bin/"
+	export PATH="/usr/local/opt/curl/bin:/usr/local/opt/coreutils/libexec/gnubin/:/usr/local/opt/node/bin/:/usr/local/opt/make/libexec/gnubin:${PATH}"
 	export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
 	export JAVA_HOME=$(/usr/libexec/java_home)
 fi
@@ -78,9 +78,6 @@ export PATH="${PYENV_ROOT}/bin:${PATH}"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 export PYTHONDONTWRITEBYTECODE=x
-
-# thefuck
-eval $(thefuck --alias)
 
 # ====================================================================
 # zplug
