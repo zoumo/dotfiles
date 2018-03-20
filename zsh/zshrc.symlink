@@ -45,7 +45,7 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow brew gem go docker docker-compose kubectl fasd)
+plugins=(git git-flow brew gem go docker docker-compose kubectl fasd thefuck)
 #plugins=(autojump)
 # User configuration
 
@@ -80,9 +80,26 @@ info() {
   printf "  [ \033[00;34m..\033[0m ] $1\n"
 }
 
+duration() {
+    start=$1  
+    end=$2  
+     
+    start_s=$(echo $start | cut -d '.' -f 1)  
+    start_ns=$(echo $start | cut -d '.' -f 2)  
+    end_s=$(echo $end | cut -d '.' -f 1)  
+    end_ns=$(echo $end | cut -d '.' -f 2)  
+  
+    time=$(( ( 10#$end_s - 10#$start_s ) * 1000 + ( 10#$end_ns / 1000000 - 10#$start_ns / 1000000 ) ))  
+  
+    echo "$time ms"  
+}
+
 load() {
-  info "loading $1"
+  start=$(date +%s.%N)
   source $1
+  end=$(date +%s.%N)
+  info "load $1 [used $(duration ${start} ${end})]"
+  
 }
 
 # dotfiles
