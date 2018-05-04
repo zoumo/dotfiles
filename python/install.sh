@@ -10,7 +10,7 @@ set -o pipefail
 ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
 source ${ROOT_PATH}/lib/init.sh
 
-VERSION="2.7.13"
+VERSION="3.6.5"
 
 if [[ ${OS} == "macos" ]]; then
 	util::brew_install readline xz
