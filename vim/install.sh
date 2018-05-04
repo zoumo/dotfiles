@@ -17,9 +17,9 @@ if [[ ${OS} == "macos" ]]; then
 	util::brew_install ctags the_silver_searcher
 	# mac中的vim版本太低, 换成macvim
 	pyenv local system
+	# use python3
 	util::brew_install python
 	util::brew_install_one macvim --with-override-system-vim
-	brew linkapps macvim
 	pyenv local --unset
 
 elif [[ ${OS} == 'centos' ]]; then
@@ -47,7 +47,10 @@ if [[ ! -d ${plugins}/k-vim ]]; then
 		cd bundle
 		tar -zxf ${plugins}/YouCompleteMe.tar.gz
 		cd YouCompleteMe
-		./install.py --clang-completer
+		# YouCompleteMe's python framwork must be the same with macvim
+		pyenv local system
+		python3 install.py --clang-completer
+		pyenv local --unset
 		cd ${plugins}/k-vim
 	fi
 	sh install.sh
