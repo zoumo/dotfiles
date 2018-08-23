@@ -5,7 +5,12 @@ alias utf82gbk="iconv -f UTF-8 -t GBK"
 alias tailf="tail -f"
 alias ve="pyenv local"
 alias la="ls -lAh"
-if [[ "${OS}" == "macos" ]]; then
+if [[ "${lsb_dist}" == "macos" ]]; then
 	alias rm="trash"
 fi
 alias mux="tmuxinator"
+
+alias npm="npm --registry=https://registry.npm.taobao.org \
+--cache=$HOME/.npm/.cache/cnpm \
+--disturl=https://npm.taobao.org/dist \
+--userconfig=$HOME/.cnpmrc"

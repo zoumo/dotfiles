@@ -5,15 +5,10 @@
 # This installs some of the common dependencies needed (or at least desired)
 # using Homebrew.
 
-# Exit on error. Append "|| true" if you expect an error.
-set -o errexit
-# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
-set -o nounset
-# Catch the error in pipeline.
-set -o pipefail
+source "$(dirname ${BASH_SOURCE})"/../../framework/oo-bootstrap.sh
 
-ROOT_PATH="$(dirname ${BASH_SOURCE})"/../..
-source ${ROOT_PATH}/lib/init.sh
+namespace macos
+Log::AddOutput macos NOTE
 
 # Binaries
 binaries=(
@@ -54,7 +49,7 @@ apps=(
 	# sourcetree  # git 管理
 	# movist  # 播放器
 	# lingon-x # 启动项管理
-	xtrafinder # 加强finder
+	# xtrafinder # 加强finder
 	# dash
 	# flux
 	# keka
@@ -73,26 +68,26 @@ apps=(
 #   font-source-code-pro
 # )
 
-if ! util::command_exists brew; then
-	echo "Installing Homebrew for you..."
+if ! Command::Exists brew; then
+	Log "Installing Homebrew for you..."
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-echo "Update Homebrew..."
+Log "Update Homebrew..."
 # Update homebrew recipes
 brew update
 
-echo "Installing coreutils, findutils, bash, macvim..."
+Log "Installing coreutils, findutils, bash, macvim..."
 # Install GNU core utilities (those that come with OS X are outdated)
 util::brew_install coreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 util::brew_install findutils
 # Install GNU `sed`
-util::brew_install_one --with-default-names gnu-sed
+util::brew_install_one gnu-sed --with-default-names
 # Install Bash 4
 util::brew_install bash
 
-echo "Installing binaries..."
+Log "Installing binaries..."
 util::brew_install ${binaries[@]}
 
 # echo "Installing fonts..."
@@ -102,12 +97,10 @@ util::brew_install ${binaries[@]}
 # If you haven’t yet, run brew uninstall --force brew-cask; brew update to switch to the new system.
 
 # Install apps to /Applications
-# Default is: /Users/$user/Applications
-echo "Installing apps..."
-brew cask install --appdir="/Applications" ${apps[@]}
+Log "Installing apps..."
+util::brew_cask_install ${apps[@]}
 
 # clean things up
 brew cleanup
-brew cask cleanup
 
 exit 0

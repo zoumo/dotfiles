@@ -2,13 +2,6 @@
 #
 # bootstrap installs things.
 
-# Exit on error. Append "|| true" if you expect an error.
-set -o errexit
-# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
-set -o nounset
-# Catch the error in pipeline.
-set -o pipefail
-
 echo ""
 echo "                       _oo0oo_"
 echo "                      o8888888o"
@@ -35,19 +28,25 @@ echo "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo ""
 echo ""
 
-ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
-source ${ROOT_PATH}/lib/init.sh
+source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
+
+import util/tryCatch
+
+# enable basic logging for this file by declaring a namespace
+namespace bootstrap
+# make the Log method direct everything in the namespace 'myApp' to the log handler called DEBUG
+Log::AddOutput bootstrap NOTE
 
 install_ohmyzsh() {
 	if [[ ! -d ~/.oh-my-zsh ]]; then
-		log::status 'installing oh-my-zsh'
+		Log 'Installing oh-my-zsh...'
 		# sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 		git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 	fi
 }
 
 install_dotfiles() {
-	log::status 'installing dotfiles'
+	Log 'Installing dotfiles...'
 
 	local overwrite_all=false backup_all=false skip_all=false
 	for src in $(find "$DOT_ROOT/" -maxdepth 2 -name '*.symlink'); do
@@ -59,25 +58,28 @@ install_dotfiles() {
 install_ohmyzsh
 install_dotfiles
 
-log::status "installing dependencies"
-if ./script/dot; then
-	log::status "dependencies installed"
-else
-	log::error_exit "error installing dependencies"
-fi
+Log "Installing dependencies..."
+try
+{
+	bash ./script/dot
+}
+catch
+{
+	e="error installing dependencies" throw
+}
 
-log::status "The installation is complete !!"
+Log "The installation is complete !!"
 
 TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
 if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
 	# If this platform provides a "chsh" command (not Cygwin), do it, man!
-	if util::command_exists chsh; then
-		log::status "Time to change your default shell to zsh!"
+	if Command::Exists chsh; then
+		Log "Time to change your default shell to zsh!"
 		chsh -s $(grep "/zsh$" /etc/shells | tail -1)
 		# Else, suggest the user do so manually.
 	else
-		log::status "I can't change your shell automatically because this system does not have chsh."
-		log::status "Please manually change your default shell to zsh!"
+		Log "I can't change your shell automatically because this system does not have chsh."
+		Log "Please manually change your default shell to zsh!"
 	fi
 fi
 

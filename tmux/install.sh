@@ -1,21 +1,13 @@
 #!/bin/bash
 
-# Exit on error. Append "|| true" if you expect an error.
-set -o errexit
-# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
-set -o nounset
-# Catch the error in pipeline.
-set -o pipefail
-
-ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
-source ${ROOT_PATH}/lib/init.sh
+source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
 cd ${plugins}
 
-VERSION=2.6
+VERSION=2.7
 
-if ! util::command_exists tmux; then
-	if [[ ${OS} == "macos" ]]; then
+if ! Command::Exists tmux; then
+	if [[ $(OS::LSBDist) == "macos" ]]; then
 		util::brew_install tmux
 	else
 		temp_dir=$(mktemp -d)
@@ -34,8 +26,13 @@ if [[ ! -d ${plugins}/tmux ]]; then
 	ln -sf ${plugins}/tmux/.tmux.conf ${HOME}/.tmux.conf
 fi
 
-if [[ ! $(util::command_exists tmuxinator) && $(util::command_exists gem) ]]; then
+if [[ ! $(Command::Exists tmuxinator) && $(Command::Exists gem) ]]; then
 	gem install tmuxinator
+	mkdir -p ${HOME}/.tmuxinator
+	ln -sf ${DOT_ROOT}/tmux/zoumo.yaml ${HOME}/.tmuxinator/zoumo.yml
 fi
+
+# link tmux local
+ln -sf ${DOT_ROOT}/tmux/.tmux.conf.local ${HOME}/.tmux.conf.local
 
 exit 0

@@ -5,21 +5,17 @@
 # `dot` handles installation, updates, things like that. Run it periodically
 # to make sure you're on the latest and greatest.
 
-# Exit on error. Append "|| true" if you expect an error.
-set -o errexit
-# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
-set -o nounset
-# Catch the error in pipeline.
-set -o pipefail
-
-ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
-source ${ROOT_PATH}/lib/init.sh
+source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
+# enable basic logging for this file by declaring a namespace
+namespace bootstrap
+# make the Log method direct everything in the namespace 'myApp' to the log handler called DEBUG
+Log::AddOutput bootstrap NOTE
 
 cd ${DOT_ROOT}
 
-log::status "preparing the operating system"
-./os/prepare.sh
-log::status "The operating system is ready"
+Log "preparing the operating system"
+bash ./os/prepare.sh
+Log "The operating system is ready"
 
 installers=($(util::find_installer | tr " " "\n"))
 
@@ -28,9 +24,9 @@ lang=("python ruby go")
 # insatll language support
 for installer in ${installers[@]}; do
 	if [[ ${lang[@]} =~ ${installer} ]]; then
-		log::status "${installer} installing"
+		Log "${installer} installing"
 		bash $HOME/.dotfiles/${installer}/install.sh
-		log::status "${installer} installation is complete"
+		Log "${installer} installation is complete"
 	fi
 done
 
@@ -40,9 +36,9 @@ for installer in ${installers[@]}; do
 		# skip os and python
 		continue
 	fi
-	log::status "${installer} installing"
+	Log "${installer} installing"
 	bash $HOME/.dotfiles/${installer}/install.sh
-	log::status "${installer} installation is complete"
+	Log "${installer} installation is complete"
 done
 
 cd -

@@ -1,25 +1,16 @@
 #!/bin/bash
-
-# Exit on error. Append "|| true" if you expect an error.
-set -o errexit
-# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
-set -o nounset
-# Catch the error in pipeline.
-set -o pipefail
-
-ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
-source ${ROOT_PATH}/lib/init.sh
+source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
 VERSION="3.6.5"
 
-if [[ ${OS} == "macos" ]]; then
+if [[ $(OS::LSBDist) == "macos" ]]; then
 	util::brew_install readline xz
-elif [[ ${OS} == "centos" ]]; then
+elif [[ $(OS::LSBDist) == "centos" ]]; then
 	yum install -y gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
 fi
 
 # install pyenv
-if ! util::command_exists pyenv; then
+if ! Command::Exists pyenv; then
 	curl -fsSL "https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer" | bash
 
 	# temporary export
@@ -34,9 +25,9 @@ if ! util::command_exists pyenv; then
 fi
 
 if [[ ! $(pyenv versions | grep $VERSION) ]]; then
-	if [[ ${OS} == "macos" ]]; then
+	if [[ $(OS::LSBDist) == "macos" ]]; then
 		env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install $VERSION
-	elif [[ ${OS} == "centos" ]]; then
+	elif [[ $(OS::LSBDist) == "centos" ]]; then
 		env PYTHON_CONFIGURE_OPTS="--enable-shared CC=clang" pyenv install $VERSION -v
 	fi
 fi
