@@ -48,6 +48,11 @@ OS::LSBDist() {
 		# Set it to redhat, it will be changed to centos below anyways
 		lsb_dist='redhat'
 	fi
+
+	if [ ${lsb_dist} == 'redhat' ]; then
+		lsb_dist='centos'
+	fi
+
 	__oo__lsb_dist=${lsb_dist}
 	echo ${__oo__lsb_dist}
 }
