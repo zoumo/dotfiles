@@ -1,19 +1,11 @@
 #!/bin/bash
 
-# Exit on error. Append "|| true" if you expect an error.
-set -o errexit
-# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
-set -o nounset
-# Catch the error in pipeline.
-set -o pipefail
-
-ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
-source ${ROOT_PATH}/lib/init.sh
+source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
 cd ${plugins}
 
 # 安装依赖
-if [[ ${OS} == "macos" ]]; then
+if [[ $(OS::LSBDist) == "macos" ]]; then
 	util::brew_install ctags the_silver_searcher
 	# mac中的vim版本太低, 换成macvim
 	pyenv local system
@@ -22,7 +14,7 @@ if [[ ${OS} == "macos" ]]; then
 	util::brew_install_one macvim --with-override-system-vim
 	pyenv local --unset
 
-elif [[ ${OS} == 'centos' ]]; then
+elif [[ $(OS::LSBDist) == 'centos' ]]; then
 	wget -P /etc/yum.repos.d/ https://copr.fedorainfracloud.org/coprs/mcepl/vim8/repo/epel-7/mcepl-vim8-epel-7.repo
 	yum remove -y vim-*
 	yum install -y vim-enhanced
@@ -53,5 +45,5 @@ if [[ ! -d ${plugins}/k-vim ]]; then
 		pyenv local --unset
 		cd ${plugins}/k-vim
 	fi
-	sh install.sh
+	bash install.sh
 fi

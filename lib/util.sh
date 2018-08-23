@@ -1,8 +1,9 @@
 #!/bin/bash
-
-util::command_exists() {
-	command -v "$@" >/dev/null 2>&1
-}
+import util/log
+# enable basic logging for this file by declaring a namespace
+namespace lib/util
+# make the Log method direct everything in the namespace 'myApp' to the log handler called DEBUG
+Log::AddOutput lib/util STATUS
 
 util::find_installer() {
 	declare -a result
@@ -19,40 +20,49 @@ util::find_installer() {
 util::brew_install() {
 	for item in "$@"; do
 		if [[ ! $(brew list | grep -e "^$item$") ]]; then
-			log::status "brew installing $item"
+			Log "brew installing $item"
 			brew install $item
 		else
-			log::status "util::brew_install: $item already exists, skip it"
+			Log "util::brew_install: $item already exists, skip it"
 		fi
 	done
 }
 
 util::brew_install_one() {
 	if [[ ! $(brew list | grep -e "^$1$") ]]; then
-		log::status "brew installing $1"
+		Log "brew installing $1"
 		brew install "$@"
 	else
-		log::status "util::brew_install: $1 already exists, skip it"
+		Log "util::brew_install: $1 already exists, skip it"
+	fi
+}
+
+util::brew_cask_install() {
+	if [[ ! $(brew cask list | grep -e "^$1$") ]]; then
+		Log "brew installing $1"
+		brew cask install --appdir="/Applications" "$@"
+	else
+		Log "util::brew_cask_install: $1 already exists, skip it"
 	fi
 }
 
 util::pip_install() {
 	for item in "$@"; do
 		if [[ ! $(pip show $item) ]]; then
-			log::status "pip installing $item"
+			Log "pip installing $item"
 			pip install $item
 		else
-			log::status "util::pip_install: $item already exists, skip it"
+			Log "util::pip_install: $item already exists, skip it"
 		fi
 	done
 }
 
 util::pip_install_one() {
 	if [[ ! $(pip show $item) ]]; then
-		log::status "pip installing $1"
+		Log "pip installing $1"
 		pip install "$@"
 	else
-		log::status "util::pip_install: $1 already exists, skip it"
+		Log "util::pip_install: $1 already exists, skip it"
 	fi
 }
 
@@ -70,7 +80,7 @@ util::link_file() {
 			if [[ "$currentSrc" == "$src" ]]; then
 				skip=true
 			else
-				log::info "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
+				Log "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
                     [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
 				read -n 1 action
 
@@ -105,22 +115,22 @@ util::link_file() {
 
 		if [[ "$overwrite" == "true" ]]; then
 			rm -rf "$dst"
-			log::status "removed $dst"
+			Log "removed $dst"
 		fi
 
 		if [[ "$backup" == "true" ]]; then
 			mv "$dst" "${dst}.backup"
-			log::status "moved $dst to ${dst}.backup"
+			Log "moved $dst to ${dst}.backup"
 		fi
 
 		if [[ "$skip" == "true" ]]; then
-			log::status "skipped $src"
+			Log "skipped $src"
 		fi
 	fi
 
 	if [[ "$skip" != "true" ]]; then # "false" or empty
 		ln -s "$1" "$2"
-		log::status "linked $1 to $2"
+		Log "linked $1 to $2"
 	fi
 	echo
 }

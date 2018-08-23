@@ -1,23 +1,17 @@
 #!/bin/bash
+source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
-# Exit on error. Append "|| true" if you expect an error.
-set -o errexit
-# Do not allow use of undefined vars. Use ${VAR:-} to use an undefined VAR
-set -o nounset
-# Catch the error in pipeline.
-set -o pipefail
-
-ROOT_PATH="$(dirname $(dirname ${BASH_SOURCE}))"
-source ${ROOT_PATH}/lib/init.sh
+namespace prepare
+Log::AddOutput prepare NOTE
 
 # prepare os
-log::status "${OS} installing"
-bash ${DOT_ROOT}/os/${OS}/install.sh
-log::status "${OS} install"
+Log "$(OS::LSBDist) installing..."
+bash ${DOT_ROOT}/os/$(OS::LSBDist)/install.sh
+Log "$(OS::LSBDist) installation is complete"
 
-if [[ ${OS} == "macos" ]]; then
+if [[ $(OS::LSBDist) == "macos" ]]; then
 	# Set OS X defaults
-	log::status "macos set-defaults"
+	Log "macos set-defaults"
 	bash ${DOT_ROOT}/os/macos/set-defaults.sh
-	log::status "macos set-defaults"
+	Log "macos set-defaults"
 fi
