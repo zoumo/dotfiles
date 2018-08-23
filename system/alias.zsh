@@ -5,7 +5,7 @@ alias utf82gbk="iconv -f UTF-8 -t GBK"
 alias tailf="tail -f"
 alias ve="pyenv local"
 alias la="ls -lAh"
-if [[ "${lsb_dist}" == "macos" ]]; then
+if [[ "$(os_lsb_dist)" == "macos" ]]; then
 	alias rm="trash"
 fi
 alias mux="tmuxinator"

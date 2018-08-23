@@ -14,7 +14,9 @@ Log::AddOutput bootstrap NOTE
 cd ${DOT_ROOT}
 
 # do minimize installation 
-bash ./scripts/mini
+Log "preparing the operating system"
+bash ./os/prepare.sh
+Log "The operating system is ready"
 
 installers=($(util::find_installer | tr " " "\n"))
 

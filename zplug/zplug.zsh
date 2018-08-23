@@ -1,5 +1,5 @@
 # zplug
-if [[ -n $ZPLUG_HOME ]]; then
+if [[ -n $ZPLUG_HOME ]] && [[ -e $ZPLUG_HOME/init.zsh ]]; then
 	source $ZPLUG_HOME/init.zsh
 fi
 

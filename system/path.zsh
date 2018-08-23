@@ -1,16 +1,19 @@
-function command_exists() {
+command_exists() {
 	command -v "$@" >/dev/null 2>&1
 }
 
-declare -g lsb_dist
+declare -g __lsb_dist
 
-lsb_dist() {
-	if [[ -n ${lsb_dist} ]]; then
-		echo ${lsb_dist}
+os_lsb_dist() {
+
+	if [[ -n ${__lsb_dist} ]]; then
+		echo ${__lsb_dist}
 		return
 	fi
+
+	local lsb_dist=""
 	# perform some very rudimentary platform detection
-	if Command::Exists lsb_release; then
+	if command_exists lsb_release; then
 		lsb_dist="$(lsb_release -si)"
 	fi
 	if [ -z "${lsb_dist}" ] && [ -r /etc/lsb-release ]; then
@@ -41,29 +44,29 @@ lsb_dist() {
 		lsb_dist="macos"
 	fi
 
-	lsb_dist="$(echo "${lsb_dist}" | cut -d " " -f1 | tr '[:upper:]' '[:lower:]')"
+	lsb_dist="$(echo ${lsb_dist} | cut -d ' ' -f1 | tr '[:upper:]' '[:lower:]')"
 
 	# Special case redhatenterpriseserver
-	if [ "${lsb_dist}" = "redhatenterpriseserver" ]; then
+	if [[ "${lsb_dist}" == "redhatenterpriseserver" ]]; then
 		# Set it to redhat, it will be changed to centos below anyways
-		lsb_dist='redhat'
+		lsb_dist="redhat"
 	fi
 
-	if [ ${lsb_dist} == 'redhat' ]; then
+	if [[ ${lsb_dist} == "redhat" ]]; then
 		lsb_dist='centos'
 	fi
-
-	lsb_dist=${lsb_dist}
-	echo ${lsb_dist}
+	__lsb_dist=${lsb_dist}
+	echo ${__lsb_dist}
 }
 
 export -f command_exists >/dev/null 2>&1
+export -f os_lsb_dist >/dev/null 2>&1
 
 export EDITOR='vim'
 export GOPATH="${HOME}/.golang"
 export GO15VENDOREXPERIMENT=1
 export PATH="${GOPATH}/bin/:${HOME}/bin:${HOME}/bin/kubebuilder:${PATH}"
-if [[ ${lsb_dist} == "macos" ]]; then
+if [[ $(os_lsb_dist) == "macos" ]]; then
 	export GOROOT="/usr/local/opt/go/libexec"
 	export PATH="/usr/local/opt/curl/bin:/usr/local/opt/coreutils/libexec/gnubin/:/usr/local/opt/node/bin/:/usr/local/opt/make/libexec/gnubin:${PATH}"
 	export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
@@ -84,10 +87,12 @@ export VIRTUALENV_USE_DISTRIBUTE=1
 export VIRTUALENV_NO_SITE_PACKAGES=1 # 设置所有虚拟环境与系统site-packages进行隔离
 
 # pyenv
-export PYENV_ROOT="${HOME}/.pyenv"
-export PATH="${PYENV_ROOT}/bin:${PATH}"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if command_exists pyenv; then
+	export PYENV_ROOT="${HOME}/.pyenv"
+	export PATH="${PYENV_ROOT}/bin:${PATH}"
+	eval "$(pyenv init -)"
+	eval "$(pyenv virtualenv-init -)"
+fi
 export PYTHONDONTWRITEBYTECODE=x
 
 # ====================================================================
@@ -99,17 +104,21 @@ export ZPLUG_HOME=${HOME}/.zplug
 # ruby
 # ====================================================================
 
-if [[ ${os} == "centos" ]]; then
+if [[ $(os_lsb_dist) != "macos" ]]; then
 	export PATH="${HOME}/.rbenv/bin:${PATH}"
 fi
 
-eval "$(rbenv init -)"
+if command_exists rbenv; then
+	eval "$(rbenv init -)"
+fi
 
 # ====================================================================
 # nodenv
 # ====================================================================
 
-if [[ ${lsb_dist} != "macos" ]]; then
+if [[ $(os_lsb_dist) != "macos" ]]; then
 	PATH="$HOME/.nodenv/bin:$PATH"
 fi
-eval "$(nodenv init -)"
+if command_exists nodenv; then
+	eval "$(nodenv init -)"
+fi
