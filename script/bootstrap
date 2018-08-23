@@ -58,10 +58,14 @@ install_dotfiles() {
 install_ohmyzsh
 install_dotfiles
 
-Log "Installing dependencies..."
+target=${1:-all}
 try
 {
-	bash ./script/dot
+	if [[ ${target} == "mini" ]]; then
+		bash ./script/mini
+	else
+		bash ./script/dot
+	fi
 }
 catch
 {

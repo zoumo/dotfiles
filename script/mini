@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# mini
+#
+# `mini` does minimize installation to prepare the system
+
+source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
+# enable basic logging for this file by declaring a namespace
+namespace mini
+# make the Log method direct everything in the namespace 'myApp' to the log handler called DEBUG
+Log::AddOutput mini NOTE
+
+cd ${DOT_ROOT}
+
+Log "preparing the operating system"
+bash ./os/prepare.sh
+Log "The operating system is ready"
