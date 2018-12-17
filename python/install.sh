@@ -1,10 +1,12 @@
 #!/bin/bash
 source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
-VERSION="3.6.5"
+VERSION="3.7.0"
 
 if [[ $(OS::LSBDist) == "macos" ]]; then
-	util::brew_install readline xz
+	util::brew_install readline xz zlib
+	export LDFLAGS="-L/usr/local/opt/zlib/lib"
+	export CPPFLAGS="-I/usr/local/opt/zlib/include"
 elif [[ $(OS::LSBDist) == "centos" ]]; then
 	yum install -y gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
 fi
@@ -24,9 +26,12 @@ if ! Command::Exists pyenv; then
 
 fi
 
+# update pyenv firstly
+pyenv update
+
 if [[ ! $(pyenv versions | grep $VERSION) ]]; then
 	if [[ $(OS::LSBDist) == "macos" ]]; then
-		env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install $VERSION
+		env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install $VERSION -v
 	elif [[ $(OS::LSBDist) == "centos" ]]; then
 		env PYTHON_CONFIGURE_OPTS="--enable-shared CC=clang" pyenv install $VERSION -v
 	fi
@@ -46,9 +51,8 @@ plugins=(
 	unittest2
 	arrow
 	thefuck
+	neovim
 )
-
-pyenv update
 
 # update pip
 util::pip_install_one --upgrade pip
