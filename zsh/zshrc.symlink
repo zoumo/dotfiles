@@ -45,7 +45,7 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(vi-mode git git-flow brew gem go docker docker-compose kubectl fasd thefuck)
+plugins=(vi-mode git brew gem go docker docker-compose kubectl fasd thefuck)
 #plugins=(autojump)
 # User configuration
 
@@ -150,3 +150,6 @@ if [[ -d "$DOTFILES" ]];
 
   unset config_files
 fi
+
+export YVM_DIR=/Users/jim/.yvm
+source /usr/local/bin/yvm
