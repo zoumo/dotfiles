@@ -25,25 +25,8 @@ fi
 # brew install --HEAD neovim
 # pip install neovim
 
-if [[ ! -e ${plugins}/YouCompleteMe.tar.gz ]]; then
-	wget -O ${plugins}/YouCompleteMe.tar.gz "http://ohpunyak1.bkt.clouddn.com/YouCompleteMe.tar.gz?v=9999"
-fi
+# use spacevim
+curl -sLf https://spacevim.org/install.sh | bash
 
-if [[ ! -d ${plugins}/k-vim ]]; then
-	git clone https://github.com/zoumo/k-vim.git
-	cd k-vim/
-	if [[ ! -d bundle/YouCompleteMe ]]; then
-		export CC=/usr/bin/clang
-		export CXX=/usr/bin/clang++
-		mkdir -p bundle
-		cd bundle
-		tar -zxf ${plugins}/YouCompleteMe.tar.gz
-		cd YouCompleteMe
-		# YouCompleteMe's python framwork must be the same with macvim
-		pyenv local system
-		python3 install.py --clang-completer
-		pyenv local --unset
-		cd ${plugins}/k-vim
-	fi
-	bash install.sh
-fi
+ln -sf ${DOT_ROOT}/vim/init.toml ~/.SpaceVim.d/init.toml
+ln -sf ${DOT_ROOT}/vim/zoumo.vim ~/.SpaceVim.d/autoload/zoumo.vim
