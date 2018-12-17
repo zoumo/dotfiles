@@ -40,13 +40,6 @@ windows:
         - #empty
         - #empty
         - #empty
-  - editor:
-      layout: tiled
-      panes:
-        - #empty
-        - #empty
-        - #empty
-        - #empty
   - cmus:
       layout: tiled
       panes:
