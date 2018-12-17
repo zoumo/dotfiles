@@ -63,6 +63,7 @@ export -f command_exists >/dev/null 2>&1
 export -f os_lsb_dist >/dev/null 2>&1
 
 export EDITOR='vim'
+
 export GOPATH="${HOME}/.golang"
 export GO15VENDOREXPERIMENT=1
 export PATH="${GOPATH}/bin/:${HOME}/bin:${HOME}/bin/kubebuilder:${PATH}"
@@ -89,6 +90,12 @@ export VIRTUALENV_NO_SITE_PACKAGES=1 # 设置所有虚拟环境与系统site-pac
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:${PATH}"
+
+if [[ $(os_lsb_dist) == "macos" ]]; then
+	export PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang"
+elif [[ $(os_lsb_dist) == "centos" ]]; then
+	export PYTHON_CONFIGURE_OPTS="--enable-shared CC=clang"
+fi
 
 if command_exists pyenv; then
 	eval "$(pyenv init -)"
@@ -123,3 +130,10 @@ fi
 if command_exists nodenv; then
 	eval "$(nodenv init -)"
 fi
+
+# ====================================================================
+# kube-ps1
+# ====================================================================
+
+source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+PS1='$(kube_ps1)'$PS1
