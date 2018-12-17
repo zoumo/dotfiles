@@ -26,6 +26,8 @@ binaries=(
 	htop
 	trash
 	cheat
+	kubectx
+	kube-ps1
 	# mysql
 	# nginx
 	# node
