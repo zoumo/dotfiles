@@ -6,12 +6,16 @@ VERSION="9.11.2"
 if ! Command::Exists nodenv; then
 	if [[ $(OS::LSBDist) == "macos" ]]; then
 		util::brew_install nodenv
+		util::brew_install node-build
 	else
 		git clone https://github.com/nodenv/nodenv.git ${HOME}/.nodenv
 		cd ${HOME}/.nodenv && src/configure && make -C src
-		mkdir ${HOME}/.nodenv/plugin
+		mkdir ${HOME}/.nodenv/plugins
 		git clone https://github.com/nodenv/node-build.git ${HOME}/.nodenv/plugin/node-build
 	fi
+	# temporary export
+	PATH="$HOME/.nodenv/bin:$PATH"
+	eval "$(nodenv init -)"
 fi
 
 if [[ ! $(nodenv versions | grep ${VERSION}) ]]; then
