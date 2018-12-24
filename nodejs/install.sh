@@ -1,7 +1,7 @@
 #!/bin/bash
 source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
-VERSION="9.11.2"
+VERSION="11.5.0"
 
 if ! Command::Exists nodenv; then
 	if [[ $(OS::LSBDist) == "macos" ]]; then
@@ -23,3 +23,6 @@ if [[ ! $(nodenv versions | grep ${VERSION}) ]]; then
 fi
 
 nodenv global ${VERSION}
+
+# install yvm
+# curl -fsSL https://raw.githubusercontent.com/tophat/yvm/master/scripts/install.sh | bash
