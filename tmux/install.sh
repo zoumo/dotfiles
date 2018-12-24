@@ -21,10 +21,8 @@ if ! Command::Exists tmux; then
 	fi
 fi
 
-if [[ ! -d ${plugins}/tmux ]]; then
-	git clone https://github.com/gpakosz/.tmux.git ${plugins}/tmux
-	ln -sf ${plugins}/tmux/.tmux.conf ${HOME}/.tmux.conf
-fi
+git::clone https://github.com/gpakosz/.tmux.git ${plugins}/tmux
+ln -sf ${plugins}/tmux/.tmux.conf ${HOME}/.tmux.conf
 
 if [[ ! $(Command::Exists tmuxinator) && $(Command::Exists gem) ]]; then
 	gem install tmuxinator

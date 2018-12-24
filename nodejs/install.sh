@@ -8,10 +8,10 @@ if ! Command::Exists nodenv; then
 		util::brew_install nodenv
 		util::brew_install node-build
 	else
-		git clone https://github.com/nodenv/nodenv.git ${HOME}/.nodenv
+		git::clone https://github.com/nodenv/nodenv.git ${HOME}/.nodenv
 		cd ${HOME}/.nodenv && src/configure && make -C src
-		mkdir ${HOME}/.nodenv/plugins
-		git clone https://github.com/nodenv/node-build.git ${HOME}/.nodenv/plugin/node-build
+		mkdir -p ${HOME}/.nodenv/plugins
+		git::clone https://github.com/nodenv/node-build.git ${HOME}/.nodenv/plugins/node-build
 	fi
 	# temporary export
 	PATH="$HOME/.nodenv/bin:$PATH"
