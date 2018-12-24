@@ -9,7 +9,7 @@ if [[ $(OS::LSBDist) == "centos" ]]; then
 	sudo systemctl start docker
 
 	# Manage Docker as a non-root user
-	sudo groupadd docker
+	[[ -n $(cat /etc/group | cut -f 1 -d : | grep docker) ]] || sudo groupadd docker
 	sudo usermod -aG docker $USER
 
 	# Configure Docker to start on boot
