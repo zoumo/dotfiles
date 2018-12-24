@@ -25,7 +25,7 @@ elif [[ $(OS::LSBDist) == 'centos' ]]; then
 			make distclean # if you build Vim before
 			make -j8
 			sudo make install
-			cp src/vim /usr/bin
+			cp src/vim /usr/bi
 		fi
 	fi
 fi
@@ -38,5 +38,6 @@ fi
 # use spacevim
 curl -sLf https://spacevim.org/install.sh | bash
 
-ln -sf ${DOT_ROOT}/vim/init.toml ~/.SpaceVim.d/init.toml
-ln -sf ${DOT_ROOT}/vim/zoumo.vim ~/.SpaceVim.d/autoload/zoumo.vim
+mkdir -p ${HOME}/.SpaceVim.d/autoload
+ln -sf ${DOT_ROOT}/vim/init.toml ${HOME}/.SpaceVim.d/init.toml
+ln -sf ${DOT_ROOT}/vim/zoumo.vim ${HOME}/.SpaceVim.d/autoload/zoumo.vim
