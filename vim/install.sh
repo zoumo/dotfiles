@@ -20,7 +20,7 @@ elif [[ $(OS::LSBDist) == 'centos' ]]; then
 	if Command::Exists vim; then
 		vim_version="$(vim --version | head -1 | cut -f 5 -d " ")"
 		if [[ "${MINIMUM_VIM_VERSION}" != $(echo -e "${MINIMUM_VIM_VERSION}\n${vim_version}" | sort -s -t. -k 1,1n -k 2,2n | head -n1) ]]; then
-			[[ -d vim ]] || git clone https://github.com/vim/vim.git
+			git::clone https://github.com/vim/vim.git
 			cd vim
 			make distclean # if you build Vim before
 			make -j8
