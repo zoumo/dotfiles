@@ -131,9 +131,14 @@ if command_exists nodenv; then
 	eval "$(nodenv init -)"
 fi
 
+if command_exists yvm; then
+	export YVM_DIR=${HOME}/.yvm
+	source /usr/local/bin/yvm
+fi
+
 # ====================================================================
 # kube-ps1
 # ====================================================================
 
-source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-PS1='$(kube_ps1)'$PS1
+# source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+# PS1='$(kube_ps1)'$PS1

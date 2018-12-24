@@ -151,5 +151,3 @@ if [[ -d "$DOTFILES" ]];
   unset config_files
 fi
 
-export YVM_DIR=/Users/jim/.yvm
-source /usr/local/bin/yvm
