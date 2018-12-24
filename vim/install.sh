@@ -4,6 +4,8 @@ source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
 cd ${plugins}
 
+MINIMUM_VIM_VERSION="8.0"
+
 # 安装依赖
 if [[ $(OS::LSBDist) == "macos" ]]; then
 	util::brew_install ctags the_silver_searcher
@@ -15,9 +17,17 @@ if [[ $(OS::LSBDist) == "macos" ]]; then
 	pyenv local --unset
 
 elif [[ $(OS::LSBDist) == 'centos' ]]; then
-	wget -P /etc/yum.repos.d/ https://copr.fedorainfracloud.org/coprs/mcepl/vim8/repo/epel-7/mcepl-vim8-epel-7.repo
-	yum remove -y vim-*
-	yum install -y vim-enhanced
+	if Command::Exists vim; then
+		vim_version="$(vim --version | head -1 | cut -f 5 -d " ")"
+		if [[ "${MINIMUM_VIM_VERSION}" != $(echo -e "${MINIMUM_VIM_VERSION}\n${vim_version}" | sort -s -t. -k 1,1n -k 2,2n | head -n1) ]]; then
+			[[ -d vim ]] || git clone https://github.com/vim/vim.git
+			cd vim
+			make distclean # if you build Vim before
+			make -j8
+			sudo make install
+			cp src/vim /usr/bin
+		fi
+	fi
 fi
 
 # 可以选择安装
