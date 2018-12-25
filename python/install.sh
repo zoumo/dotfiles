@@ -1,7 +1,8 @@
 #!/bin/bash
 source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
-VERSION="3.7.0"
+GLOBAL_VERSION="3.7.0"
+VERSIONS=("2.7.15" ${GLOBAL_VERSION})
 
 if [[ $(OS::LSBDist) == "macos" ]]; then
 	util::brew_install readline xz zlib
@@ -29,16 +30,18 @@ fi
 # update pyenv firstly
 pyenv update
 
-if [[ ! $(pyenv versions | grep $VERSION) ]]; then
-	if [[ $(OS::LSBDist) == "macos" ]]; then
-		env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install $VERSION -v
-	elif [[ $(OS::LSBDist) == "centos" ]]; then
-		env PYTHON_CONFIGURE_OPTS="--enable-shared CC=clang" pyenv install $VERSION -v
+for VERSION in ${VERSIONS[@]}; do
+	if [[ ! $(pyenv versions | grep $VERSION) ]]; then
+		if [[ $(OS::LSBDist) == "macos" ]]; then
+			env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install $VERSION -v
+		elif [[ $(OS::LSBDist) == "centos" ]]; then
+			env PYTHON_CONFIGURE_OPTS="--enable-shared CC=clang" pyenv install $VERSION -v
+		fi
 	fi
-fi
+done
 
 # set global version
-pyenv global $VERSION
+pyenv global $GLOBAL_VERSION
 
 # install plugins
 plugins=(
