@@ -38,11 +38,12 @@ namespace bootstrap
 Log::AddOutput bootstrap NOTE
 
 install_ohmyzsh() {
-	if [[ ! -d ~/.oh-my-zsh ]]; then
-		Log 'Installing oh-my-zsh...'
-		# sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-		git::clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-	fi
+	Log 'Installing oh-my-zsh...'
+	# sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+	git::clone https://github.com/robbyrussell/oh-my-zsh.git ${HOME}/.oh-my-zsh
+
+	git::clone https://github.com/denysdovhan/spaceship-prompt.git "${ZSH_CUSTOM}/themes/spaceship-prompt"
+	ln -sf "${ZSH_CUSTOM}/themes/spaceship-prompt/spaceship.zsh-theme" "${ZSH_CUSTOM}/themes/spaceship.zsh-theme"
 }
 
 install_dotfiles() {
