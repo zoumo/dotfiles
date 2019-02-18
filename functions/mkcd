@@ -20,8 +20,7 @@
 # 2010-10-07: Added ability to allow spaces in directory names
 # (yucch), per http://onethingwell.org/post/586977440/mkcd-improved.
 
-function mkcd
-{
-  dir="$*";
-  mkdir -p "$dir" && cd "$dir";
+function mkcd() {
+    dir="$*"
+    mkdir -p "$dir" && cd "$dir"
 }

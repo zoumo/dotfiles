@@ -6,19 +6,19 @@ namespace oo/type
 ## TODO: use vars, not $1-9 so $ref: references are resolved
 
 map.set() {
-	this["$1"]="$2"
+    this["$1"]="$2"
 
-	@return #this
+    @return #this
 }
 
 map.delete() {
-	unset this["$1"]
+    unset this["$1"]
 
-	@return #this
+    @return #this
 }
 
 map.get() {
-	@return:value "${this[$1]}"
+    @return:value "${this[$1]}"
 }
 
 Type::InitializePrimitive map

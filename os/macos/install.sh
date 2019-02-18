@@ -12,56 +12,56 @@ Log::AddOutput macos NOTE
 
 # Binaries
 binaries=(
-	libxml2
-	libxslt
-	libiconv
-	gnupg
-	dos2unix
-	wget
-	ctags
-	grc
-	git-flow
-	tree
-	mackup
-	htop
-	trash
-	cheat
-	kubectx
-	kube-ps1
-	# mysql
-	# nginx
-	# node
-	# mongodb
-	# grc
-	# hub
-	# legit
-	# ssh-copy-id
+    libxml2
+    libxslt
+    libiconv
+    gnupg
+    dos2unix
+    wget
+    ctags
+    grc
+    git-flow
+    tree
+    mackup
+    htop
+    trash
+    cheat
+    kubectx
+    kube-ps1
+    # mysql
+    # nginx
+    # node
+    # mongodb
+    # grc
+    # hub
+    # legit
+    # ssh-copy-id
 
 )
 
 # Apps
 apps=(
-	scroll-reverser # 可以分别鼠标和触控板滚动方向
-	slate # 开源免费的桌面窗口控制调整工具
-	# qlcolorcode
-	# qlmarkdown
-	# qlstephen
-	the-unarchiver # 免费的解压软件
-	# sequel-pro  # mysql客户端
-	# sourcetree  # git 管理
-	# movist  # 播放器
-	# lingon-x # 启动项管理
-	# xtrafinder # 加强finder
-	# dash
-	# flux
-	# keka
-	# kitematic
-	# obs
-	# recordit
-	# slack
-	# todoist
-	# virtualbox
-	# vlc
+    scroll-reverser # 可以分别鼠标和触控板滚动方向
+    slate # 开源免费的桌面窗口控制调整工具
+    # qlcolorcode
+    # qlmarkdown
+    # qlstephen
+    the-unarchiver # 免费的解压软件
+    # sequel-pro  # mysql客户端
+    # sourcetree  # git 管理
+    # movist  # 播放器
+    # lingon-x # 启动项管理
+    # xtrafinder # 加强finder
+    # dash
+    # flux
+    # keka
+    # kitematic
+    # obs
+    # recordit
+    # slack
+    # todoist
+    # virtualbox
+    # vlc
 )
 
 # Fonts
@@ -71,8 +71,8 @@ apps=(
 # )
 
 if ! Command::Exists brew; then
-	Log "Installing Homebrew for you..."
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    Log "Installing Homebrew for you..."
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 Log "Update Homebrew..."

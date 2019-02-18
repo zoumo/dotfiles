@@ -785,6 +785,6 @@ defaults write com.apple.dock showhidden -bool true
 ###############################################################################
 
 for app in "Dock" "Finder"; do
-	killall "${app}" > /dev/null 2>&1
+    killall "${app}" >/dev/null 2>&1
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."

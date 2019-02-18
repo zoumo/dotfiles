@@ -4,11 +4,11 @@ namespace oo/type
 ## Awaiting pull requests for this one!
 
 integer.=() {
-	[string] value
+    [string] value
 
-	this="$value"
+    this="$value"
 
-	@return
+    @return
 }
 
 Type::InitializePrimitive integer

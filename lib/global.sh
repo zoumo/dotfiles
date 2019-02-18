@@ -8,5 +8,5 @@ DOT_ROOT="$(cd "${__oo__path}" && pwd -P)"
 plugins=${DOT_ROOT}/plugins
 
 if [[ ! -d ${plugins} ]]; then
-	mkdir ${plugins}
+    mkdir ${plugins}
 fi

@@ -7,17 +7,17 @@ import util/namedParameters
 
 # static version
 Array::Reverse() {
-	[...rest] this
+    [...rest] this
 
-	local -i length=${#this[@]} #$(this length)
-	local -a outArray
-	local -i indexFromEnd
-	local -i index
+    local -i length=${#this[@]} #$(this length)
+    local -a outArray
+    local -i indexFromEnd
+    local -i index
 
-	for index in "${!this[@]}"; do
-		indexFromEnd=$(($length - 1 - $index))
-		outArray+=("${this[$indexFromEnd]}")
-	done
+    for index in "${!this[@]}"; do
+        indexFromEnd=$(($length - 1 - $index))
+        outArray+=("${this[$indexFromEnd]}")
+    done
 
-	@get outArray
+    @get outArray
 }

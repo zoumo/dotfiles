@@ -10,7 +10,7 @@ function docker-clean() {
 }
 
 function docker-clean-image() {
-    docker images  -f "dangling=true" -q | xargs docker rmi
+    docker images -f "dangling=true" -q | xargs docker rmi
 }
 
 #the implementation refs from https://github.com/jpetazzo/nsenter/blob/master/docker-enter
@@ -28,7 +28,7 @@ function docker-enter() {
     [ -z "$NSENTER" ] && echo "WARN Cannot find nsenter" && return
 
     if [ -z "$1" ]; then
-        echo "Usage: `basename "$0"` CONTAINER [COMMAND [ARG]...]"
+        echo "Usage: $(basename "$0") CONTAINER [COMMAND [ARG]...]"
         echo ""
         echo "Enters the Docker CONTAINER and executes the specified COMMAND."
         echo "If COMMAND is not specified, runs an interactive shell in CONTAINER."
