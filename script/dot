@@ -24,22 +24,22 @@ lang=("python ruby go")
 
 # insatll language support
 for installer in ${installers[@]}; do
-	if [[ ${lang[@]} =~ ${installer} ]]; then
-		Log "${installer} installing"
-		bash $HOME/.dotfiles/${installer}/install.sh
-		Log "${installer} installation is complete"
-	fi
+    if [[ ${lang[@]} =~ ${installer} ]]; then
+        Log "${installer} installing"
+        bash $HOME/.dotfiles/${installer}/install.sh
+        Log "${installer} installation is complete"
+    fi
 done
 
 # install others
 for installer in ${installers[@]}; do
-	if [[ ${lang[@]} =~ ${installer} ]]; then
-		# skip os and python
-		continue
-	fi
-	Log "${installer} installing"
-	bash $HOME/.dotfiles/${installer}/install.sh
-	Log "${installer} installation is complete"
+    if [[ ${lang[@]} =~ ${installer} ]]; then
+        # skip os and python
+        continue
+    fi
+    Log "${installer} installing"
+    bash $HOME/.dotfiles/${installer}/install.sh
+    Log "${installer} installation is complete"
 done
 
 cd -
