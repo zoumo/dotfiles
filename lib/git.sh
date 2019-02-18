@@ -6,10 +6,10 @@ namespace lib/git
 Log::AddOutput lib/git STATUS
 
 git::failed_checkout() {
-	subject=ERROR Log "Failed to git clone $1"
-	exit -1
+    subject=ERROR Log "Failed to git clone $1"
+    exit -1
 }
 
 git::clone() {
-	[ -d "$2" ] || git clone --depth 1 "$1" "$2" || failed_checkout "$1"
+    [ -d "$2" ] || git clone --depth 1 "$1" "$2" || failed_checkout "$1"
 }

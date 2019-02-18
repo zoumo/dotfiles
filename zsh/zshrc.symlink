@@ -49,8 +49,6 @@ plugins=(vi-mode git brew gem go docker docker-compose kubectl fasd thefuck)
 #plugins=(autojump)
 # User configuration
 
-
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -77,77 +75,73 @@ plugins=(vi-mode git brew gem go docker docker-compose kubectl fasd thefuck)
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 info() {
-  printf "  [ \033[00;34m..\033[0m ] $1\n"
+    printf "  [ \033[00;34m..\033[0m ] $1\n"
 }
 
 datetime() {
-  time=$(date +%s.%N)
-  if [[ ${time: -1} == "N" ]];then
-    echo ${time/%N/000000000}
-    return
-  fi
+    time=$(date +%s.%N)
+    if [[ ${time: -1} == "N" ]]; then
+        echo ${time/%N/000000000}
+        return
+    fi
 
-  echo ${time} 
+    echo ${time}
 }
 
 duration() {
-    start=$1  
-    end=$2  
-     
-    start_s=$(echo $start | cut -d '.' -f 1)  
-    start_ns=$(echo $start | cut -d '.' -f 2)  
-    end_s=$(echo $end | cut -d '.' -f 1)  
-    end_ns=$(echo $end | cut -d '.' -f 2)  
-    time=$(( ( 10#$end_s - 10#$start_s ) * 1000 + ( 10#$end_ns / 1000000 - 10#$start_ns / 1000000 ) ))  
-  
-    echo "$time ms"  
+    start=$1
+    end=$2
+
+    start_s=$(echo $start | cut -d '.' -f 1)
+    start_ns=$(echo $start | cut -d '.' -f 2)
+    end_s=$(echo $end | cut -d '.' -f 1)
+    end_ns=$(echo $end | cut -d '.' -f 2)
+    time=$(((10#$end_s - 10#$start_s) * 1000 + (10#$end_ns / 1000000 - 10#$start_ns / 1000000)))
+
+    echo "$time ms"
 }
 
 load() {
-  start=$(datetime)
-  source $1
-  end=$(datetime)
-  info "load $1 [used $(duration ${start} ${end})]"
+    start=$(datetime)
+    source $1
+    end=$(datetime)
+    info "load $1 [used $(duration ${start} ${end})]"
 }
 
 # dotfiles
 # shortcut to this dotfiles path is $DOTFILES
 export DOTFILES=$HOME/.dotfiles
 
-if [[ -d "$DOTFILES" ]];
-then
-  # all of our zsh files
-  typeset -U config_files
-  config_files=($DOTFILES/**/*.zsh)
+if [[ -d "$DOTFILES" ]]; then
+    # all of our zsh files
+    declare -U config_files
+    config_files=($DOTFILES/**/*.zsh)
 
-  # load the path files
-  # 获取到所有目录下path.zsh的文件, 优先载入
-  for file in ${(M)config_files:#*/path.zsh}
-  do
-    load $file
-  done
-if
+    # load the path files
+    # 获取到所有目录下path.zsh的文件, 优先载入
+    for file in ${(M)config_files:#*/path.zsh}; do
+        load $file
+    done
+fi
 
 load $ZSH/oh-my-zsh.sh
 
-if [[ -d "$DOTFILES" ]];
-  # all of our zsh files
-  typeset -U config_files
-  config_files=($DOTFILES/**/*.zsh)
+if [[ -d "$DOTFILES" ]]; then
+    # all of our zsh files
+    declare -U config_files
+    config_files=($DOTFILES/**/*.zsh)
 
-  # load everything but the path and completion files
-  # 然后载入除掉所有目录下path.zsh的文件
-  for file in ${config_files:#*/path.zsh}
-  do
-    load $file
-  done
+    # load everything but the path and completion files
+    # 然后载入除掉所有目录下path.zsh的文件
+    for file in ${config_files:#*/path.zsh}; do
+        load $file
+    done
 
-  # load every completion after autocomplete loads
-  # for file in ${(M)config_files:#*/completion.zsh}
-  # do
-  #   source $file
-  # done
+    # load every completion after autocomplete loads
+    # for file in ${(M)config_files:#*/completion.zsh}
+    # do
+    #   source $file
+    # done
 
-  unset config_files
+    unset config_files
 fi
-

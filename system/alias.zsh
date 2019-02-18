@@ -6,7 +6,7 @@ alias tailf="tail -f"
 alias ve="pyenv local"
 alias la="ls -lAh"
 if [[ "$(os_lsb_dist)" == "macos" ]]; then
-	alias rm="trash"
+    alias rm="trash"
 fi
 
 # 首先在 tmux.conf 配置了

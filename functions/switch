@@ -1,7 +1,6 @@
 #!/bin/bash
 
-function switch
-{
+function switch() {
     if [[ $# != 2 ]]; then
         echo "Usage: switch A B"
     else

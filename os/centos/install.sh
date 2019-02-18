@@ -1,25 +1,25 @@
 #!/bin/bash
 
 binaries=(
-	yum-axelget
-	git
-	dconf
-	gcc
-	clang
-	bzip2
-	openssl-devel
-	libyaml-devel
-	libffi-devel
-	readline-devel
-	zlib-devel
-	gdbm-devel
-	libevent-devel
-	ncurses-devel
-	deltarpm
-	python-devel
-	the_silver_searcher
-	cmake
-	zsh
+    yum-axelget
+    git
+    dconf
+    gcc
+    clang
+    bzip2
+    openssl-devel
+    libyaml-devel
+    libffi-devel
+    readline-devel
+    zlib-devel
+    gdbm-devel
+    libevent-devel
+    ncurses-devel
+    deltarpm
+    python-devel
+    the_silver_searcher
+    cmake
+    zsh
 )
 
 # EPEL(http://fedoraproject.org/wiki/EPEL) 是由 Fedora 社区打造，

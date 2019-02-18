@@ -1,8 +1,7 @@
 #!/bin/bash
-function crt
-{
-    user="$(whoami)";
-    host="$(ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d " " -f 2 )";
+function crt() {
+    user="$(whoami)"
+    host="$(ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d " " -f 2)"
     PWD="$(pwd)"
 
     if [[ $# == 1 ]]; then
