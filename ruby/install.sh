@@ -9,12 +9,12 @@ if ! Command::Exists rbenv; then
         util::brew_install rbenv
     else
         git::clone https://github.com/rbenv/rbenv.git $HOME/.rbenv
-        cd $HOME/.rbenv && src/configure && make -C src
+        [[ ! -x $HOME/.rbenv/bin/rbenv ]] || cd $HOME/.rbenv && src/configure && make -C src
+        export PATH="$HOME/.rbenv/bin:$PATH"
         # install ruby-build
         mkdir -p "$(rbenv root)"/plugins
         git::clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
     fi
-    export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
 fi
 
