@@ -21,7 +21,7 @@ if [[ $(OS::LSBDist) == "centos" ]] && Command::Exists gnome-shell; then
 fi
 
 # install dircolors-solarized
-git::clone https://github.com/seebi/dircolors-solarized.git ircolors-solarized
+git::clone https://github.com/seebi/dircolors-solarized.git dircolors-solarized
 cp dircolors-solarized/dircolors.ansi-dark $HOME/.dircolors
 
 exit 0
