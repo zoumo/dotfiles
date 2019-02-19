@@ -34,7 +34,6 @@ semver::compare() {
 
     # MAJOR, MINOR and PATCH should compare numericaly
     for i in 0 1 2; do
-        Log "i: $i, ${V[$i]}, ${V_[$i]}"
         local diff=$((${V[$i]} - ${V_[$i]}))
         if [[ $diff -lt 0 ]]; then
             echo -1
