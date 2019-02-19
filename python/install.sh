@@ -14,7 +14,8 @@ fi
 
 # install pyenv
 if ! Command::Exists pyenv; then
-    curl -fsSL "https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer" | bash
+
+    [[ -d $HOME/.pyenv ]] || curl -fsSL "https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer" | bash
 
     # temporary export
     export PYENV_ROOT="$HOME/.pyenv"
