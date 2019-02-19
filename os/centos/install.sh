@@ -1,5 +1,10 @@
 #!/bin/bash
 
+source "$(dirname ${BASH_SOURCE})"/../../framework/oo-bootstrap.sh
+
+namespace centos
+Log::AddOutput centos NOTE
+
 binaries=(
     yum-axelget
     git
@@ -19,7 +24,6 @@ binaries=(
     python-devel
     the_silver_searcher
     cmake
-    zsh
 )
 
 # EPEL(http://fedoraproject.org/wiki/EPEL) 是由 Fedora 社区打造，
@@ -41,3 +45,6 @@ sudo yum install -y epel-release
 sudo yum groupinstall -y 'Development Tools'
 
 sudo yum install -y ${binaries[@]}
+
+# install zsh
+bash ./install-zsh.sh
