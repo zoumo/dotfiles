@@ -19,7 +19,7 @@ if ! Command::Exists rbenv; then
 fi
 
 if [[ ! $(rbenv versions | grep $VERSION) ]]; then
-    rbenv install $VERSION -v
+    RUBY_CONFIGURE_OPTS=--disable-install-doc rbenv install $VERSION -v
 fi
 
 rbenv global $VERSION
