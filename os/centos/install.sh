@@ -47,4 +47,4 @@ sudo yum groupinstall -y 'Development Tools'
 sudo yum install -y ${binaries[@]}
 
 # install zsh
-bash ./install-zsh.sh
+bash ${DOT_ROOT}/os/centos/install-zsh.sh
