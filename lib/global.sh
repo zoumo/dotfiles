@@ -2,6 +2,7 @@ import util/os
 import util/command
 import lib/util
 import lib/git
+import lib/semver
 import util/log
 
 DOT_ROOT="$(cd "${__oo__path}" && pwd -P)"
