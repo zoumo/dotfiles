@@ -24,3 +24,5 @@ if [[ ${ZSH_VERSION} == "" ]] || (($(semver::compare ${ZSH_VERSION} ${MIN_ZSH_VE
 
     cd -
 fi
+
+[[ -n "$(grep "/zsh$" /etc/shells | tail -1)" ]] || sudo echo "/bin/zsh" >>/etc/shells
