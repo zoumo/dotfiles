@@ -34,8 +34,8 @@
     vim_help_language = "cn"
     snippet_engine = "ultisnips"
 
-    bootstrap_before = "zoumo#before"
-    # bootstrap_after = "zoumo#after"
+    bootstrap_before = "customize#before"
+    # bootstrap_after = "customize#after"
 
     # enable_vimfiler_gitstatus = true
 
