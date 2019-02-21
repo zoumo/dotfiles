@@ -1,5 +1,5 @@
 " 文件名称与函数前缀要一致
-function! zoumo#before() abort
+function! customize#before() abort
     " 文件管理在左边
     let g:vimfiler_direction = 'topleft'
     " tagbar 在右边
@@ -17,8 +17,10 @@ function! zoumo#before() abort
     " I can type :help on my own, thanks.  Protect your fat fingers from the evils of <F1>
     noremap <F1> <Esc>"
 
+    set clipboard=unnamed
+
 endfunction
 
-" function! zoumo#after() abort 
+" function! customize#after() abort 
 "     let g:airline_theme='onehalfdark'
 " endfunction
