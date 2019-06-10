@@ -2,7 +2,7 @@
 
 source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
-VERSION="2.4.2"
+VERSION="2.6.3"
 
 if ! Command::Exists rbenv; then
     if [[ $(OS::LSBDist) == "macos" ]]; then
