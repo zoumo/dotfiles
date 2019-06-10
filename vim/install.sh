@@ -16,7 +16,7 @@ if [[ $(OS::LSBDist) == "macos" ]]; then
     pyenv local system
     # use python3
     util::brew_install python
-    util::brew_install_one macvim --with-override-system-vim
+    util::brew_install_one macvim
     pyenv local --unset
 
     # 可以选择安装
