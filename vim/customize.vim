@@ -17,6 +17,8 @@ function! customize#before() abort
     " I can type :help on my own, thanks.  Protect your fat fingers from the evils of <F1>
     noremap <F1> <Esc>"
 
+    set pastetoggle=<F4> 
+
     set clipboard=unnamed
 
 endfunction
