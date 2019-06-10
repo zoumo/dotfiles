@@ -85,8 +85,8 @@ util::brew_install coreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 util::brew_install findutils
 # Install GNU `sed`
-util::brew_install_one gnu-sed --with-default-names
-# Install Bash 4
+util::brew_install_one gnu-sed
+# Install Bash 5
 util::brew_install bash
 
 Log "Installing binaries..."
