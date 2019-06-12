@@ -1,5 +1,5 @@
 #!/bin/bash
-source "$(dirname ${BASH_SOURCE})"/../../framework/oo-bootstrap.sh
+source "$(dirname ${BASH_SOURCE})"/../framework/oo-bootstrap.sh
 
 ZSH_VERSION=""
 MIN_ZSH_VERSION="5.7.1"
@@ -25,4 +25,4 @@ if [[ ${ZSH_VERSION} == "" ]] || (($(semver::compare ${ZSH_VERSION} ${MIN_ZSH_VE
     cd -
 fi
 
-[[ -n "$(grep "/zsh$" /etc/shells | tail -1)" ]] || sudo echo "/bin/zsh" >>/etc/shells
+[[ -n "$(grep "/zsh$" /etc/shells | tail -1)" ]] || sudo bash -c 'echo "/bin/zsh" >>/etc/shells'

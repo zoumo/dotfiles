@@ -24,6 +24,8 @@ binaries=(
     python-devel
     the_silver_searcher
     cmake
+    curl
+    file
 )
 
 # EPEL(http://fedoraproject.org/wiki/EPEL) 是由 Fedora 社区打造，
@@ -47,4 +49,8 @@ sudo yum groupinstall -y 'Development Tools'
 sudo yum install -y ${binaries[@]}
 
 # install zsh
-bash ${DOT_ROOT}/os/centos/install-zsh.sh
+bash ${DOT_ROOT}/zsh/install-zsh.sh
+
+if util::brewable; then
+    util::install_brew
+fi

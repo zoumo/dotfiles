@@ -1,10 +1,18 @@
 #!/bin/bash
 source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
-if [[ $(OS::LSBDist) == "centos" ]]; then
-    if Command::Exists docker; then
-        exit 0
-    fi
+namespace docker
+Log::AddOutput docker NOTE
+
+if Command::Exists docker; then
+    Log "docker has already existed, skip it"
+    docker version
+    exit 0
+fi
+
+if [[ $(OS::LSBDist) == "macos" ]]; then
+    util::brew_cask_install docker
+elif [[ $(OS::LSBDist) == "centos" ]]; then
     sudo yum install -y yum-utils device-mapper-persistent-data lvm2
     sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
     sudo yum install -y docker-ce

@@ -17,6 +17,21 @@ util::find_installer() {
     echo ${result[@]}
 }
 
+util::brewable() {
+    [[ "$(OS::LSBDist)" == "macos" ]] || [[ "$(whoami)" != "root" ]]
+}
+
+util::install_brew() {
+    if [[ "$(OS::LSBDist)" == "macos" ]]; then
+        # install homebrew
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    else
+        # install linuxbrew
+        # use echo to skip "Press RETURN to continue or any other key to abort"
+        echo | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+    fi
+}
+
 util::brew_install() {
     for item in "$@"; do
         if [[ ! $(brew list | grep -e "^$item$") ]]; then
@@ -85,25 +100,25 @@ util::link_file() {
                 read -n 1 action
 
                 case "$action" in
-                    o)
-                        overwrite=true
-                        ;;
-                    O)
-                        overwrite_all=true
-                        ;;
-                    b)
-                        backup=true
-                        ;;
-                    B)
-                        backup_all=true
-                        ;;
-                    s)
-                        skip=true
-                        ;;
-                    S)
-                        skip_all=true
-                        ;;
-                    *) ;;
+                o)
+                    overwrite=true
+                    ;;
+                O)
+                    overwrite_all=true
+                    ;;
+                b)
+                    backup=true
+                    ;;
+                B)
+                    backup_all=true
+                    ;;
+                s)
+                    skip=true
+                    ;;
+                S)
+                    skip_all=true
+                    ;;
+                *) ;;
                 esac
             fi
 

@@ -7,7 +7,7 @@ cd ${plugins}
 VERSION=2.7
 
 if ! Command::Exists tmux; then
-    if [[ $(OS::LSBDist) == "macos" ]]; then
+    if util::brewable; then
         util::brew_install tmux
     else
         temp_dir=$(mktemp -d)
@@ -23,14 +23,15 @@ fi
 
 git::clone https://github.com/gpakosz/.tmux.git ${plugins}/tmux
 ln -sf ${plugins}/tmux/.tmux.conf ${HOME}/.tmux.conf
+# link tmux local
+ln -sf ${DOT_ROOT}/tmux/.tmux.conf.local ${HOME}/.tmux.conf.local
 
-if [[ ! $(Command::Exists tmuxinator) && $(Command::Exists gem) ]]; then
-    gem install tmuxinator
+if Command::Exists gem; then
+    if ! Command::Exists tmuxinator; then
+        gem install tmuxinator
+    fi
     mkdir -p ${HOME}/.tmuxinator
     ln -sf ${DOT_ROOT}/tmux/zoumo.yaml ${HOME}/.tmuxinator/zoumo.yml
 fi
-
-# link tmux local
-ln -sf ${DOT_ROOT}/tmux/.tmux.conf.local ${HOME}/.tmux.conf.local
 
 exit 0

@@ -72,7 +72,7 @@ apps=(
 
 if ! Command::Exists brew; then
     Log "Installing Homebrew for you..."
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    util::install_brew
 fi
 
 Log "Update Homebrew..."
@@ -85,7 +85,7 @@ util::brew_install coreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 util::brew_install findutils
 # Install GNU `sed`
-util::brew_install_one gnu-sed
+util::brew_install gnu-sed
 # Install Bash 5
 util::brew_install bash
 
