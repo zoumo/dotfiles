@@ -1,10 +1,13 @@
 #!/bin/bash
 source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
+namespace nodejs
+Log::AddOutput nodejs NOTE
+
 VERSION="11.5.0"
 
 if ! Command::Exists nodenv; then
-    if [[ $(OS::LSBDist) == "macos" ]]; then
+    if util::brewable; then
         util::brew_install nodenv
         util::brew_install node-build
     else
@@ -19,6 +22,7 @@ if ! Command::Exists nodenv; then
 fi
 
 if [[ ! $(nodenv versions | grep ${VERSION}) ]]; then
+    Log "Installing nodejs ${VERSION}"
     nodenv install ${VERSION}
 fi
 

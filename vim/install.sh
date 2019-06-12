@@ -23,7 +23,8 @@ if [[ $(OS::LSBDist) == "macos" ]]; then
     # brew tap neovim/neovim
     # util::brew_install --HEAD neovim
     # util::pip_install neovim
-
+elif util::brewable; then
+    util::brew_install vim
 elif [[ $(OS::LSBDist) == 'centos' ]]; then
     VIM_VERSION=""
 

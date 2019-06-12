@@ -59,6 +59,10 @@ os_lsb_dist() {
     echo ${__lsb_dist}
 }
 
+brewable() {
+    [[ "$(os_lsb_dist)" == "macos" ]] || [[ "$(whoami)" != "root" ]]
+}
+
 export -f command_exists >/dev/null 2>&1
 export -f os_lsb_dist >/dev/null 2>&1
 
@@ -66,7 +70,21 @@ export EDITOR='vim'
 
 export GOPATH="${HOME}/.golang"
 export GO15VENDOREXPERIMENT=1
+
+# cleanup path
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+if [[ brewable ]] && [[ "$(os_lsb_dist)" != "macos" ]]; then
+    # add linuxbrew to path
+    test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+    test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
+
 export PATH="${GOPATH}/bin/:${HOME}/bin:${HOME}/bin/kubebuilder:${PATH}"
+
 if [[ $(os_lsb_dist) == "macos" ]]; then
     export GOROOT="/usr/local/opt/go/libexec"
     export PATH="/usr/local/opt/curl/bin:/usr/local/opt/coreutils/libexec/gnubin/:/usr/local/opt/node/bin/:/usr/local/opt/make/libexec/gnubin:${PATH}"
@@ -93,7 +111,7 @@ export PATH="${PYENV_ROOT}/bin:${PATH}"
 
 if [[ $(os_lsb_dist) == "macos" ]]; then
     export PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang"
-elif [[ $(os_lsb_dist) == "centos" ]]; then
+else
     export PYTHON_CONFIGURE_OPTS="--enable-shared CC=clang"
 fi
 
@@ -124,7 +142,7 @@ fi
 # nodenv
 # ====================================================================
 
-if [[ $(os_lsb_dist) != "macos" ]]; then
+if ! brewable; then
     PATH="$HOME/.nodenv/bin:$PATH"
 fi
 if command_exists nodenv; then

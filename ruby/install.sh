@@ -5,7 +5,7 @@ source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 VERSION="2.6.3"
 
 if ! Command::Exists rbenv; then
-    if [[ $(OS::LSBDist) == "macos" ]]; then
+    if util::brewable; then
         util::brew_install rbenv
     else
         git::clone https://github.com/rbenv/rbenv.git $HOME/.rbenv
