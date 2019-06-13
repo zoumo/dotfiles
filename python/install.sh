@@ -5,7 +5,7 @@ namespace python
 Log::AddOutput python NOTE
 
 GLOBAL_VERSION="3.7.3"
-VERSIONS=("2.7.15" ${GLOBAL_VERSION})
+VERSIONS=("2.7.16" ${GLOBAL_VERSION})
 
 if [[ $(OS::LSBDist) == "centos" ]]; then
     sudo yum install -y gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
@@ -14,9 +14,9 @@ elif [[ $(OS::LSBDist) == "debian" ]]; then
 fi
 
 if util::brewable; then
-    util::brew_install readline xz zlib openssl libressl
-    export LDFLAGS="-L$(brew --prefix libressl)/lib"
-    export CPPFLAGS="-I$(brew --prefix libressl)/include"
+    util::brew_install readline xz zlib openssl@1.1
+    export LDFLAGS="-L$(brew --prefix openssl@1.1)/lib"
+    export CPPFLAGS="-I$(brew --prefix openssl@1.1)/include"
 fi
 
 # install pyenv
@@ -41,9 +41,9 @@ for VERSION in ${VERSIONS[@]}; do
     if [[ ! $(pyenv versions | grep ${VERSION}) ]]; then
         Log "Installing python ${VERSION}"
         if [[ $(OS::LSBDist) == "macos" ]]; then
-            env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install ${VERSION} -v
+            env CONFIGURE_OPTS="--enable-framework CC=clang --with-openssl=$(brew --prefix openssl@1.1)" pyenv install ${VERSION} -v
         else
-            env PYTHON_CONFIGURE_OPTS="--enable-shared CC=clang" pyenv install ${VERSION} -v
+            env CONFIGURE_OPTS="--enable-shared CC=clang" pyenv install ${VERSION} -v
         fi
     fi
 done
