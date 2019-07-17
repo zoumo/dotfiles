@@ -1,5 +1,5 @@
 function proxy_on() {
-    proxy_addr=${PROXY_ADDR:-127.0.0.1:1087}
+    local proxy_addr=${PROXY_ADDR:-127.0.0.1:1087}
     export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
     export http_proxy="http://${proxy_addr}/"
     export https_proxy=${http_proxy}
@@ -16,4 +16,12 @@ function proxy_off() {
     unset HTTP_PROXY
     unset HTTPS_PROXY
     echo "=> terminal proxy off"
+}
+
+function proxy_toggle() {
+    if [[ ${http_proxy:-} != "" ]]; then
+        proxy_off
+    else
+        proxy_on
+    fi
 }
