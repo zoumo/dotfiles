@@ -68,9 +68,6 @@ export -f os_lsb_dist >/dev/null 2>&1
 
 export EDITOR='vim'
 
-export GOPATH="${HOME}/.golang"
-export GO15VENDOREXPERIMENT=1
-
 # cleanup path
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 
@@ -86,11 +83,25 @@ fi
 export PATH="${GOPATH}/bin/:${HOME}/bin:${HOME}/bin/kubebuilder:${PATH}"
 
 if [[ $(os_lsb_dist) == "macos" ]]; then
-    export GOROOT="/usr/local/opt/go/libexec"
     export PATH="/usr/local/opt/curl/bin:/usr/local/opt/coreutils/libexec/gnubin/:/usr/local/opt/node/bin/:/usr/local/opt/make/libexec/gnubin:${PATH}"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
     export JAVA_HOME=$(/usr/libexec/java_home)
 fi
+
+# ====================================================================
+# Golang
+# ====================================================================
+export GOPATH="${HOME}/.golang"
+export GO15VENDOREXPERIMENT=1
+export GO111MODULE=on
+if [[ $(os_lsb_dist) == "macos" ]]; then
+    export GOROOT="/usr/local/opt/go/libexec"
+fi
+
+# ====================================================================
+# Rust
+# ====================================================================
+export PATH="${HOME}/.cargo/bin:${PATH}"
 
 # ====================================================================
 # use clang
