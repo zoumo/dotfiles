@@ -94,6 +94,7 @@ fi
 export GOPATH="${HOME}/.golang"
 export GO15VENDOREXPERIMENT=1
 export GO111MODULE=on
+export GOPROXY="https://goproxy.io"
 if [[ $(os_lsb_dist) == "macos" ]]; then
     export GOROOT="/usr/local/opt/go/libexec"
 fi
