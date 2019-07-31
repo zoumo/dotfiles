@@ -1,0 +1,20 @@
+#!/bin/bash
+
+brew() {
+    if [[ "$(uname -s)" == "Darwin" ]]; then
+        /usr/local/bin/brew $@
+        return
+    fi
+
+    if [[ ${HOMEBREW_PREFIX:-} == "" ]]; then
+        export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+        export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar"
+        export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew"
+    fi
+
+    if [[ "$(whoami)" == "root" ]]; then
+        su - linuxbrew bash -c "${HOMEBREW_PREFIX}/bin/brew $*"
+    else
+        ${HOMEBREW_PREFIX}/bin/brew $@
+    fi
+}

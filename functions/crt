@@ -1,4 +1,5 @@
 #!/bin/bash
+# show current user@host:pwd for scp
 function crt() {
     user="$(whoami)"
     host="$(ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d " " -f 2)"

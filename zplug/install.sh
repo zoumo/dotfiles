@@ -2,5 +2,10 @@
 
 source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
-ZPLUG_HOME=$HOME/.zplug
-git::clone https://github.com/zplug/zplug $ZPLUG_HOME
+## fasd
+brew::install fasd
+
+## fzf
+brew::install fzf
+# To install useful keybindings and fuzzy completion
+$(brew --prefix fzf)/install --all --no-update-rc

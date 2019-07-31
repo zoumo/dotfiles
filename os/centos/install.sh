@@ -26,6 +26,8 @@ binaries=(
     cmake
     curl
     file
+    perl
+    yodl
 )
 
 # EPEL(http://fedoraproject.org/wiki/EPEL) 是由 Fedora 社区打造，
@@ -51,6 +53,4 @@ sudo yum install -y ${binaries[@]}
 # install zsh
 bash ${DOT_ROOT}/zsh/install-zsh.sh
 
-if util::brewable; then
-    util::install_brew
-fi
+brew::setup

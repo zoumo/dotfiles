@@ -72,7 +72,7 @@ apps=(
 
 if ! Command::Exists brew; then
     Log "Installing Homebrew for you..."
-    util::install_brew
+    brew::setup
 fi
 
 Log "Update Homebrew..."
@@ -81,16 +81,16 @@ brew update
 
 Log "Installing coreutils, findutils, bash, macvim..."
 # Install GNU core utilities (those that come with OS X are outdated)
-util::brew_install coreutils
+brew::install coreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
-util::brew_install findutils
+brew::install findutils
 # Install GNU `sed`
-util::brew_install gnu-sed
+brew::install gnu-sed
 # Install Bash 5
-util::brew_install bash
+brew::install bash
 
 Log "Installing binaries..."
-util::brew_install ${binaries[@]}
+brew::install ${binaries[@]}
 
 # echo "Installing fonts..."
 # brew cask install ${fonts[@]}
@@ -100,7 +100,7 @@ util::brew_install ${binaries[@]}
 
 # Install apps to /Applications
 Log "Installing apps..."
-util::brew_cask_install ${apps[@]}
+brew::cask::install ${apps[@]}
 
 # clean things up
 brew cleanup

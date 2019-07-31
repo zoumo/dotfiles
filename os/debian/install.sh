@@ -11,6 +11,10 @@ binaries=(
     file
     git
     clang
+    automake
+    yodl
+    perl
+    libevent-dev
 )
 
 sudo apt-get update
@@ -19,6 +23,4 @@ sudo apt-get install -y ${binaries[@]}
 # install zsh
 bash ${DOT_ROOT}/zsh/install-zsh.sh
 
-if util::brewable; then
-    util::install_brew
-fi
+brew::setup

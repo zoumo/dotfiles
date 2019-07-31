@@ -45,7 +45,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(vi-mode git brew gem go docker docker-compose kubectl fasd thefuck)
+plugins=(zsh-autosuggestions vi-mode git brew gem go docker docker-compose kubectl fasd thefuck)
 #plugins=(autojump)
 # User configuration
 
@@ -78,39 +78,13 @@ info() {
     printf "  [ \033[00;34m..\033[0m ] $1\n"
 }
 
-datetime() {
-    time=$(date +%s.%N)
-    if [[ ${time: -1} == "N" ]]; then
-        echo ${time/%N/000000000}
-        return
-    fi
-
-    echo ${time}
-}
-
-duration() {
-    start=$1
-    end=$2
-
-    start_s=$(echo $start | cut -d '.' -f 1)
-    start_ns=$(echo $start | cut -d '.' -f 2)
-    end_s=$(echo $end | cut -d '.' -f 1)
-    end_ns=$(echo $end | cut -d '.' -f 2)
-    time=$(((10#$end_s - 10#$start_s) * 1000 + (10#$end_ns / 1000000 - 10#$start_ns / 1000000)))
-
-    echo "$time ms"
-}
-
-load() {
-    start=$(datetime)
-    source $1
-    end=$(datetime)
-    info "load $1 [used $(duration ${start} ${end})]"
-}
-
 # dotfiles
 # shortcut to this dotfiles path is $DOTFILES
 export DOTFILES=$HOME/.dotfiles
+# load functions firstly
+fpath=(${DOTFILES}/functions ${fpath})
+autoload -U ${DOTFILES}/functions/*(:t)
+
 
 if [[ -d "$DOTFILES" ]]; then
     # all of our zsh files

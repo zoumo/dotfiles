@@ -6,18 +6,18 @@ Log::AddOutput nodejs NOTE
 
 VERSION="11.5.0"
 
+nodenv_from_src() {
+    git::clone https://github.com/nodenv/nodenv.git ${HOME}/.nodenv
+    cd ${HOME}/.nodenv && src/configure && make -C src
+    mkdir -p ${HOME}/.nodenv/plugins
+    git::clone https://github.com/nodenv/node-build.git ${HOME}/.nodenv/plugins/node-build
+}
+
 if ! Command::Exists nodenv; then
-    if util::brewable; then
-        util::brew_install nodenv
-        util::brew_install node-build
-    else
-        git::clone https://github.com/nodenv/nodenv.git ${HOME}/.nodenv
-        cd ${HOME}/.nodenv && src/configure && make -C src
-        mkdir -p ${HOME}/.nodenv/plugins
-        git::clone https://github.com/nodenv/node-build.git ${HOME}/.nodenv/plugins/node-build
-    fi
+    brew::install nodenv node-build
+
     # temporary export
-    PATH="$HOME/.nodenv/bin:$PATH"
+    export PATH="$HOME/.nodenv/bin:$PATH"
     eval "$(nodenv init -)"
 fi
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# switch two files name
 function switch() {
     if [[ $# != 2 ]]; then
         echo "Usage: switch A B"

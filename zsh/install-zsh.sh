@@ -10,24 +10,22 @@ fi
 
 if [[ ${ZSH_VERSION} == "" ]] || (($(semver::compare ${ZSH_VERSION} ${MIN_ZSH_VERSION}) == -1)); then
     cd ${DOT_CACHE}
-    target_file="zsh-${MIN_ZSH_VERSION}.tar.xz"
-    target_path="zsh-${MIN_ZSH_VERSION}"
+    target_file="zsh-${MIN_ZSH_VERSION}.tar.gz"
+    target_path="zsh-zsh-${MIN_ZSH_VERSION}"
 
     if [[ ! -e ${target_file} ]]; then
-        wget "https://sourceforge.net/projects/zsh/files/zsh/${MIN_ZSH_VERSION}/${target_file}/download" -O ${target_file}
+        wget "https://github.com/zsh-users/zsh/archive/${target_file}" -O ${target_file}
     fi
-    if [[ ! -d ${target_path} ]]; then
-        tar -xvJf ${target_file}
-    fi
+
+    rm -rf ${target_path} && tar -zxvf ${target_file}
 
     cd ${target_path}
 
     # install zsh to /bin/zsh
+    ./Util/preconfig
     ./configure --bindir=/bin
     make && sudo make install
-
     cd -
-
 fi
 
 [[ -n "$(grep "/zsh$" /etc/shells | tail -1)" ]] || sudo bash -c 'echo "/bin/zsh" >>/etc/shells'

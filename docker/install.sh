@@ -10,8 +10,8 @@ if Command::Exists docker; then
     exit 0
 fi
 
-if [[ $(OS::LSBDist) == "macos" ]]; then
-    util::brew_cask_install docker
+if os::macos; then
+    brew::cask::install docker
 elif [[ $(OS::LSBDist) == "centos" ]]; then
     sudo yum install -y yum-utils device-mapper-persistent-data lvm2
     sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
