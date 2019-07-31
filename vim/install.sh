@@ -5,7 +5,7 @@ source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 namespace vim
 Log::AddOutput vim ERROR
 
-cd ${plugins}
+cd ${DOT_PLUGINS}
 
 MINIMUM_VIM_VERSION="8.0"
 

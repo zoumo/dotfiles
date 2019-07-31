@@ -2,7 +2,7 @@
 
 source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
-cd ${plugins}
+cd ${DOT_PLUGINS}
 
 VERSION=2.7
 
@@ -17,12 +17,12 @@ if ! Command::Exists tmux; then
         cd tmux-${VERSION}
         LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local
         make && make install
-        cd ${plugins}
+        cd ${DOT_PLUGINS}
     fi
 fi
 
-git::clone https://github.com/gpakosz/.tmux.git ${plugins}/tmux
-ln -sf ${plugins}/tmux/.tmux.conf ${HOME}/.tmux.conf
+git::clone https://github.com/gpakosz/.tmux.git ${DOT_PLUGINS}/tmux
+ln -sf ${DOT_PLUGINS}/tmux/.tmux.conf ${HOME}/.tmux.conf
 # link tmux local
 ln -sf ${DOT_ROOT}/tmux/.tmux.conf.local ${HOME}/.tmux.conf.local
 
