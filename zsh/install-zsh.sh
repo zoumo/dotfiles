@@ -9,20 +9,25 @@ if Command::Exists zsh; then
 fi
 
 if [[ ${ZSH_VERSION} == "" ]] || (($(semver::compare ${ZSH_VERSION} ${MIN_ZSH_VERSION}) == -1)); then
-    tempdir=$(mktemp -d)
-    cd ${tempdir}
-    wget "https://sourceforge.net/projects/zsh/files/zsh/${MIN_ZSH_VERSION}/zsh-${MIN_ZSH_VERSION}.tar.xz/download" -O zsh-${MIN_ZSH_VERSION}.tar.xz
+    cd ${DOT_CACHE}
+    local target_file="zsh-${MIN_ZSH_VERSION}.tar.xz"
+    local target_path="zsh-${MIN_ZSH_VERSION}"
 
-    tar -xvJf zsh-${MIN_ZSH_VERSION}.tar.xz
-    cd zsh-${MIN_ZSH_VERSION}
+    if [[ ! -e ${target_file} ]]; then
+        wget "https://sourceforge.net/projects/zsh/files/zsh/${MIN_ZSH_VERSION}/${target_file}/download" -O ${target_file}
+    fi
+    if [[ ! -d ${target_path} ]]; then
+        tar -xvJf ${target_file}
+    fi
+
+    cd ${target_path}
 
     # install zsh to /bin/zsh
     ./configure --bindir=/bin
-
     make && sudo make install
-    rm -rf zsh-${MIN_ZSH_VERSION}.tar.xz zsh-${MIN_ZSH_VERSION}
 
     cd -
+
 fi
 
 [[ -n "$(grep "/zsh$" /etc/shells | tail -1)" ]] || sudo bash -c 'echo "/bin/zsh" >>/etc/shells'
