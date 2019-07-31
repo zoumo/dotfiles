@@ -80,11 +80,12 @@ if [[ brewable ]] && [[ "$(os_lsb_dist)" != "macos" ]]; then
     test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
 
-export PATH="${GOPATH}/bin/:${HOME}/bin:${HOME}/bin/kubebuilder:${PATH}"
+export PATH="${HOME}/bin:${PATH}"
 
 if [[ $(os_lsb_dist) == "macos" ]]; then
-    export PATH="/usr/local/opt/curl/bin:/usr/local/opt/coreutils/libexec/gnubin/:/usr/local/opt/node/bin/:/usr/local/opt/make/libexec/gnubin:${PATH}"
-    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
+    export OPT_PATH="/usr/local/opt"
+    export PATH="${OPT_PATH}/curl/bin:${OPT_PATH}/coreutils/libexec/gnubin/:${OPT_PATH}/node/bin/:${OPT_PATH}/make/libexec/gnubin:${PATH}"
+    export MANPATH="${OPT_PATH}/coreutils/libexec/gnuman:${MANPATH}"
     export JAVA_HOME=$(/usr/libexec/java_home)
 fi
 
@@ -95,8 +96,9 @@ export GOPATH="${HOME}/.golang"
 export GO15VENDOREXPERIMENT=1
 export GO111MODULE=on
 export GOPROXY="https://goproxy.io"
+export PATH="${GOPATH}/bin:${GOPATH}/bin/kubebuilder:${PATH}"
 if [[ $(os_lsb_dist) == "macos" ]]; then
-    export GOROOT="/usr/local/opt/go/libexec"
+    export GOROOT="${OPT_PATH}/go/libexec"
 fi
 
 # ====================================================================
@@ -170,5 +172,5 @@ fi
 # kube-ps1
 # ====================================================================
 
-# source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+# source "${OPT_PATH}/kube-ps1/share/kube-ps1.sh"
 # PS1='$(kube_ps1)'$PS1
