@@ -1,12 +1,14 @@
 #!/bin/bash
+
 # command name: trash-rm
 # http://www.webupd8.org/2010/02/make-rm-move-files-to-trash-instead-of.html
-shopt -s extglob
-recursive=1
-declare -a cmd
-((i = 0))
-for f in "$@"; do
-    case "$f" in
+function trash_rm() {
+    shopt -s extglob
+    recursive=1
+    declare -a cmd
+    ((i = 0))
+    for f in "$@"; do
+        case "$f" in
         -*([fiIv])r*([fiIv]) | -*([fiIv])R*([fiIv]))
             tmp="${f//[rR]/}"
             if [ -n "$tmp" ]; then
@@ -26,6 +28,7 @@ for f in "$@"; do
                 ((i++))
             fi
             ;;
-    esac
-done
-trash "${cmd[@]}"
+        esac
+    done
+    trash "${cmd[@]}"
+}

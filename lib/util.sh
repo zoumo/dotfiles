@@ -17,68 +17,8 @@ util::find_installer() {
     echo ${result[@]}
 }
 
-util::brewable() {
-    [[ "$(OS::LSBDist)" == "macos" ]] || [[ "$(whoami)" != "root" ]]
-}
-
-util::import_brew() {
-    if [[ "$(OS::LSBDist)" != "macos" ]] && [[ "${HOMEBREW_CELLAR:-}" == "" ]]; then
-        # add linuxbrew to path
-        test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
-        test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-    fi
-}
-
-util::install_brew() {
-    if [[ "$(OS::LSBDist)" == "macos" ]]; then
-        # install homebrew
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    else
-        if [[ -d ~/.linuxbrew ]] || [[ -d /home/linuxbrew/.linuxbrew ]]; then
-            return
-        fi
-        # install linuxbrew
-        # use echo to skip "Press RETURN to continue or any other key to abort"
-        echo | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-    fi
-}
-
-util::brew_install() {
-    util::import_brew
-
-    for item in "$@"; do
-        if [[ ! $(brew list | grep -e "^$item$") ]]; then
-            Log "brew installing $item"
-            brew install $item
-        else
-            Log "util::brew_install: $item already exists, skip it"
-        fi
-    done
-}
-
-util::brew_install_one() {
-    util::import_brew
-
-    if [[ ! $(brew list | grep -e "^$1$") ]]; then
-        Log "brew installing $1"
-        brew install "$@"
-    else
-        Log "util::brew_install: $1 already exists, skip it"
-    fi
-}
-
-util::brew_link() {
-    util::import_brew
-    brew link $@
-}
-
-util::brew_cask_install() {
-    if [[ ! $(brew cask list | grep -e "^$1$") ]]; then
-        Log "brew installing $1"
-        brew cask install --appdir="/Applications" "$@"
-    else
-        Log "util::brew_cask_install: $1 already exists, skip it"
-    fi
+os::macos() {
+    [[ $(OS::LSBDist) == "macos" ]]
 }
 
 util::pip_install() {

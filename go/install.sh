@@ -10,10 +10,6 @@ if Command::Exists go; then
     exit 0
 fi
 
-if util::brewable; then
-    util::brew_install go mercurial
-elif [[ $(OS::LSBDist) == "centos" ]]; then
-    sudo yum install -y golang
-fi
+brew::install go mercurial
 
 exit 0

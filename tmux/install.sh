@@ -6,19 +6,19 @@ cd ${DOT_PLUGINS}
 
 VERSION=2.7
 
+tmux_from_src() {
+    temp_dir=$(mktemp -d)
+    cd ${temp_dir}
+    wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
+    tar xvzf tmux-${VERSION}.tar.gz
+    cd tmux-${VERSION}
+    LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local
+    make && make install
+    cd ${DOT_PLUGINS}
+}
+
 if ! Command::Exists tmux; then
-    if util::brewable; then
-        util::brew_install tmux
-    else
-        temp_dir=$(mktemp -d)
-        cd ${temp_dir}
-        wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
-        tar xvzf tmux-${VERSION}.tar.gz
-        cd tmux-${VERSION}
-        LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local
-        make && make install
-        cd ${DOT_PLUGINS}
-    fi
+    brew::install tmux
 fi
 
 git::clone https://github.com/gpakosz/.tmux.git ${DOT_PLUGINS}/tmux

@@ -1,86 +1,13 @@
-command_exists() {
-    command -v "$@" >/dev/null 2>&1
-}
-
-declare -g __lsb_dist
-
-os_lsb_dist() {
-
-    if [[ -n ${__lsb_dist} ]]; then
-        echo ${__lsb_dist}
-        return
-    fi
-
-    local lsb_dist=""
-    # perform some very rudimentary platform detection
-    if command_exists lsb_release; then
-        lsb_dist="$(lsb_release -si)"
-    fi
-    if [ -z "${lsb_dist}" ] && [ -r /etc/lsb-release ]; then
-        lsb_dist="$(. /etc/lsb-release && echo "$DISTRIB_ID")"
-    fi
-    if [ -z "${lsb_dist}" ] && [ -r /etc/debian_version ]; then
-        lsb_dist='debian'
-    fi
-    if [ -z "${lsb_dist}" ] && [ -r /etc/fedora-release ]; then
-        lsb_dist='fedora'
-    fi
-    if [ -z "${lsb_dist}" ] && [ -r /etc/oracle-release ]; then
-        lsb_dist='oracleserver'
-    fi
-    if [ -z "${lsb_dist}" ] && [ -r /etc/centlsb_dist-release ]; then
-        lsb_dist='centlsb_dist'
-    fi
-    if [ -z "${lsb_dist}" ] && [ -r /etc/redhat-release ]; then
-        lsb_dist='redhat'
-    fi
-    if [ -z "${lsb_dist}" ] && [ -r /etc/photon-release ]; then
-        lsb_dist='photon'
-    fi
-    if [ -z "${lsb_dist}" ] && [ -r /etc/lsb_dist-release ]; then
-        lsb_dist="$(. /etc/lsb_dist-release && echo "$ID")"
-    fi
-    if [ -z "${lsb_dist}" ] && [[ "$(uname -s)" == "Darwin" ]]; then
-        lsb_dist="macos"
-    fi
-
-    lsb_dist="$(echo ${lsb_dist} | cut -d ' ' -f1 | tr '[:upper:]' '[:lower:]')"
-
-    # Special case redhatenterpriseserver
-    if [[ "${lsb_dist}" == "redhatenterpriseserver" ]]; then
-        # Set it to redhat, it will be changed to centos below anyways
-        lsb_dist="redhat"
-    fi
-
-    if [[ ${lsb_dist} == "redhat" ]]; then
-        lsb_dist='centos'
-    fi
-    __lsb_dist=${lsb_dist}
-    echo ${__lsb_dist}
-}
-
-brewable() {
-    [[ "$(os_lsb_dist)" == "macos" ]] || [[ "$(whoami)" != "root" ]]
-}
-
-export -f command_exists >/dev/null 2>&1
-export -f os_lsb_dist >/dev/null 2>&1
-
 export EDITOR='vim'
 
 # cleanup path
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="${HOME}/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-if [[ brewable ]] && [[ "$(os_lsb_dist)" != "macos" ]]; then
-    # add linuxbrew to path
-    test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
-    test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-fi
-
-export PATH="${HOME}/bin:${PATH}"
+# brew is a custom function at here
+eval $(brew shellenv)
 
 if [[ $(os_lsb_dist) == "macos" ]]; then
     export OPT_PATH="/usr/local/opt"
@@ -93,13 +20,11 @@ fi
 # Golang
 # ====================================================================
 export GOPATH="${HOME}/.golang"
+export GOROOT="$(brew --prefix go)/libexec"
 export GO15VENDOREXPERIMENT=1
 export GO111MODULE=on
 export GOPROXY="https://goproxy.io"
 export PATH="${GOPATH}/bin:${GOPATH}/bin/kubebuilder:${PATH}"
-if [[ $(os_lsb_dist) == "macos" ]]; then
-    export GOROOT="${OPT_PATH}/go/libexec"
-fi
 
 # ====================================================================
 # Rust
@@ -156,9 +81,10 @@ fi
 # nodenv
 # ====================================================================
 
-if ! brewable; then
+if [[ $(os_lsb_dist) != "macos" ]]; then
     PATH="$HOME/.nodenv/bin:$PATH"
 fi
+
 if command_exists nodenv; then
     eval "$(nodenv init -)"
 fi
@@ -167,6 +93,13 @@ if command_exists yvm; then
     export YVM_DIR=${HOME}/.yvm
     source /usr/local/bin/yvm
 fi
+
+# ====================================================================
+# zsh-autosuggestions
+# ====================================================================
+
+# set highlight foreground colour to
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=243"
 
 # ====================================================================
 # kube-ps1

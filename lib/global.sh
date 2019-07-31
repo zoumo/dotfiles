@@ -1,5 +1,6 @@
 import util/os
 import util/command
+import lib/brew
 import lib/util
 import lib/git
 import lib/semver
