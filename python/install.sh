@@ -13,12 +13,6 @@ elif [[ $(OS::LSBDist) == "debian" ]]; then
     sudo apt-get install -y make build-essential zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev python-openssl git
 fi
 
-if util::brewable; then
-    util::brew_install readline xz zlib openssl@1.1
-    export LDFLAGS="-L$(brew --prefix openssl@1.1)/lib"
-    export CPPFLAGS="-I$(brew --prefix openssl@1.1)/include"
-fi
-
 # install pyenv
 if ! Command::Exists pyenv; then
     [[ -d ${HOME}/.pyenv ]] || curl -fsSL "https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer" | bash
@@ -41,8 +35,25 @@ for VERSION in ${VERSIONS[@]}; do
     if [[ ! $(pyenv versions | grep ${VERSION}) ]]; then
         Log "Installing python ${VERSION}"
         if [[ $(OS::LSBDist) == "macos" ]]; then
-            env CONFIGURE_OPTS="--enable-framework CC=clang --with-openssl=$(brew --prefix openssl@1.1)" pyenv install ${VERSION} -v
+            # fixed, do not change me
+            util::brew_install readline sqlite xz zlib openssl openssl@1.1
+            env CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install ${VERSION} -v
         else
+            if util::brewable; then
+                util::brew_install bzip2 libffi libxml2 libxmlsec1 readline sqlite xz zlib openssl openssl@1.1
+                reg='^2\.'
+                if [[ ${VERSION} =~ ${reg} ]]; then
+                    # use openssl 1.0x for python2
+                    util::brew_link --overwrite openssl
+                    export LD_LIBRARY_PATH="$(brew --prefix openssl)/lib:$(brew --prefix readline)/lib:$(brew --prefix zlib)/lib"
+                    export LIBRARY_PATH="$(brew --prefix openssl)/include:$(brew --prefix readline)/include:$(brew --prefix zlib)/include"
+                else
+                    # use openssl 1.1 for python3
+                    util::brew_link --overwrite openssl@1.1
+                    export LD_LIBRARY_PATH="$(brew --prefix)/lib"
+                    export LIBRARY_PATH="$(brew --prefix)/include"
+                fi
+            fi
             env CONFIGURE_OPTS="--enable-shared CC=clang" pyenv install ${VERSION} -v
         fi
     fi

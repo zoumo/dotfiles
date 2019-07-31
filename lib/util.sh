@@ -34,6 +34,9 @@ util::install_brew() {
         # install homebrew
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     else
+        if [[ -d ~/.linuxbrew ]] || [[ -d /home/linuxbrew/.linuxbrew ]]; then
+            return
+        fi
         # install linuxbrew
         # use echo to skip "Press RETURN to continue or any other key to abort"
         echo | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
@@ -62,6 +65,11 @@ util::brew_install_one() {
     else
         Log "util::brew_install: $1 already exists, skip it"
     fi
+}
+
+util::brew_link() {
+    util::import_brew
+    brew link $@
 }
 
 util::brew_cask_install() {
