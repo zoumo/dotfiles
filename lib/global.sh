@@ -8,7 +8,7 @@ import util/log
 
 DOT_ROOT="$(cd "${__oo__path}" && pwd -P)"
 DOT_PLUGINS=${DOT_ROOT}/plugins
-DOT_CACHE=${DOT_ROOT}/cache
+DOT_CACHE=${HOME}/.cache/dotfiles
 
 if [[ ! -d ${DOT_PLUGINS} ]]; then
     mkdir -p ${DOT_PLUGINS}
