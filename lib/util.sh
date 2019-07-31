@@ -21,6 +21,14 @@ util::brewable() {
     [[ "$(OS::LSBDist)" == "macos" ]] || [[ "$(whoami)" != "root" ]]
 }
 
+util::import_brew() {
+    if [[ "$(OS::LSBDist)" != "macos" ]] && [[ "${HOMEBREW_CELLAR:-}" == "" ]]; then
+        # add linuxbrew to path
+        test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+        test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    fi
+}
+
 util::install_brew() {
     if [[ "$(OS::LSBDist)" == "macos" ]]; then
         # install homebrew
@@ -33,6 +41,8 @@ util::install_brew() {
 }
 
 util::brew_install() {
+    util::import_brew
+
     for item in "$@"; do
         if [[ ! $(brew list | grep -e "^$item$") ]]; then
             Log "brew installing $item"
@@ -44,6 +54,8 @@ util::brew_install() {
 }
 
 util::brew_install_one() {
+    util::import_brew
+
     if [[ ! $(brew list | grep -e "^$1$") ]]; then
         Log "brew installing $1"
         brew install "$@"
