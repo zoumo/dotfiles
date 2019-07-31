@@ -10,8 +10,8 @@ fi
 
 if [[ ${ZSH_VERSION} == "" ]] || (($(semver::compare ${ZSH_VERSION} ${MIN_ZSH_VERSION}) == -1)); then
     cd ${DOT_CACHE}
-    local target_file="zsh-${MIN_ZSH_VERSION}.tar.xz"
-    local target_path="zsh-${MIN_ZSH_VERSION}"
+    target_file="zsh-${MIN_ZSH_VERSION}.tar.xz"
+    target_path="zsh-${MIN_ZSH_VERSION}"
 
     if [[ ! -e ${target_file} ]]; then
         wget "https://sourceforge.net/projects/zsh/files/zsh/${MIN_ZSH_VERSION}/${target_file}/download" -O ${target_file}
