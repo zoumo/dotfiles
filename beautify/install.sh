@@ -1,7 +1,7 @@
 #!/bin/bash
 source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
 
-cd ${plugins}
+cd ${DOT_PLUGINS}
 
 # install one dark for iterm
 git::clone https://github.com/nathanbuchar/atom-one-dark-terminal.git atom-one-dark-terminal
