@@ -1,14 +1,6 @@
 #!/bin/bash
 
-declare -g __lsb_dist
-
 function os_lsb_dist() {
-
-    if [[ -n ${__lsb_dist} ]]; then
-        echo ${__lsb_dist}
-        return
-    fi
-
     local lsb_dist=""
     # perform some very rudimentary platform detection
     if command_exists lsb_release; then
@@ -53,6 +45,5 @@ function os_lsb_dist() {
     if [[ ${lsb_dist} == "redhat" ]]; then
         lsb_dist='centos'
     fi
-    __lsb_dist=${lsb_dist}
-    echo ${__lsb_dist}
+    echo ${lsb_dist}
 }
