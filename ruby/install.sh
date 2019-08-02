@@ -23,7 +23,7 @@ if ! Command::Exists rbenv; then
     brew::install rbenv
 
     # temporary export
-    export PATH="$HOME/.rbenv/bin:$PATH"
+    export PATH="$(brew --prefix rbenv)/bin:$PATH"
 
     # make cache
     mkdir -p "$(rbenv root)"/cache

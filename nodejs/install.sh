@@ -17,7 +17,7 @@ if ! Command::Exists nodenv; then
     brew::install nodenv node-build
 
     # temporary export
-    export PATH="$HOME/.nodenv/bin:$PATH"
+    export PATH="$(brew --prefix nodenv)/bin:$PATH"
     eval "$(nodenv init -)"
 fi
 

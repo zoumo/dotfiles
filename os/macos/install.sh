@@ -12,6 +12,7 @@ Log::AddOutput macos NOTE
 
 # Binaries
 binaries=(
+    make
     libxml2
     libxslt
     libiconv
