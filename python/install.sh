@@ -58,7 +58,7 @@ for VERSION in ${VERSIONS[@]}; do
             reg='^2\.'
             if [[ ${VERSION} =~ ${reg} ]]; then
                 # deprecated python2
-
+                subject=WARN Log "python2 is deprecated now"
                 # use openssl 1.0x for python2
                 # brew link --overwrite openssl
                 # export LD_LIBRARY_PATH="$(brew --prefix openssl)/lib:$(brew --prefix readline)/lib:$(brew --prefix zlib)/lib"
