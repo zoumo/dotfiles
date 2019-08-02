@@ -5,13 +5,14 @@ namespace python
 Log::AddOutput python NOTE
 
 GLOBAL_VERSION="3.7.3"
-VERSIONS=("2.7.16" ${GLOBAL_VERSION})
+VERSIONS=(${GLOBAL_VERSION})
 
-# if [[ $(OS::LSBDist) == "centos" ]]; then
-#     sudo yum install -y gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
-# elif [[ $(OS::LSBDist) == "debian" ]]; then
-#     sudo apt-get install -y make build-essential zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev python-openssl git
-# fi
+# prerequisite is needed
+if [[ $(OS::LSBDist) == "centos" ]]; then
+    sudo yum install -y gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
+elif [[ $(OS::LSBDist) == "debian" ]]; then
+    sudo apt-get install -y make build-essential zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev python-openssl git
+fi
 
 if os::macos; then
     brew::install readline sqlite xz zlib openssl
@@ -56,10 +57,12 @@ for VERSION in ${VERSIONS[@]}; do
         else
             reg='^2\.'
             if [[ ${VERSION} =~ ${reg} ]]; then
+                # deprecated python2
+
                 # use openssl 1.0x for python2
-                brew link --overwrite openssl
-                export LD_LIBRARY_PATH="$(brew --prefix openssl)/lib:$(brew --prefix readline)/lib:$(brew --prefix zlib)/lib"
-                export LIBRARY_PATH="$(brew --prefix openssl)/include:$(brew --prefix readline)/include:$(brew --prefix zlib)/include"
+                # brew link --overwrite openssl
+                # export LD_LIBRARY_PATH="$(brew --prefix openssl)/lib:$(brew --prefix readline)/lib:$(brew --prefix zlib)/lib"
+                # export LIBRARY_PATH="$(brew --prefix openssl)/include:$(brew --prefix readline)/include:$(brew --prefix zlib)/include"
             else
                 # use openssl 1.1 for python3
                 brew link --overwrite openssl@1.1
