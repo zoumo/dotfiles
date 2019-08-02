@@ -7,5 +7,3 @@ brew::install fasd
 
 ## fzf
 brew::install fzf
-# To install useful keybindings and fuzzy completion
-$(brew --prefix fzf)/install --all --no-update-rc

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# To install useful keybindings and fuzzy completion
+[[ -f ~/.fzf.zsh ]] || $(brew --prefix fzf)/install --all --no-update-rc
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
@@ -28,8 +31,8 @@ fo() {
 # This one differs from the above, by only showing the sub directories and not
 #  showing the directories within those.
 fd() {
-    DIR=$(find * -maxdepth 0 -type d -print 2>/dev/null | fzf-tmux) \
-        && cd "$DIR"
+    DIR=$(find * -maxdepth 0 -type d -print 2>/dev/null | fzf-tmux) &&
+        cd "$DIR"
 }
 
 # fh - repeat history
@@ -55,9 +58,9 @@ tm() {
 #   - Exit if there's no match (--exit-0)
 fs() {
     local session
-    session=$(tmux list-sessions -F "#{session_name}" \
-        | fzf --query="$1" --select-1 --exit-0) \
-        && tmux switch-client -t "$session"
+    session=$(tmux list-sessions -F "#{session_name}" |
+        fzf --query="$1" --select-1 --exit-0) &&
+        tmux switch-client -t "$session"
 }
 
 # ftpane - switch pane (@george-b)
@@ -75,16 +78,16 @@ ftpane() {
     if [[ $current_window -eq $target_window ]]; then
         tmux select-pane -t ${target_window}.${target_pane}
     else
-        tmux select-pane -t ${target_window}.${target_pane} \
-            && tmux select-window -t $target_window
+        tmux select-pane -t ${target_window}.${target_pane} &&
+            tmux select-window -t $target_window
     fi
 }
 
 # fshow - git commit browser
 fshow() {
     git log --graph --color=always \
-        --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" \
-        | fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+        --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+        fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
             --bind "ctrl-m:execute:
                 (grep -o '[a-f0-9]\{7\}' | head -1 |
                 xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
