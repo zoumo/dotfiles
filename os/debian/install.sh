@@ -20,7 +20,4 @@ binaries=(
 sudo apt-get update
 sudo apt-get install -y ${binaries[@]}
 
-# install zsh
-bash ${DOT_ROOT}/zsh/install-zsh.sh
-
 brew::setup

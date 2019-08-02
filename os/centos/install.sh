@@ -50,7 +50,4 @@ sudo yum groupinstall -y 'Development Tools'
 
 sudo yum install -y ${binaries[@]}
 
-# install zsh
-bash ${DOT_ROOT}/zsh/install-zsh.sh
-
 brew::setup
