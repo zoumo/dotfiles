@@ -25,12 +25,12 @@ if ! Command::Exists rbenv; then
     # temporary export
     export PATH="$(brew --prefix rbenv)/bin:$PATH"
 
+    mkdir -p "$(rbenv root)"/plugins
     # make cache
     mkdir -p "$(rbenv root)"/cache
 
-    if [[ ! -d "$(rbenv root)"/plugins/rbenv-china-mirror ]]; then
-        git clone https://github.com/andorchen/rbenv-china-mirror.git "$(rbenv root)"/plugins/rbenv-china-mirror
-    fi
+    git::clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+    git::clone https://github.com/andorchen/rbenv-china-mirror.git "$(rbenv root)"/plugins/rbenv-china-mirror
     eval "$(rbenv init -)"
 fi
 
