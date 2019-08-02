@@ -14,10 +14,14 @@ nodenv_from_src() {
 }
 
 if ! Command::Exists nodenv; then
-    brew::install nodenv node-build
+    brew::install nodenv
 
     # temporary export
     export PATH="$(brew --prefix nodenv)/bin:$PATH"
+
+    mkdir -p "$(nodenv root)"/plugins
+    git::clone https://github.com/nodenv/node-build.git "$(nodenv root)"/plugins/node-build
+
     eval "$(nodenv init -)"
 fi
 
