@@ -17,12 +17,7 @@ brew() {
         export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar"
         export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew"
     fi
-
-    if [[ "$(whoami)" == "root" ]]; then
-        su - linuxbrew bash -c "${HOMEBREW_PREFIX}/bin/brew $*"
-    else
-        ${HOMEBREW_PREFIX}/bin/brew $@
-    fi
+    sudo su - linuxbrew bash -c "${HOMEBREW_PREFIX}/bin/brew $*"
 }
 
 brew::mirror() {
