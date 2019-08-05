@@ -6,7 +6,6 @@ Log::AddOutput docker NOTE
 
 if Command::Exists docker; then
     Log "docker has already existed, skip it"
-    docker version
     exit 0
 fi
 
