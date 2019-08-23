@@ -11,7 +11,7 @@ eval $(brew shellenv)
 
 if [[ $(os_lsb_dist) == "macos" ]]; then
     export OPT_PATH="/usr/local/opt"
-    export PATH="${OPT_PATH}/coreutils/libexec/gnubin/:${OPT_PATH}/make/libexec/gnubin:${PATH}"
+    export PATH="${OPT_PATH}/coreutils/libexec/gnubin/:${OPT_PATH}/gnu-sed/libexec/gnubin/:${OPT_PATH}/make/libexec/gnubin:${PATH}"
     export MANPATH="${OPT_PATH}/coreutils/libexec/gnuman:${MANPATH}"
     export JAVA_HOME=$(/usr/libexec/java_home)
 fi

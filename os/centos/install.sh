@@ -28,6 +28,7 @@ binaries=(
     file
     perl
     yodl
+    gnu-sed
 )
 
 # EPEL(http://fedoraproject.org/wiki/EPEL) 是由 Fedora 社区打造，
