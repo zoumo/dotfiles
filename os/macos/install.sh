@@ -42,7 +42,8 @@ binaries=(
 
 # Apps
 apps=(
-    scroll-reverser # 可以分别鼠标和触控板滚动方向
+    # scroll-reverser # 可以分别鼠标和触控板滚动方向
+    mos # 平滑你的鼠标滚动效果或单独设置滚动方向
     slate # 开源免费的桌面窗口控制调整工具
     # qlcolorcode
     # qlmarkdown
