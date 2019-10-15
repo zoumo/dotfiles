@@ -42,13 +42,17 @@ binaries=(
 
 # Apps
 apps=(
-    # scroll-reverser # 可以分别鼠标和触控板滚动方向
     mos # 平滑你的鼠标滚动效果或单独设置滚动方向
-    slate # 开源免费的桌面窗口控制调整工具
+    hammerspoon # mac 自动化工具，使用 lua 脚本实现各种功能
+    ezip # 免费的解压软件
+    iina # 播放器
+    # xld # 音频转化
+    # the-unarchiver # 免费的解压软件
+    # scroll-reverser # 可以分别鼠标和触控板滚动方向
+    # slate # 开源免费的桌面窗口控制调整工具
     # qlcolorcode
     # qlmarkdown
     # qlstephen
-    the-unarchiver # 免费的解压软件
     # sequel-pro  # mysql客户端
     # sourcetree  # git 管理
     # movist  # 播放器
