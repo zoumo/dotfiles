@@ -1,13 +1,11 @@
 #!/bin/bash
-source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
+
+PKG_PATH="$(cd "$(dirname ${BASH_SOURCE})" && pwd -P)"
+source ${PKG_PATH}/../../../framework/oo-bootstrap.sh
 
 namespace tmux
 Log::AddOutput tmux NOTE
 
-if [[ ${DOT_MODE:-} == "mini" ]]; then
-    Log "skipping tmux installation in mini mode"
-    exit 0
-fi
 cd ${DOT_PLUGINS}
 
 VERSION=2.7
@@ -30,14 +28,15 @@ fi
 git::clone https://github.com/gpakosz/.tmux.git ${DOT_PLUGINS}/tmux
 ln -sf ${DOT_PLUGINS}/tmux/.tmux.conf ${HOME}/.tmux.conf
 # link tmux local
-ln -sf ${DOT_ROOT}/tmux/.tmux.conf.local ${HOME}/.tmux.conf.local
+ln -sf ${PKG_PATH}/.tmux.conf.local ${HOME}/.tmux.conf.local
 
 if Command::Exists gem; then
     if ! Command::Exists tmuxinator; then
         gem install tmuxinator
     fi
     mkdir -p ${HOME}/.tmuxinator
-    ln -sf ${DOT_ROOT}/tmux/zoumo.yaml ${HOME}/.tmuxinator/zoumo.yml
+
+    ln -sf ${PKG_PATH}/zoumo.yaml ${HOME}/.tmuxinator/zoumo.yml
 fi
 
 exit 0

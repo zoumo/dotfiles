@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
+PKG_PATH="$(cd "$(dirname ${BASH_SOURCE})" && pwd -P)"
+source ${PKG_PATH}/../../../framework/oo-bootstrap.sh
 
 namespace vim
 Log::AddOutput vim ERROR
@@ -67,5 +68,5 @@ fi
 curl -sLf https://spacevim.org/install.sh | bash
 
 mkdir -p ${HOME}/.SpaceVim.d/autoload
-ln -sf ${DOT_ROOT}/vim/init.toml ${HOME}/.SpaceVim.d/init.toml
-ln -sf ${DOT_ROOT}/vim/customize.vim ${HOME}/.SpaceVim.d/autoload/customize.vim
+ln -sf ${PKG_PATH}/init.toml ${HOME}/.SpaceVim.d/init.toml
+ln -sf ${PKG_PATH}/customize.vim ${HOME}/.SpaceVim.d/autoload/customize.vim
