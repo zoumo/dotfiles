@@ -1,5 +1,5 @@
 #!/bin/bash
-source "$(dirname ${BASH_SOURCE})"/../framework/oo-bootstrap.sh
+source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 
 brew::install zsh
 zsh_bin="$(brew --prefix)/bin/zsh"

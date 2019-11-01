@@ -1,8 +1,13 @@
 #!/bin/bash
-source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
+source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 
 namespace protobuf
 Log::AddOutput protobuf NOTE
+
+if [[ ${DOT_MODE:-} == "mini" ]]; then
+    Log "skipping protobuf installation in mini mode"
+    exit 0
+fi
 
 brew::install protobuf
 

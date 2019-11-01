@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
+source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 
 cd ${DOT_PLUGINS}
 

@@ -62,14 +62,11 @@ install_dotfiles() {
 install_ohmyzsh
 install_dotfiles
 
-target=${1:-all}
+export DOT_MODE=${1:-full}
+
 try
 {
-    if [[ ${target} == "mini" ]]; then
-        bash ./script/mini
-    else
-        bash ./script/dot
-    fi
+    bash ./script/dot
 }
 catch
 {

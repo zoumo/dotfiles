@@ -6,10 +6,12 @@ namespace lib/util
 Log::AddOutput lib/util STATUS
 
 util::find_installer() {
+    local parent=${1}
     declare -a result
     index=1
-    for dir in $(ls); do
-        if [[ -d $dir && -e $dir/install.sh ]]; then
+    for dir in $(ls ${parent}); do
+        local fullDir=${parent}/${dir}
+        if [[ -d $fullDir && -e $fullDir/install.sh ]]; then
             result[$index]=$dir
             index=$(($index + 1))
         fi

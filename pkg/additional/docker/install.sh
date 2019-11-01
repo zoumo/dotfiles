@@ -1,8 +1,13 @@
 #!/bin/bash
-source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
+source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 
 namespace docker
 Log::AddOutput docker NOTE
+
+if [[ ${DOT_MODE:-} == "mini" ]]; then
+    Log "skipping docker installation in mini mode"
+    exit 0
+fi
 
 if Command::Exists docker; then
     Log "docker has already existed, skip it"

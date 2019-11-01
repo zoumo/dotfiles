@@ -13,12 +13,18 @@ Log::AddOutput bootstrap NOTE
 
 cd ${DOT_ROOT}
 
-# do minimize installation 
+Log "Bootstrap on ${DOT_MODE} mode"
+
+# prepare the operating system
 Log "preparing the operating system"
 bash ./os/prepare.sh
 Log "The operating system is ready"
 
-installers=($(util::find_installer | tr " " "\n"))
+basic="${DOT_ROOT}/pkg/basic"
+additional="${DOT_ROOT}/pkg/additional"
+
+# install basic requirements pkg
+installers=($(util::find_installer ${basic} | tr " " "\n"))
 
 lang=("python ruby go")
 
@@ -26,7 +32,7 @@ lang=("python ruby go")
 for installer in ${installers[@]}; do
     if [[ ${lang[@]} =~ ${installer} ]]; then
         Log "${installer} installing"
-        bash $HOME/.dotfiles/${installer}/install.sh
+        bash ${basic}/${installer}/install.sh
         Log "${installer} installation is complete"
     fi
 done
@@ -38,8 +44,19 @@ for installer in ${installers[@]}; do
         continue
     fi
     Log "${installer} installing"
-    bash $HOME/.dotfiles/${installer}/install.sh
+    bash ${basic}/${installer}/install.sh
     Log "${installer} installation is complete"
 done
+
+# install additional pkg
+if [[ ${DOT_MODE} != "mini" ]]; then
+    installers=($(util::find_installer ${additional} | tr " " "\n"))
+    for installer in ${installers[@]}; do
+        Log "${installer} installing"
+        bash ${additional}/${installer}/install.sh
+        Log "${installer} installation is complete"
+    done
+
+fi
 
 cd -

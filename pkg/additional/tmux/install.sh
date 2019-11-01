@@ -1,7 +1,13 @@
 #!/bin/bash
+source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 
-source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
+namespace tmux
+Log::AddOutput tmux NOTE
 
+if [[ ${DOT_MODE:-} == "mini" ]]; then
+    Log "skipping tmux installation in mini mode"
+    exit 0
+fi
 cd ${DOT_PLUGINS}
 
 VERSION=2.7

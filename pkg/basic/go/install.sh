@@ -1,5 +1,5 @@
 #!/bin/bash
-source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
+source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 
 namespace golang
 Log::AddOutput golang NOTE

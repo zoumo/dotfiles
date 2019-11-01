@@ -1,6 +1,14 @@
 #!/bin/bash
 
-source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
+source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
+
+namespace ruby
+Log::AddOutput protobuf NOTE
+
+if [[ ${DOT_MODE:-} == "mini" ]]; then
+    Log "skipping ruby installation in mini mode"
+    exit 0
+fi
 
 VERSION="2.6.3"
 

@@ -1,8 +1,13 @@
 #!/bin/bash
-source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
+source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 
 namespace nodejs
 Log::AddOutput nodejs NOTE
+
+if [[ ${DOT_MODE:-} == "mini" ]]; then
+    Log "skipping nodejs installation in mini mode"
+    exit 0
+fi
 
 VERSION="11.5.0"
 
