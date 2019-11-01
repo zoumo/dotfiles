@@ -20,7 +20,7 @@ else
 
     sudo systemctl start docker
     # Configure Docker to start on boot
-    sudo systemctl enable docke
+    sudo systemctl enable docker
 fi
 
 # if [[ $(OS::LSBDist) == "centos" ]]; then
