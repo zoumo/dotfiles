@@ -40,8 +40,8 @@ brew::setup() {
     elif [[ ! -d /home/linuxbrew/.linuxbrew ]]; then
         HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-'/home/linuxbrew/.linuxbrew'}"
 
-        sudo useradd -m -s /bin/bash linuxbrew
-        sudo echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+        sudo id -u linuxbrew >/dev/null 2>&1 || sudo useradd -m -s /bin/bash linuxbrew
+        sudo grep -q "linuxbrew ALL" /etc/sudoers || sudo bash -c "echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers"
 
         if [[ "$(whoami)" != "root" ]]; then
             # add current user to group linuxbrew
@@ -49,11 +49,11 @@ brew::setup() {
         fi
 
         sudo mkdir -p /home/linuxbrew/.linuxbrew
-        git clone https://github.com/Homebrew/brew.git /home/linuxbrew/.linuxbrew/Homebrew
+        [[ -d /home/linuxbrew/.linuxbrew/Homebrew ]] || sudo git clone https://github.com/Homebrew/brew.git /home/linuxbrew/.linuxbrew/Homebrew
 
         cd /home/linuxbrew/.linuxbrew
         sudo mkdir -p bin etc include lib opt sbin share var/homebrew/linked Cellar
-        sudo ln -s ../Homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/
+        sudo ln -sf ../Homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/
 
         # change owner
         sudo chown -R linuxbrew: /home/linuxbrew/.linuxbrew
