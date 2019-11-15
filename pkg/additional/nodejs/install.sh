@@ -21,8 +21,6 @@ if ! Command::Exists nodenv; then
 
     mkdir -p "$(nodenv root)"/plugins
     git::clone https://github.com/nodenv/node-build.git "$(nodenv root)"/plugins/node-build
-
-    eval "$(nodenv init -)"
 fi
 
 if [[ ! $(nodenv versions | grep ${VERSION}) ]]; then
@@ -31,6 +29,8 @@ if [[ ! $(nodenv versions | grep ${VERSION}) ]]; then
 fi
 
 nodenv global ${VERSION}
+Log "nodenv versions:"
+nodenv versions
 
 # install yvm
 # curl -fsSL https://raw.githubusercontent.com/tophat/yvm/master/scripts/install.sh | bash
