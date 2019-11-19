@@ -76,11 +76,12 @@ catch
 Log "The installation is complete !!"
 
 TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
+zsh_bin=$(grep "/zsh$" /etc/shells | tail -1)
 if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
     # If this platform provides a "chsh" command (not Cygwin), do it, man!
     if Command::Exists chsh; then
         Log "Time to change your default shell to zsh!"
-        chsh -s $(grep "/zsh$" /etc/shells | tail -1)
+        sudo chsh -s ${zsh_bin} $(whoami)
         # Else, suggest the user do so manually.
     else
         Log "I can't change your shell automatically because this system does not have chsh."
@@ -88,5 +89,4 @@ if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
     fi
 fi
 
-zsh_bin=$(grep "/zsh$" /etc/shells | tail -1)
 [[ -n ${zsh_bin} ]] && ${zsh_bin}
