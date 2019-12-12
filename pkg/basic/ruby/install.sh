@@ -22,9 +22,9 @@ rbenv_from_src() {
 }
 
 if os::macos; then
-    brew::install libyaml libffi openssl
+    brew::install libyaml libffi openssl@1.1
 else
-    brew::install libffi openssl
+    brew::install libffi openssl@1.1
 fi
 
 if ! Command::Exists rbenv; then
@@ -43,7 +43,7 @@ if ! Command::Exists rbenv; then
 fi
 
 if [[ ! $(rbenv versions | grep $VERSION) ]]; then
-    RUBY_CONFIGURE_OPTS="--disable-install-doc --with-openssl-dir=$(brew --prefix openssl) --with-readline-dir=$(brew --prefix readline)" CC=clang rbenv install $VERSION -v
+    RUBY_CONFIGURE_OPTS="--disable-install-doc --with-openssl-dir=$(brew --prefix openssl@1.1) --with-readline-dir=$(brew --prefix readline)" CC=clang rbenv install $VERSION -v
 fi
 
 rbenv global $VERSION
