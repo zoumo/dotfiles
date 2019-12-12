@@ -16,18 +16,8 @@ fi
 
 if os::macos; then
     brew::install readline sqlite xz zlib openssl
-    # unlnk openss for installing openssl@1.1
-    brew unlink openssl
-    brew::install openssl@1.1
-    brew link --overwrite openssl
-    brew link --overwrite openssl@1.1
 else
     brew::install bzip2 libffi libxml2 libxmlsec1 readline sqlite xz zlib openssl
-    # unlnk openss for installing openssl@1.1
-    brew unlink openssl
-    brew::install openssl@1.1
-    brew link --overwrite openssl
-    brew link --overwrite openssl@1.1
 fi
 
 # install pyenv
@@ -65,9 +55,8 @@ for VERSION in ${VERSIONS[@]}; do
                 # export LIBRARY_PATH="$(brew --prefix openssl)/include:$(brew --prefix readline)/include:$(brew --prefix zlib)/include"
             else
                 # use openssl 1.1 for python3
-                brew link --overwrite openssl@1.1
-                export LD_LIBRARY_PATH="$(brew --prefix openssl@1.1)/lib:$(brew --prefix readline)/lib:$(brew --prefix zlib)/lib"
-                export LIBRARY_PATH="$(brew --prefix openssl@1.1)/include:$(brew --prefix readline)/include:$(brew --prefix zlib)/include"
+                export LD_LIBRARY_PATH="$(brew --prefix openssl)/lib:$(brew --prefix readline)/lib:$(brew --prefix zlib)/lib"
+                export LIBRARY_PATH="$(brew --prefix openssl)/include:$(brew --prefix readline)/include:$(brew --prefix zlib)/include"
             fi
             env CONFIGURE_OPTS="--enable-shared CC=clang" pyenv install ${VERSION} -v
         fi
