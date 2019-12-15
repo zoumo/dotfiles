@@ -29,7 +29,7 @@ if command_exists go; then
     export GOPATH="${HOME}/.golang"
     export GOROOT="$(brew --prefix go)/libexec"
     export GO15VENDOREXPERIMENT=1
-    export GO111MODULE=on
+    export GO111MODULE=auto
     export PATH="${GOPATH}/bin:${GOPATH}/bin/kubebuilder:${PATH}"
 fi
 
