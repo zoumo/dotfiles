@@ -18,6 +18,6 @@ binaries=(
 )
 
 sudo apt-get update
-sudo apt-get install -y ${binaries[@]}
+sudo apt-get install -y "${binaries[@]}"
 
 brew::setup

@@ -7,7 +7,7 @@ Log::AddOutput lib/git STATUS
 
 git::failed_checkout() {
     subject=ERROR Log "Failed to git clone $1"
-    exit -1
+    exit 1
 }
 
 git::clone() {

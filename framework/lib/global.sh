@@ -1,3 +1,4 @@
+#!/bin/bash
 import util/os
 import util/command
 import lib/brew
@@ -12,9 +13,9 @@ DOT_PLUGINS=${DOT_ROOT}/plugins
 DOT_CACHE=${HOME}/.cache/dotfiles
 
 if [[ ! -d ${DOT_PLUGINS} ]]; then
-    mkdir -p ${DOT_PLUGINS}
+    mkdir -p "${DOT_PLUGINS}"
 fi
 
 if [[ ! -d ${DOT_CACHE} ]]; then
-    mkdir -p ${DOT_CACHE}
+    mkdir -p "${DOT_CACHE}"
 fi

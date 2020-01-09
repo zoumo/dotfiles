@@ -7,10 +7,10 @@ Log::AddOutput nodejs NOTE
 VERSION="11.5.0"
 
 nodenv_from_src() {
-    git::clone https://github.com/nodenv/nodenv.git ${HOME}/.nodenv
-    cd ${HOME}/.nodenv && src/configure && make -C src
+    git::clone https://github.com/nodenv/nodenv.git "${HOME}/.nodenv"
+    cd "${HOME}/.nodenv && src/configure" && make -C src
     mkdir -p ${HOME}/.nodenv/plugins
-    git::clone https://github.com/nodenv/node-build.git ${HOME}/.nodenv/plugins/node-build
+    git::clone https://github.com/nodenv/node-build.git "${HOME}/.nodenv/plugins/node-build"
 }
 
 if ! Command::Exists nodenv; then

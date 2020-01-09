@@ -7,8 +7,8 @@ function switch() {
         file1=$1
         file2=$2
 
-        cp $file1 $file2.tmp
-        cp $file2 $file1
-        mv $file2.tmp $file2
+        cp "$file1" "$file2.tmp"
+        cp "$file2" "$file1"
+        mv "$file2.tmp" "$file2"
     fi
 }

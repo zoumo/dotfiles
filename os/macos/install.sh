@@ -42,10 +42,10 @@ binaries=(
 
 # Apps
 apps=(
-    mos # 平滑你的鼠标滚动效果或单独设置滚动方向
+    mos         # 平滑你的鼠标滚动效果或单独设置滚动方向
     hammerspoon # mac 自动化工具，使用 lua 脚本实现各种功能
-    ezip # 免费的解压软件
-    iina # 播放器
+    ezip        # 免费的解压软件
+    iina        # 播放器
     # xld # 音频转化
     # the-unarchiver # 免费的解压软件
     # scroll-reverser # 可以分别鼠标和触控板滚动方向
@@ -96,7 +96,7 @@ brew::install gnu-sed
 brew::install bash
 
 Log "Installing binaries..."
-brew::install ${binaries[@]}
+brew::install "${binaries[@]}"
 
 # echo "Installing fonts..."
 # brew cask install ${fonts[@]}
@@ -106,7 +106,7 @@ brew::install ${binaries[@]}
 
 # Install apps to /Applications
 Log "Installing apps..."
-brew::cask::install ${apps[@]}
+brew::cask::install "${apps[@]}"
 
 # clean things up
 brew cleanup

@@ -8,9 +8,9 @@ datetime() {
     fi
     if [[ ${time: -1} == "N" ]]; then
         # BSD date does not support N
-        echo ${time/%N/000000000}
+        echo "${time/%N/000000000}"
         return
     fi
 
-    echo ${time}
+    echo "${time}"
 }

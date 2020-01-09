@@ -2,7 +2,7 @@
 
 brew() {
     if [[ "$(uname -s)" == "Darwin" ]]; then
-        /usr/local/bin/brew $@
+        /usr/local/bin/brew "$@"
         return
     fi
 

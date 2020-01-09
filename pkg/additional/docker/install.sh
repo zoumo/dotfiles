@@ -16,7 +16,7 @@ else
 
     # Manage Docker as a non-root user
     [[ -n $(cat /etc/group | cut -f 1 -d : | grep docker) ]] || sudo groupadd docker
-    sudo usermod -aG docker $USER
+    sudo usermod -aG docker "$USER"
 
     sudo systemctl start docker
     # Configure Docker to start on boot

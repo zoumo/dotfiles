@@ -9,14 +9,14 @@ util::find_installer() {
     local parent=${1}
     declare -a result
     index=1
-    for dir in $(ls ${parent}); do
-        local fullDir=${parent}/${dir}
+    for fullDir in "${parent}"/*; do
+        local dir=${fullDir##${parent}/}
         if [[ -d $fullDir && -e $fullDir/install.sh ]]; then
             result[$index]=$dir
-            index=$(($index + 1))
+            index=$((index + 1))
         fi
     done
-    echo ${result[@]}
+    echo "${result[@]}"
 }
 
 os::macos() {
@@ -25,9 +25,9 @@ os::macos() {
 
 util::pip_install() {
     for item in "$@"; do
-        if [[ ! $(pip show $item) ]]; then
+        if [[ ! $(pip show "$item") ]]; then
             Log "pip installing $item"
-            pip install $item
+            pip install "$item"
         else
             Log "util::pip_install: $item already exists, skip it"
         fi
@@ -35,7 +35,7 @@ util::pip_install() {
 }
 
 util::pip_install_one() {
-    if [[ ! $(pip show $item) ]]; then
+    if [[ ! $(pip show "$item") ]]; then
         Log "pip installing $1"
         pip install "$@"
     else
@@ -46,13 +46,14 @@ util::pip_install_one() {
 util::link_file() {
     local src=$1 dst=$2
 
-    local overwrite= backup= skip=
-    local action=
+    local overwrite backup skip
+    local action
 
-    if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
+    if [ -f "$dst" ] || [ -d "$dst" ] || [ -L "$dst" ]; then
 
         if [[ "$overwrite_all" == "false" ]] && [[ "$backup_all" == "false" ]] && [[ "$skip_all" == "false" ]]; then
-            local currentSrc="$(readlink $dst)"
+            local currentSrc
+            currentSrc="$(readlink "$dst")"
 
             if [[ "$currentSrc" == "$src" ]]; then
                 skip=true

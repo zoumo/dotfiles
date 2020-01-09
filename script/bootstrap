@@ -40,7 +40,7 @@ Log::AddOutput bootstrap NOTE
 install_ohmyzsh() {
     Log 'Installing oh-my-zsh...'
     # sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    git::clone https://github.com/robbyrussell/oh-my-zsh.git ${HOME}/.oh-my-zsh
+    git::clone https://github.com/robbyrussell/oh-my-zsh.git "${HOME}/.oh-my-zsh"
 
     ZSH_CUSTOM="${HOME}/.oh-my-zsh/custom"
     git::clone https://github.com/denysdovhan/spaceship-prompt.git "${ZSH_CUSTOM}/themes/spaceship-prompt"
@@ -81,7 +81,7 @@ if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
     # If this platform provides a "chsh" command (not Cygwin), do it, man!
     if Command::Exists chsh; then
         Log "Time to change your default shell to zsh!"
-        sudo chsh -s ${zsh_bin} $(whoami)
+        sudo chsh -s "${zsh_bin}" "$(whoami)"
         # Else, suggest the user do so manually.
     else
         Log "I can't change your shell automatically because this system does not have chsh."

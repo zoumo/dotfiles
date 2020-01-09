@@ -12,5 +12,5 @@ function crt() {
         suffix=""
     fi
 
-    echo ${user}@${host}:${PWD}${suffix}
+    echo "${user}@${host}:${PWD}${suffix}"
 }

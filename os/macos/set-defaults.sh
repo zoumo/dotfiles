@@ -1,4 +1,4 @@
-# !/usr/bin/env bash
+#!/usr/bin/env bash
 #
 # Sets reasonable OS X defaults.
 #
@@ -47,6 +47,7 @@ sudo pmset -a autopoweroff 0
 # 		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
 # 		"/System/Library/CoreServices/Menu Extras/Volume.menu" \
 # 		"/System/Library/CoreServices/Menu Extras/User.menu"
+
 # done
 # defaults write com.apple.systemuiserver menuExtras -array \
 # 	"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
@@ -588,6 +589,7 @@ defaults write com.apple.dock showhidden -bool true
 # 	'{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
 # 	'{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
 # 	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
+
 # Load new settings before rebuilding the index
 # killall mds > /dev/null 2>&1
 # Make sure indexing is enabled for the main volume

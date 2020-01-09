@@ -8,7 +8,7 @@ Log::AddOutput lib/brew STATUS
 
 brew() {
     if [[ "$(OS::LSBDist)" == "macos" ]]; then
-        /usr/local/bin/brew $@
+        /usr/local/bin/brew "$@"
         return
     fi
 
@@ -45,13 +45,13 @@ brew::setup() {
 
         if [[ "$(whoami)" != "root" ]]; then
             # add current user to group linuxbrew
-            [[ -n $(groups $USER | grep linuxbrew) ]] || sudo usermod -a -G linuxbrew $USER
+            groups "$USER" | grep -q linuxbrew || sudo usermod -a -G linuxbrew "$USER"
         fi
 
         sudo mkdir -p /home/linuxbrew/.linuxbrew
         [[ -d /home/linuxbrew/.linuxbrew/Homebrew ]] || sudo git clone https://github.com/Homebrew/brew.git /home/linuxbrew/.linuxbrew/Homebrew
 
-        cd /home/linuxbrew/.linuxbrew
+        cd /home/linuxbrew/.linuxbrew || exit
         sudo mkdir -p bin etc include lib opt sbin share var/homebrew/linked Cellar
         sudo ln -sf ../Homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/
 
@@ -65,11 +65,11 @@ brew::setup() {
 }
 
 brew::install() {
-    local brew_list=($(brew list))
+    brew_list=($(brew list -1))
     for item in "$@"; do
-        if ! Array::Contains $item ${brew_list[@]}; then
+        if ! Array::Contains "$item" "${brew_list[@]}"; then
             Log "brew installing $item"
-            brew install $item
+            brew install "$item"
         else
             Log "brew::install: $item already exists, skip it"
         fi
@@ -77,19 +77,21 @@ brew::install() {
 }
 
 brew::install_one() {
-    if [[ ! $(brew list | grep -e "^$1$") ]]; then
+    brew_list=($(brew list -1))
+    if Array::Contains "${1}" "${brew_list[@]}"; then
+        Log "brew::install: $1 already exists, skip it"
+    else
         Log "brew installing $1"
         brew install "$@"
-    else
-        Log "brew::install: $1 already exists, skip it"
     fi
 }
 
 brew::cask::install() {
-    if [[ ! $(brew cask list | grep -e "^$1$") ]]; then
+    brew_list=($(brew cask list -1))
+    if Array::Contains "${1}" "${brew_list[@]}"; then
+        Log "brew::cask::install: $1 already exists, skip it"
+    else
         Log "brew installing $1"
         brew cask install --appdir="/Applications" "$@"
-    else
-        Log "brew::cask::install: $1 already exists, skip it"
     fi
 }

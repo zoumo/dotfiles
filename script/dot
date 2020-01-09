@@ -6,12 +6,14 @@
 # to make sure you're on the latest and greatest.
 
 source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
+import Array/Contains
+
 # enable basic logging for this file by declaring a namespace
 namespace bootstrap
 # make the Log method direct everything in the namespace 'myApp' to the log handler called DEBUG
 Log::AddOutput bootstrap NOTE
 
-cd ${DOT_ROOT}
+cd "${DOT_ROOT}" || exit 1
 
 Log "Bootstrap on ${DOT_MODE} mode"
 
@@ -26,34 +28,36 @@ additional="${DOT_ROOT}/pkg/additional"
 # install basic requirements pkg
 installers=($(util::find_installer ${basic} | tr " " "\n"))
 
-lang=("python ruby go")
+Log ">>> installers ${installers[*]}"
+
+langs=("python ruby go")
 
 # insatll language support
-for installer in ${installers[@]}; do
-    if [[ ${lang[@]} =~ ${installer} ]]; then
+for installer in "${installers[@]}"; do
+    if Array::Contains "${installer}" "${langs[@]}"; then
         Log "${installer} installing"
-        bash ${basic}/${installer}/install.sh
+        bash "${basic}/${installer}/install.sh"
         Log "${installer} installation is complete"
     fi
 done
 
 # install others
-for installer in ${installers[@]}; do
-    if [[ ${lang[@]} =~ ${installer} ]]; then
-        # skip os and python
+for installer in "${installers[@]}"; do
+    if Array::Contains "${installer}" "${langs[@]}"; then
         continue
     fi
     Log "${installer} installing"
-    bash ${basic}/${installer}/install.sh
+    bash "${basic}/${installer}/install.sh"
     Log "${installer} installation is complete"
 done
 
 # install additional pkg
 if [[ ${DOT_MODE} != "mini" ]]; then
     installers=($(util::find_installer ${additional} | tr " " "\n"))
-    for installer in ${installers[@]}; do
+
+    for installer in "${installers[@]}"; do
         Log "${installer} installing"
-        bash ${additional}/${installer}/install.sh
+        bash "${additional}/${installer}/install.sh"
         Log "${installer} installation is complete"
     done
 
