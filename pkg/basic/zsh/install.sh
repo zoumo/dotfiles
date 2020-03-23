@@ -13,7 +13,7 @@ zsh_from_source() {
         ZSH_VERSION=$(zsh --version | cut -d " " -f 2)
     fi
 
-    if [[ ${ZSH_VERSION} == "" ]] || (($(semver::compare ${ZSH_VERSION} ${MIN_ZSH_VERSION}) == -1)); then
+    if [[ ${ZSH_VERSION} == "" ]] || (($(semver::compare_version ${ZSH_VERSION} ${MIN_ZSH_VERSION}) == -1)); then
         cd ${DOT_CACHE}
         target_file="zsh-${MIN_ZSH_VERSION}.tar.gz"
         target_path="zsh-zsh-${MIN_ZSH_VERSION}"

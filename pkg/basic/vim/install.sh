@@ -27,7 +27,7 @@ fi
 #     if Command::Exists vim; then
 #         VIM_VERSION="$(vim --version | head -1 | cut -f 5 -d " ")"
 #     fi
-#     if [[ ${VIM_VERSION} == "" ]] || (($(semver::compare ${VIM_VERSION} ${MINIMUM_VIM_VERSION}) == -1)); then
+#     if [[ ${VIM_VERSION} == "" ]] || (($(semver::compare_version ${VIM_VERSION} ${MINIMUM_VIM_VERSION}) == -1)); then
 #         # ruby  - rbenv
 #         if ! Command::Exists rbenv; then
 #             Log "ruby is required in compiling vim, please install rbenv firstly"
