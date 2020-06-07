@@ -41,6 +41,8 @@ brew::setup() {
         HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-'/home/linuxbrew/.linuxbrew'}"
 
         sudo id -u linuxbrew >/dev/null 2>&1 || sudo useradd -m -s /bin/bash linuxbrew
+        # add permission for normal user
+        sudo chmod 0755 /home/linuxbrew
         sudo grep -q "linuxbrew ALL" /etc/sudoers || sudo bash -c "echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers"
 
         if [[ "$(whoami)" != "root" ]]; then
