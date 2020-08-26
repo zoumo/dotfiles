@@ -4,7 +4,7 @@ source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 namespace python
 Log::AddOutput python NOTE
 
-GLOBAL_VERSION="3.7.3"
+GLOBAL_VERSION="3.8.5"
 VERSIONS=(${GLOBAL_VERSION})
 
 # prerequisite is needed
