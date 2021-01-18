@@ -26,7 +26,7 @@ export CXX=/usr/bin/clang++
 # Golang
 # ====================================================================
 if command_exists go; then
-    export GOPATH="${HOME}/.golang"
+    export GOPATH="${HOME}/golang"
     export GOROOT="$(brew --prefix go)/libexec"
     export GO15VENDOREXPERIMENT=1
     export GO111MODULE=auto
