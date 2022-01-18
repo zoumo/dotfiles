@@ -1,10 +1,13 @@
 #!/bin/bash
 import util/log
 import Array/Contains
+import lib/semver
 # enable basic logging for this file by declaring a namespace
 namespace lib/brew
 # make the Log method direct everything in the namespace 'myApp' to the log handler called DEBUG
 Log::AddOutput lib/brew STATUS
+
+readonly BREW_MIN_VERSION="3.3.6"
 
 brew() {
     if [[ "$(OS::LSBDist)" == "macos" ]]; then
@@ -18,6 +21,16 @@ brew() {
         export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew"
     fi
     sudo su - linuxbrew bash -c "${HOMEBREW_PREFIX}/bin/brew $*"
+}
+
+brew::verify() {
+    brew_version=$(brew --version | head -1 | cut -d " " -f 2)
+    if (($(semver::compare_version "${brew_version}" "${BREW_MIN_VERSION}") == -1)); then
+        Log "brew version is too old, please use brew update to upgrade brew"
+        # brew version is less than min version
+        return 1
+    fi
+    return 0
 }
 
 brew::mirror() {
@@ -67,7 +80,10 @@ brew::setup() {
 }
 
 brew::install() {
-    brew_list=($(brew list -1))
+    if ! brew::verify; then
+        return
+    fi
+    brew_list=($(brew list --formula -1))
     for item in "$@"; do
         if ! Array::Contains "$item" "${brew_list[@]}"; then
             Log "brew installing $item"
@@ -79,7 +95,10 @@ brew::install() {
 }
 
 brew::install_one() {
-    brew_list=($(brew list -1))
+    if ! brew::verify; then
+        return
+    fi
+    brew_list=($(brew list --formula -1))
     if Array::Contains "${1}" "${brew_list[@]}"; then
         Log "brew::install: $1 already exists, skip it"
     else
@@ -89,11 +108,14 @@ brew::install_one() {
 }
 
 brew::cask::install() {
-    brew_list=($(brew cask list -1))
+    if ! brew::verify; then
+        return
+    fi
+    brew_list=($(brew list --cask -1))
     if Array::Contains "${1}" "${brew_list[@]}"; then
         Log "brew::cask::install: $1 already exists, skip it"
     else
         Log "brew installing $1"
-        brew cask install --appdir="/Applications" "$@"
+        brew install --cask --appdir="/Applications" "$@"
     fi
 }
