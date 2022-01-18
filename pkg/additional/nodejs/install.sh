@@ -4,7 +4,7 @@ source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 namespace nodejs
 Log::AddOutput nodejs NOTE
 
-VERSION="11.5.0"
+VERSION="16.13.2"
 
 nodenv_from_src() {
     git::clone https://github.com/nodenv/nodenv.git "${HOME}/.nodenv"
