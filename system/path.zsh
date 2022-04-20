@@ -25,13 +25,7 @@ export CXX=/usr/bin/clang++
 # ====================================================================
 # Golang
 # ====================================================================
-if command_exists go; then
-    export GOPATH="${HOME}/golang"
-    export GOROOT="$(brew --prefix go)/libexec"
-    export GO15VENDOREXPERIMENT=1
-    export GO111MODULE=on
-    export PATH="${GOPATH}/bin:${GOPATH}/bin/kubebuilder:${PATH}"
-fi
+# golang path moved to basic/go/goenv.zsh
 
 # ====================================================================
 # Rust
