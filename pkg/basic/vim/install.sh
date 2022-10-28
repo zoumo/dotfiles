@@ -16,7 +16,8 @@ if os::macos; then
     # replace vim with macvim
     pyenv local system
     # use python3
-    brew::install python macvim
+    brew::install python
+    brew::cask::install macvim
     pyenv local --unset
 else
     brew::install vim
