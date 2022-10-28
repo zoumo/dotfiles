@@ -36,6 +36,38 @@ semver::validate_version() {
     fi
 }
 
+function is_nat {
+    [[ "$1" =~ ^($NAT)$ ]]
+}
+
+function is_null {
+    [ -z "$1" ]
+}
+
+function order_nat {
+    [ "$1" -lt "$2" ] && {
+        echo -1
+        return
+    }
+    [ "$1" -gt "$2" ] && {
+        echo 1
+        return
+    }
+    echo 0
+}
+
+function order_string {
+    [[ $1 < $2 ]] && {
+        echo -1
+        return
+    }
+    [[ $1 > $2 ]] && {
+        echo 1
+        return
+    }
+    echo 0
+}
+
 # given two (named) arrays containing NAT and/or ALPHANUM fields, compare them
 # one by one according to semver 2.0.0 spec. Return -1, 0, 1 if left array ($1)
 # is less-than, equal, or greater-than the right array ($2).  The longer array
@@ -62,33 +94,33 @@ semver::compare_fields() {
         left="${leftfield[$i]}"
         right="${rightfield[$i]}"
 
-        is-null "$left" && is-null "$right" && {
+        is_null "$left" && is_null "$right" && {
             echo 0
             return
         }
-        is-null "$left" && {
+        is_null "$left" && {
             echo -1
             return
         }
-        is-null "$right" && {
+        is_null "$right" && {
             echo 1
             return
         }
 
-        is-nat "$left" && is-nat "$right" && {
-            order=$(order-nat "$left" "$right")
+        is_nat "$left" && is_nat "$right" && {
+            order=$(order_nat "$left" "$right")
             continue
         }
-        is-nat "$left" && {
+        is_nat "$left" && {
             echo -1
             return
         }
-        is-nat "$right" && {
+        is_nat "$right" && {
             echo 1
             return
         }
         {
-            order=$(order-string "$left" "$right")
+            order=$(order_string "$left" "$right")
             continue
         }
     done
