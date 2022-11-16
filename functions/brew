@@ -11,5 +11,7 @@ brew() {
         export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar"
         export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew"
     fi
-    sudo su - linuxbrew bash -c "${HOMEBREW_PREFIX}/bin/brew $*"
+    # sudo use -E to preserve-env
+    # su use -p to preserve-env
+    sudo -E su -p - linuxbrew bash -c "${HOMEBREW_PREFIX}/bin/brew $*"
 }
