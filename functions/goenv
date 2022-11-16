@@ -30,16 +30,19 @@ goenv() {
         brew_go_version="go"
     fi
 
-    if [[ ${brew_go_version} == ${go_target} ]]; then
-        echo "brew go version is ${go_target} now"
-        return
+    if [[ "${go_target}" == "go@${go_latest}" ]]; then
+        go_target="go"
     fi
 
-    echo "switch brew go version to ${go_target}"
+    if [[ "${brew_go_version}" == "${go_target}" ]]; then
+        echo "brew go version is ${go_target} now"
+        echo "${go_target}" >"${HOME}/.brew_go_version"
+    else
+        echo "switch brew go version to ${go_target}"
+        brew unlink "${brew_go_version}"
+        brew link --force "${go_target}"
+        echo "${go_target}" >"${HOME}/.brew_go_version"
+        source "${HOME}/.zshrc"
+    fi
 
-    brew unlink "${brew_go_version}"
-    brew link --force "${go_target}"
-
-    echo "${go_target}" >"${HOME}/.brew_go_version"
-    source "${HOME}/.zshrc"
 }
