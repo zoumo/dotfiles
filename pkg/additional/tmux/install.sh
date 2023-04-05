@@ -30,6 +30,15 @@ ln -sf "${DOT_PLUGINS}/tmux/.tmux.conf" "${HOME}/.tmux.conf"
 # link tmux local
 ln -sf "${PKG_PATH}/.tmux.conf.local" "${HOME}/.tmux.conf.local"
 
+if ! Command::Exists rbenv; then
+    subject=ERROR Log "please install pyenv firstly"
+    exit 1
+fi
+
+# temporary export
+export PATH="$(brew --prefix rbenv)/bin:$PATH"
+eval "$(rbenv init -)"
+
 if Command::Exists gem; then
     if ! Command::Exists tmuxinator; then
         gem install tmuxinator

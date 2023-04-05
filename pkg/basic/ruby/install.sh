@@ -10,7 +10,7 @@ if [[ ${DOT_MODE:-} == "mini" ]]; then
     exit 0
 fi
 
-VERSION="2.6.3"
+VERSION="2.7.2"
 
 rbenv_from_src() {
     git::clone https://github.com/rbenv/rbenv.git $HOME/.rbenv

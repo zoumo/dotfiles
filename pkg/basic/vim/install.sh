@@ -13,6 +13,17 @@ MINIMUM_VIM_VERSION="8.0"
 # 安装依赖
 if os::macos; then
     brew::install ctags the_silver_searcher
+    if ! Command::Exists pyenv; then
+        if [[ ! -d ${HOME}/.pyenv ]]; then
+            subject=ERROR Log "please install pyenv firstly"
+            exit 1
+        fi
+        # temporary export
+        export PYENV_ROOT="${HOME}/.pyenv"
+        export PATH="${PYENV_ROOT}/bin:${PATH}"
+        eval "$(pyenv init -)"
+        eval "$(pyenv virtualenv-init -)"
+    fi
     # replace vim with macvim
     pyenv local system
     # use python3
