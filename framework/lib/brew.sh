@@ -11,7 +11,8 @@ readonly BREW_MIN_VERSION="3.3.6"
 
 brew() {
     if [[ "$(OS::LSBDist)" == "macos" ]]; then
-        /usr/local/bin/brew "$@"
+        HOMEBREW_PREFIX=${HOMEBREW_PREFIX:-"/opt/homebrew"}
+        "${HOMEBREW_PREFIX}"/bin/brew "$@"
         return
     fi
 
