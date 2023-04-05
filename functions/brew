@@ -2,7 +2,8 @@
 
 brew() {
     if [[ "$(uname -s)" == "Darwin" ]]; then
-        /usr/local/bin/brew "$@"
+        HOMEBREW_PREFIX=${HOMEBREW_PREFIX:-"/opt/homebrew"}
+        "${HOMEBREW_PREFIX}"/bin/brew "$@"
         return
     fi
 
