@@ -32,7 +32,7 @@ export SPACESHIP_GOLANG_SYMBOL="go:"
 # export SPACESHIP_GOLANG_COLOR="blue"
 
 # python
-export SPACESHIP_PYENV_SYMBOL="py:"
+export SPACESHIP_PYTHON_SYMBOL="py:"
 
 # nodejs
 export SPACESHIP_NODE_SYMBOL="node:"
