@@ -29,6 +29,7 @@ binaries=(
     cheat
     kubectx
     kube-ps1
+    watch
     # mysql
     # nginx
     # node
