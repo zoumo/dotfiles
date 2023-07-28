@@ -89,3 +89,8 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=243"
 
 # source "${OPT_PATH}/kube-ps1/share/kube-ps1.sh"
 # PS1='$(kube_ps1)'$PS1
+
+# ====================================================================
+# krew
+# ====================================================================
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

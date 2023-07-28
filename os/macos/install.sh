@@ -30,6 +30,7 @@ binaries=(
     kubectx
     kube-ps1
     watch
+    krew
     # mysql
     # nginx
     # node
