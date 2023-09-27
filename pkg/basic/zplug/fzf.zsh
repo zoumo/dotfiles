@@ -37,7 +37,7 @@ fd() {
 
 # fh - repeat history
 fh() {
-    print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed "s/ *[0-9]* *//" | sed "s/\* *//")
+    print -z "${$( ([ -n "$ZSH_NAME" ] && fc -ln 1 || history) | fzf +s --tac)}"
 }
 
 # tm - create new tmux session, or switch to existing one. Works from within tmux too. (@bag-man)
