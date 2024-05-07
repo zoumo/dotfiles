@@ -31,6 +31,9 @@ binaries=(
     kube-ps1
     watch
     krew
+    ynqa/tap/jnv # https://github.com/ynqa/jnv
+    difftastic   # https://github.com/Wilfred/difftastic
+    colordiff
     # mysql
     # nginx
     # node
@@ -48,9 +51,10 @@ apps=(
     hammerspoon # mac 自动化工具，使用 lua 脚本实现各种功能
     maczip      # 免费的解压软件
     iina        # 播放器
+    eazydict    # Translator
+    orbstack    # mac docker alternative
+    bleunlock   # bluetooth unlock
     # xld # 音频转化
-    # the-unarchiver # 免费的解压软件
-    # scroll-reverser # 可以分别鼠标和触控板滚动方向
     # slate # 开源免费的桌面窗口控制调整工具
     # qlcolorcode
     # qlmarkdown
