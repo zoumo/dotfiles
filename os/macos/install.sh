@@ -47,6 +47,7 @@ binaries=(
 
 # Apps
 apps=(
+    alacritty   # 一个快速、跨平台的GPU驱动终端
     mos         # 平滑你的鼠标滚动效果或单独设置滚动方向
     hammerspoon # mac 自动化工具，使用 lua 脚本实现各种功能
     maczip      # 免费的解压软件

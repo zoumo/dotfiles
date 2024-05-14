@@ -7,7 +7,7 @@ cd ${DOT_PLUGINS}
 git::clone https://github.com/nathanbuchar/atom-one-dark-terminal.git atom-one-dark-terminal
 
 if os::macos; then
-    open "atom-one-dark-terminal/scheme/iterm/One Dark.itermcolors"
+    # open "atom-one-dark-terminal/scheme/iterm/One Dark.itermcolors"
     open "atom-one-dark-terminal/scheme/terminal/One Dark.terminal"
 fi
 

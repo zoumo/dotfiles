@@ -14,7 +14,7 @@
   - [dotfiles](#dotfiles)
     - [Topical](#topical)
     - [Components](#components)
-    - [流程](#%E6%B5%81%E7%A8%8B)
+    - [流程](#流程)
   - [macOS](#macos)
     - [Homebrew packages](#homebrew-packages)
       - [Binaries](#binaries)
@@ -26,10 +26,8 @@
   - [Mackup](#mackup)
   - [alias](#alias)
   - [Issue](#issue)
-  - [TODO](#todo)
   - [Reference](#reference)
   - [Thanks](#thanks)
-  - [GitHub](#github)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -201,20 +199,20 @@ apps=(
 
 #### Binaries
 
-| name                                                         | info                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| dos2unix                                                     | 文档格式转换                                                 |
-| wget                                                         | wget 工具                                                    |
-| ctags                                                        | 方便代码阅读                                                 |
-| [grc](http://kassiopeia.juls.savba.sk/~garabik/software/grc/README.txt) | log 上色                                                     |
-| [git-flow](https://github.com/nvie/gitflow)                  | Git branch manage model                                      |
-| [tree](http://mama.indstate.edu/users/ice/tree/)             | 树状目录结构显示                                             |
-| [mackup](https://github.com/lra/mackup)                      | 同步应用程序配置                                             |
-| [z](https://github.com/rupa/z.git)                           | autojump                                                     |
-| tmux                                                         | tmux                                                         |
-| htop                                                         | 加强版 top                                                   |
+| name                                                                             | info                                                                  |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| dos2unix                                                                         | 文档格式转换                                                          |
+| wget                                                                             | wget 工具                                                             |
+| ctags                                                                            | 方便代码阅读                                                          |
+| [grc](http://kassiopeia.juls.savba.sk/~garabik/software/grc/README.txt)          | log 上色                                                              |
+| [git-flow](https://github.com/nvie/gitflow)                                      | Git branch manage model                                               |
+| [tree](http://mama.indstate.edu/users/ice/tree/)                                 | 树状目录结构显示                                                      |
+| [mackup](https://github.com/lra/mackup)                                          | 同步应用程序配置                                                      |
+| [z](https://github.com/rupa/z.git)                                               | autojump                                                              |
+| tmux                                                                             | tmux                                                                  |
+| htop                                                                             | 加强版 top                                                            |
 | [trash](http://hasseg.org/blog/post/406/trash-files-from-the-os-x-command-line/) | 模拟 Finder 的移到废纸篓功能, 在 alias 中对 rm 进行替换, 进行安全删除 |
-| [cheat](https://github.com/chrisallenlane/cheat)             | 命令示例 cheatsheets                                         |
+| [cheat](https://github.com/chrisallenlane/cheat)                                 | 命令示例 cheatsheets                                                  |
 
 #### Apps
 
@@ -230,50 +228,50 @@ apps=(
 
 以下是目前设定的配置：
 
-| setting                               | script                                   |
-| ------------------------------------- | ---------------------------------------- |
-| 关闭电源进入深度睡眠                            | `sudo pmset -a autopoweroff 0`           |
-| 加快窗口 resize 的速度(Cocoa applications)   | `defaults write NSGlobalDomain NSWindowResizeTime -float 0.001` |
-| 预设展开存储窗口(1)                           | `defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true` |
-| 预设展开存储窗口(2)                           | `defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true` |
-| 关闭“你确定要开启这个应用程序?"的询问窗口                | `defaults write com.apple.LaunchServices LSQuarantine -bool false` |
-| 加速进入睡眠模式                              | `sudo pmset -a hibernatemode 0`          |
-| 开启触控板轻触点击功能(1)                        | `defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true` |
-| 开启触控板轻触点击功能(2)                        | `defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1` |
-| 开启触控板轻触点击功能(3)                        | `defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1` |
-| 开启触控板/滑鼠右键菜单功能(1)                     | `defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true` |
-| 开启触控板/滑鼠右键菜单功能(2)                     | `defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode "TwoButton"` |
-| 开启触控板三指拖拽功能(1)                        | `defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerDragGesture -bool true` |
-| 开启触控板三指拖拽功能(2)                        | `defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true` |
-| 开启触控板四指下滑出现 app expose 功能(1)          | `defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0` |
-| 开启触控板四指下滑出现 app expose 功能(2)          | `defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 0` |
-| 开启触控板四指下滑出现 app expose 功能(3)          | `defaults write com.apple.dock showAppExposeGestureEnabled -int 1` |
-| 加快触控板/滑鼠的速度(1)                        | `defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3` |
-| 加快触控板/滑鼠的速度(2)                        | `defaults write NSGlobalDomain com.apple.mouse.scaling -int 3` |
-| 开启全部窗口組件支持键盘控制                        | `defaults write NSGlobalDomain AppleKeyboardUIMode -int 3` |
-| 关闭键盘按住的输入限制                           | `defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false` |
-| 加快键盘输入                                | `defaults write NSGlobalDomain KeyRepeat -int 0` |
-| 移除窗口截图的影子移除視窗截圖的影子                    | `defaults write com.apple.screencapture disable-shadow -bool true` |
-| 显示隐藏文件                                | `defaults write ~/Library/Preferences/com.apple.finder AppleShowAllFiles -bool true` |
-| 预设Finder起始位置为下载(1)                    | `defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true` |
-| 预设Finder起始位置为下载(2)                    | `defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true` |
-| 显示所有拓展名                               | `defaults write NSGlobalDomain AppleShowAllExtensions -bool true` |
-| 显示 Finder 状态栏                         | `defaults write com.apple.finder ShowStatusBar -bool true` |
-| 显示 Finder 路径栏                         | `defaults write com.apple.finder ShowPathbar -bool true` |
-| 允许框选 Finde Quick Look 的文字             | `defaults write com.apple.finder QLEnableTextSelection -bool true` |
-| 预设搜索的结果默认为当前的目录下                      | `defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"` |
-| 关闭更改拓展名的警告提示                          | `defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false` |
-| 开启资料夹的 spring loading 功能              | `defaults write NSGlobalDomain com.apple.springing.enabled -bool true` |
-| 开启 Dock 的 spring loading 功能           | `defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true` |
-| 移除 spring loading 的延迟                 | `defaults write NSGlobalDomain com.apple.springing.delay -float 0` |
-| 避免在 network volumes 底下建立 .DS_Store 档案 | `defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true` |
-| 使用 column view 作為 Finder 預設顯示選項       | `defaults write com.apple.finder FXPreferredViewStyle -string "clmv"` |
-| 将窗口最小化到应用程序图标                         | `defaults write com.apple.dock minimize-to-application -bool true` |
-| 在 Dock 中为打开的应用程序显示指示灯                 | `defaults write com.apple.dock show-process-indicators -bool true` |
-| 关闭 Dashboard                          | `defaults write com.apple.dashboard mcx-disabled -bool true` |
-| 将 Dashboard 从多重桌面之中移除                 | `defaults write com.apple.dock dashboard-in-overlay -bool true` |
-| 自动显示和隐藏dock                           | `defaults write com.apple.dock autohide -bool true` |
-| 将隐藏的应用程序 Dock 图标用半透明显示                | `defaults write com.apple.dock showhidden -bool true` |
+| setting                                        | script                                                                                                         |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| 关闭电源进入深度睡眠                           | `sudo pmset -a autopoweroff 0`                                                                                 |
+| 加快窗口 resize 的速度(Cocoa applications)     | `defaults write NSGlobalDomain NSWindowResizeTime -float 0.001`                                                |
+| 预设展开存储窗口(1)                            | `defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true`                                  |
+| 预设展开存储窗口(2)                            | `defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true`                                 |
+| 关闭“你确定要开启这个应用程序?"的询问窗口      | `defaults write com.apple.LaunchServices LSQuarantine -bool false`                                             |
+| 加速进入睡眠模式                               | `sudo pmset -a hibernatemode 0`                                                                                |
+| 开启触控板轻触点击功能(1)                      | `defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true`                        |
+| 开启触控板轻触点击功能(2)                      | `defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1`                                |
+| 开启触控板轻触点击功能(3)                      | `defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1`                                             |
+| 开启触控板/滑鼠右键菜单功能(1)                 | `defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true`              |
+| 开启触控板/滑鼠右键菜单功能(2)                 | `defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode "TwoButton"`                   |
+| 开启触控板三指拖拽功能(1)                      | `defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerDragGesture -bool true`              |
+| 开启触控板三指拖拽功能(2)                      | `defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true`         |
+| 开启触控板四指下滑出现 app expose 功能(1)      | `defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0`                  |
+| 开启触控板四指下滑出现 app expose 功能(2)      | `defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 0` |
+| 开启触控板四指下滑出现 app expose 功能(3)      | `defaults write com.apple.dock showAppExposeGestureEnabled -int 1`                                             |
+| 加快触控板/滑鼠的速度(1)                       | `defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3`                                              |
+| 加快触控板/滑鼠的速度(2)                       | `defaults write NSGlobalDomain com.apple.mouse.scaling -int 3`                                                 |
+| 开启全部窗口組件支持键盘控制                   | `defaults write NSGlobalDomain AppleKeyboardUIMode -int 3`                                                     |
+| 关闭键盘按住的输入限制                         | `defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false`                                           |
+| 加快键盘输入                                   | `defaults write NSGlobalDomain KeyRepeat -int 0`                                                               |
+| 移除窗口截图的影子移除視窗截圖的影子           | `defaults write com.apple.screencapture disable-shadow -bool true`                                             |
+| 显示隐藏文件                                   | `defaults write ~/Library/Preferences/com.apple.finder AppleShowAllFiles -bool true`                           |
+| 预设Finder起始位置为下载(1)                    | `defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true`                                  |
+| 预设Finder起始位置为下载(2)                    | `defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true`                                 |
+| 显示所有拓展名                                 | `defaults write NSGlobalDomain AppleShowAllExtensions -bool true`                                              |
+| 显示 Finder 状态栏                             | `defaults write com.apple.finder ShowStatusBar -bool true`                                                     |
+| 显示 Finder 路径栏                             | `defaults write com.apple.finder ShowPathbar -bool true`                                                       |
+| 允许框选 Finde Quick Look 的文字               | `defaults write com.apple.finder QLEnableTextSelection -bool true`                                             |
+| 预设搜索的结果默认为当前的目录下               | `defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"`                                          |
+| 关闭更改拓展名的警告提示                       | `defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false`                                   |
+| 开启资料夹的 spring loading 功能               | `defaults write NSGlobalDomain com.apple.springing.enabled -bool true`                                         |
+| 开启 Dock 的 spring loading 功能               | `defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true`                             |
+| 移除 spring loading 的延迟                     | `defaults write NSGlobalDomain com.apple.springing.delay -float 0`                                             |
+| 避免在 network volumes 底下建立 .DS_Store 档案 | `defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true`                                 |
+| 使用 column view 作為 Finder 預設顯示選項      | `defaults write com.apple.finder FXPreferredViewStyle -string "clmv"`                                          |
+| 将窗口最小化到应用程序图标                     | `defaults write com.apple.dock minimize-to-application -bool true`                                             |
+| 在 Dock 中为打开的应用程序显示指示灯           | `defaults write com.apple.dock show-process-indicators -bool true`                                             |
+| 关闭 Dashboard                                 | `defaults write com.apple.dashboard mcx-disabled -bool true`                                                   |
+| 将 Dashboard 从多重桌面之中移除                | `defaults write com.apple.dock dashboard-in-overlay -bool true`                                                |
+| 自动显示和隐藏dock                             | `defaults write com.apple.dock autohide -bool true`                                                            |
+| 将隐藏的应用程序 Dock 图标用半透明显示         | `defaults write com.apple.dock showhidden -bool true`                                                          |
 
 ## Beautify
 
@@ -393,20 +391,20 @@ alias rm="trash" # 这个需要brew install trash
 
 其他的一些软件按需安装
 
-| name                                              | 说明                                         |
-| ------------------------------------------------- | -------------------------------------------- |
-| [google-chrome](www.google.com/chrome)            | Google 浏览器                                |
-| [Iterm2](http://iterm2.com/)                      | 加强版终端                                   |
-| [beyond-compare](http://www.scootersoftware.com/) | Beyond Compare 是一个优秀的文件/目录对比工具 |
-| [VSCode](https://code.visualstudio.com/)          | 我最喜欢的 Editor                            |
-| Alfred                                            | workflow 神器                                |
-| Dash                                              | API 查询神器                                 |
-| Airmail2                                          | 漂亮的邮件客户端                             |
-| MindNode Pro                                      | Simple and Beautiful Visual Brainstorming    |
-| sequel-pro                                        | mysql client                                 |
-| [Clipy](https://github.com/Clipy/Clipy)           | Clipboard extension app for macOS            |
-| [Charles](http://www.charlesproxy.com/)           | 抓包工具                                     |
-| movist                                            | 播放器                                       |
+| name                                                | 说明                                         |
+| --------------------------------------------------- | -------------------------------------------- |
+| [google-chrome](www.google.com/chrome)              | Google 浏览器                                |
+| [Alacritty](https://github.com/alacritty/alacritty) | 一个快速、跨平台的 GPU 驱动终端              |
+| [beyond-compare](http://www.scootersoftware.com/)   | Beyond Compare 是一个优秀的文件/目录对比工具 |
+| [VSCode](https://code.visualstudio.com/)            | 我最喜欢的 Editor                            |
+| Alfred                                              | workflow 神器                                |
+| Dash                                                | API 查询神器                                 |
+| Airmail2                                            | 漂亮的邮件客户端                             |
+| MindNode Pro                                        | Simple and Beautiful Visual Brainstorming    |
+| sequel-pro                                          | mysql client                                 |
+| [Clipy](https://github.com/Clipy/Clipy)             | Clipboard extension app for macOS            |
+| [Charles](http://www.charlesproxy.com/)             | 抓包工具                                     |
+| movist                                              | 播放器                                       |
 
 
 

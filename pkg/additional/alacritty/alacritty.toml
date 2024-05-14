@@ -1,0 +1,44 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+import = ["~/.config/alacritty/themes/themes/one_dark.toml"]
+
+shell = { program = "/bin/zsh", args = [
+  "-l",
+  "-c",
+  "TERM=screen-256color /Users/jim/.rbenv/shims/tmuxinator start zoumo",
+] }
+
+live_config_reload = true
+
+# Setup term for programs to be able to use it
+[env]
+TERM = "screen-256color"
+
+[window]
+# Spread additional padding evenly around the terminal content.
+dynamic_padding = true
+
+padding = { x = 5, y = 5 }
+
+
+[font]
+normal = { family = "Monaco", style = "Regular" }
+bold = { family = "Monaco", style = "Bold" }
+italic = { family = "Monaco", style = "Italic" }
+size = 14.0
+
+
+[selection]
+# When set to true, selected text will be copied to the primary clipboard.
+save_to_clipboard = true
+
+
+[cursor]
+style.blinking = "On"
+
+
+[keyboard]
+bindings = [
+  { mods = "Control", key = "v", action = "ToggleViMode" },
+  { mode = "Vi", mods = "Shift", key = "l", action = "Last" },
+  { mode = "Vi", mods = "Shift", key = "h", action = "First" },
+]
