@@ -25,7 +25,11 @@ export CXX=/usr/bin/clang++
 # ====================================================================
 # Golang
 # ====================================================================
-# golang path moved to basic/go/goenv.zsh
+if [[ -d "${HOME}/.gvm" ]]; then
+    source "${HOME}/.gvm/scripts/gvm"
+fi
+
+export GO111MODULE=auto
 
 # ====================================================================
 # Rust
