@@ -6,12 +6,6 @@ Log::AddOutput golang NOTE
 
 VERSION="go1.22.2"
 
-# if Command::Exists go; then
-#     Log "golang has already existed, skip it"
-#     go version
-#     exit 0
-# fi
-
 brew::install go mercurial
 
 # install gvm

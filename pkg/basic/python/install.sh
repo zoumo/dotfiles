@@ -4,7 +4,7 @@ source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 namespace python
 Log::AddOutput python NOTE
 
-GLOBAL_VERSION="3.8.10"
+GLOBAL_VERSION="3.12.3"
 VERSIONS=(${GLOBAL_VERSION})
 
 # prerequisite is needed
@@ -20,23 +20,26 @@ else
     brew::install bzip2 libffi libxml2 libxmlsec1 readline sqlite xz zlib openssl@1.1
 fi
 
-# install pyenv
-if ! Command::Exists pyenv; then
-    [[ -d ${HOME}/.pyenv ]] || curl -fsSL "https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer" | bash
+brew::install pyenv pyenv-virtualenv pyenv-ccache
 
-    # temporary export
-    export PYENV_ROOT="${HOME}/.pyenv"
-    export PATH="${PYENV_ROOT}/bin:${PATH}"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
-    # make cache
-    mkdir -p $(pyenv root)/cache
+# # install pyenv
+# if ! Command::Exists pyenv; then
 
-fi
+#     [[ -d ${HOME}/.pyenv ]] || curl -fsSL "https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer" | bash
 
-# update pyenv firstly
-pyenv update
+#     # temporary export
+#     export PYENV_ROOT="${HOME}/.pyenv"
+#     export PATH="${PYENV_ROOT}/bin:${PATH}"
+#     eval "$(pyenv init -)"
+#     eval "$(pyenv virtualenv-init -)"
+
+#     # make cache
+#     mkdir -p $(pyenv root)/cache
+
+# fi
 
 for VERSION in ${VERSIONS[@]}; do
     if [[ ! $(pyenv versions | grep ${VERSION}) ]]; then
@@ -65,7 +68,7 @@ pyenv global ${GLOBAL_VERSION}
 
 # install plugins
 plugins=(
-    virtualenv
+    # virtualenv
     autopep8
     flake8
     docopt

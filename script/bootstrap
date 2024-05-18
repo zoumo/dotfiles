@@ -37,36 +37,12 @@ namespace bootstrap
 # make the Log method direct everything in the namespace 'myApp' to the log handler called DEBUG
 Log::AddOutput bootstrap NOTE
 
-install_ohmyzsh() {
-    Log 'Installing oh-my-zsh...'
-    # sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    git::clone https://github.com/robbyrussell/oh-my-zsh.git "${HOME}/.oh-my-zsh"
-
-    ZSH_CUSTOM="${HOME}/.oh-my-zsh/custom"
-    git::clone https://github.com/denysdovhan/spaceship-prompt.git "${ZSH_CUSTOM}/themes/spaceship-prompt"
-    ln -sf "${ZSH_CUSTOM}/themes/spaceship-prompt/spaceship.zsh-theme" "${ZSH_CUSTOM}/themes/spaceship.zsh-theme"
-
-    git::clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
-}
-
-install_dotfiles() {
-    Log 'Installing dotfiles...'
-
-    local overwrite_all=false backup_all=false skip_all=false
-    for src in $(find "$DOT_ROOT/" -maxdepth 2 -name '*.symlink'); do
-        dst="$HOME/.$(basename "${src%.*}")"
-        util::link_file "$src" "$dst"
-    done
-}
-
-install_ohmyzsh
-install_dotfiles
-
 export DOT_MODE=${1:-full}
 
 try
 {
     bash ./script/dot
+    bash ./script/linkfile
 }
 catch
 {
@@ -75,18 +51,19 @@ catch
 
 Log "The installation is complete !!"
 
+default_shell="fish"
 TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
-zsh_bin=$(grep "/zsh$" /etc/shells | tail -1)
-if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
+shell_bin=$(grep "/${default_shell}$" /etc/shells | tail -1)
+if [ "$TEST_CURRENT_SHELL" != "${default_shell}" ]; then
     # If this platform provides a "chsh" command (not Cygwin), do it, man!
     if Command::Exists chsh; then
-        Log "Time to change your default shell to zsh!"
-        sudo chsh -s "${zsh_bin}" "$(whoami)"
+        Log "Time to change your default shell to ${shell_bin}!"
+        sudo chsh -s "${shell_bin}" "$(whoami)"
         # Else, suggest the user do so manually.
     else
         Log "I can't change your shell automatically because this system does not have chsh."
-        Log "Please manually change your default shell to zsh!"
+        Log "Please manually change your default shell to ${shell_bin}!"
     fi
 fi
 
-[[ -n ${zsh_bin} ]] && ${zsh_bin}
+[[ -n ${shell_bin} ]] && ${shell_bin}

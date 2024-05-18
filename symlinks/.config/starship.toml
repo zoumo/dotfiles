@@ -1,0 +1,67 @@
+# ~/.config/starship.toml
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+
+# format = """
+# $all\
+# $kubernetes\
+# $line_break\
+# $jobs\
+# $battery\
+# $time\
+# $status\
+# $os\
+# $container\
+# $shell\
+# $character"""
+# Inserts a blank line between shell prompts
+add_newline = false
+
+# Replace the '❯' symbol in the prompt with '➜'
+# [character] # The name of the module we are configuring is 'character'
+# success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+
+[directory]
+# truncation_length = 8
+truncate_to_repo = false
+
+# [status]
+# disabled = false
+
+[username]
+show_always = true
+
+[git_branch]
+symbol = 'git:'
+
+[golang]
+symbol = "go:"
+
+[python]
+symbol = "py:"
+
+[ruby]
+symbol = "rb:"
+
+[rust]
+symbol = "rs:"
+
+[nodejs]
+symbol = "node:"
+
+[lua]
+symbol = "lua:"
+
+[kubernetes]
+disabled = false
+symbol = "k8s:"
+
+[[kubernetes.contexts]]
+# "bold red" style + default symbol when Kubernetes current context name equals "production" *and* the current user
+# equals "admin_user"
+context_pattern = "online-.*"
+style = "bold red"
+
+[shell]
+disabled = false

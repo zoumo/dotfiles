@@ -6,46 +6,13 @@ source "${PKG_PATH}/../../../framework/oo-bootstrap.sh"
 namespace tmux
 Log::AddOutput tmux NOTE
 
-cd "${DOT_PLUGINS}" || exit 1
+brew::install tmux
 
-VERSION=2.7
-
-tmux_from_src() {
-    temp_dir=$(mktemp -d)
-    cd "${temp_dir}" || exit 1
-    wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
-    tar xvzf tmux-${VERSION}.tar.gz
-    cd "tmux-${VERSION}" || exit 1
-    LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local
-    make && make install
-    cd "${DOT_PLUGINS}" || exit 1
-}
-
-if ! Command::Exists tmux; then
-    brew::install tmux
-fi
+# tmux session manager
+# https://github.com/ivaaaan/smug
+brew::install smug
 
 git::clone https://github.com/gpakosz/.tmux.git "${DOT_PLUGINS}/tmux"
 ln -sf "${DOT_PLUGINS}/tmux/.tmux.conf" "${HOME}/.tmux.conf"
-# link tmux local
-ln -sf "${PKG_PATH}/.tmux.conf.local" "${HOME}/.tmux.conf.local"
-
-if ! Command::Exists rbenv; then
-    subject=ERROR Log "please install pyenv firstly"
-    exit 1
-fi
-
-# temporary export
-export PATH="$(brew --prefix rbenv)/bin:$PATH"
-eval "$(rbenv init -)"
-
-if Command::Exists gem; then
-    if ! Command::Exists tmuxinator; then
-        gem install tmuxinator
-    fi
-    mkdir -p "${HOME}/.tmuxinator"
-
-    ln -sf "${PKG_PATH}/zoumo.yaml" "${HOME}/.tmuxinator/zoumo.yml"
-fi
 
 exit 0

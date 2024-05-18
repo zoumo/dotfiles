@@ -1,11 +1,12 @@
 #!/bin/bash
-source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
+
+PKG_PATH="$(cd "$(dirname ${BASH_SOURCE})" && pwd -P)"
+source ${PKG_PATH}/../../../framework/oo-bootstrap.sh
 
 cd ${DOT_PLUGINS}
 
 # install one dark for iterm
 git::clone https://github.com/nathanbuchar/atom-one-dark-terminal.git atom-one-dark-terminal
-
 if os::macos; then
     # open "atom-one-dark-terminal/scheme/iterm/One Dark.itermcolors"
     open "atom-one-dark-terminal/scheme/terminal/One Dark.terminal"
@@ -20,7 +21,7 @@ if [[ $(OS::LSBDist) == "centos" ]] && Command::Exists gnome-shell; then
     sh ./gnome-terminal-colors-solarized/install.sh
 fi
 
-# install dircolors-solarized
+# install dircolors-solarized for GNU ls
 git::clone https://github.com/seebi/dircolors-solarized.git dircolors-solarized
 cp dircolors-solarized/dircolors.ansi-dark $HOME/.dircolors
 

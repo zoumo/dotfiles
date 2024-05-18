@@ -1,0 +1,15 @@
+session: zoumo
+
+root: ~/
+
+windows:
+  # 4 panes
+  - name: editor
+    layout: tiled
+    panes:
+      - #empty
+      - #empty
+      - #empty
+  # 1 pane
+  - name: cmus
+    layout: tiled

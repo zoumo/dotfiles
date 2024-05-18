@@ -1,0 +1,25 @@
+#!/bin/bash
+
+source $(dirname $(dirname ${BASH_SOURCE}))/framework/oo-bootstrap.sh
+
+# symlinks dir
+SYMLINKS_DIR="${DOT_ROOT}/symlinks"
+
+# find all normal files
+find "$SYMLINKS_DIR" -type f | while read -r file; do
+    # get relative path of file to $SYMLINKS_DIR
+    relative_path="${file#"${SYMLINKS_DIR}"/}"
+
+    # 创建$HOME中相对路径的目录结构
+    # build real_path to $HOME
+    base_dir=$(dirname "$relative_path")
+    if [ ! -d "$HOME/$base_dir" ]; then
+        mkdir -p "$HOME/$base_dir"
+    fi
+
+    # create symlink
+    echo "link file $file to $HOME/$relative_path"
+    ln -sf "$file" "$HOME/$relative_path"
+done
+
+echo "All symlinks have been created."

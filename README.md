@@ -13,12 +13,8 @@
 - [How To Use](#how-to-use)
   - [dotfiles](#dotfiles)
     - [Topical](#topical)
-    - [Components](#components)
-    - [流程](#流程)
   - [macOS](#macos)
     - [Homebrew packages](#homebrew-packages)
-      - [Binaries](#binaries)
-      - [Apps](#apps)
     - [macOS defaults setting](#macos-defaults-setting)
   - [Beautify](#beautify)
     - [Terminal/Iterm2](#terminaliterm2)
@@ -31,26 +27,19 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-
-
 # Jim's dotfiles
 
 ## What is dotfiles
 
 > The set of files used to describe session initialization procedures and store user customizations are commonly referred to as "dotfiles". These files can be used to customize screen appearance, shell behavior, program specifications and aspects of your Athena session. Most dotfiles are text files, although some exist in other formats. Dotfiles generally contain one command per line and are stored in your home directory. Dotfiles usually have names that begin with a period, hence the name dotfiles. You are given some dotfiles that are necessary for you to be able to login when you get your account.
 
-![iMac-MacBook-flat](https://camo.githubusercontent.com/d3cade777e0e8da13097e79a1263f3b49bed2773/687474703a2f2f692e696d6775722e636f6d2f4742706a7248422e706e67)
-
-这份 [dotfiles](https://github.com/zoumo/dotfiles) 是 fork 自 [Amowu's dotfiles](https://github.com/amowu/dotfiles) 基于 [Holman's dotfiles](https://github.com/holman/dotfiles)，并更加个人的需求进行了修改, 如果有兴趣欢迎fork一份回去配置适合自己的dotfiles。
+这份 [dotfiles](https://github.com/zoumo/dotfiles) 是 fork 自 [Amowu's dotfiles](https://github.com/amowu/dotfiles) 基于 [Holman's dotfiles](https://github.com/holman/dotfiles)，并更加个人的需求进行了修改, 如果有兴趣欢迎 fork 一份回去配置适合自己的dotfiles。
 
 更多的 dotfiles 请参考 [GitHub does dotfiles](https://dotfiles.github.io/)。
 
 ## Compatibility
 
 -   macOS
-
-
--   CentOS7
 
 # Quick Start
 
@@ -85,24 +74,20 @@ $ bash ./script/bootstrap
 
 `bootstrap` 这个程序会自动完成以下的工作:
 
-1. 检查并安装 [Oh My Zsh](http://ohmyz.sh/)。
-2. 检查并链接 dotfiles (`.zshrc`)。
-3. 系统相关：
+1. 系统相关：
     1. macOS
         1. 检查并安装 [Homebrew](http://brew.sh/)。
         2. 安装一些必要的软件和依赖。
         3. 设置 Mac OS X 的 defaults settings。
         4. 清理缓存
-    2. CentOS7
-        1. 安装源和依赖库
-4. 语言环境 （python, ruby, go 作为基础依赖会优先安装）
+2. 语言环境 （python, go, rust 作为基础依赖会优先安装）
     1. python: 使用 [pyenv](https://github.com/pyenv/pyenv) 管理 python 版本，安装一些基础库，很多其他工具都是基于 python，所以 python 会优先安装
-    2. ruby: 使用 [rbenv](https://github.com/rbenv/rbenv.git) 管理 ruby 版本，目前是 [tmuxinator](https://github.com/tmuxinator/tmuxinator) 依赖 ruby
-    3. go: golang 为我主要的工作语言
-    4. nodejs
-5. 安装 vim 和 tmux
-6. 对 vim, ls, terminal 进行美化, 使用了 [one dark](https://github.com/nathanbuchar/atom-one-dark-terminal.git)
-7. 切换 shell 到 zsh
+    2. go: golang 为我主要的工作语言
+    3. rust: rust 作为一门新兴的语言，我也会使用它来做一些小工具
+    4. 还有一些其他的语言，比如 nodejs, java
+3. 安装 fish, vim 和 tmux, 以及其他一些软件
+4. 将 symlinks 下面的文件连接到 `$HOME`
+5. 切换 shell 到 fish
 
 ## Restore backup
 
@@ -118,58 +103,15 @@ $ mackup restore
 
 ## dotfiles
 
-执行 `bash ~/.dotfiles/script/bootstrap` 的时候，脚本会将目录底下所有的 `*.symlink` 文件通过 `ln` 命令建立链接至 `$HOME` 目录底下:
+脚本在运行的时候会遍历 `symlinks` 目录，将目录下面所有的文件通 `ln` 创建软连接到 `$HOME` 的相对路径中
 
-| topic | *.symlink      | .dotfiles |
-| ----- | -------------- | --------- |
-| zsh   | zshenv.symlink | ~/.zshenv |
-| zsh   | zshrc.symlink  | ~/.zshrc  |
-
->   我的 git 的 dotfiles 交给 mackup 来备份, vim 的 dotfiles 交给 [SpaceVim](https://github.com/SpaceVim/SpaceVim) 管理
+> 我的 git 的 dotfiles 交给 mackup 来备份
+> 
+> vim 的 dotfiles 交给 [SpaceVim](https://github.com/SpaceVim/SpaceVim) 管理
 
 ### Topical
 
 每一个环境的配置是以文件夹的形式独立区分, 例如, 如果想要增加 "Python" 的配置到 dotfiles, 则简单的新增一个名字为 `python` 的文件夹
-
-任何后缀名是 `.zsh` 的文件将在 shell 执行时自动被载入环境中。
-
-任何后缀名是 `.symlink` 的文件将在你执行 `script/bootstrap ` 的时候自动链接到 `$HOME` 目录下
-
-### Components
-
-目录中比较特殊的文件
-
-- **bin/**: 任何在 `bin/` 目录下的文件可以在 shell 执行的时候使用。
-- **topic/*.zsh**: 任何 `.zsh` 结尾的文件都会在 shell 执行的时候被载入环境。
-- **topic/path.zsh**: 任何 `path.zsh` 文件会在 shell 执行时优先载入。
-- **topic/*.symlink**: 任何 `*.symlink` 結尾的文件都会在 `$HOME` 目录下建立链接。
-
-不同于 [Holman's dotfiles](https://github.com/holman/dotfiles)，我修改了一些部分:
-
-- Shell 的部分改用 [Oh My Zsh](http://ohmyz.sh/) 取代原作者自己配置的 zsh。
-- 移除 **topic/aliases.zsh**、**topic/completion.zsh** 等文件，改用 Oh My Zsh 的 [plugins]。(https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins) 代替。
-- 移除 **zsh/prompt.zsh**、**zsh/window.zsh** 等文件，改用 Oh My Zsh 的 [themes]。(https://github.com/robbyrussell/oh-my-zsh/wiki/Themes) 代替。
-- dotfiles 只專注在 **topic/*.symlink**、**topic/path.zsh** 的配置已经环境的配置。
-
-### 流程
-
-`bin/dot` 会在 `script/bootstrap` 中执行, 负责安装 macOS 的程序和修改系统配置
-
-执行 `$ dot` 之后，它会执行下面几个脚本:
-
-1. `$HOME/.dotfiles/os/prepare.sh` 准备系统环境，判断运行操作系统，运行下面的两个脚本之一
-
-    - `$HOME/.dotfiles/os/macos/*.sh`  安装 homebrew ，下载软件和依赖包，设置  macOS 的 defaults settings
-
-    - `$HOME/.dotfiles/os/centos/install.sh` 安装 centos 源和依赖包
-
-2. `$HOME/.dotfiles/python/install.sh` 使用 pyenv 安装 python
-
-3. `$HOME/.dotfiles/ruby/install.sh` 使用 rbenv 安装 ruby
-
-4. `$HOME/.dotfiles/go/install.sh` 安装 golang
-
-5. `$HOME/.dotfiles/*/install.sh`  寻找其他含有 `install.sh` 的文件夹，逐个执行它
 
 ## macOS
 
@@ -194,34 +136,6 @@ apps=(
   ...
 )
 ```
-
-以下是我目前自动安裝的 packages：
-
-#### Binaries
-
-| name                                                                             | info                                                                  |
-| -------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| dos2unix                                                                         | 文档格式转换                                                          |
-| wget                                                                             | wget 工具                                                             |
-| ctags                                                                            | 方便代码阅读                                                          |
-| [grc](http://kassiopeia.juls.savba.sk/~garabik/software/grc/README.txt)          | log 上色                                                              |
-| [git-flow](https://github.com/nvie/gitflow)                                      | Git branch manage model                                               |
-| [tree](http://mama.indstate.edu/users/ice/tree/)                                 | 树状目录结构显示                                                      |
-| [mackup](https://github.com/lra/mackup)                                          | 同步应用程序配置                                                      |
-| [z](https://github.com/rupa/z.git)                                               | autojump                                                              |
-| tmux                                                                             | tmux                                                                  |
-| htop                                                                             | 加强版 top                                                            |
-| [trash](http://hasseg.org/blog/post/406/trash-files-from-the-os-x-command-line/) | 模拟 Finder 的移到废纸篓功能, 在 alias 中对 rm 进行替换, 进行安全删除 |
-| [cheat](https://github.com/chrisallenlane/cheat)                                 | 命令示例 cheatsheets                                                  |
-
-#### Apps
-
-| name                                                    | info                                   |
-| ------------------------------------------------------- | -------------------------------------- |
-| the-unarchiver                                          | 优秀免费的解压软件                     |
-| [scroll-reverser](http://pilotmoon.com/scrollreverser/) | 支持鼠标和触控板滚轮分别设置           |
-| [slate](https://github.com/jigish/slate)                | Mac窗口调节程序,类似于Divvy and SizeUp |
-
 ### macOS defaults setting
 
 执行 `bash ./os/macos/set-defaults.sh` 之后，程序会更改 macOS 的一些系统设置, 根据个人喜欢和需求修改这个文件，或是参考 [Mathias’s dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.osx) 整理好的配置。

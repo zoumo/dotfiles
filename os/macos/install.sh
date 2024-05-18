@@ -34,6 +34,7 @@ binaries=(
     ynqa/tap/jnv # https://github.com/ynqa/jnv
     difftastic   # https://github.com/Wilfred/difftastic
     colordiff
+    tldr
     # mysql
     # nginx
     # node
@@ -55,6 +56,7 @@ apps=(
     eazydict    # Translator
     orbstack    # mac docker alternative
     bleunlock   # bluetooth unlock
+    loop
     # xld # 音频转化
     # slate # 开源免费的桌面窗口控制调整工具
     # qlcolorcode
@@ -78,10 +80,9 @@ apps=(
 )
 
 # Fonts
-# fonts=(
-#   font-roboto
-#   font-source-code-pro
-# )
+fonts=(
+    font-hack-nerd-font
+)
 
 if ! Command::Exists brew; then
     Log "Installing Homebrew for you..."
@@ -110,6 +111,9 @@ brew::install "${binaries[@]}"
 
 # Important December 2015 update: Homebrew-Cask will now be kept up to date together with Homebrew (see #15381 for details).
 # If you haven’t yet, run brew uninstall --force brew-cask; brew update to switch to the new system.
+
+Log "Installing fonts..."
+brew::install "${fonts[@]}"
 
 # Install apps to /Applications
 Log "Installing apps..."

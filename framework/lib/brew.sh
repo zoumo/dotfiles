@@ -11,16 +11,17 @@ readonly BREW_MIN_VERSION="3.3.6"
 
 brew() {
     if [[ "$(OS::LSBDist)" == "macos" ]]; then
-        HOMEBREW_PREFIX=${HOMEBREW_PREFIX:-"/opt/homebrew"}
+        export HOMEBREW_PREFIX="/opt/homebrew"
+        export PATH="${HOMEBREW_PREFIX}/bin:${PATH}"
         "${HOMEBREW_PREFIX}"/bin/brew "$@"
         return
     fi
 
-    if [[ ${HOMEBREW_PREFIX:-} == "" ]]; then
-        export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
-        export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar"
-        export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew"
-    fi
+    export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+    export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar"
+    export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew"
+    export PATH="${HOMEBREW_PREFIX}/bin:${PATH}"
+
     sudo su - linuxbrew bash -c "${HOMEBREW_PREFIX}/bin/brew $*"
 }
 
@@ -50,7 +51,7 @@ brew::unmirror() {
 brew::setup() {
     if [[ "$(OS::LSBDist)" == "macos" ]]; then
         # install homebrew
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     elif [[ ! -d /home/linuxbrew/.linuxbrew ]]; then
         HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-'/home/linuxbrew/.linuxbrew'}"
 
@@ -84,7 +85,7 @@ brew::install() {
     if ! brew::verify; then
         return
     fi
-    brew_list=($(brew list --formula -1))
+    brew_list=($(brew list -1))
     for item in "$@"; do
         if ! Array::Contains "$item" "${brew_list[@]}"; then
             Log "brew installing $item"
@@ -99,7 +100,7 @@ brew::install_one() {
     if ! brew::verify; then
         return
     fi
-    brew_list=($(brew list --formula -1))
+    brew_list=($(brew list -1))
     if Array::Contains "${1}" "${brew_list[@]}"; then
         Log "brew::install: $1 already exists, skip it"
     else
@@ -112,7 +113,7 @@ brew::cask::install() {
     if ! brew::verify; then
         return
     fi
-    brew_list=($(brew list --cask -1))
+    brew_list=($(brew list -1))
     if Array::Contains "${1}" "${brew_list[@]}"; then
         Log "brew::cask::install: $1 already exists, skip it"
     else

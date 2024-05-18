@@ -6,79 +6,12 @@ source ${PKG_PATH}/../../../framework/oo-bootstrap.sh
 namespace vim
 Log::AddOutput vim ERROR
 
-cd ${DOT_PLUGINS}
-
-MINIMUM_VIM_VERSION="8.0"
-
 # 安装依赖
 if os::macos; then
-    brew::install ctags the_silver_searcher
-    if ! Command::Exists pyenv; then
-        if [[ ! -d ${HOME}/.pyenv ]]; then
-            subject=ERROR Log "please install pyenv firstly"
-            exit 1
-        fi
-        # temporary export
-        export PYENV_ROOT="${HOME}/.pyenv"
-        export PATH="${PYENV_ROOT}/bin:${PATH}"
-        eval "$(pyenv init -)"
-        eval "$(pyenv virtualenv-init -)"
-    fi
-    # replace vim with macvim
-    pyenv local system
-    # use python3
-    brew::install python
     brew::cask::install macvim
-    pyenv local --unset
 else
     brew::install vim
 fi
 
-# if [[ $(OS::LSBDist) == 'centos' ]]; then
-#     VIM_VERSION=""
-#     if Command::Exists vim; then
-#         VIM_VERSION="$(vim --version | head -1 | cut -f 5 -d " ")"
-#     fi
-#     if [[ ${VIM_VERSION} == "" ]] || (($(semver::compare_version ${VIM_VERSION} ${MINIMUM_VIM_VERSION}) == -1)); then
-#         # ruby  - rbenv
-#         if ! Command::Exists rbenv; then
-#             Log "ruby is required in compiling vim, please install rbenv firstly"
-#             exit 1
-#         fi
-#         if ! Command::Exists pyenv; then
-#             Log "python is required in compiling vim, please install pyenv firstly"
-#             exit 1
-#         fi
-#         # python3 - pyenv
-#         sudo yum install -y lua lua-devel luajit \
-#             luajit-devel ctags git tcl-devel \
-#             perl perl-devel perl-ExtUtils-ParseXS \
-#             perl-ExtUtils-XSpp perl-ExtUtils-CBuilder \
-#             perl-ExtUtils-Embed
-#         # This step is needed to rectify an issue with how Fedora 20 installs XSubPP:
-#         # symlink xsubpp (perl) from /usr/bin to the perl dir
-#         sudo ln -sf /usr/bin/xsubpp /usr/share/perl5/ExtUtils/xsubpp
-#         git::clone https://github.com/vim/vim.git vim
-#         cd vim
-#         make distclean # if you build Vim before
-#         ./configure --with-features=huge \
-#             --enable-multibyte \
-#             --enable-rubyinterp=yes \
-#             --enable-python3interp=yes \
-#             --with-python3-config-dir=$(python3-config --configdir) \
-#             --enable-perlinterp=yes \
-#             --enable-luainterp=yes \
-#             --enable-gui=gtk2 \
-#             --enable-cscope \
-#             --prefix=/usr/local
-#         sudo make install
-#         cp src/vim /usr/local/bin/vim
-#     fi
-# fi
-
 # use spacevim
-curl -sLf https://spacevim.org/install.sh | bash
-
-mkdir -p ${HOME}/.SpaceVim.d/autoload
-ln -sf ${PKG_PATH}/init.toml ${HOME}/.SpaceVim.d/init.toml
-ln -sf ${PKG_PATH}/customize.vim ${HOME}/.SpaceVim.d/autoload/customize.vim
+curl -sLf https://spacevim.org/cn/install.sh | bash

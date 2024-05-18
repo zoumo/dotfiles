@@ -1,0 +1,44 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# use one dark theme
+import = ["~/.config/alacritty/themes/themes/one_dark.toml"]
+
+shell = { program = "/opt/homebrew/bin/fish", args = [
+  "-l",
+  "--init-command",
+  "smug start zoumo",
+] }
+
+live_config_reload = true
+
+[env]
+TERM = "screen-256color"
+
+[window]
+# Spread additional padding evenly around the terminal content.
+dynamic_padding = true
+
+padding = { x = 5, y = 5 }
+
+startup_mode = "Maximized"
+
+[font]
+normal = { family = "Hack Nerd Font", style = "Regular" }
+
+size = 15.0
+
+[selection]
+# When set to true, selected text will be copied to the primary clipboard.
+save_to_clipboard = true
+
+
+[cursor]
+style.blinking = "On"
+
+
+[keyboard]
+bindings = [
+  { mods = "Control", key = "v", action = "ToggleViMode" },
+  { mode = "Vi", mods = "Shift", key = "l", action = "Last" },
+  { mode = "Vi", mods = "Shift", key = "h", action = "First" },
+]

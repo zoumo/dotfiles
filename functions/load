@@ -1,8 +1,0 @@
-#!/bin/bash
-
-load() {
-    start=$(datetime)
-    source $1
-    end=$(datetime)
-    info "load $1 [used $(duration "${start}" "${end}")]"
-}

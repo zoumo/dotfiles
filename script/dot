@@ -30,7 +30,7 @@ installers=($(util::find_installer ${basic} | tr " " "\n"))
 
 Log ">>> installers ${installers[*]}"
 
-langs=("python ruby go")
+langs=("python go rust")
 
 # insatll language support
 for installer in "${installers[@]}"; do

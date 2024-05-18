@@ -8,14 +8,6 @@ Log::AddOutput alacritty NOTE
 
 brew::install alacritty
 
-ALACRITTY_CONFIG_PATH="${HOME}/.config/alacritty"
-
-if [ ! -d "${ALACRITTY_CONFIG_PATH}" ]; then
-    mkdir -p "${ALACRITTY_CONFIG_PATH}"
-fi
-
-# link alacritty config
-ln -sf "${PKG_PATH}/alacritty.toml" "${ALACRITTY_CONFIG_PATH}/alacritty.toml"
-
 # install theme
-git::clone https://github.com/alacritty/alacritty-theme "${ALACRITTY_CONFIG_PATH}/themes"
+ALACRITTY_CONFIG_PATH="${HOME}/.config/alacritty"
+git::clone https://github.com/alacritty/alacritty-theme.git "${ALACRITTY_CONFIG_PATH}/themes"

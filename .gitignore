@@ -3,7 +3,7 @@
 *.swp
 plugins
 .vscode
-secret.zsh
+secret.*
 cache
 go.mod
 go.sum
