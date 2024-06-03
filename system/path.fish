@@ -89,6 +89,9 @@ if test (os_lsb_dist) = "macos"
     fish_add_path -gP /opt/homebrew/opt/openjdk/bin
     #For compilers to find openjdk you may need to set:
     set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk/include"
+	set -gx JAVA_HOME (/usr/libexec/java_home)
+    set -gx CLASS_PATH $JAVA_HOME/lib
+    
 end
 
 

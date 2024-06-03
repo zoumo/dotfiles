@@ -53,6 +53,9 @@ symbol = "node:"
 [lua]
 symbol = "lua:"
 
+[java]
+symbol = "java:"
+
 [kubernetes]
 disabled = false
 symbol = "k8s:"
