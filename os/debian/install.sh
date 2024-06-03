@@ -15,6 +15,7 @@ binaries=(
     yodl
     perl
     libevent-dev
+    bsdmainutils
 )
 
 sudo apt-get update
