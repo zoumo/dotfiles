@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 # clean path
-set -gx PATH /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin
+# set -gx PATH /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin
 
 # set dotfiles path
 set -gx DOTFILES $HOME/.dotfiles
@@ -11,7 +11,11 @@ set -gx DOTFILES $HOME/.dotfiles
 # ============================================================
 # setup brew prefix temporarily to let fish find brew
 if test (uname -s) = Darwin
-    set -x HOMEBREW_PREFIX /opt/homebrew
+    if test (uname -m) = arm64
+        set -x HOMEBREW_PREFIX /opt/homebrew
+    else
+        set -x HOMEBREW_PREFIX /usr/local
+    end
 else 
     set -x HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew"
     set -x HOMEBREW_CELLAR "/home/linuxbrew/.linuxbrew/Cellar"

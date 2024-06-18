@@ -6,6 +6,10 @@ source "${PKG_PATH}/../../../framework/oo-bootstrap.sh"
 namespace alacritty
 Log::AddOutput alacritty NOTE
 
+if ! os::macos; then
+    exit 0
+fi
+
 brew::install alacritty
 
 # install theme

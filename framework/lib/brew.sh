@@ -9,20 +9,43 @@ Log::AddOutput lib/brew STATUS
 
 readonly BREW_MIN_VERSION="3.3.6"
 
-brew() {
+brew::mirror() {
+    export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+    export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+    export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+    export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+    export HOMEBREW_PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
+}
+
+brew::unmirror() {
+    unset HOMEBREW_API_DOMAIN
+    unset HOMEBREW_BOTTLE_DOMAIN
+    unset HOMEBREW_BREW_GIT_REMOTE
+    unset HOMEBREW_CORE_GIT_REMOTE
+    unset HOMEBREW_PIP_INDEX_URL
+}
+
+brew::shellenv() {
     if [[ "$(OS::LSBDist)" == "macos" ]]; then
-        export HOMEBREW_PREFIX="/opt/homebrew"
-        export PATH="${HOMEBREW_PREFIX}/bin:${PATH}"
-        "${HOMEBREW_PREFIX}"/bin/brew "$@"
-        return
+        if [[ "$(OS::Arch)" == "arm64" ]]; then
+            export HOMEBREW_PREFIX="/opt/homebrew"
+        else
+            export HOMEBREW_PREFIX="/usr/local"
+        fi
+    else
+        export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+        export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar"
+        export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew"
     fi
-
-    export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
-    export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar"
-    export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew"
+    export HOMEBREW_NO_INSTALL_CLEANUP="true"
     export PATH="${HOMEBREW_PREFIX}/bin:${PATH}"
+}
 
-    sudo su - linuxbrew bash -c "${HOMEBREW_PREFIX}/bin/brew $*"
+brew() {
+    brew::mirror
+    brew::shellenv
+
+    "${HOMEBREW_PREFIX}"/bin/brew "$@"
 }
 
 brew::verify() {
@@ -35,50 +58,31 @@ brew::verify() {
     return 0
 }
 
-brew::mirror() {
-    git -C "$(brew --repo)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
-    git -C "$(brew --repo homebrew/core)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
-
-    brew update
-}
-
-brew::unmirror() {
-    git -C "$(brew --repo)" remote set-url origin https://github.com/Homebrew/brew.git
-    git -C "$(brew --repo homebrew/core)" remote set-url origin https://github.com/Homebrew/homebrew-core
-    brew update
-}
-
 brew::setup() {
-    if [[ "$(OS::LSBDist)" == "macos" ]]; then
-        # install homebrew
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    elif [[ ! -d /home/linuxbrew/.linuxbrew ]]; then
-        HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-'/home/linuxbrew/.linuxbrew'}"
+    brew::mirror
 
-        sudo id -u linuxbrew >/dev/null 2>&1 || sudo useradd -m -s /bin/bash linuxbrew
-        # add permission for normal user
-        sudo chmod 0755 /home/linuxbrew
-        sudo grep -q "linuxbrew ALL" /etc/sudoers || sudo bash -c "echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-        if [[ "$(whoami)" != "root" ]]; then
-            # add current user to group linuxbrew
-            groups "$USER" | grep -q linuxbrew || sudo usermod -a -G linuxbrew "$USER"
-        fi
-
-        sudo mkdir -p /home/linuxbrew/.linuxbrew
-        [[ -d /home/linuxbrew/.linuxbrew/Homebrew ]] || sudo git clone https://github.com/Homebrew/brew.git /home/linuxbrew/.linuxbrew/Homebrew
-
-        cd /home/linuxbrew/.linuxbrew || exit
-        sudo mkdir -p bin etc include lib opt sbin share var/homebrew/linked Cellar
-        sudo ln -sf ../Homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/
-
-        # change owner
-        sudo chown -R linuxbrew: /home/linuxbrew/.linuxbrew
-
-        # install linuxbrew
-        # use echo to skip "Press RETURN to continue or any other key to abort"
-        # echo | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-    fi
+    # if [[ "$(OS::LSBDist)" == "macos" ]]; then
+    #     # install homebrew
+    #     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # elif [[ ! -d /home/linuxbrew/.linuxbrew ]]; then
+    #     HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-'/home/linuxbrew/.linuxbrew'}"
+    #     # create linuxbrew user to install homebrew
+    #     sudo id -u linuxbrew >/dev/null 2>&1 || sudo useradd -m -s /bin/bash linuxbrew
+    #     # add permission for normal user
+    #     sudo chmod 0755 /home/linuxbrew
+    #     # enable sudo
+    #     sudo grep -q "linuxbrew ALL" /etc/sudoers || sudo bash -c "echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers"
+    #     if [[ "$(whoami)" != "root" ]]; then
+    #         # add current user to group linuxbrew
+    #         groups "$USER" | grep -q linuxbrew || sudo usermod -a -G linuxbrew "$USER"
+    #     fi
+    #     # install homebrew by linuxbrew user
+    #     # -E to preserve environment variables
+    #     # -u to run as user linuxbrew
+    #     sudo -E -u linuxbrew bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # fi
 }
 
 brew::install() {

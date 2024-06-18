@@ -56,3 +56,14 @@ OS::LSBDist() {
     __oo__lsb_dist=${lsb_dist}
     echo ${__oo__lsb_dist}
 }
+
+OS::Arch() {
+    arch="$(uname -m)"
+    case "${arch}" in
+    x86_64) arch="amd64" ;;
+    aarch64) arch="arm64" ;;
+    armv7l) arch="armv7" ;;
+    armv6l) arch="armv6" ;;
+    esac
+    echo "${arch}"
+}

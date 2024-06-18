@@ -82,6 +82,7 @@ apps=(
 # Fonts
 fonts=(
     font-hack-nerd-font
+    font-caskaydia-cove-nerd-font
 )
 
 if ! Command::Exists brew; then

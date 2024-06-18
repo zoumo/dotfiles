@@ -2,8 +2,8 @@
 
 source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 
-# fasd
-brew::install fasd
+# A smarter cd command.
+brew::install zoxide
 
 # fzf
 brew::install fzf

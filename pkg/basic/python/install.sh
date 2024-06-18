@@ -4,15 +4,15 @@ source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 namespace python
 Log::AddOutput python NOTE
 
-GLOBAL_VERSION="3.12.3"
+GLOBAL_VERSION="3.11.9"
 VERSIONS=(${GLOBAL_VERSION})
 
 # prerequisite is needed
-if [[ $(OS::LSBDist) == "centos" ]]; then
-    sudo yum install -y gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
-elif [[ $(OS::LSBDist) == "debian" ]]; then
-    sudo apt-get install -y make build-essential zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev python-openssl git
-fi
+# if [[ $(OS::LSBDist) == "centos" ]]; then
+#     sudo yum install -y gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
+# elif [[ $(OS::LSBDist) == "debian" ]]; then
+#     sudo apt-get install -y make build-essential zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev git
+# fi
 
 if os::macos; then
     brew::install readline sqlite xz zlib openssl@1.1
@@ -22,24 +22,10 @@ fi
 
 brew::install pyenv pyenv-virtualenv pyenv-ccache
 
+brew::shellenv
+
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-
-# # install pyenv
-# if ! Command::Exists pyenv; then
-
-#     [[ -d ${HOME}/.pyenv ]] || curl -fsSL "https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer" | bash
-
-#     # temporary export
-#     export PYENV_ROOT="${HOME}/.pyenv"
-#     export PATH="${PYENV_ROOT}/bin:${PATH}"
-#     eval "$(pyenv init -)"
-#     eval "$(pyenv virtualenv-init -)"
-
-#     # make cache
-#     mkdir -p $(pyenv root)/cache
-
-# fi
 
 for VERSION in ${VERSIONS[@]}; do
     if [[ ! $(pyenv versions | grep ${VERSION}) ]]; then
@@ -52,11 +38,10 @@ for VERSION in ${VERSIONS[@]}; do
             if [[ ${VERSION} =~ ${reg} ]]; then
                 # deprecated python2
                 subject=WARN Log "python2 is deprecated now"
-                # use openssl 1.0x for python2
-            else
+                # else
                 # use openssl 1.1 for python3
-                export LD_LIBRARY_PATH="$(brew --prefix openssl@1.1)/lib:$(brew --prefix readline)/lib:$(brew --prefix zlib)/lib"
-                export LIBRARY_PATH="$(brew --prefix openssl@1.1)/include:$(brew --prefix readline)/include:$(brew --prefix zlib)/include"
+                # export LD_LIBRARY_PATH="$(brew --prefix openssl@1.1)/lib:$(brew --prefix readline)/lib:$(brew --prefix zlib)/lib"
+                # export LIBRARY_PATH="$(brew --prefix openssl@1.1)/include:$(brew --prefix readline)/include:$(brew --prefix zlib)/include"
             fi
             env CONFIGURE_OPTS="--enable-shared CC=clang" pyenv install ${VERSION} -v
         fi
@@ -67,22 +52,22 @@ done
 pyenv global ${GLOBAL_VERSION}
 
 # install plugins
-plugins=(
-    # virtualenv
-    autopep8
-    flake8
-    docopt
-    pytz
-    requests
-    unittest2
-    arrow
-    thefuck
-    neovim
-)
+# plugins=(
+#     # virtualenv
+#     autopep8
+#     flake8
+#     docopt
+#     pytz
+#     requests
+#     unittest2
+#     arrow
+#     thefuck
+#     neovim
+# )
 
 # update pip
 util::pip_install_one --upgrade pip
 # use mirror
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-util::pip_install ${plugins[@]}
+# util::pip_install ${plugins[@]}

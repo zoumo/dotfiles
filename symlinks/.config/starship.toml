@@ -18,6 +18,8 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 
+command_timeout = 1000
+
 # Replace the '❯' symbol in the prompt with '➜'
 # [character] # The name of the module we are configuring is 'character'
 # success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
@@ -68,3 +70,9 @@ style = "bold red"
 
 [shell]
 disabled = false
+
+[custom.proxy]
+symbol = "proxy:ON"
+when = ''' test -n "$HTTP_PROXY" '''
+shell = ["/bin/bash"]
+format = 'by [$symbol($output)](red bold) '

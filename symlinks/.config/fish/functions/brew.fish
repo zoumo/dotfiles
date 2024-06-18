@@ -2,15 +2,16 @@
 
 function brew --wraps brew
     if test (uname -s) = Darwin
-        set HOMEBREW_PREFIX /opt/homebrew
-        $HOMEBREW_PREFIX/bin/brew $argv
-        return
+        if test (uname -m) = arm64
+            set HOMEBREW_PREFIX /opt/homebrew
+        else
+            set HOMEBREW_PREFIX /usr/local
+        end
+    else
+        set HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew"
+        set HOMEBREW_CELLAR "/home/linuxbrew/.linuxbrew/Cellar"
+        set HOMEBREW_REPOSITORY "/home/linuxbrew/.linuxbrew/Homebrew"
     end
 
-    set -x HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew"
-    set -x HOMEBREW_CELLAR "/home/linuxbrew/.linuxbrew/Cellar"
-    set -x HOMEBREW_REPOSITORY "/home/linuxbrew/.linuxbrew/Homebrew"
-    # sudo use -E to preserve-env
-    # su use -p to preserve-env
-    sudo -E su -p - linuxbrew bash -c "$HOMEBREW_PREFIX/bin/brew $argv"
+    $HOMEBREW_PREFIX/bin/brew $argv
 end

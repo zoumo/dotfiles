@@ -10,18 +10,26 @@ if Command::Exists docker; then
 fi
 
 if os::macos; then
-    brew::cask::install docker
+    brew::cask::install OrbStack
 else
-    curl -fsSL https://get.docker.com | sudo bash
-
-    # Manage Docker as a non-root user
-    [[ -n $(cat /etc/group | cut -f 1 -d : | grep docker) ]] || sudo groupadd docker
-    sudo usermod -aG docker "$USER"
-
-    sudo systemctl start docker
-    # Configure Docker to start on boot
-    sudo systemctl enable docker
+    brew::install docker
 fi
+
+brew::install docker
+
+# if os::macos; then
+#     brew::cask::install docker
+# else
+#     curl -fsSL https://get.docker.com | sudo bash
+
+#     # Manage Docker as a non-root user
+#     [[ -n $(cat /etc/group | cut -f 1 -d : | grep docker) ]] || sudo groupadd docker
+#     sudo usermod -aG docker "$USER"
+
+#     sudo systemctl start docker
+#     # Configure Docker to start on boot
+#     sudo systemctl enable docker
+# fi
 
 # if [[ $(OS::LSBDist) == "centos" ]]; then
 #     sudo yum install -y yum-utils device-mapper-persistent-data lvm2

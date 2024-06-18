@@ -23,7 +23,8 @@ padding = { x = 5, y = 5 }
 startup_mode = "Maximized"
 
 [font]
-normal = { family = "Hack Nerd Font", style = "Regular" }
+normal = { family = "CaskaydiaCove Nerd Font", style = "Regular" }
+# normal = { family = "cascadiamono", style = "Regular" }
 
 size = 15.0
 
@@ -33,7 +34,7 @@ save_to_clipboard = true
 
 
 [cursor]
-style.blinking = "On"
+style.blinking = "Always"
 
 
 [keyboard]

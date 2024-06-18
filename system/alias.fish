@@ -16,14 +16,10 @@ end
 alias mux="smug start zoumo"
 
 # fzf
+alias fcd=_fzf_search_directory
 alias fps=_fzf_search_processes
 alias fh=_fzf_search_history
 alias fgl=_fzf_search_git_log
-
-# alias npm="npm --registry=https://registry.npm.taobao.org \
-# --cache=$HOME/.npm/.cache/cnpm \
-# --disturl=https://npm.taobao.org/dist \
-# --userconfig=$HOME/.cnpmrc"
 
 # git alias
 git config --global alias.co checkout
