@@ -23,6 +23,7 @@ alias fgl=_fzf_search_git_log
 
 # git alias
 git config --global alias.co checkout
+git config --global alias.cp cherry-pick
 git config --global alias.ci commit
 git config --global alias.st status
 git config --global alias.br branch
