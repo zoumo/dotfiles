@@ -22,8 +22,8 @@ else
     set -x HOMEBREW_REPOSITORY "/home/linuxbrew/.linuxbrew/Homebrew"
 end
 
-fish_add_path -gP $HOMEBREW_PREFIX/bin
-fish_add_path -gP $HOMEBREW_PREFIX/sbin
+fish_add_path -gpm $HOMEBREW_PREFIX/bin
+fish_add_path -gpm $HOMEBREW_PREFIX/sbin
 
 # set up brew shell env
 brew shellenv | source

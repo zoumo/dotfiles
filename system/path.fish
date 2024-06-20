@@ -4,8 +4,8 @@
 set -gx EDITOR 'vim'
 
 # add path
-fish_add_path -gP $DOTFILES/bin
-fish_add_path -gP $HOME/bin
+fish_add_path -gpm $DOTFILES/bin
+fish_add_path -gpm $HOME/bin
 
 # set languange
 set -gx LC_CTYPE en_US.UTF-8
@@ -18,9 +18,9 @@ set -gx OPT_PATH "/usr/local/opt"
 # set gnu
 # ====================================================================
 if test (os_lsb_dist) = "macos"
-    fish_add_path -gP (brew --prefix coreutils)/libexec/gnubin
-    fish_add_path -gP (brew --prefix findutils)/libexec/gnubin
-    fish_add_path -gP (brew --prefix gnu-sed)/libexec/gnubin
+    fish_add_path -gpm (brew --prefix coreutils)/libexec/gnubin
+    fish_add_path -gpm (brew --prefix findutils)/libexec/gnubin
+    fish_add_path -gpm (brew --prefix gnu-sed)/libexec/gnubin
 end
 # ====================================================================
 # use clang
@@ -38,7 +38,7 @@ set -gx GO111MODULE auto
 # Rust
 # ====================================================================
 if test -d $HOME/.cargo/bin
-    fish_add_path -gP $HOME/.cargo/bin
+    fish_add_path -gpm $HOME/.cargo/bin
 end
 
 # ====================================================================
@@ -73,7 +73,7 @@ if test (os_lsb_dist) = "macos"
     # For the system Java wrappers to find this JDK, symlink it with
     # sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
     # If you need to have openjdk first in your PATH, run:
-    fish_add_path -gP $HOMEBREW_PREFIX/opt/openjdk/bin
+    fish_add_path -gpm $HOMEBREW_PREFIX/opt/openjdk/bin
     #For compilers to find openjdk you may need to set:
     set -gx CPPFLAGS "-I$HOMEBREW_PREFIX/opt/openjdk/include"
 	set -gx JAVA_HOME (/usr/libexec/java_home)
@@ -85,7 +85,7 @@ end
 # ====================================================================
 # krew
 # ====================================================================
-fish_add_path -gP $HOME/.krew/bin
+fish_add_path -gpm $HOME/.krew/bin
 
 # ====================================================================
 # starship
