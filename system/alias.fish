@@ -21,8 +21,6 @@ end
 
 alias mux="smug start zoumo"
 
-
-
 # fzf
 alias fcd=_fzf_search_directory
 alias fps=_fzf_search_processes

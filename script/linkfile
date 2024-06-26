@@ -46,3 +46,8 @@ function symlink::unlink() {
 }
 
 symlink::create
+
+# ====================================================================
+# git include sub config
+# ====================================================================
+git config --global include.path ~/.config/.gitconfig
