@@ -1,0 +1,36 @@
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+	cp = cherry-pick
+
+[pager]
+	branch = false
+
+[push]
+	autoSetupRemote = true
+
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[merge]
+	conflictStyle = diff3
+
+[diff]
+	colorMoved = default
+	# external = difft
+
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+[user]
+	name = zoumo
+	email = jim.zoumo@gmail.com

@@ -108,3 +108,9 @@ end
 if command_exists orb
     orb completion fish | source
 end
+
+
+# ====================================================================
+# git
+# ====================================================================
+git config --global include.path ~/.config/.gitconfig

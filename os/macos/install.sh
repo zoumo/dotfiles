@@ -22,28 +22,11 @@ binaries=(
     ctags
     grc
     git-flow
-    tree
     mackup
-    htop
     trash
     cheat
-    kubectx
-    kube-ps1
     watch
-    krew
-    ynqa/tap/jnv # https://github.com/ynqa/jnv
-    difftastic   # https://github.com/Wilfred/difftastic
     colordiff
-    tldr
-    # mysql
-    # nginx
-    # node
-    # mongodb
-    # grc
-    # hub
-    # legit
-    # ssh-copy-id
-
 )
 
 # Apps
