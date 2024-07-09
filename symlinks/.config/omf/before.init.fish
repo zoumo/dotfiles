@@ -22,8 +22,16 @@ else
     set -x HOMEBREW_REPOSITORY "/home/linuxbrew/.linuxbrew/Homebrew"
 end
 
-fish_add_path -gpm $HOMEBREW_PREFIX/bin
-fish_add_path -gpm $HOMEBREW_PREFIX/sbin
+# Add homebrew bin path to $PATH directly, it will be the first item in $PATH now.
+# Then PATH may be orther shell init scripts such as gvm, pyenv, there shims will be prepended before brew binaries.
+# Finally, $fish_user_paths will be prepended to $PATH.
+# The order of $PATH is:
+# 1. $fish_user_paths
+# 2. gvm, pyenv, nodenv shims
+# 3. brew bin, brew sbin
+# 4. original $PATH
+fish_add_path -gP $HOMEBREW_PREFIX/bin
+fish_add_path -gP $HOMEBREW_PREFIX/sbin
 
 # set up brew shell env
 brew shellenv | source
