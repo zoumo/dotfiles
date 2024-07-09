@@ -39,6 +39,8 @@ utils=(
     krew
     # A tool for exploring each layer in a docker image
     dive # https://github.com/wagoodman/dive
+    # kubectl context switcher on multiple files
+    danielfoehrkn/switch/switcher # https://github.com/danielfoehrKn/kubeswitch
 )
 
 Log "Installing utils..."
