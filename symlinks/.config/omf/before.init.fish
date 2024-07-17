@@ -23,15 +23,15 @@ else
 end
 
 # Add homebrew bin path to $PATH directly, it will be the first item in $PATH now.
-# Then PATH may be orther shell init scripts such as gvm, pyenv, there shims will be prepended before brew binaries.
+# Then PATH may be orther shell init scripts such as gvm, pyenv, these shims paths will be prepended before brew bin paths.
 # Finally, $fish_user_paths will be prepended to $PATH.
 # The order of $PATH is:
 # 1. $fish_user_paths
 # 2. gvm, pyenv, nodenv shims
 # 3. brew bin, brew sbin
 # 4. original $PATH
-fish_add_path -gP $HOMEBREW_PREFIX/bin
-fish_add_path -gP $HOMEBREW_PREFIX/sbin
+fish_add_path -gpmP $HOMEBREW_PREFIX/bin
+fish_add_path -gpmP $HOMEBREW_PREFIX/sbin
 
 # set up brew shell env
 brew shellenv | source
