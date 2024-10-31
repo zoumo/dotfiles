@@ -6,4 +6,4 @@ source ${PKG_PATH}/../../../framework/oo-bootstrap.sh
 namespace java
 Log::AddOutput java ERROR
 
-brew::install openjdk maven
+brew::install openjdk mvnvm jenv
