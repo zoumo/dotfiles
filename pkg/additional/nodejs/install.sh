@@ -4,7 +4,7 @@ source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 namespace nodejs
 Log::AddOutput nodejs NOTE
 
-VERSION="16.13.2"
+VERSION="23.2.0"
 
 nodenv_from_src() {
     git::clone https://github.com/nodenv/nodenv.git "${HOME}/.nodenv"
@@ -19,9 +19,12 @@ if ! Command::Exists nodenv; then
     # temporary export
     export PATH="$(brew --prefix nodenv)/bin:$PATH"
 
-    mkdir -p "$(nodenv root)"/plugins
-    git::clone https://github.com/nodenv/node-build.git "$(nodenv root)"/plugins/node-build
 fi
+
+# install node-build or update it
+mkdir -p "$(nodenv root)"/plugins
+git::clone https://github.com/nodenv/node-build.git "$(nodenv root)"/plugins/node-build
+cd "$(nodenv root)/plugins/node-build" && git pull
 
 if [[ ! $(nodenv versions | grep ${VERSION}) ]]; then
     Log "Installing nodejs ${VERSION}"
