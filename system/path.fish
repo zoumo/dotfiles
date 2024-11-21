@@ -73,17 +73,6 @@ if command_exists jenv
     jenv init - fish | source
 end
 
-if test (os_lsb_dist) = macos
-    # For the system Java wrappers to find this JDK, symlink it with
-    # sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
-    # If you need to have openjdk first in your PATH, run:
-    # fish_add_path -gpm $HOMEBREW_PREFIX/opt/openjdk/bin
-    #For compilers to find openjdk you may need to set:
-    set -gx CPPFLAGS "-I$HOMEBREW_PREFIX/opt/openjdk/include"
-    set -gx JAVA_HOME (/usr/libexec/java_home)
-    set -gx CLASS_PATH $JAVA_HOME/lib
-end
-
 # ====================================================================
 # krew
 # ====================================================================

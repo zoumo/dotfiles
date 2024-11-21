@@ -7,3 +7,9 @@ namespace java
 Log::AddOutput java ERROR
 
 brew::install openjdk mvnvm jenv
+
+brew::shellenv
+
+# https://github.com/jenv/jenv#12-configuring-your-shell
+eval "$(jenv init -)"
+jenv enable-plugin export
