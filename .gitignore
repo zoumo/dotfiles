@@ -1,7 +1,7 @@
 .DS_Store
 *~
 *.swp
-plugins
+/plugins
 .vscode
 secret.*
 cache
