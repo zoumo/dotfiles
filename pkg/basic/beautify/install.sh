@@ -5,17 +5,17 @@ source ${PKG_PATH}/../../../framework/oo-bootstrap.sh
 
 cd ${DOT_PLUGINS}
 
-# install one dark for iterm
+# download one dark
 git::clone https://github.com/nathanbuchar/atom-one-dark-terminal.git atom-one-dark-terminal
-if os::macos; then
-    # open "atom-one-dark-terminal/scheme/iterm/One Dark.itermcolors"
-    open "atom-one-dark-terminal/scheme/terminal/One Dark.terminal"
-fi
-
-# install solarized for terminal
+# download solarized
 git::clone https://github.com/altercation/solarized.git solarized
 
-if [[ $(OS::LSBDist) == "centos" ]] && Command::Exists gnome-shell; then
+if os::macos; then
+    # install one dark for iterm2
+    # open "atom-one-dark-terminal/scheme/iterm/One Dark.itermcolors"
+    # install one dark for terminal
+    open "atom-one-dark-terminal/scheme/terminal/One Dark.terminal"
+elif Command::Exists gnome-shell; then
     git::clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git gnome-terminal-colors-solarized
     # need dconf
     sh ./gnome-terminal-colors-solarized/install.sh
