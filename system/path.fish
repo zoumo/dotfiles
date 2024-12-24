@@ -98,6 +98,7 @@ end
 # ====================================================================
 if command_exists kubectl
     kubectl completion fish | source
+    kubectl completion fish | sed -e "s/-c kubectl/-c k/g" | source
 end
 
 # ====================================================================

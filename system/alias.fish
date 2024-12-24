@@ -26,6 +26,3 @@ alias fcd=_fzf_search_directory
 alias fps=_fzf_search_processes
 alias fh=_fzf_search_history
 alias fgl=_fzf_search_git_log
-
-# kubectl alias
-alias k="kubectl"
