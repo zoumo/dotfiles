@@ -6,6 +6,7 @@ function proxy_toggle
         set -e https_proxy
         set -e HTTP_PROXY
         set -e HTTPS_PROXY
+        set -e ALL_PROXY
         echo "==> terminal proxy off"
     else
         set proxy_addr $PROXY_ADDR; or set proxy_addr 127.0.0.1:7890
