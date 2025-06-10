@@ -4,7 +4,7 @@ source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 namespace golang
 Log::AddOutput golang NOTE
 
-VERSION="go1.22.2"
+VERSION="go1.24.2"
 
 brew::install go mercurial
 
