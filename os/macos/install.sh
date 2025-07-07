@@ -27,6 +27,9 @@ binaries=(
     cheat
     watch
     colordiff
+    fx             # terminal json viewer & processor
+    tesseract      # OCR (Optical Character Recognition) engine
+    tesseract-lang # Enables extra languages support for Tesseract
 )
 
 # Apps
