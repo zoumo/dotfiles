@@ -294,5 +294,5 @@ bind - split-window -v
 unbind _
 bind | split-window -h
 
-set -ag terminal-overrides ',screen-256color:Tc'
+set -ag terminal-overrides ',screen-256color:Tc' #!important
 # set -as terminal-overrides ',xterm*:sitm=\E[3m'
