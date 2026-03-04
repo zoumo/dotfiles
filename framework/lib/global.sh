@@ -7,6 +7,7 @@ import lib/git
 import lib/semver
 import lib/system
 import util/log
+import lib/mise
 
 DOT_ROOT="$(cd "${__oo__path}" && pwd -P)"
 DOT_PLUGINS=${DOT_ROOT}/plugins
