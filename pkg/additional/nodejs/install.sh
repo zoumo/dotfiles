@@ -6,34 +6,10 @@ Log::AddOutput nodejs NOTE
 
 VERSION="23.2.0"
 
-nodenv_from_src() {
-    git::clone https://github.com/nodenv/nodenv.git "${HOME}/.nodenv"
-    cd "${HOME}/.nodenv && src/configure" && make -C src
-    mkdir -p ${HOME}/.nodenv/plugins
-    git::clone https://github.com/nodenv/node-build.git "${HOME}/.nodenv/plugins/node-build"
-}
+# Ensure mise is available
+mise::setup
 
-if ! Command::Exists nodenv; then
-    brew::install nodenv
+# Install and set as global (mise use -g auto-installs)
+mise use -g "node@${VERSION}"
 
-    # temporary export
-    export PATH="$(brew --prefix nodenv)/bin:$PATH"
-
-fi
-
-# install node-build or update it
-mkdir -p "$(nodenv root)"/plugins
-git::clone https://github.com/nodenv/node-build.git "$(nodenv root)"/plugins/node-build
-cd "$(nodenv root)/plugins/node-build" && git pull
-
-if [[ ! $(nodenv versions | grep ${VERSION}) ]]; then
-    Log "Installing nodejs ${VERSION}"
-    nodenv install ${VERSION}
-fi
-
-nodenv global ${VERSION}
-Log "nodenv versions:"
-nodenv versions
-
-# install yvm
-# curl -fsSL https://raw.githubusercontent.com/tophat/yvm/master/scripts/install.sh | bash
+Log "Node.js $(node --version 2>/dev/null) installed"

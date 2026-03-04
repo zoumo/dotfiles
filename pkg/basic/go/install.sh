@@ -4,20 +4,12 @@ source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 namespace golang
 Log::AddOutput golang NOTE
 
-VERSION="go1.24.2"
+VERSION="1.24.2"
 
-brew::install go mercurial
+# Ensure mise is available (lib/mise is auto-loaded via global.sh)
+mise::setup
 
-# install gvm
-if [[ ! -d "${HOME}/.gvm" ]]; then
-    bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-fi
+# Install and set as global (mise use -g auto-installs)
+mise use -g "go@${VERSION}"
 
-if ! Command::Exists gvm; then
-    # shellcheck source=/dev/null
-    source "${HOME}/.gvm/scripts/gvm"
-fi
-
-gvm install "${VERSION}" -B
-
-exit 0
+Log "Go $(go version 2>/dev/null | awk '{print $3}') installed"

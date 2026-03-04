@@ -29,17 +29,14 @@ set -gx CC /usr/bin/clang
 set -gx CXX /usr/bin/clang++
 
 # ====================================================================
-# Golang
+# mise - version manager for Go, Node.js, Java, Rust
 # ====================================================================
-set -gx GVM_ROOT "$HOME/.gvm"
-set -gx GO111MODULE auto
-
-# ====================================================================
-# Rust
-# ====================================================================
-if test -d $HOME/.cargo/bin
-    fish_add_path -gpm $HOME/.cargo/bin
+if command_exists mise
+    mise activate fish | source
 end
+
+# Go
+set -gx GO111MODULE auto
 
 # ====================================================================
 # python - uv (replaces pyenv)
@@ -51,21 +48,6 @@ set -gx PYTHONDONTWRITEBYTECODE x
 # Auto-activate virtual environments via auto-uv-env
 if test -f (brew --prefix)/share/auto-uv-env/auto-uv-env.fish
     source (brew --prefix)/share/auto-uv-env/auto-uv-env.fish
-end
-
-# ====================================================================
-# nodenv
-# ====================================================================
-if command_exists nodenv
-    nodenv init - fish | source
-end
-
-# ====================================================================
-# java
-# ====================================================================
-if command_exists jenv
-    fish_add_path -gpm $HOME/.jenv/bin
-    jenv init - fish | source
 end
 
 # ====================================================================
@@ -86,7 +68,6 @@ end
 if command_exists zoxide
     zoxide init fish | source
 end
-
 
 # ====================================================================
 # kubectl

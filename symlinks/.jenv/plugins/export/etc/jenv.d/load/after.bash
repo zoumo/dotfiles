@@ -1,1 +1,0 @@
-echo "echo You may restart your session to activate  jenv export plugin"
