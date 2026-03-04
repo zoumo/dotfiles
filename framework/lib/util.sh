@@ -24,22 +24,24 @@ os::macos() {
 }
 
 util::pip_install() {
-    for item in "$@"; do
-        if [[ ! $(pip show "$item") ]]; then
-            Log "pip installing $item"
-            pip install "$item"
+    for package in "$@"; do
+        if ! uv pip show "$package" &>/dev/null; then
+            Log "pip installing $package via uv"
+            uv pip install "$package"
         else
-            Log "util::pip_install: $item already exists, skip it"
+            Log "util::pip_install: $package already exists, skip it"
         fi
     done
 }
 
 util::pip_install_one() {
-    if [[ ! $(pip show "$item") ]]; then
-        Log "pip installing $1"
-        pip install "$@"
+    local package=$1
+    shift
+    if ! uv pip show "$package" &>/dev/null; then
+        Log "pip installing $package via uv"
+        uv pip install "$@" "$package"
     else
-        Log "util::pip_install: $1 already exists, skip it"
+        Log "util::pip_install_one: $package already exists, skip it"
     fi
 }
 

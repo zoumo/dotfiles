@@ -42,21 +42,16 @@ if test -d $HOME/.cargo/bin
 end
 
 # ====================================================================
-# python
+# python - uv (replaces pyenv)
 # ====================================================================
-# pyenv
-if command_exists pyenv
-    pyenv init - fish | source
-    pyenv virtualenv-init - fish | source
-end
 
-if test (os_lsb_dist) = macos
-    set -gx PYTHON_CONFIGURE_OPTS "--enable-framework CC=clang"
-else
-    set -gx PYTHON_CONFIGURE_OPTS "--enable-shared CC=clang"
-end
-
+# Python environment settings
 set -gx PYTHONDONTWRITEBYTECODE x
+
+# Auto-activate virtual environments via auto-uv-env
+if test -f (brew --prefix)/share/auto-uv-env/auto-uv-env.fish
+    source (brew --prefix)/share/auto-uv-env/auto-uv-env.fish
+end
 
 # ====================================================================
 # nodenv
