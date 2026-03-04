@@ -4,70 +4,36 @@ source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 namespace python
 Log::AddOutput python NOTE
 
-GLOBAL_VERSION="3.11.9"
-VERSIONS=(${GLOBAL_VERSION})
-
-# prerequisite is needed
-# if [[ $(OS::LSBDist) == "centos" ]]; then
-#     sudo yum install -y gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
-# elif [[ $(OS::LSBDist) == "debian" ]]; then
-#     sudo apt-get install -y make build-essential zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev git
-# fi
-
-if os::macos; then
-    brew::install readline sqlite xz zlib openssl@1.1
-else
-    brew::install bzip2 libffi libxml2 libxmlsec1 readline sqlite xz zlib openssl@1.1
-fi
-
-brew::install pyenv pyenv-virtualenv pyenv-ccache
-
 brew::shellenv
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# Install uv - modern Python package manager
+# brew::install handles idempotency (skips if already installed)
+brew::install uv
 
-for VERSION in ${VERSIONS[@]}; do
-    if [[ ! $(pyenv versions | grep ${VERSION}) ]]; then
-        Log "Installing python ${VERSION}"
-        if os::macos; then
-            # fixed, do not change me
-            env CONFIGURE_OPTS="--enable-framework CC=clang" pyenv install ${VERSION} -v
-        else
-            reg='^2\.'
-            if [[ ${VERSION} =~ ${reg} ]]; then
-                # deprecated python2
-                subject=WARN Log "python2 is deprecated now"
-                # else
-                # use openssl 1.1 for python3
-                # export LD_LIBRARY_PATH="$(brew --prefix openssl@1.1)/lib:$(brew --prefix readline)/lib:$(brew --prefix zlib)/lib"
-                # export LIBRARY_PATH="$(brew --prefix openssl@1.1)/include:$(brew --prefix readline)/include:$(brew --prefix zlib)/include"
-            fi
-            env CONFIGURE_OPTS="--enable-shared CC=clang" pyenv install ${VERSION} -v
-        fi
-    fi
-done
+# Install auto-uv-env for automatic venv activation
+# brew tap is idempotent (safe to run if already tapped)
+brew tap ashwch/tap
+brew::install auto-uv-env
 
-# set global version
-pyenv global ${GLOBAL_VERSION}
+# 下载加速
+export UV_PYTHON_INSTALL_MIRROR="https://gh-proxy.com/https://github.com/astral-sh/python-build-standalone/releases/download"
+# Configure uv mirror (idempotent - overwrites existing)
+mkdir -p ~/.config/uv
+cat > ~/.config/uv/uv.toml << 'EOF'
+[[index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+EOF
 
-# install plugins
-# plugins=(
-#     # virtualenv
-#     autopep8
-#     flake8
-#     docopt
-#     pytz
-#     requests
-#     unittest2
-#     arrow
-#     thefuck
-#     neovim
-# )
+# Install Python 3.12.x (latest patch version)
+# uv python install is idempotent (skips if already installed)
+uv python install 3.12
 
-# update pip
-util::pip_install_one --upgrade pip
-# use mirror
-pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+# Generate uv completions (idempotent - overwrites existing)
+# Create completions directory if it doesn't exist
+mkdir -p ~/.config/fish/completions
+uv generate-shell-completion fish > ~/.config/fish/completions/uv.fish 2>/dev/null || true
 
-# util::pip_install ${plugins[@]}
+
+Log "Python $(uv python find 3.12) installed successfully"
+Log "Virtual environments will auto-activate via auto-uv-env"
