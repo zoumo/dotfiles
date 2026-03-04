@@ -109,3 +109,11 @@ end
 if command_exists helm
     helm completion fish | source
 end
+
+# ====================================================================
+# pnpm
+# ====================================================================
+if command_exists pnpm
+    set -gx PNPM_HOME "$HOME/.pnpm"
+    fish_add_path -gpm $HOME/.pnpm
+end
