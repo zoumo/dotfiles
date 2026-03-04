@@ -2,55 +2,70 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
+- [What is dotfiles](#what-is-dotfiles)
 - [Jim's dotfiles](#jims-dotfiles)
-  - [What is dotfiles](#what-is-dotfiles)
-  - [Compatibility](#compatibility)
 - [Quick Start](#quick-start)
   - [Erase and reinstall macOS](#erase-and-reinstall-macos)
   - [Install Xcode](#install-xcode)
   - [Install dotfiles](#install-dotfiles)
-  - [Restore backup](#restore-backup)
-- [How To Use](#how-to-use)
-  - [dotfiles](#dotfiles)
-    - [Topical](#topical)
-  - [macOS](#macos)
-    - [Homebrew packages](#homebrew-packages)
+- [细节说明](#细节说明)
+  - [系统依赖初始化](#系统依赖初始化)
     - [macOS defaults setting](#macos-defaults-setting)
-  - [Beautify](#beautify)
-    - [Terminal/Iterm2](#terminaliterm2)
-    - [ls](#ls)
-  - [Mackup](#mackup)
-  - [alias](#alias)
-  - [Issue](#issue)
+  - [终端美化](#终端美化)
+    - [macos ls](#macos-ls)
+  - [dotfiles](#dotfiles)
+- [定制开发](#定制开发)
+  - [基本工作原理](#基本工作原理)
+  - [操作系统初始化逻辑](#操作系统初始化逻辑)
   - [Reference](#reference)
-  - [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+# What is dotfiles
+
+The set of files used to describe session initialization procedures and store user customizations are commonly referred to as "dotfiles". These files can be used to customize screen appearance, shell behavior, program specifications and aspects of your Athena session. Most dotfiles are text files, although some exist in other formats. Dotfiles generally contain one command per line and are stored in your home directory. Dotfiles usually have names that begin with a period, hence the name dotfiles. You are given some dotfiles that are necessary for you to be able to login when you get your account.
+
 # Jim's dotfiles
 
-## What is dotfiles
+这份 [dotfiles](https://github.com/zoumo/dotfiles) 是最初是 fork 自 [Amowu's dotfiles](https://github.com/amowu/dotfiles) 基于 [Holman's dotfiles](https://github.com/holman/dotfiles)，后面根据个人的需求进行了大刀阔斧的修改，现在基本上已经跟原来的配置无关了
 
-> The set of files used to describe session initialization procedures and store user customizations are commonly referred to as "dotfiles". These files can be used to customize screen appearance, shell behavior, program specifications and aspects of your Athena session. Most dotfiles are text files, although some exist in other formats. Dotfiles generally contain one command per line and are stored in your home directory. Dotfiles usually have names that begin with a period, hence the name dotfiles. You are given some dotfiles that are necessary for you to be able to login when you get your account.
 
-这份 [dotfiles](https://github.com/zoumo/dotfiles) 是 fork 自 [Amowu's dotfiles](https://github.com/amowu/dotfiles) 基于 [Holman's dotfiles](https://github.com/holman/dotfiles)，并更加个人的需求进行了修改, 如果有兴趣欢迎 fork 一份回去配置适合自己的dotfiles。
+如果有兴趣欢迎 fork 一份回去配置适合自己的dotfiles。
 
 更多的 dotfiles 请参考 [GitHub does dotfiles](https://dotfiles.github.io/)。
 
-## Compatibility
+目前本 dotfiles 兼容以下的环境
 
 -   macOS
+-   linux
+    -   debian - bookworm
+
+最终在 macOS 下会得到以下的环境和工具
+
+| Topic          | Value                                               |
+| -------------- | --------------------------------------------------- |
+| 包管理         | [Homebrew](https://brew.sh/)                        |
+| 终端           | [alacritty](https://github.com/alacritty/alacritty) |
+| vim            | [SpaceVim](https://spacevim.org/)                   |
+| docker         | [OrbStack](https://orbstack.dev/)                   |
+| 窗口控制       | [Loop](https://github.com/MrKai77/Loop)             |
+| 状态栏管理工具 | [Ice](https://github.com/jordanbaird/Ice)           |
+| go             | 1.22+                                               |
+| python         | 3.11.9+                                             |
+| Shell          | [fish](https://fishshell.com/)                      |
+
+
 
 # Quick Start
 
 ## Erase and reinstall macOS
 
-如果你打算从干净的 Mac 环境开始，请参考「[OS X：如何清除并安装](http://support.apple.com/zh-tw/HT5943)」。
+如果你打算从干净的 Mac 环境开始，请参考「[如何重新安装 macOS](https://support.apple.com/zh-cn/102655)」。
 
 ## Install Xcode
 
-1. 安装或更新Xcode, 保证Xcode最新, 否则可能会导致失败
-2. 安装Xcode Command Line Tools
+1. 安装或更新 Xcode, 保证 Xcode 最新, 否则可能会导致失败
+2. 安装 Xcode Command Line Tools
 
 ``` bash
 $ xcode-select --install
@@ -80,6 +95,8 @@ $ bash ./script/bootstrap
         2. 安装一些必要的软件和依赖。
         3. 设置 Mac OS X 的 defaults settings。
         4. 清理缓存
+    2. Linux
+        1. 会安装一些系统依赖
 2. 语言环境 （python, go, rust 作为基础依赖会优先安装）
     1. python: 使用 [pyenv](https://github.com/pyenv/pyenv) 管理 python 版本，安装一些基础库，很多其他工具都是基于 python，所以 python 会优先安装
     2. go: golang 为我主要的工作语言
@@ -89,56 +106,19 @@ $ bash ./script/bootstrap
 4. 将 symlinks 下面的文件连接到 `$HOME`
 5. 切换 shell 到 fish
 
-## Restore backup
 
-使用 [Mackup](https://github.com/lra/mackup) 进行备份恢复:
 
-``` bash
-$ mackup restore
-```
+# 细节说明
 
-> 什么是 Mackup? 下面会介紹。
+## 系统依赖初始化
 
-# How To Use
+对于 Linux 系统，首先会通过对应的发行版本的包管理器安装必要的软件，比如 git, curl 等还有运行 linuxbrew 必须的一些依赖
 
-## dotfiles
+后续的二进制和包会都通过 `Homebrew/Linuxbrew` 来统一管理。
 
-脚本在运行的时候会遍历 `symlinks` 目录，将目录下面所有的文件通 `ln` 创建软连接到 `$HOME` 的相对路径中
-
-> 我的 git 的 dotfiles 交给 mackup 来备份
-> 
-> vim 的 dotfiles 交给 [SpaceVim](https://github.com/SpaceVim/SpaceVim) 管理
-
-### Topical
-
-每一个环境的配置是以文件夹的形式独立区分, 例如, 如果想要增加 "Python" 的配置到 dotfiles, 则简单的新增一个名字为 `python` 的文件夹
-
-## macOS
-
-### Homebrew packages
-
-执行 `bash ./os/macos/install.sh` 的时候, 脚本会使用 [Homebrew](http://brew.sh/) 和 [Homebrew Cask](http://caskroom.io/) 來安裝 **binary**、**font** 還有 **app**，可以根据个人的需求增减packages的安装:
-
-``` bash
-binaries=(
-  git
-  tree
-  ...
-)
-```
-
-应用程序可以用 `$ brew cask search XXX` 或是 [Cask Search](http://caskroom.io/search) 网站搜索是否存在。
-
-``` bash
-apps=(
-  scroll-reverser # 可以分别鼠标和触控板滚动方向
-  slate # 开源免费的桌面窗口控制调整工具
-  ...
-)
-```
 ### macOS defaults setting
 
-执行 `bash ./os/macos/set-defaults.sh` 之后，程序会更改 macOS 的一些系统设置, 根据个人喜欢和需求修改这个文件，或是参考 [Mathias’s dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.osx) 整理好的配置。
+执行 `bash ./os/macos/set-defaults.sh` 之后，本程序会更改 macOS 的一些系统设置, 根据个人喜欢和需求修改这个文件，或是参考 [Mathias’s dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.osx) 整理好的配置。
 
 以下是目前设定的配置：
 
@@ -187,140 +167,54 @@ apps=(
 | 自动显示和隐藏dock                             | `defaults write com.apple.dock autohide -bool true`                                                            |
 | 将隐藏的应用程序 Dock 图标用半透明显示         | `defaults write com.apple.dock showhidden -bool true`                                                          |
 
-## Beautify
+## 终端美化
 
-美化至少要对三个工具进行配色 Terminal, vim, ls, vim 使用了 SpaceVim 管理 vim 的方案
+本程序还会对以下三个工具进行配色 Terminal, vim, ls，其中 vim 使用了 SpaceVim 管理 vim 的方案
 
-在 macOS 下使用了 atom-one-dark
+在 macOS 下使用了 atom-one-dark 的配色方案
 
-在 CentOS 下使用了 solarized, 它提供了一套比较完整的解决方案, 但是作者没有给 ls 配色, 所以使用另外一个作者 [seebi](https://github.com/seebi/) 的 [dircolors-solarized](https://github.com/seebi/dircolors-solarized.git)
+在 linux 下使用了 solarized, 它提供了一套比较完整的解决方案，但是作者没有给 ls 配色所以采用另外一个作者 [seebi](https://github.com/seebi/) 的 [dircolors-solarized](https://github.com/seebi/dircolors-solarized.git)
 
-``` bash
-$ git clone https://github.com/nathanbuchar/atom-one-dark-terminal.git ~/plugins
-$ git clone https://github.com/altercation/solarized.git ~/plugins
-$ git clone https://github.com/seebi/dircolors-solarized.git ~/plugins
-```
 
-### Terminal/Iterm2
+### macos ls
 
-```bash
-# 导入iterm2的配色
-$ open "~/plugins/atom-one-dark-terminal/scheme/iterm/One Dark.itermcolors"
-# 导入Terminal.app的配色
-$ open "~/plugins/atom-one-dark-terminal/scheme/terminal/One Dark.terminal"
-```
-
-### ls
-
-macOS 是基于 FreeBSD 的, 所以 ls 是 BSD 那一套, 不是 GNU 的 ls, 所以即使Terminal/iTerm2 配置了颜色, 但是 ls 也不会受到影响, 所以通过安装 GNU 的 coreutils, 来解决
+我们默认安装的配色采用的 dircolors，这个只能影响到 GNU 的 ls，而 macOS 是基于 FreeBSD 的，并不会被上面的方案影响到，所以需要额外安装 GNU 的 coreutils 套件
 
 ```shell
-# Install GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
-eval `dircolors ~/plugins/dircolors-solarized/dircolors.ansi-dark`
 ```
 
-## Mackup
+## dotfiles
 
-当初始环境都安装好了以后, 就是需要备份了。除了 `.zsrc`、`.vimrc` 这类 dotfile 比较适合放置Github上面之外，其他像是 Sublime 的 plugin、iTerm2 的 setting、Oh My Zsh 的 plugin、等等很多一般程序的配置需要备份, 这些不适合放在Github上面。所以这里介紹 [Mackup](https://github.com/lra/mackup) 
+脚本在运行的时候会遍历 `symlinks` 目录，将目录下面所有的文件通 `ln` 创建软连接到 `$HOME` 的相对路径中
 
-**它将你想要备份的文件转移到 Dropbox , Google Drive, 百度云这样的云盘在本地的同步目录如 `~/dropbox/mackup`, 然后使用 `ln -s` 进行链接 `link -> ~/dropbox/mackup`**
+比如 symlinks 目录下面有一个文件 `.tmux.config.local`, 那么脚本会将这个文件软连接到 `$HOME/.tmux.config.local`
 
-install
 
-``` bash
-$ brew install mackup
+# 定制开发
+
+本项目主要是使用 bash 的 shell 脚本开发，使用了 [bash-oo-framework](https://github.com/niieani/bash-oo-framework) 的 bash 框架
+
+```shell
+.
+├── framework # bash-oo-framework 源代码
+├── os        # 操作系统初始化相关逻辑
+├── pkg       # 各个 topic 的目录
+├── plugins   # 安装过程中下载内容的目录
+├── script    # 项目入口
+├── symlinks  # 软连接,所有文件都会链接到 $HOME 的相对路径下
 ```
 
-配置方式也很容易，建立一份 `~/.mackup.cfg` 來修改:
+## 基本工作原理
 
-``` bash
-[storage]
-engine = dropbox # 同步的云盘, 目前只有dropbox和google_drive可以选择
-directory = Mackup # 同步的文件夹，这里会将所有的同步备份至 ~/Dropbox/Mackup 底下
-
-# 指定要同步的应用程序
-[applications_to_sync]
-iterm2
-oh-my-zsh
-sublime-text-3
-ssh
-
-[applications_to_ignore]
-# 指定不想同步的应用程序
-```
-
-还可以在 `~/.mackup`文件夹中添加自定义程序同步配置(注意, 如果自定义的配置与默认支持的程序同名, 会覆盖默认配置)
-
-``` bash
-$ vim ~/.mackup/sublime-text-3.cfg
-[application]
-name = Sublime Text 3
-
-[configuration_files]
-# Based on https://packagecontrol.io/docs/syncing
-Library/Application Support/Sublime Text 3/Packages
-Library/Application Support/Sublime Text 3/Installed Packages
-.config/sublime-text-3/Packages/User
-```
-
-进行备份, 以后的任意修改都会被同步到云端
-
-``` bash
-$ mackup backup
-```
-
-就可以将文件备份到 Dropbox 或 Google Drive。需要恢复的适合则执行:
-
-``` bash
-$ mackup restore
-```
-
-以下是目前我备份的应用程序：
-
-| app             | backup-conf                        |
-| --------------- | ---------------------------------- |
-| git             | ~/.gitconfig 和 .config/git/ignore |
-| mackup          | ~/.mackup.cfg 和 ~/.mackup         |
-| scroll-reverser | 默认配置                           |
-| slate           | ~/.slate                           |
-| sublime-text-3  | plugins 和 config                  |
-
-更多详细的配置说明和支持软件请查看 [mackup 的文件](https://github.com/lra/mackup/tree/master/doc)。
-
-## alias
-
-由于个人习惯需要对一些命令进行alias, 如下
-
-``` bash
-alias dos2mac="dos2unix -c mac"
-alias gbk2utf8="iconv -f GBK -t UTF-8"
-alias utf82gbk="iconv -f UTF-8 -t GBK"
-alias tailf="tail -f"
-alias ve="pyenv local"
-alias rm="trash" # 这个需要brew install trash
-```
-
-## Issue
-
-其他的一些软件按需安装
-
-| name                                                | 说明                                         |
-| --------------------------------------------------- | -------------------------------------------- |
-| [google-chrome](www.google.com/chrome)              | Google 浏览器                                |
-| [Alacritty](https://github.com/alacritty/alacritty) | 一个快速、跨平台的 GPU 驱动终端              |
-| [beyond-compare](http://www.scootersoftware.com/)   | Beyond Compare 是一个优秀的文件/目录对比工具 |
-| [VSCode](https://code.visualstudio.com/)            | 我最喜欢的 Editor                            |
-| Alfred                                              | workflow 神器                                |
-| Dash                                                | API 查询神器                                 |
-| Airmail2                                            | 漂亮的邮件客户端                             |
-| MindNode Pro                                        | Simple and Beautiful Visual Brainstorming    |
-| sequel-pro                                          | mysql client                                 |
-| [Clipy](https://github.com/Clipy/Clipy)             | Clipboard extension app for macOS            |
-| [Charles](http://www.charlesproxy.com/)             | 抓包工具                                     |
-| movist                                              | 播放器                                       |
+在本项目中，如果某个目录中带有 `install.sh` 的文件，那么这个目录被称为一天 topic 或者 module。
 
 
+## 操作系统初始化逻辑
+
+在开始构建环境之前通常需要对操作系统做一些初始化的工作，比如安装必要的依赖库和软件等
+
+初始化的的逻辑入口在 `os/prepare.sh` 中，它会判断 os 的发行版，然后调用相应的脚本
 
 ## Reference
 
@@ -331,7 +225,3 @@ alias rm="trash" # 这个需要brew install trash
 - [osx-for-hackers.sh](https://gist.github.com/brandonb927/3195465)
 - [Mackup](https://github.com/lra/mackup/tree/master/doc)
 - [我的 mac-dev-setup](https://github.com/zoumo/mac-dev-setup)
-
-## Thanks
-
-I forked [Amowu](https://github.com/amowu/)'s [dotfiles](https://github.com/amowu/dotfiles.git) base on [Zach Holman](http://github.com/holman)'s excellent [dotfiles](http://github.com/holman/dotfiles).
