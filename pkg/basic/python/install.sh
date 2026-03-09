@@ -29,11 +29,5 @@ EOF
 # uv python install is idempotent (skips if already installed)
 uv python install 3.12
 
-# Generate uv completions (idempotent - overwrites existing)
-# Create completions directory if it doesn't exist
-mkdir -p ~/.config/fish/completions
-uv generate-shell-completion fish > ~/.config/fish/completions/uv.fish 2>/dev/null || true
-
-
 Log "Python $(uv python find 3.12) installed successfully"
 Log "Virtual environments will auto-activate via auto-uv-env"

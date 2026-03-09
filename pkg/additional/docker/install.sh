@@ -15,8 +15,6 @@ else
     brew::install docker
 fi
 
-brew::install docker
-
 # if os::macos; then
 #     brew::cask::install docker
 # else

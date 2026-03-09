@@ -8,10 +8,19 @@ Log::AddOutput vim ERROR
 
 # 安装依赖
 if os::macos; then
-    brew::cask::install macvim
+    brew::install macvim
 else
     brew::install vim
 fi
 
-# use spacevim
-curl -sLf https://spacevim.org/cn/install.sh | bash
+brew::install neovim
+
+cd "${DOT_PLUGINS}" || exit
+
+git::clone https://github.com/LazyVim/starter starter
+
+if [[ -d "${HOME}/.config/nvim" ]];then
+   mv "${HOME}/.config/nvim" "${HOME}/.config/nvim.bak"
+fi
+
+ln -sf "${DOT_PLUGINS}/starter" "${HOME}/.config/nvim"

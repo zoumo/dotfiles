@@ -32,3 +32,8 @@ alias fgl=_fzf_search_git_log
 # fx
 alias jv="fx"
 alias yv="fx --yaml"
+
+# neovim
+set -gx EDITOR nvim
+alias vi=nvim
+alias vim=nvim

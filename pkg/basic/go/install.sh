@@ -4,10 +4,14 @@ source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 namespace golang
 Log::AddOutput golang NOTE
 
-VERSION="1.24.2"
+VERSION="1.24.13"
 
 # Ensure mise is available (lib/mise is auto-loaded via global.sh)
 mise::setup
+
+# use mirror and skip checksum
+mise settings go_download_mirror https://mirrors.aliyun.com/golang
+mise settings go_skip_checksum true
 
 # Install and set as global (mise use -g auto-installs)
 mise use -g "go@${VERSION}"

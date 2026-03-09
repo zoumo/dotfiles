@@ -22,6 +22,7 @@ if test (os_lsb_dist) = macos
     fish_add_path -gpm (brew --prefix findutils)/libexec/gnubin
     fish_add_path -gpm (brew --prefix gnu-sed)/libexec/gnubin
 end
+
 # ====================================================================
 # use clang
 # ====================================================================
@@ -35,19 +36,36 @@ if command_exists mise
     mise activate fish | source
 end
 
+# ====================================================================
 # Go
-set -gx GO111MODULE auto
+# ====================================================================
+if command_exists go
+    set -gx GO111MODULE auto
+end
+
+# ====================================================================
+# rust
+# ====================================================================
+if command_exists rustup
+    # set rustup mirror
+    set -gx RUSTUP_UPDATE_ROOT "https://mirrors.aliyun.com/rustup/rustup"
+    set -gx RUSTUP_DIST_SERVER "https://mirrors.aliyun.com/rustup"
+end
 
 # ====================================================================
 # python - uv (replaces pyenv)
 # ====================================================================
+if command_exists uv
+    uv generate-shell-completion fish | source
 
-# Python environment settings
-set -gx PYTHONDONTWRITEBYTECODE x
-
-# Auto-activate virtual environments via auto-uv-env
-if test -f (brew --prefix)/share/auto-uv-env/auto-uv-env.fish
-    source (brew --prefix)/share/auto-uv-env/auto-uv-env.fish
+    set -gx UV_PYTHON_INSTALL_MIRROR "https://gh-proxy.com/https://github.com/astral-sh/python-build-standalone/releases/download"
+    # Python environment settings
+    set -gx PYTHONDONTWRITEBYTECODE x
+    
+    # Auto-activate virtual environments via auto-uv-env
+    if test -f (brew --prefix)/share/auto-uv-env/auto-uv-env.fish
+        source (brew --prefix)/share/auto-uv-env/auto-uv-env.fish
+    end
 end
 
 # ====================================================================
