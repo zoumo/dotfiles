@@ -12,6 +12,14 @@
     - [Homebrew 二进制工具](#homebrew-%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%B7%A5%E5%85%B7)
     - [macOS 应用 (Homebrew Cask)](#macos-%E5%BA%94%E7%94%A8-homebrew-cask)
     - [字体](#%E5%AD%97%E4%BD%93)
+  - [工具选择理念](#%E5%B7%A5%E5%85%B7%E9%80%89%E6%8B%A9%E7%90%86%E5%BF%B5)
+    - [Shell: Fish](#shell-fish)
+    - [终端: Alacritty](#%E7%BB%88%E7%AB%AF-alacritty)
+    - [Docker: OrbStack](#docker-orbstack)
+    - [GNU 工具](#gnu-%E5%B7%A5%E5%85%B7)
+    - [版本管理: mise](#%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86-mise)
+    - [Python: uv](#python-uv)
+    - [编辑器: Neovim + LazyVim](#%E7%BC%96%E8%BE%91%E5%99%A8-neovim--lazyvim)
   - [MacOS 默认配置修改](#macos-%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E4%BF%AE%E6%94%B9)
   - [语言工具版本管理](#%E8%AF%AD%E8%A8%80%E5%B7%A5%E5%85%B7%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86)
   - [现代工具替换](#%E7%8E%B0%E4%BB%A3%E5%B7%A5%E5%85%B7%E6%9B%BF%E6%8D%A2)
@@ -126,6 +134,97 @@ FORCE_MACOS_DEFAULTS=1 bash ./script/bootstrap
 - font-caskaydia-cove-nerd-font
 
 </details>
+
+## 工具选择理念
+
+为什么选择这些工具？以下是每个关键工具的选型理由。
+
+### Shell: Fish
+
+[Fish](https://fishshell.com/) (Friendly Interactive Shell) 是一个为用户友好设计的现代 shell：
+
+- **开箱即用的自动补全**：无需复杂配置，Fish 提供强大的命令、参数和路径补全
+- **语法高亮**：命令在输入时就会显示不同颜色，帮助识别语法错误
+- **基于 Web 的配置界面**：通过 `fish_config` 可以在浏览器中配置主题和函数
+- **简洁的脚本语法**：比 Bash 更直观，没有 POSIX 的历史包袱
+- **与 Oh-My-Fish 配合**：提供插件生态和主题支持
+
+> 唯一需要注意的是 Fish 不完全兼容 POSIX，一些 Bash 脚本可能需要调整。但日常使用中，Fish 的优势远大于这个限制。
+
+### 终端: Alacritty
+
+[Alacritty](https://alacritty.org/) 是一个使用 GPU 加速的现代终端模拟器：
+
+- **极致性能**：利用 GPU 渲染，滚动和输出速度远超传统终端
+- **最小化设计**：不内置标签页、分屏等功能，遵循 Unix 哲学——专注做一件事
+- **配置简单**：使用 TOML/YAML 配置文件，无需 GUI 设置
+- **跨平台**：macOS、Linux、Windows 都可用相同配置
+
+> 为什么不用 iTerm2？iTerm2 功能丰富但臃肿，Alacritty 选择与 tmux 配合，性能更好。
+
+### Docker: OrbStack
+
+[OrbStack](https://orbstack.dev/) 是 macOS 上 Docker Desktop 的现代替代品：
+
+- **启动速度**：秒级启动，Docker Desktop 需要数十秒
+- **资源占用低**：内存占用仅为 Docker Desktop 的 1/3
+- **原生网络**：无需端口转发，容器端口直接可用
+- **无缝集成**：完全兼容 Docker CLI 和 docker-compose
+- **额外功能**：内置 Linux 虚拟机和 Kubernetes 支持
+
+> 对于开发者，OrbStack 带来的体验提升是革命性的——不再需要等待 Docker 启动，不再因为资源占用而卡顿。
+
+### GNU 工具
+
+macOS 的命令行工具来自 BSD，与 Linux (GNU) 有细微差异。安装 GNU 工具的原因：
+
+- **跨平台脚本一致性**：编写能在 macOS 和 Linux 上运行的脚本
+- **更丰富的功能**：GNU 工具通常有更多选项和扩展
+- **脚本兼容性**：许多开源项目的构建脚本假设 GNU 环境
+
+| GNU 工具 | 替代的 BSD 工具 | 主要差异 |
+|----------|-----------------|----------|
+| `coreutils` | BSD userland | `date -d`, `ls --color` 等 GNU 扩展 |
+| `gnu-sed` | BSD sed | 支持 `-i` 直接修改文件（无需备份后缀）|
+| `findutils` | BSD find | 更丰富的 `-exec` 语法和选项 |
+
+> 通过在 PATH 中添加 GNU 工具前缀（如 `gdate`, `gsed`），可以同时保留两者，按需使用。
+
+### 版本管理: mise
+
+[mise](https://mise.jdx.dev/) (前身为 rtx) 是一个统一的多语言版本管理器：
+
+- **统一管理**：一个工具管理 Go、Node.js、Rust、Java 等所有语言版本
+- **兼容 asdf**：可以直接使用 asdf 插件生态
+- **自动切换**：进入项目目录自动切换到配置的版本
+- **速度快**：用 Rust 编写，比 asdf 快 10-100 倍
+- **无需 shim**：直接操作 PATH，没有性能损耗
+
+> 告别 nvm、pyenv、goenv、sdkman 等多个版本管理器，mise 一个就够了。
+
+### Python: uv
+
+[uv](https://docs.astral.sh/uv/) 是 Astral 公司用 Rust 编写的极速 Python 工具：
+
+- **安装速度**：比 pip 快 10-100 倍
+- **统一工具链**：替代 pip、pip-tools、pipx、poetry、pyenv、virtualenv
+- **自动虚拟环境**：运行脚本自动创建和管理 venv
+- **项目管理**：内置依赖解析和 lock 文件支持
+- **工具安装**：`uv tool install` 替代 pipx
+
+> 为什么不用 pyenv？uv 安装 Python 的速度比 pyenv 快很多，而且它还能管理依赖和虚拟环境，一站式解决所有 Python 开发需求。
+
+### 编辑器: Neovim + LazyVim
+
+[Neovim](https://neovim.io/) 是 Vim 的现代分支，[LazyVim](https://www.lazyvim.org/) 是一个预配置的 Neovim 发行版：
+
+- **启动速度快**：Lua 配置比 VimScript 快得多
+- **LSP 原生支持**：内置语言服务器协议，无需插件即可获得智能补全
+- **Tree-sitter**：更精准的语法高亮和代码理解
+- **LazyVim 开箱即用**：预配置了 LSP、格式化、Git、文件树等常用功能
+- **插件生态**：使用 lazy.nvim 插件管理器，延迟加载，按需安装
+
+> 为什么不用 VS Code？Neovim + LazyVim 提供了 VS Code 级别的功能，但保持了 Vim 的键盘操作效率。一旦适应，编码速度会显著提升。
 
 ## MacOS 默认配置修改
 
