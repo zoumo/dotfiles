@@ -2,7 +2,7 @@
 
 # install omf plugins
 set -a omf_plugins bass
-set -a omf_plugins fish-gvm
+# set -a omf_plugins fish-gvm
 set -a omf_plugins https://github.com/PatrickF1/fzf.fish
 
 for plugin in $omf_plugins
