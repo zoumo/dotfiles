@@ -21,7 +21,7 @@ export UV_PYTHON_INSTALL_MIRROR="https://gh-proxy.com/https://github.com/astral-
 mkdir -p ~/.config/uv
 cat > ~/.config/uv/uv.toml << 'EOF'
 [[index]]
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+url = "http://mirrors.aliyun.com/pypi/simple"
 default = true
 EOF
 

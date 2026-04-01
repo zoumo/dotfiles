@@ -116,3 +116,23 @@ if command_exists pnpm
     set -gx PNPM_HOME "$HOME/.pnpm"
     fish_add_path -gpm $HOME/.pnpm
 end
+
+
+# ===================================================================
+# Obsidian
+# ===================================================================
+if test -d /Applications/Obsidian.app
+    fish_add_path -gpm /Applications/Obsidian.app/Contents/MacOS
+end
+if command_exists notesmd-cli
+    notesmd-cli completion fish | source
+end
+
+
+# ====================================================================
+# bun
+# ====================================================================
+
+if test -d $HOME/.bun
+    fish_add_path -gpm $HOME/.bun/bin
+end
