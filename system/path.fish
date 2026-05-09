@@ -13,14 +13,13 @@ set -gx LC_ALL en_US.UTF-8
 
 set -gx OPT_PATH /usr/local/opt
 
-
 # ====================================================================
 # set gnu
 # ====================================================================
 if test (os_lsb_dist) = macos
-    fish_add_path -gpm (brew --prefix coreutils)/libexec/gnubin
-    fish_add_path -gpm (brew --prefix findutils)/libexec/gnubin
-    fish_add_path -gpm (brew --prefix gnu-sed)/libexec/gnubin
+    fish_add_path -gpm $ZEROBREW_PREFIX/opt/coreutils/libexec/gnubin
+    fish_add_path -gpm $ZEROBREW_PREFIX/opt/findutils/libexec/gnubin
+    fish_add_path -gpm $ZEROBREW_PREFIX/opt/gnu-sed/libexec/gnubin
 end
 
 # ====================================================================
@@ -135,4 +134,9 @@ end
 
 if test -d $HOME/.bun
     fish_add_path -gpm $HOME/.bun/bin
+end
+
+
+if command_exists atuin
+    atuin init fish --disable-up-arrow | source
 end

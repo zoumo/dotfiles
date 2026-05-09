@@ -10,11 +10,17 @@ Log::AddOutput lib/brew STATUS
 readonly BREW_MIN_VERSION="3.3.6"
 
 brew::mirror() {
-    export HOMEBREW_API_DOMAIN="https://mirrors.aliyun.com/homebrew-bottles/api"
-    export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew-bottles"
-    export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/brew.git"
-    export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
-    export HOMEBREW_PIP_INDEX_URL="http://mirrors.aliyun.com/pypi/simple"
+    # export HOMEBREW_API_DOMAIN="https://mirrors.aliyun.com/homebrew-bottles/api"
+    # export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew-bottles"
+    # export HOMEBREW_PIP_INDEX_URL="http://mirrors.aliyun.com/pypi/simple"
+    # export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/brew.git"
+    # export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
+
+    export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+    export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+    export HOMEBREW_PIP_INDEX_URL="https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+    # export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+    # export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
 }
 
 brew::unmirror() {
@@ -59,33 +65,15 @@ brew::verify() {
 }
 
 brew::setup() {
+    # set up homebrew
     brew::mirror
-
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-    # if [[ "$(OS::LSBDist)" == "macos" ]]; then
-    #     # install homebrew
-    #     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # elif [[ ! -d /home/linuxbrew/.linuxbrew ]]; then
-    #     HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-'/home/linuxbrew/.linuxbrew'}"
-    #     # create linuxbrew user to install homebrew
-    #     sudo id -u linuxbrew >/dev/null 2>&1 || sudo useradd -m -s /bin/bash linuxbrew
-    #     # add permission for normal user
-    #     sudo chmod 0755 /home/linuxbrew
-    #     # enable sudo
-    #     sudo grep -q "linuxbrew ALL" /etc/sudoers || sudo bash -c "echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers"
-    #     if [[ "$(whoami)" != "root" ]]; then
-    #         # add current user to group linuxbrew
-    #         groups "$USER" | grep -q linuxbrew || sudo usermod -a -G linuxbrew "$USER"
-    #     fi
-    #     # install homebrew by linuxbrew user
-    #     # -E to preserve environment variables
-    #     # -u to run as user linuxbrew
-    #     sudo -E -u linuxbrew bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # fi
+    # setup zerobrew
+    curl -fsSL https://zerobrew.rs/install | bash
 }
 
-brew::install() {
+homebrew::install() {
     if ! brew::verify; then
         return
     fi
@@ -95,33 +83,85 @@ brew::install() {
             Log "brew installing $item"
             brew install "$item"
         else
-            Log "brew::install: $item already exists, skip it"
+            Log "homebrew::install: $item already exists, skip it"
         fi
     done
 }
 
-brew::install_one() {
+homebrew::tap::install() {
     if ! brew::verify; then
         return
     fi
-    brew_list=($(brew list -1))
-    if Array::Contains "${1}" "${brew_list[@]}"; then
-        Log "brew::install: $1 already exists, skip it"
-    else
-        Log "brew installing $1"
-        brew install "$@"
-    fi
+    brew_tap_list=($(brew tap))
+    for item in "$@"; do
+        tap="${item%/*}"
+        formula="${item##*/}"
+
+        if [[ "${tap}" == "${item}" ]]; then
+            Log "homebrew::tap::install: $item is not a tapped formula"
+            return 1
+        fi
+
+        if ! Array::Contains "$tap" "${brew_tap_list[@]}"; then
+            Log "brew tapping $tap"
+            brew tap "$tap" || return 1
+            brew_tap_list+=("$tap")
+        else
+            Log "homebrew::tap::install: $tap already exists, skip it"
+        fi
+
+        if brew list --formula "$formula" >/dev/null 2>&1; then
+            Log "homebrew::tap::install: $formula already exists, skip it"
+        else
+            Log "brew installing $item"
+            brew install "$item" || return 1
+        fi
+    done
 }
 
-brew::cask::install() {
+homebrew::cask::install() {
     if ! brew::verify; then
         return
     fi
-    brew_list=($(brew list -1))
-    if Array::Contains "${1}" "${brew_list[@]}"; then
-        Log "brew::cask::install: $1 already exists, skip it"
+    brew_cask_list=($(brew list --cask -1))
+    for item in "$@"; do
+        if Array::Contains "${item}" "${brew_cask_list[@]}"; then
+            Log "homebrew::cask::install: $item already exists, skip it"
+        else
+            Log "brew cask installing $item"
+            brew install --cask --appdir="/Applications" -f "$item" || return 1
+            brew_cask_list+=("$item")
+        fi
+    done
+}
+
+
+zb() {
+    zerobrew::shellenv
+    "$ZEROBREW_BIN"/zb "$@"
+}
+
+zerobrew::shellenv() {
+    if [[ "$(OS::LSBDist)" == "macos" ]]; then
+        export ZEROBREW_ROOT="/opt/zerobrew"
+        export ZEROBREW_PREFIX=$ZEROBREW_ROOT
     else
-        Log "brew installing $1"
-        brew install --cask --appdir="/Applications" "$@"
+        XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+        export ZEROBREW_ROOT="$XDG_DATA_HOME/zerobrew"
+        export ZEROBREW_PREFIX=$ZEROBREW_ROOT/prefix
     fi
+    export PATH="${ZEROBREW_PREFIX}/bin:${PATH}"
+    export ZEROBREW_BIN="$HOME"/.local/bin
+}
+
+zerobrew::install() {
+    zb_list=($(zb list))
+    for item in "$@"; do
+        if ! Array::Contains "$item" "${zb_list[@]}"; then
+            Log "zerobrew installing $item"
+            zb install "$item"
+        else
+            Log "zerobrew::install: $item already exists, skip it"
+        fi
+    done
 }

@@ -42,7 +42,7 @@ import = ["~/.config/alacritty/themes/themes/one_dark.toml"]
 
 [terminal]
 
-shell = { program = "/opt/homebrew/bin/fish", args = [
+shell = { program = "/opt/zerobrew/bin/fish", args = [
   "-l",
   "--init-command",
   "smug start zoumo",

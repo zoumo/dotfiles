@@ -5,15 +5,15 @@ import util/command
 namespace lib/mise
 Log::AddOutput lib/mise STATUS
 
-# Install mise via Homebrew (idempotent)
+# Install mise via Zerobrew (idempotent)
 # Note: 'mise use -g <tool>@<version>' auto-installs the tool
 mise::setup() {
     if Command::Exists mise; then
         return 0
     fi
 
-    Log "Installing mise via Homebrew..."
-    brew::install mise
+    Log "Installing mise via Zerobrew..."
+    zerobrew::install mise
 
     # Verify installation
     if ! Command::Exists mise; then
