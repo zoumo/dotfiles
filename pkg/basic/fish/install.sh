@@ -4,10 +4,10 @@ PKG_PATH="$(cd "$(dirname ${BASH_SOURCE})" && pwd -P)"
 source ${PKG_PATH}/../../../framework/oo-bootstrap.sh
 
 # install fish fisher starship
-brew::install fish fisher starship
+zerobrew::install fish fisher starship
 
 # add fish to /etc/shells
-shell_bin="$(brew --prefix)/bin/fish"
+shell_bin="$ZEROBREW_PREFIX/bin/fish"
 [[ -n "$(grep "${shell_bin}" /etc/shells | tail -1)" ]] || sudo bash -c "echo ${shell_bin} >>/etc/shells"
 
 # install oh-my-fish

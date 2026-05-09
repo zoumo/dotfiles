@@ -10,7 +10,7 @@ if ! os::macos; then
     exit 0
 fi
 
-brew::install alacritty
+homebrew::cask::install alacritty
 
 # install theme
 ALACRITTY_CONFIG_PATH="${HOME}/.config/alacritty"

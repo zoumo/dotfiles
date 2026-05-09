@@ -10,10 +10,9 @@ Log::AddOutput java NOTE
 mise::setup
 
 # install java via brew
-brew::install openjdk 
+zerobrew::install openjdk
 
-# link java@brew
-mise link --force java@brew "$(brew --prefix openjdk)"
-mise use -g "java@brew"
+mise install java@17
+mise use -g java@17
 
 Log "Java $(java -version 2>&1 | head -1) installed"

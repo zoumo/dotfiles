@@ -16,6 +16,6 @@ mise settings node.mirror_url=https://mirrors.tuna.tsinghua.edu.cn/nodejs-releas
 mise use -g "node@${VERSION}"
 
 # install bun
-brew::install bun
+homebrew::tap::install oven-sh/bun/bun
 
 Log "Node.js $(node --version) installed"

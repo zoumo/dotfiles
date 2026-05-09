@@ -33,16 +33,20 @@ utils=(
     difftastic # https://github.com/Wilfred/difftastic
     # tldr: Collaborative cheatsheets for console commands
     tealdeer
-    # control kubectl context
-    kubectx
     # krew
     krew
     # A tool for exploring each layer in a docker image
     dive # https://github.com/wagoodman/dive
-    # kubectl context switcher on multiple files
-    danielfoehrkn/switch/switcher # https://github.com/danielfoehrKn/kubeswitch
+
+)
+
+brew_tap_utils=(
+  # kubectl context switcher on multiple files
+  danielfoehrkn/switch/switch # https://github.com/danielfoehrKn/kubeswitch
 )
 
 Log "Installing utils..."
-brew::install "${replacement[@]}"
-brew::install "${utils[@]}"
+zerobrew::install "${replacement[@]}"
+zerobrew::install "${utils[@]}"
+
+homebrew::tap::install "${brew_tap_utils[@]}"

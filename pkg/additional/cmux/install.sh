@@ -11,7 +11,7 @@ if ! os::macos; then
     exit 0
 fi
 
-brew::cask::install cmux
+homebrew::cask::install cmux
 
 Log "Configuring keybindings..."
 bash "${PKG_PATH}/setup-keybindings.sh"

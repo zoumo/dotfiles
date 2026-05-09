@@ -10,13 +10,13 @@ if Command::Exists docker; then
 fi
 
 if os::macos; then
-    brew::cask::install OrbStack
+    homebrew::cask::install OrbStack
 else
-    brew::install docker
+    homebrew::install docker
 fi
 
 # if os::macos; then
-#     brew::cask::install docker
+#     homebrew::cask::install docker
 # else
 #     curl -fsSL https://get.docker.com | sudo bash
 

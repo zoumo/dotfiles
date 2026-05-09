@@ -34,11 +34,10 @@ binaries=(
 
 # Apps
 apps=(
-    alacritty       # 一个快速、跨平台的GPU驱动终端
     mos             # 平滑你的鼠标滚动效果或单独设置滚动方向
     maczip          # 免费的解压软件
     iina            # 播放器
-    eazydict        # Translator
+    easydict        # Translator
     orbstack        # mac docker alternative
     bleunlock       # bluetooth unlock
     loop            # Window management made elegant.
@@ -83,16 +82,16 @@ brew update
 
 Log "Installing coreutils, findutils, bash, macvim..."
 # Install GNU core utilities (those that come with OS X are outdated)
-brew::install coreutils
+zerobrew::install coreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
-brew::install findutils
+zerobrew::install findutils
 # Install GNU `sed`
-brew::install gnu-sed
+zerobrew::install gnu-sed
 # Install Bash 5
-brew::install bash
+zerobrew::install bash
 
 Log "Installing binaries..."
-brew::install "${binaries[@]}"
+zerobrew::install "${binaries[@]}"
 
 # echo "Installing fonts..."
 # brew cask install ${fonts[@]}
@@ -101,11 +100,11 @@ brew::install "${binaries[@]}"
 # If you haven’t yet, run brew uninstall --force brew-cask; brew update to switch to the new system.
 
 Log "Installing fonts..."
-brew::install "${fonts[@]}"
+homebrew::cask::install "${fonts[@]}"
 
 # Install apps to /Applications
 Log "Installing apps..."
-brew::cask::install "${apps[@]}"
+homebrew::cask::install "${apps[@]}"
 
 # clean things up
 brew cleanup
