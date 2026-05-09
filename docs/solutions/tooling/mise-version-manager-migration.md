@@ -66,15 +66,15 @@ import util/command
 namespace lib/mise
 Log::AddOutput lib/mise STATUS
 
-# Install mise via Homebrew (idempotent)
+# Install mise via Zerobrew (idempotent)
 # Note: 'mise use -g <tool>@<version>' auto-installs the tool
 mise::setup() {
     if Command::Exists mise; then
         return 0
     fi
 
-    Log "Installing mise via Homebrew..."
-    brew::install mise
+    Log "Installing mise via Zerobrew..."
+    zerobrew::install mise
 
     # Verify installation
     if ! Command::Exists mise; then
@@ -92,7 +92,7 @@ mise::setup() {
 
 **Key Design Decisions:**
 - Idempotent: Returns early if mise already installed
-- Uses `brew::install` which is itself idempotent
+- Uses `zerobrew::install` for the mise binary, matching the current convention for regular CLI tools
 - Non-fatal completion generation (uses `|| true`)
 - Leverages existing `Command::Exists` and `Log` utilities from bash-oo-framework
 

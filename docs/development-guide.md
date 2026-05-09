@@ -8,7 +8,7 @@
 ├── framework/        # bash-oo-framework 框架
 │   └── lib/          # 项目封装的库函数
 │       ├── global.sh   # 全局变量（DOT_ROOT, DOT_PLUGINS, DOT_CACHE）
-│       ├── brew.sh     # Homebrew 安装与镜像配置
+│       ├── brew.sh     # Homebrew/Zerobrew 安装与镜像配置
 │       ├── mise.sh     # mise 版本管理器封装
 │       ├── git.sh      # Git 克隆工具函数
 │       ├── util.sh     # 通用工具函数
@@ -17,7 +17,7 @@
 ├── os/               # 操作系统初始化
 │   ├── prepare.sh      # OS 初始化入口
 │   ├── macos/          # macOS 专用配置
-│   │   ├── install.sh    # Homebrew 及常用软件安装
+│   │   ├── install.sh    # Homebrew/Zerobrew 及常用软件安装
 │   │   └── set-defaults.sh
 │   └── debian/         # Debian 专用配置
 ├── pkg/              # 包安装脚本
@@ -45,7 +45,7 @@ script/bootstrap
     ├─→ script/dot
     │       │
     │       ├─→ os/prepare.sh
-    │       │       └─→ os/{macos|debian}/install.sh  # 安装系统依赖和 Homebrew
+    │       │       └─→ os/{macos|debian}/install.sh  # 安装系统依赖、Homebrew 和 Zerobrew
     │       │
     │       ├─→ pkg/basic/{lang}/install.sh  # 先安装语言（python, go, rust）
     │       │
@@ -82,8 +82,8 @@ Fish 通过 Oh-My-Fish (OMF) 启动，加载顺序：
 ~/.config/omf/before.init.fish
     │
     ├─→ 设置 DOTFILES 环境变量
-    ├─→ 配置 Homebrew 路径和镜像
-    └─→ 设置 brew 环境变量
+    ├─→ 配置 Homebrew/Zerobrew 路径和镜像
+    └─→ 设置 brew/zb 环境变量
 
 ~/.config/omf/init.fish
     │
@@ -95,7 +95,7 @@ Fish 通过 Oh-My-Fish (OMF) 启动，加载顺序：
 
 | 文件 | 作用 |
 |------|------|
-| `before.init.fish` | Fish 启动前执行，配置 brew 和镜像 |
+| `before.init.fish` | Fish 启动前执行，配置 brew、zb 和镜像 |
 | `init.fish` | 加载 `system/path.fish` 和 `system/alias.fish` |
 | `path.fish` | 工具激活（mise, uv, starship, zoxide 等） |
 | `alias.fish` | 命令别名（ls→eza, cat→bat 等） |
@@ -134,8 +134,8 @@ if Command::Exists mytool; then
     exit 0
 fi
 
-# 安装逻辑
-brew::install mytool
+# 安装逻辑：普通 CLI 工具优先使用 Zerobrew
+zerobrew::install mytool
 # 或
 mise::setup
 mise use -g "mytool@1.0.0"
@@ -173,11 +173,13 @@ Log "Installing something..."  # 打印日志
 ```bash
 # ✅ 正确：检查后安装
 if ! Command::Exists mise; then
-    brew::install mise
+    zerobrew::install mise
 fi
 
 # ✅ 正确：使用封装好的幂等函数
-brew::install go rust node  # 内部已做检查
+zerobrew::install go rust node  # 普通 CLI 工具，内部已做检查
+homebrew::cask::install firefox iterm2  # macOS GUI 应用，逐个检查后安装
+homebrew::tap::install oven-sh/bun/bun  # tap formula，先 tap 再安装
 
 # ❌ 错误：直接安装（会重复安装）
 brew install go
@@ -188,13 +190,20 @@ brew install go
 #### brew.sh
 
 ```bash
-brew::setup              # 安装 Homebrew
-brew::install <pkg>...   # 幂等安装包（已安装则跳过）
-brew::install_one <pkg> [args...]  # 幂等安装单个包，可传参数
-brew::cask::install <app>...       # 幂等安装 macOS 应用
-brew::mirror             # 设置清华镜像
-brew::unmirror           # 取消镜像设置
+brew::setup                         # 安装 Homebrew 和 Zerobrew
+brew::mirror                        # 设置 Homebrew 清华镜像
+brew::unmirror                      # 取消 Homebrew 镜像设置
+homebrew::install <pkg>...          # 幂等安装必须走 Homebrew 的普通包
+homebrew::tap::install <tap/pkg>... # 幂等安装 tap formula，如 oven-sh/bun/bun
+homebrew::cask::install <app>...    # 幂等安装 macOS GUI 应用或字体
+zerobrew::install <pkg>...          # 幂等安装普通 CLI 工具，默认优先使用
 ```
+
+普通命令行工具优先使用 `zerobrew::install`，例如 `fish`、`neovim`、`tmux`、`uv`、`coreutils` 等。只有在以下场景使用 Homebrew 封装：
+
+- `homebrew::cask::install`：安装 macOS GUI 应用、字体或只能通过 cask 分发的包。
+- `homebrew::tap::install`：安装第三方 tap 中的 formula，传入完整 formula 名，函数会自动把前两段识别为 tap。例如 `oven-sh/bun/bun` 会先 tap `oven-sh/bun`，再安装 `bun`。
+- `homebrew::install`：安装必须走 Homebrew core 的普通 formula。
 
 #### mise.sh
 
@@ -284,8 +293,9 @@ mkdir -p symlinks/.config/myapp
 1. 在 `pkg/basic/` 创建目录（基础工具）或 `pkg/additional/`（可选工具）
 2. 编写 `install.sh`
 3. 使用 `mise::setup` + `mise use -g`（mise 管理的工具）
-4. 或使用 `brew::install`（Homebrew 工具）
-5. 如需配置环境变量，编辑 `system/path.fish`
+4. 或使用 `zerobrew::install`（普通 CLI 工具）
+5. 如需安装 Homebrew cask 或 tap formula，使用 `homebrew::cask::install` / `homebrew::tap::install`
+6. 如需配置环境变量，编辑 `system/path.fish`
 
 ## 安装模式
 
