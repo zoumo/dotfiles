@@ -160,8 +160,8 @@ FORCE_MACOS_DEFAULTS=1 bash ./script/bootstrap
 - **跨平台**：macOS、Linux、Windows 都可用相同配置
 
 Ghostty 的现有本地配置也由仓库管理。两个终端默认先启动登录 Fish，再由
-Fish 进入 Zellij；标签页、分屏和会话恢复统一交给 Zellij，tmux 工作流仍可
-通过 `mux` 使用。
+Fish 连接或创建同一个 `zoumo` Zellij session；标签页、分屏和会话恢复统一
+交给 Zellij。tmux 与 smug 仍保留安装，需要时可以直接使用原命令。
 
 ### 终端工作区: Zellij
 
@@ -172,7 +172,7 @@ Fish 进入 Zellij；标签页、分屏和会话恢复统一交给 Zellij，tmux
 - **会话恢复**：保存退出会话的布局和命令，机器重启后可以重建工作区
 - **低迁移成本**：保留 `Ctrl-b`/`Ctrl-a` 前缀及常用 tmux 快捷键
 - **跨平台**：原生支持 macOS、Linux 和 Windows
-- **兼容保留**：bootstrap 仍安装 tmux 与 smug，`mux` 等旧工作流保持不变
+- **兼容保留**：bootstrap 仍安装 tmux 与 smug，`mux` 默认进入 `zoumo` Zellij session
 
 安装、配置和 tmux 迁移说明见 [Zellij 安装与配置](docs/zellij.md)。
 
@@ -317,7 +317,7 @@ macOS 的命令行工具来自 BSD，与 Linux (GNU) 有细微差异。安装 GN
 | fgl | _fzf_search_git_log | fzf Git 日志搜索 |
 | jv | fx | JSON 查看器 |
 | yv | fx --yaml | YAML 查看器 |
-| mux | smug start zoumo | 启动 tmux 会话 |
+| mux | zellij attach --create zoumo | 连接或创建 `zoumo` Zellij session |
 
 </details>
 

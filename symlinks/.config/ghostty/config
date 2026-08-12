@@ -13,5 +13,5 @@ font-family = CaskaydiaCove Nerd Font
 
 scrollbar = never
 
-# Start a login Fish shell and enter Zellij from it.
-command = /opt/zerobrew/bin/fish -l --init-command zellij
+# Start a login Fish shell and attach every surface to the same Zellij session.
+command = /opt/zerobrew/bin/fish -l --init-command "zellij attach --create zoumo"

@@ -45,5 +45,5 @@ import = ["~/.config/alacritty/themes/themes/one_dark.toml"]
 shell = { program = "/opt/zerobrew/bin/fish", args = [
   "-l",
   "--init-command",
-  "zellij",
+  "zellij attach --create zoumo",
 ] }

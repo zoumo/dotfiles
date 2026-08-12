@@ -21,7 +21,7 @@ if test (os_lsb_dist) = "macos"
     alias rm="trash"
 end
 
-alias mux="smug start zoumo"
+alias mux="zellij attach --create zoumo"
 
 # fzf
 alias fcd=_fzf_search_directory

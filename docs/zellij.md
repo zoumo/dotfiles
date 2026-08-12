@@ -2,7 +2,7 @@
 
 Zellij 是本仓库默认的交互式终端工作区和会话管理器。考虑到其他组件可能
 依赖 tmux，原有 tmux、smug、Oh My Tmux 安装与配置保持不变；完整安装会
-同时安装两套工具，`mux` 也继续执行 `smug start zoumo`。
+同时安装两套工具。`mux` 默认执行 `zellij attach --create zoumo`。
 
 ## 安装流程
 
@@ -49,11 +49,12 @@ Alacritty 和 Ghostty 的配置也由仓库管理。两个终端都先启动登�
 `~/.config/ghostty/config`。等价启动命令为：
 
 ```bash
-/opt/zerobrew/bin/fish -l --init-command zellij
+/opt/zerobrew/bin/fish -l --init-command 'zellij attach --create zoumo'
 ```
 
-打开新的终端窗口或标签页时会进入 Zellij；退出 Zellij 后会回到外层 Fish。
-原有 `mux` 命令不受影响，仍会执行 `smug start zoumo`。
+打开新的终端窗口或标签页时，两个终端都会连接到同一个 `zoumo` session；
+session 不存在时自动创建。退出或 detach Zellij 后会回到外层 Fish。原有
+tmux 与 smug 安装不受影响；`mux` 也会连接或创建同一个 Zellij session。
 
 ## 默认行为
 
