@@ -22,7 +22,7 @@
 │   └── debian/         # Debian 专用配置
 ├── pkg/              # 包安装脚本
 │   ├── basic/          # 基础包（go, python, rust, nodejs, vim, fish, tools）
-│   └── additional/     # 附加包（docker, java, tmux, alacritty）
+│   └── additional/     # 附加包（docker, java, zellij, tmux, alacritty）
 ├── plugins/          # 安装过程中下载的内容
 ├── script/           # 入口脚本
 │   ├── bootstrap     # 主安装入口
@@ -199,7 +199,7 @@ homebrew::cask::install <app>...    # 幂等安装 macOS GUI 应用或字体
 zerobrew::install <pkg>...          # 幂等安装普通 CLI 工具，默认优先使用
 ```
 
-普通命令行工具优先使用 `zerobrew::install`，例如 `fish`、`neovim`、`tmux`、`uv`、`coreutils` 等。只有在以下场景使用 Homebrew 封装：
+普通命令行工具优先使用 `zerobrew::install`，例如 `fish`、`neovim`、`zellij`、`uv`、`coreutils` 等。只有在以下场景使用 Homebrew 封装：
 
 - `homebrew::cask::install`：安装 macOS GUI 应用、字体或只能通过 cask 分发的包。
 - `homebrew::tap::install`：安装第三方 tap 中的 formula，传入完整 formula 名，函数会自动把前两段识别为 tap。例如 `oven-sh/bun/bun` 会先 tap `oven-sh/bun`，再安装 `bun`。

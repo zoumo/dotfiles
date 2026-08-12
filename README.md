@@ -1,8 +1,8 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [什么是 dotfiles](#%E4%BB%80%E4%B9%88%E6%98%AF-dotfiles)
-- [zoumo 的 dotfiles](#zoumo-%E7%9A%84-dotfiles)
+- [zoumo's dotfiles](#zoumos-dotfiles)
+  - [什么是 dotfiles](#%E4%BB%80%E4%B9%88%E6%98%AF-dotfiles)
 - [快速开始](#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
   - [兼容性说明](#%E5%85%BC%E5%AE%B9%E6%80%A7%E8%AF%B4%E6%98%8E)
   - [MacOS 前置准备](#macos-%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87)
@@ -14,7 +14,8 @@
     - [字体](#%E5%AD%97%E4%BD%93)
   - [工具选择理念](#%E5%B7%A5%E5%85%B7%E9%80%89%E6%8B%A9%E7%90%86%E5%BF%B5)
     - [Shell: Fish](#shell-fish)
-    - [终端: Alacritty](#%E7%BB%88%E7%AB%AF-alacritty)
+    - [终端: Alacritty / Ghostty](#%E7%BB%88%E7%AB%AF-alacritty--ghostty)
+    - [终端工作区: Zellij](#%E7%BB%88%E7%AB%AF%E5%B7%A5%E4%BD%9C%E5%8C%BA-zellij)
     - [Docker: OrbStack](#docker-orbstack)
     - [GNU 工具](#gnu-%E5%B7%A5%E5%85%B7)
     - [版本管理: mise](#%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86-mise)
@@ -25,8 +26,6 @@
   - [现代工具替换](#%E7%8E%B0%E4%BB%A3%E5%B7%A5%E5%85%B7%E6%9B%BF%E6%8D%A2)
   - [配置文件链接](#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5)
   - [Shell 别名](#shell-%E5%88%AB%E5%90%8D)
-  - [环境变量](#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F)
-  - [安装目录](#%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95)
   - [开发指南](#%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97)
 - [常见问题](#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
     - [如何更新工具版本？](#%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0%E5%B7%A5%E5%85%B7%E7%89%88%E6%9C%AC)
@@ -90,7 +89,7 @@ FORCE_MACOS_DEFAULTS=1 bash ./script/bootstrap
 
 - **语言工具**: Go, Node.js, Rust, Python, Java (通过 mise/uv 管理)
 - **Shell**: fish + Oh-My-Fish + starship 提示符
-- **终端**: Alacritty (GPU 驱动的现代终端)
+- **终端**: Alacritty / Ghostty + Zellij（GPU 加速终端与可恢复工作区）
 - **编辑器**: Neovim + LazyVim 配置
 - **Docker**: OrbStack (macOS 上的 Docker 替代品)
 - **窗口管理**: Loop (优雅的窗口管理工具)
@@ -114,7 +113,7 @@ FORCE_MACOS_DEFAULTS=1 bash ./script/bootstrap
 - eza (ls), bat (cat), dust (du), duf (df), zoxide (cd), fd (find), procs (ps), ripgrep (grep)
 
 **开发辅助**:
-- fzf, starship, jnv, difftastic, tealdeer, kubectx, krew, dive, switcher
+- fzf, starship, zellij, tmux, smug, jnv, difftastic, tealdeer, kubectx, krew, dive, switcher
 
 ### macOS 应用 (Homebrew Cask)
 
@@ -151,7 +150,7 @@ FORCE_MACOS_DEFAULTS=1 bash ./script/bootstrap
 
 > 唯一需要注意的是 Fish 不完全兼容 POSIX，一些 Bash 脚本可能需要调整。但日常使用中，Fish 的优势远大于这个限制。
 
-### 终端: Alacritty
+### 终端: Alacritty / Ghostty
 
 [Alacritty](https://alacritty.org/) 是一个使用 GPU 加速的现代终端模拟器：
 
@@ -160,7 +159,22 @@ FORCE_MACOS_DEFAULTS=1 bash ./script/bootstrap
 - **配置简单**：使用 TOML/YAML 配置文件，无需 GUI 设置
 - **跨平台**：macOS、Linux、Windows 都可用相同配置
 
-> 为什么不用 iTerm2？iTerm2 功能丰富但臃肿，Alacritty 选择与 tmux 配合，性能更好。
+Ghostty 的现有本地配置也由仓库管理。两个终端默认先启动登录 Fish，再由
+Fish 进入 Zellij；标签页、分屏和会话恢复统一交给 Zellij，tmux 工作流仍可
+通过 `mux` 使用。
+
+### 终端工作区: Zellij
+
+[Zellij](https://zellij.dev/) 负责终端中的标签页、分屏、layout 和后台会话：
+
+- **预设工作区**：默认启动等分四宫格，也可以为项目定义独立 layout
+- **后台会话**：Detach 后任务继续运行，随时可以重新 attach
+- **会话恢复**：保存退出会话的布局和命令，机器重启后可以重建工作区
+- **低迁移成本**：保留 `Ctrl-b`/`Ctrl-a` 前缀及常用 tmux 快捷键
+- **跨平台**：原生支持 macOS、Linux 和 Windows
+- **兼容保留**：bootstrap 仍安装 tmux 与 smug，`mux` 等旧工作流保持不变
+
+安装、配置和 tmux 迁移说明见 [Zellij 安装与配置](docs/zellij.md)。
 
 ### Docker: OrbStack
 
@@ -255,6 +269,7 @@ macOS 的命令行工具来自 BSD，与 Linux (GNU) 有细微差异。安装 GN
 | ps | [procs](https://github.com/dalance/procs) | 现代 ps |
 | top | [btop](https://github.com/aristocratos/btop) | 更美观的 top |
 | cd | [zoxide](https://github.com/ajeetdsouza/zoxide) | 智能目录跳转 |
+| tmux | [Zellij](https://zellij.dev/) | 现代终端工作区、layout 和会话恢复 |
 
 ## 配置文件链接
 
@@ -268,12 +283,15 @@ macOS 的命令行工具来自 BSD，与 Linux (GNU) 有细微差异。安装 GN
 | `~/.config/.gitconfig` | Git 全局配置 |
 | `~/.config/starship.toml` | Starship 提示符配置 |
 | `~/.config/alacritty/alacritty.toml` | Alacritty 终端配置 |
+| `~/.config/ghostty/config` | Ghostty 终端配置 |
 | `~/.config/fish/functions/` | Fish shell 自定义函数 |
 | `~/.config/omf/init.fish` | Oh-My-Fish 初始化配置 |
 | `~/.config/omf/before.init.fish` | Fish 启动前配置 |
-| `~/.config/smug/zoumo.yml` | Tmux 会话管理配置 |
+| `~/.config/zellij/config.kdl` | Zellij 主题、快捷键和会话配置 |
+| `~/.config/zellij/layouts/default.kdl` | Zellij 默认四宫格 layout |
+| `~/.config/smug/zoumo.yml` | 兼容保留的 tmux 会话管理配置 |
 | `~/.kube/switch-config.yaml` | kubectl context 切换配置 |
-| `~/.tmux.conf.local` | Tmux 本地配置 |
+| `~/.tmux.conf.local` | 兼容保留的 tmux 本地配置 |
 | `~/.mvnvm.properties` | Maven 版本管理配置 |
 
 </details>
