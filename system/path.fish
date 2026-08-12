@@ -140,3 +140,11 @@ end
 if command_exists atuin
     atuin init fish --disable-up-arrow | source
 end
+
+
+# ====================================================================
+# zellij
+# ====================================================================
+if command_exists zellij
+    zellij setup --generate-completion fish | source
+end
