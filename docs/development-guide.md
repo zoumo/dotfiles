@@ -22,7 +22,7 @@
 │   └── debian/         # Debian 专用配置
 ├── pkg/              # 包安装脚本
 │   ├── basic/          # 基础包（go, python, rust, nodejs, vim, fish, tools）
-│   └── additional/     # 附加包（docker, java, zellij, tmux, alacritty）
+│   └── additional/     # 附加包（docker, java, zellij, tmux, alacritty, agent skills）
 ├── plugins/          # 安装过程中下载的内容
 ├── script/           # 入口脚本
 │   ├── bootstrap     # 主安装入口

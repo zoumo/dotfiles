@@ -115,6 +115,10 @@ FORCE_MACOS_DEFAULTS=1 bash ./script/bootstrap
 **开发辅助**:
 - fzf, starship, zellij, tmux, smug, jnv, difftastic, tealdeer, kubectx, krew, dive, switcher
 
+**Agent skills**:
+- 完整安装模式会通过 `bunx skills` 为 Claude Code 和 Codex 安装第三方 skills
+- skill 来源和安装清单由 `pkg/additional/skills/install.sh` 管理
+
 ### macOS 应用 (Homebrew Cask)
 
 - alacritty - GPU 驱动的跨平台终端
