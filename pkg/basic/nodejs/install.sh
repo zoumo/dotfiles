@@ -4,7 +4,7 @@ source $(dirname ${BASH_SOURCE})/../../../framework/oo-bootstrap.sh
 namespace nodejs
 Log::AddOutput nodejs NOTE
 
-VERSION="24.1.0"
+VERSION="24.21.0"
 
 # Ensure mise is available
 mise::setup
