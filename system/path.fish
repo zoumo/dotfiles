@@ -60,7 +60,7 @@ if command_exists uv
     set -gx UV_PYTHON_INSTALL_MIRROR "https://gh-proxy.com/https://github.com/astral-sh/python-build-standalone/releases/download"
     # Python environment settings
     set -gx PYTHONDONTWRITEBYTECODE x
-    
+
     # Auto-activate virtual environments via auto-uv-env
     if test -f (brew --prefix)/share/auto-uv-env/auto-uv-env.fish
         source (brew --prefix)/share/auto-uv-env/auto-uv-env.fish
@@ -136,7 +136,16 @@ if test -d $HOME/.bun
     fish_add_path -gpm $HOME/.bun/bin
 end
 
+# ====================================================================
+# Skills Manager
+# ====================================================================
+if test -d $HOME/.skills-manager/bin
+    fish_add_path -gpm $HOME/.skills-manager/bin
+end
 
+# ====================================================================
+# atuin
+# ====================================================================
 if command_exists atuin
     atuin init fish --disable-up-arrow | source
 end

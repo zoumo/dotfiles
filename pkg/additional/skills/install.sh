@@ -8,20 +8,83 @@ source "${PKG_PATH}/../../../framework/oo-bootstrap.sh"
 namespace skills
 Log::AddOutput skills NOTE
 
-if ! Command::Exists bunx; then
-    Log "bunx is required to install agent skills"
-    exit 1
+install_skills_manager_cli() {
+    local install_root="$HOME/.skills-manager"
+    local binary="${install_root}/bin/skills-manager-cli"
+    local platform arch download_file
+
+    if Command::Exists skills-manager-cli || [[ -x "${binary}" ]]; then
+        Log "skills-manager-cli already installed, skipping"
+        return 0
+    fi
+
+    if Command::Exists cargo && Command::Exists rustc &&
+        cargo --version >/dev/null 2>&1 && rustc --version >/dev/null 2>&1; then
+        Log "Building skills-manager-cli with Cargo..."
+        cargo install --git https://github.com/xingkongliang/skills-manager \
+            --bin skills-manager-cli --locked --root "${install_root}" || return 1
+    else
+        if os::macos; then
+            platform=macOS
+        elif [[ "$(uname -s)" == Linux ]]; then
+            platform=Linux
+        else
+            Log "Unsupported OS for skills-manager-cli: $(uname -s)"
+            return 1
+        fi
+        arch=$(OS::Arch)
+        case "${arch}" in
+            arm64) ;;
+            amd64) arch=x64 ;;
+            *) Log "Unsupported architecture for skills-manager-cli: ${arch}"; return 1 ;;
+        esac
+
+        Log "Downloading skills-manager-cli for ${platform}-${arch}..."
+        mkdir -p "${install_root}/bin" || return 1
+        download_file=$(mktemp "${install_root}/bin/.skills-manager-cli.XXXXXX") || return 1
+        if ! curl --fail --location --retry 3 \
+            "https://gh-proxy.org/https://github.com/xingkongliang/skills-manager/releases/latest/download/skills-manager-cli-${platform}-${arch}" \
+            --output "${download_file}" ||
+            ! chmod +x "${download_file}" ||
+            ! "${download_file}" --version ||
+            ! mv -f "${download_file}" "${binary}"; then
+            rm -f "${download_file}"
+            Log "Failed to install skills-manager-cli"
+            return 1
+        fi
+    fi
+
+    "${binary}" --version || return 1
+    Log "skills-manager-cli installed at ${binary}"
+}
+
+install_skills_manager_cli || exit 1
+
+SKILLS_MANAGER_CLI="$HOME/.skills-manager/bin/skills-manager-cli"
+if [[ ! -x "${SKILLS_MANAGER_CLI}" ]]; then
+    SKILLS_MANAGER_CLI=$(command -v skills-manager-cli) || exit 1
 fi
 
 install_skills() {
     local source=$1
+    local skill
     shift
 
     Log "Installing agent skills from ${source}..."
-    if ! bunx skills add "${source}" -g -y \
-        --agent claude-code codex \
-        --skill "$@"; then
-        Log "Failed to install agent skills from ${source}"
+    for skill in "$@"; do
+        if "${SKILLS_MANAGER_CLI}" skills status "${skill}" >/dev/null 2>&1; then
+            Log "${skill} already in the library, skipping install"
+            continue
+        fi
+        if ! "${SKILLS_MANAGER_CLI}" skills install "${source}@${skill}"; then
+            Log "Failed to install ${skill} from ${source}"
+            exit 1
+        fi
+    done
+
+    if ! "${SKILLS_MANAGER_CLI}" skills deploy "$@" \
+        --agent claude_code --agent codex; then
+        Log "Failed to deploy agent skills from ${source}"
         exit 1
     fi
 }
@@ -58,7 +121,6 @@ install_skills mattpocock/skills \
     improve-codebase-architecture \
     prototype \
     research \
-    resolving-merge-conflicts \
     setup-matt-pocock-skills \
     tdd \
     teach \
@@ -90,6 +152,10 @@ install_skills vercel-labs/skills \
 # Create animated HTML presentations and convert slide decks.
 install_skills zarazhangrui/frontend-slides \
     frontend-slides
+
+# Write clear technical English using ASD-STE100.
+install_skills danyuchn/asd-ste100-skill \
+    asd-ste100
 
 Log "Agent skills installed for Claude Code and Codex"
 
